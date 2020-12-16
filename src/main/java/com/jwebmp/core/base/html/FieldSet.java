@@ -40,20 +40,17 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  * @param <J>
- *
  * @author GedMarc
  */
 public class FieldSet<J extends FieldSet<J>>
 		extends Component<FieldSetChildren, NoAttributes, NoFeatures, NoEvents, J>
-		implements FormChildren<FieldSetChildren, J>, NoIDTag
+		implements FormChildren, NoIDTag
 {
-
-
 	/**
 	 * The legend if any is applied
 	 */
-	private Legend legend;
-
+	private Legend<?> legend;
+	
 	/**
 	 * Constructs a new instance of Field Set
 	 */
@@ -61,7 +58,7 @@ public class FieldSet<J extends FieldSet<J>>
 	{
 		super(ComponentTypes.FieldSet);
 	}
-
+	
 	/**
 	 * Returns the legends text
 	 *
@@ -72,7 +69,7 @@ public class FieldSet<J extends FieldSet<J>>
 		return legend.getText(0)
 		             .toString();
 	}
-
+	
 	/**
 	 * Sets the legend
 	 *
@@ -82,22 +79,22 @@ public class FieldSet<J extends FieldSet<J>>
 	{
 		if (legend == null)
 		{
-			legend = new Legend();
+			legend = new Legend<>();
 			legend.setText(legendText);
-			add(legend);
+			asHierarchyBase().add(legend);
 		}
 		else
 		{
 			legend.setText(legendText);
 		}
 	}
-
+	
 	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
 	}
-
+	
 	@Override
 	public boolean equals(Object o)
 	{

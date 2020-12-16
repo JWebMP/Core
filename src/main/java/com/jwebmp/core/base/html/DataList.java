@@ -42,7 +42,6 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  * @param <J>
- *
  * @author GedMarc
  * @since 2014/12/21
  */
@@ -57,13 +56,12 @@ public class DataList<J extends DataList<J>>
 	{
 		this(null);
 	}
-
+	
 	/**
 	 * Creates a new DataList with the given.
 	 * <p>
 	 *
-	 * @param id
-	 * 		The ID of the data list to be linked with the Input Tag
+	 * @param id The ID of the data list to be linked with the Input Tag
 	 */
 	public DataList(String id)
 	{

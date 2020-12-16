@@ -51,7 +51,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since Mar 1, 2015
  */
 public class ProgressBar<J extends ProgressBar<J>>
-		extends Component<IComponentHierarchyBase, ProgressBarAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<IComponentHierarchyBase<?,?>, ProgressBarAttributes, GlobalFeatures, GlobalEvents, J>
 {
 
 

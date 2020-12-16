@@ -16,16 +16,14 @@
  */
 package com.jwebmp.core.base.html.interfaces.children;
 
-import com.jwebmp.core.base.ComponentBase;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
+import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 
 /**
  * Allows labels inside of areas
  *
  * @author MMagon
  */
-public interface AreaChildren<C extends IComponentHierarchyBase, J extends ComponentBase>
-		extends IComponentHierarchyBase<C, J>
+public interface AreaChildren extends GlobalChildren
 {
 
 }

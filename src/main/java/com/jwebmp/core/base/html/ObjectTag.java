@@ -68,11 +68,6 @@ public class ObjectTag<J extends ObjectTag<J>>
 		extends Component<ObjectTagChildren, ObjectAttributes, GlobalFeatures, GlobalEvents, J>
 		implements NoNewLineForRawText
 {
-
-
-	/**
-	 *
-	 */
 	public ObjectTag()
 	{
 		super(ComponentTypes.Object);

@@ -23,6 +23,7 @@ import com.jwebmp.core.Page;
 import com.jwebmp.core.base.client.Browsers;
 import com.jwebmp.core.base.client.HTMLVersions;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.HTMLFeatures;
 import com.jwebmp.core.base.html.interfaces.NoClassAttribute;
 import com.jwebmp.core.base.html.interfaces.NoIDTag;
@@ -68,27 +69,25 @@ import jakarta.validation.constraints.NotNull;
  * @author GedMarc
  * @since right from the start, 2007 with radio on live
  */
-public abstract class Html<C extends IComponentHierarchyBase, J extends Html<C, J>>
+public abstract class Html<C extends GlobalChildren, J extends Html<C, J>>
 		extends Component<C, NoAttributes, HTMLFeatures, NoEvents, J>
 		implements NoIDTag, NoClassAttribute
 {
-
-
 	/**
 	 * The head object
 	 */
-	private final Head<IComponentHierarchyBase, ?> head;
+	private final Head<?> head;
 	@JsonProperty("RunningEnvironment")
 	private DevelopmentEnvironments runningEnvironment = DevelopmentEnvironments.Development;
 	/**
 	 * The body object
 	 */
-	private Body body;
+	private Body<?,?> body;
 	/**
 	 * The HTML Version the page
 	 */
+	@SuppressWarnings("FieldMayBeFinal")
 	private HTMLVersions htmlVersion;
-
 	/*
 	 * The current browser of the render
 	 */
@@ -115,7 +114,7 @@ public abstract class Html<C extends IComponentHierarchyBase, J extends Html<C, 
 	{
 		super(ComponentTypes.Html);
 		htmlVersion = browser.getHtmlVersion();
-		head = new Head();
+		head = new Head<>();
 	}
 
 	/**
@@ -212,7 +211,7 @@ public abstract class Html<C extends IComponentHierarchyBase, J extends Html<C, 
 	 *
 	 * @return
 	 */
-	public Head<IComponentHierarchyBase, ?> getHead()
+	public Head<?> getHead()
 	{
 		return head;
 	}
@@ -224,7 +223,7 @@ public abstract class Html<C extends IComponentHierarchyBase, J extends Html<C, 
 	{
 		if (body == null)
 		{
-			body = new Body<>((Page) this);
+			body = new Body<>((Page<?>) this);
 		}
 		return body;
 	}
@@ -235,7 +234,7 @@ public abstract class Html<C extends IComponentHierarchyBase, J extends Html<C, 
 	 * @param body
 	 */
 	@SuppressWarnings("unchecked")
-	public J setBody(Body body)
+	public J setBody(Body<?,?> body)
 	{
 		this.body = body;
 		return (J) this;

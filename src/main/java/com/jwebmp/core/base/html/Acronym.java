@@ -25,6 +25,7 @@ import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
 import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
 import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
 import com.jwebmp.core.base.html.interfaces.children.HtmlChildren;
+import com.jwebmp.core.base.html.interfaces.children.NoChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
@@ -60,10 +61,9 @@ import java.util.logging.Level;
  * @since 2014 09 22
  */
 public class Acronym<J extends Acronym<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, GlobalEvents, J>
-		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, HtmlChildren<IComponentHierarchyBase, J>, BodyChildren<IComponentHierarchyBase, J>, Serializable, NoIDTag
+		extends Component<NoChildren, NoAttributes, NoFeatures, GlobalEvents, J>
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, HtmlChildren, BodyChildren, Serializable, NoIDTag
 {
-
 	/**
 	 * Logger for the Component
 	 */

@@ -53,7 +53,7 @@ public abstract class SortAdapter<J extends SortAdapter<J>>
 	 * 		The component this click is going to be acting on
 	 */
 	@SuppressWarnings("WeakerAccess")
-	public SortAdapter(Component component)
+	public SortAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.sort, component);
 	}
@@ -67,7 +67,7 @@ public abstract class SortAdapter<J extends SortAdapter<J>>
 	 * 		The Response Object Being Returned
 	 */
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -120,5 +120,5 @@ public abstract class SortAdapter<J extends SortAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onSort(AjaxCall call, AjaxResponse response);
+	public abstract void onSort(AjaxCall<?> call, AjaxResponse<?> response);
 }

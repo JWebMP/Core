@@ -53,14 +53,14 @@ public abstract class MouseUpAdapter<J extends MouseUpAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public MouseUpAdapter(Component component)
+	public MouseUpAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.mouseUp, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -82,7 +82,7 @@ public abstract class MouseUpAdapter<J extends MouseUpAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onMouseUp(AjaxCall call, AjaxResponse response);
+	public abstract void onMouseUp(AjaxCall<?> call, AjaxResponse<?> response);
 
 
 	/**

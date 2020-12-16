@@ -39,8 +39,7 @@ public class ComponentStyleBaseTest
 	@Test
 	public void test()
 	{
-		ComponentStyleBase head = new ComponentStyleBase(ComponentTypes.Head)
-		{};
+		ComponentHierarchyBase head = new ComponentHierarchyBase(ComponentTypes.Head);
 		head.add(new Meta("name"));
 		head.add(new Meta(Meta.MetadataFields.Author, "Author Me"));
 		ComponentHierarchyBase body = new ComponentHierarchyBase(ComponentTypes.Body);

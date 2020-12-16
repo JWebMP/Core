@@ -37,9 +37,7 @@ import java.util.logging.Level;
  * @author GedMarc
  */
 @ComponentInformation(name = "Before Close Event",
-		description = "Server Side Event for Before Close Adapter.",
-		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
+		description = "Server Side Event for Before Close Adapter.")
 public abstract class BeforeCloseAdapter<J extends BeforeCloseAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
@@ -57,14 +55,14 @@ public abstract class BeforeCloseAdapter<J extends BeforeCloseAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public BeforeCloseAdapter(Component component)
+	public BeforeCloseAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.beforeClose, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -87,7 +85,7 @@ public abstract class BeforeCloseAdapter<J extends BeforeCloseAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onBeforeClose(AjaxCall call, AjaxResponse response);
+	public abstract void onBeforeClose(AjaxCall<?> call, AjaxResponse<?> response);
 
 	private void onCall()
 	{

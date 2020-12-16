@@ -54,7 +54,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since 2014/10/26
  */
 public class Aside<J extends Aside<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<IComponentHierarchyBase<?,?>, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 

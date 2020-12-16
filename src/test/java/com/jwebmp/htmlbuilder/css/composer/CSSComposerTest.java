@@ -20,6 +20,7 @@ import com.jwebmp.BaseTestClass;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.html.Body;
 import com.jwebmp.core.base.html.Div;
+import com.jwebmp.core.base.html.DivSimple;
 import com.jwebmp.core.base.html.H1;
 import com.jwebmp.core.htmlbuilder.css.backgrounds.BackgroundBlendMode;
 import com.jwebmp.core.htmlbuilder.css.backgrounds.BackgroundCSS;
@@ -123,7 +124,7 @@ public class CSSComposerTest
 
 	@BackgroundCSS(BackgroundBlendMode = BackgroundBlendMode.Lighten)
 	public class InnerClass
-			extends Div
+			extends DivSimple<InnerClass>
 	{
 
 		private H1 comp = new H1("asdf");

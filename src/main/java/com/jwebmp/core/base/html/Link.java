@@ -16,19 +16,19 @@
  */
 package com.jwebmp.core.base.html;
 
+import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.Component;
-import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.attributes.LinkAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
 import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
+import com.jwebmp.core.base.html.interfaces.children.FormChildren;
 import com.jwebmp.core.base.html.interfaces.children.ListChildren;
 import com.jwebmp.core.base.html.interfaces.children.ListItemChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.guicedee.logger.LogFactory;
-
 import jakarta.validation.constraints.NotNull;
 
 /**
@@ -65,10 +65,10 @@ import jakarta.validation.constraints.NotNull;
  * @author GedMarc
  */
 public class Link<J extends Link<J>>
-		extends Component<IComponentHierarchyBase, LinkAttributes, GlobalFeatures, GlobalEvents, J>
-		implements BodyChildren<IComponentHierarchyBase, J>, NoNewLineForRawText,
-				           ListItemChildren<IComponentHierarchyBase, J>,
-				           ListChildren<IComponentHierarchyBase, J>
+		extends Component<GlobalChildren, LinkAttributes, GlobalFeatures, GlobalEvents, J>
+		implements BodyChildren, NoNewLineForRawText,
+		           ListItemChildren,
+		           ListChildren, FormChildren
 {
 
 	private static final java.util.logging.Logger log = LogFactory.getInstance()
@@ -155,7 +155,7 @@ public class Link<J extends Link<J>>
 	 * @param component
 	 * 		Includes raw text in the link
 	 */
-	public Link(String directToAddress, String targetFrameName, ComponentHierarchyBase component)
+	public Link(String directToAddress, String targetFrameName, IComponentHierarchyBase<?,?> component)
 	{
 		super("a", ComponentTypes.Link);
 		this.directToAddress = directToAddress;

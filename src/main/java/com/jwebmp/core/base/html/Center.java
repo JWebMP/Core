@@ -42,7 +42,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  */
 public class Center<J extends Center<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, NoEvents, J>
+		extends Component<IComponentHierarchyBase<?,?>, NoAttributes, NoFeatures, NoEvents, J>
 		implements NoIDTag, NoClassAttribute, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 

@@ -17,7 +17,7 @@ public class JWebMPJavaScriptDynamicScriptRenderer
 	}
 
 	@Override
-	public Script renderScript(Page<?> page)
+	public Script<?,?> renderScript(Page<?> page)
 	{
 		return getJavascriptScript(page);
 	}
@@ -28,7 +28,7 @@ public class JWebMPJavaScriptDynamicScriptRenderer
 	 *
 	 * @return Script
 	 */
-	private Script getJavascriptScript(Page<?> page)
+	private Script<?,?> getJavascriptScript(Page<?> page)
 	{
 		StringBuilder js = page.renderJavascript();
 		if (!js.toString()

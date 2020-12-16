@@ -44,7 +44,7 @@ import static com.fasterxml.jackson.databind.SerializationFeature.*;
 		getterVisibility = JsonAutoDetect.Visibility.NONE,
 		setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CSSImplementationAdapter<A extends Annotation, T extends CSSImplementationClass>
+public class CSSImplementationAdapter<A extends Annotation, T extends CSSImplementationClass<A,T>>
 		implements CSSImplementationClass<A, T>
 {
 
@@ -113,7 +113,7 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 	 *
 	 * @param propertyFactory
 	 */
-	protected void setPropertyFactory(CSSPropertiesFactory propertyFactory)
+	protected void setPropertyFactory(CSSPropertiesFactory<A> propertyFactory)
 	{
 		this.propertyFactory = propertyFactory;
 	}
@@ -123,10 +123,9 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 	 *
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public Map<StringBuilder, Object> getMap()
 	{
-		CSSPropertiesFactory props = new CSSPropertiesFactory();
+		CSSPropertiesFactory<?> props = new CSSPropertiesFactory<>();
 		return props.getCSSProperties(this);
 	}
 

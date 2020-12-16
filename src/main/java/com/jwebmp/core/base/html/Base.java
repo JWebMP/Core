@@ -20,6 +20,7 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.BaseAttributes;
 import com.jwebmp.core.base.html.interfaces.*;
 import com.jwebmp.core.base.html.interfaces.children.HeadChildren;
+import com.jwebmp.core.base.html.interfaces.children.NoChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
@@ -60,8 +61,8 @@ import java.util.logging.Level;
  * @since 2013/11/12
  */
 public class Base<J extends Base<J>>
-		extends Component<IComponentHierarchyBase, BaseAttributes, NoFeatures, NoEvents, J>
-		implements NoIDTag, NoClosingTag, HeadChildren<IComponentHierarchyBase, J>, NoClosingBracket, NoClassAttribute
+		extends Component<NoChildren, BaseAttributes, NoFeatures, NoEvents, J>
+		implements NoIDTag, NoClosingTag, HeadChildren, NoClosingBracket, NoClassAttribute
 {
 
 	/**

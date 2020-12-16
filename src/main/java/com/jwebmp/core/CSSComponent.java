@@ -20,6 +20,7 @@ import com.jwebmp.core.base.html.attributes.NoAttributes;
 import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.guicedee.guicedinjection.json.StaticStrings;
 
@@ -35,11 +36,9 @@ import jakarta.validation.constraints.NotNull;
  * @since 2015/04/24
  */
 public class CSSComponent<J extends CSSComponent<J>>
-		extends Component<CSSComponent, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<IComponentHierarchyBase<?,?>, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements GlobalChildren
 {
-
-
 	/**
 	 * Constructs a new CSS Class with the given features and events associated
 	 * <p>

@@ -52,14 +52,14 @@ public abstract class UnselectedAdapter<J extends UnselectedAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public UnselectedAdapter(Component component)
+	public UnselectedAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.unselected, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -81,7 +81,7 @@ public abstract class UnselectedAdapter<J extends UnselectedAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onUnselected(AjaxCall call, AjaxResponse response);
+	public abstract void onUnselected(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

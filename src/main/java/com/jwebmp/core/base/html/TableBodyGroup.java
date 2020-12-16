@@ -58,10 +58,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class TableBodyGroup<J extends TableBodyGroup<J>>
 		extends Component<TableBodyGroupChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements TableChildren<TableBodyGroupChildren, J>
+		implements TableChildren
 {
-
-
 	/**
 	 * Constructs a new instance of a table body group
 	 */

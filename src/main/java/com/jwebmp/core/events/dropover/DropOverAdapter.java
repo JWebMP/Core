@@ -37,9 +37,7 @@ import java.util.logging.Level;
  * @author GedMarc
  */
 @ComponentInformation(name = "Drop Over Event",
-		description = "Server Side Event for Drop Out",
-		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
+		description = "Server Side Event for Drop Out")
 public abstract class DropOverAdapter<J extends DropOverAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
@@ -57,14 +55,14 @@ public abstract class DropOverAdapter<J extends DropOverAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public DropOverAdapter(Component component)
+	public DropOverAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.drop, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -86,7 +84,7 @@ public abstract class DropOverAdapter<J extends DropOverAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onDropOver(AjaxCall call, AjaxResponse response);
+	public abstract void onDropOver(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

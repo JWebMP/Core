@@ -21,6 +21,7 @@ import com.jwebmp.core.base.html.attributes.NoAttributes;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
 import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
+import com.jwebmp.core.base.html.interfaces.children.NoChildren;
 import com.jwebmp.core.base.html.interfaces.children.TableChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
@@ -50,11 +51,9 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since forever
  */
 public class TableCaption<J extends TableCaption<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements TableChildren<IComponentHierarchyBase, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText
+		extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements TableChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
-
-
 	/**
 	 * Constructs a new table caption
 	 * <p>

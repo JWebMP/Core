@@ -49,7 +49,7 @@ public class CSSComponentTest
 	}
 
 	private class CSSComponentImpl
-			extends CSSComponent
+			extends CSSComponent<CSSComponentImpl>
 	{
 
 		/**

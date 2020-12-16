@@ -16,20 +16,18 @@
  */
 package com.jwebmp.core.base.html.interfaces.events;
 
-import com.jwebmp.core.htmlbuilder.javascript.events.interfaces.IEvent;
-
 /**
  * Marks a component not able to handle events
  * <p>
  *
  * @author MMagon
- * 		<p>
- * 		<p>
+ * <p>
+ * <p>
  * @version 1.0
  * @since 2013/11/12
  */
 public interface NoEvents
-		extends IEvent, GlobalEvents
+		extends GlobalEvents
 {
 
 }

@@ -49,19 +49,15 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * The "compact" attribute is not supported in HTML5.<p>
  * <p>
  *
- * @param <C>
  * @param <A>
  * @param <E>
  * @param <J>
- *
  * @author GedMarc
  */
-public class List<C extends ListChildren, A extends Enum & AttributeDefinitions, E extends GlobalEvents, J extends List<C, A, E, J>>
+public class List<C extends ListChildren, A extends Enum<?> & AttributeDefinitions, E extends GlobalEvents, J extends List<C,A, E, J>>
 		extends Component<C, A, GlobalFeatures, E, J>
-		implements ListChildren<C, J>, DisplayObjectType<C, J>, ListItemChildren<C, J>
+		implements ListChildren, DisplayObjectType, ListItemChildren
 {
-
-
 	/**
 	 * Constructs an unordered list
 	 */
@@ -69,7 +65,7 @@ public class List<C extends ListChildren, A extends Enum & AttributeDefinitions,
 	{
 		this(false);
 	}
-
+	
 	/**
 	 * Specifies if the list is ordered or unordered
 	 *
@@ -79,37 +75,34 @@ public class List<C extends ListChildren, A extends Enum & AttributeDefinitions,
 	{
 		super(orderedList ? "ol" : "ul", orderedList ? ComponentTypes.OrderedList : ComponentTypes.UnorderedList, false);
 	}
-
+	
 	/**
 	 * Adds a list item to this list
 	 *
 	 * @param textToAdd
-	 *
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public ListItem<?> addItem(String textToAdd)
 	{
-		ListItem li = new ListItem(textToAdd);
-		add((C) li);
+		ListItem<?> li = new ListItem<>(textToAdd);
+		add((C)li);
 		return li;
 	}
-
+	
 	/**
 	 * Returns a list of the specified text
 	 *
 	 * @param textToAdd
-	 *
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public List<?, ?, ?, ?> addList(String textToAdd)
+	public List<?,?, ?, ?> addList(String textToAdd)
 	{
-		ListItem lit = new ListItem(textToAdd);
-		List li = new List(false);
+		ListItem<?> lit = new ListItem<>(textToAdd);
+		List<?,?,?,?> li = new List<>(false);
 		lit.add(li);
-		add((C) lit);
+		add((C)lit);
 		return li;
 	}
-
+	
 }

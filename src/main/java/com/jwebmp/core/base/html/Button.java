@@ -18,7 +18,10 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
+import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
+import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
+import com.jwebmp.core.base.html.interfaces.children.FormChildren;
 import com.jwebmp.core.base.html.interfaces.children.ListItemChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
@@ -51,16 +54,17 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @param <A>
  * @param <F>
  * @param <E>
- *
  * @author GedMarc
  * @since 2014/12/20
  */
-public class Button<C extends IComponentHierarchyBase, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Button<C, A, F, E, J>>
+public class Button<C extends GlobalChildren,
+		A extends Enum<?> & AttributeDefinitions,
+		F extends GlobalFeatures,
+		E extends GlobalEvents,
+		J extends Button<C, A, F, E, J>>
 		extends Component<C, A, F, E, J>
-		implements ListItemChildren<C, J>
+		implements ListItemChildren, FormChildren, BodyChildren
 {
-
-
 	/**
 	 * Constructs a new button object with no text
 	 */
@@ -68,13 +72,12 @@ public class Button<C extends IComponentHierarchyBase, A extends Enum & Attribut
 	{
 		this("");
 	}
-
+	
 	/**
 	 * Constructs a new button object with the given text
 	 * <p>
 	 *
-	 * @param text
-	 * 		The text to show on the button
+	 * @param text The text to show on the button
 	 */
 	public Button(String text)
 	{

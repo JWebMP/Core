@@ -46,12 +46,11 @@ import java.util.Set;
  * @author GedMarc
  * @since 23 Apr 2016
  */
-public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentThemeBase<A, F, E, J>>
+public class ComponentThemeBase<A extends Enum<?> & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents,
+		J extends ComponentThemeBase<A, F, E, J>>
 		extends ComponentDataBindingBase<A, F, E, J>
-		implements IComponentThemeBase
+		implements IComponentThemeBase<J>
 {
-
-
 	/**
 	 * The associated theme
 	 */
@@ -74,7 +73,7 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 	 * @return
 	 */
 	@SuppressWarnings("unused")
-	public IComponentThemeBase asThemeBase()
+	public IComponentThemeBase<J> asThemeBase()
 	{
 		return this;
 	}

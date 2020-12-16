@@ -51,6 +51,7 @@ import static com.guicedee.guicedinjection.json.StaticStrings.STRING_FORWARD_SLA
  * @version 1.0
  * @since 20 Dec 2016
  */
+@SuppressWarnings("unused")
 public class JWebMPSiteBinder
 		implements IGuiceSiteBinder<GuiceSiteInjectorModule>
 {
@@ -67,13 +68,13 @@ public class JWebMPSiteBinder
 	 * Field localStorageTypeLiteral
 	 */
 	@SuppressWarnings("Convert2Diamond")
-	private static TypeLiteral<Map<String, String>> localStorageTypeLiteral = new TypeLiteral<Map<String, String>>() {};
+	private static final TypeLiteral<Map<String, String>> localStorageTypeLiteral = new TypeLiteral<Map<String, String>>() {};
 
 	/**
 	 * Field sessionStorageTypeLiteral
 	 */
 	@SuppressWarnings("Convert2Diamond")
-	private static TypeLiteral<Map<String, String>> sessionStorageTypeLiteral = new TypeLiteral<Map<String, String>>() {};
+	private static final TypeLiteral<Map<String, String>> sessionStorageTypeLiteral = new TypeLiteral<Map<String, String>>() {};
 
 	/**
 	 * Constructs a new instance, mostly for injection
@@ -126,11 +127,11 @@ public class JWebMPSiteBinder
 	/**
 	 * Returns the url to access the data binding search
 	 *
-	 * @param component
+	 * @param component the component to render for
 	 *
-	 * @return
+	 * @return The rendered URL string
 	 */
-	public static String getDataBindUrl(ComponentBase component)
+	public static String getDataBindUrl(ComponentBase<?> component)
 	{
 		return JWebMPSiteBinder.getDataLocation()
 		                       .replace(STRING_FORWARD_SLASH, STRING_EMPTY) + "?component=" + component.getID();
@@ -139,7 +140,7 @@ public class JWebMPSiteBinder
 	/**
 	 * Gets the data location
 	 *
-	 * @return
+	 * @return The given data location
 	 */
 	public static String getDataLocation()
 	{
@@ -203,20 +204,21 @@ public class JWebMPSiteBinder
 
 		JWebMPSiteBinder.log.fine("Bound Page.class");
 
-		module.bind(Page.class)
+		module.bind(IPage.class)
 		      .toProvider(new PageProvider())
 		      .in(RequestScoped.class);
-
+		
+		@SuppressWarnings("rawtypes")
 		Set<IPage> notInjectedPages = GuiceContext.instance()
 		                                          .getLoader(IPage.class, true, ServiceLoader.load(IPage.class));
 
-		for (IPage page : notInjectedPages)
+		for (IPage<?> page : notInjectedPages)
 		{
 			PageConfiguration pc = page.getClass()
 			                           .getAnnotation(PageConfiguration.class);
 			if (pc == null)
 			{
-				JWebMPSiteBinder.log.log(Level.SEVERE, "Couldnt Find Page Configuration on IPage Object {0}", new Object[]{page.getClass().getCanonicalName()});
+				JWebMPSiteBinder.log.log(Level.SEVERE, "Couldn't Find Page Configuration on IPage Object {0}", new Object[]{page.getClass().getCanonicalName()});
 			}
 			else if (!pc.ignore())
 			{

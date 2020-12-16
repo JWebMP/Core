@@ -26,7 +26,7 @@ import java.util.Set;
  * @author GedMarc
  * @since Sep 26, 2016
  */
-public interface IComponentThemeBase
+public interface IComponentThemeBase<J extends IComponentThemeBase<J>>
 {
 
 	/**
@@ -50,5 +50,66 @@ public interface IComponentThemeBase
 	 * @return The theme
 	 */
 	Set<Theme> getThemes();
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentHTMLAttributeBase<?, ?> asAttributeBase()
+	{
+		return (IComponentHTMLAttributeBase<?, ?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentHTMLBase<?> asTagBase()
+	{
+		return (IComponentHTMLBase<?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentEventBase<?, ?> asEventBase()
+	{
+		return (IComponentEventBase<?, ?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentFeatureBase<?, ?> asFeatureBase()
+	{
+		return (IComponentFeatureBase<?, ?>) this;
+	}
 
+	/**
+	 * Returns the components exposed dependency methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentDependencyBase<?> asDependencyBase()
+	{
+		return (IComponentDependencyBase<?>) this;
+	}
+	
+	/**
+	 * Returns the base exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentBase<?> asBase()
+	{
+		return (IComponentBase<?>) this;
+	}
+	
+	
 }

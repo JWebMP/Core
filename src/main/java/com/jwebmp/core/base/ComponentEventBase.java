@@ -22,6 +22,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentEventBase;
+import com.jwebmp.core.base.interfaces.IComponentFeatureBase;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
@@ -29,6 +31,7 @@ import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.guicedee.logger.LogFactory;
 
 import jakarta.validation.constraints.NotNull;
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.logging.Level;
@@ -36,22 +39,19 @@ import java.util.logging.Level;
 /**
  * Enables Events in the Component Tree Hierarchy
  *
- * @param <F>
- * 		The Features TYpe
- * @param <E>
- * 		The Events Type
- * @param <J>
- * 		This Type
- *
+ * @param <F> The Features TYpe
+ * @param <E> The Events Type
+ * @param <J> This Type
  * @author GedMarc
  * @version 2.0
  * @since 23 Apr 2013
  */
-public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentEventBase<F, E, J>>
+public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents,
+		J extends ComponentEventBase<F, E, J>>
 		extends ComponentFeatureBase<F, J>
 		implements IComponentEventBase<E, J>
 {
-
+	
 	/**
 	 * Logger for the Component
 	 */
@@ -59,77 +59,67 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("ComponentEventBase");
 	/**
-	 * Serial Version for all Components and their compatibility
-	 *
-	 * @version 2 Version 2 - Updated CSS Library and References
-	 */
-	@JsonIgnore
-	private static final long serialVersionUID = 2L;
-
-	/**
 	 * The event of this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Set<E> events;
-
+	
 	/**
 	 * The actual event type
 	 */
 	@JsonIgnore
 	private EventTypes eventType;
-
+	
 	/**
 	 * Constructs a new event for the given component type
 	 *
-	 * @param componentType
+	 * @param componentType The type for the event
 	 */
 	public ComponentEventBase(ComponentTypes componentType)
 	{
 		this(EventTypes.undefined, componentType);
 	}
-
+	
 	/**
 	 * Constructs a new event type for component type
 	 *
-	 * @param eventType
-	 * 		The Event Type being applied
-	 * @param componentType
-	 * 		The component type of this component
+	 * @param eventType     The Event Type being applied
+	 * @param componentType The component type of this component
 	 */
-	@SuppressWarnings("all")
 	public ComponentEventBase(EventTypes eventType, ComponentTypes componentType)
 	{
 		super(componentType);
 		this.eventType = eventType;
 	}
-
+	
 	/**
 	 * Returns an Attribute Base interface of this component
 	 *
-	 * @return
+	 * @return This object with only the events based methods
 	 */
 	@NotNull
 	@SuppressWarnings("unused")
-	public IComponentEventBase asEventBase()
+	public IComponentEventBase<?, ?> asEventBase()
 	{
 		return this;
 	}
-
+	
 	/**
 	 * Adds an event to this object
 	 * <p>
 	 *
-	 * @param event
-	 * 		The Event to add
+	 * @param event The Event to add
 	 */
 	@Override
 	@NotNull
 	@SuppressWarnings("unchecked")
 	public J addEvent(@NotNull E event)
 	{
-		if (!ComponentEventBase.class.cast(event)
-		                             .getComponentType()
-		                             .equals(ComponentTypes.Event))
+		//noinspection RedundantClassCall
+		if (!IComponentEventBase.class.cast(event)
+		                              .asBase()
+		                              .getComponentType()
+		                              .equals(ComponentTypes.Event))
 		{
 			ComponentEventBase.LOG.log(Level.WARNING, "Tried to add a non event to the event collection");
 		}
@@ -137,21 +127,20 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 		{
 			getEvents().add(event);
 		}
-		if (ComponentHierarchyBase.class.isAssignableFrom(getClass()))
+		if (IComponentHierarchyBase.class.isAssignableFrom(getClass()))
 		{
-			event.asEventBase()
-			     .asFeatureBase()
-			     .setComponent((ComponentHierarchyBase) this);
+			event.asFeatureBase()
+			     .setComponent((IComponentHierarchyBase<?, ?>) this);
 		}
 		event.init();
 		event.preConfigure();
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns the event type for this event
 	 *
-	 * @return
+	 * @return The associated Event Type
 	 */
 	@Override
 	@NotNull
@@ -167,7 +156,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 			return eventType;
 		}
 	}
-
+	
 	/**
 	 * Gets all registered events
 	 * <p>
@@ -184,22 +173,21 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 		}
 		return events;
 	}
-
+	
 	/**
 	 * Returns all the events associated with the given type
 	 *
-	 * @param eventType
-	 *
-	 * @return
+	 * @param eventType All child events on this component with the given event type
+	 * @return An in order list of all the events of the given type for this component
 	 */
 	@Override
 	@NotNull
-	public Set<ComponentEventBase> getEventsFor(@NotNull EventTypes eventType)
+	public Set<ComponentEventBase<?, ?, ?>> getEventsFor(@NotNull EventTypes eventType)
 	{
-		Set<ComponentEventBase> output = new LinkedHashSet<>();
+		Set<ComponentEventBase<?, ?, ?>> output = new LinkedHashSet<>();
 		for (E e : getEvents())
 		{
-			ComponentEventBase next = (ComponentEventBase) e;
+			ComponentEventBase<?, ?, ?> next = (ComponentEventBase<?, ?, ?>) e;
 			if (next.getEventTypes()
 			        .equals(eventType))
 			{
@@ -208,17 +196,15 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 		}
 		return output;
 	}
-
+	
 	/**
 	 * Events are types of feature that have server side support. These are referenced using the Ajax Receiver.
 	 * <p>
 	 *
-	 * @param event
-	 * 		The event to be removed
-	 * 		<p>
-	 *
+	 * @param event The event to be removed
+	 *              <p>
 	 * @return currently false
-	 * 		<p>
+	 * <p>
 	 */
 	@Override
 	@NotNull
@@ -228,13 +214,12 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 		getEvents().remove(event);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Sets the event type of an event
 	 *
-	 * @param eventType
-	 *
-	 * @return
+	 * @param eventType The given event type
+	 * @return This object
 	 */
 	@Override
 	@NotNull
@@ -244,21 +229,19 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 		this.eventType = eventType;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns an event with the given Id
 	 *
-	 * @param eventId
-	 *
-	 * @return
+	 * @param eventId A given id
+	 * @return The event or null
 	 */
 	@Override
-
-	public ComponentEventBase findEvent(@NotNull String eventId)
+	public ComponentEventBase<?, ?, ?> findEvent(@NotNull String eventId)
 	{
 		for (E e : getEvents())
 		{
-			ComponentEventBase next = (ComponentEventBase) e;
+			ComponentEventBase<?, ?, ?> next = (ComponentEventBase<?, ?, ?>) e;
 			if (next.getID()
 			        .equals(eventId))
 			{
@@ -267,15 +250,14 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 		}
 		return null;
 	}
-
+	
 	/**
 	 * Returns the event type for this event
 	 *
-	 * @return
+	 * @return the type to be used for event types
 	 */
 	@JsonProperty("eventType")
 	@JsonInclude(value = JsonInclude.Include.NON_NULL)
-
 	@SuppressWarnings("unused")
 	private EventTypes getEventTypesJSON()
 	{
@@ -288,12 +270,13 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 			return eventType;
 		}
 	}
-
+	
 	/**
 	 * Adds in the JavaScript References for the Features
 	 *
-	 * @return
+	 * @return The set of all references
 	 */
+	@SuppressWarnings("RedundantClassCall")
 	@Override
 	@NotNull
 	public Set<CSSReference> getCssReferencesAll()
@@ -309,14 +292,15 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 		                    });
 		return allCss;
 	}
-
+	
 	/**
 	 * Adds in the JavaScript References for the Features
 	 *
-	 * @return
+	 * @return The set of all javascript references
 	 */
 	@Override
 	@NotNull
+	@SuppressWarnings("RedundantClassCall")
 	public Set<JavascriptReference> getJavascriptReferencesAll()
 	{
 		Set<JavascriptReference> allJs = super.getJavascriptReferencesAll();
@@ -330,7 +314,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 		                    });
 		return allJs;
 	}
-
+	
 	/**
 	 * Method hashCode ...
 	 *
@@ -341,13 +325,11 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	{
 		return super.hashCode();
 	}
-
+	
 	/**
 	 * Method equals ...
 	 *
-	 * @param obj
-	 * 		of type Object
-	 *
+	 * @param obj of type Object
 	 * @return boolean
 	 */
 	@Override
@@ -355,7 +337,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	{
 		return super.equals(obj);
 	}
-
+	
 	@Override
 	public void destroy()
 	{
@@ -366,7 +348,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 		}
 		super.destroy();
 	}
-
+	
 	/**
 	 * Checks if this feature has been configured and rendered with all the features
 	 */
@@ -379,15 +361,12 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 		}
 		super.checkAssignedFunctions();
 	}
-
+	
 	/**
 	 * Sets all features beneath to tiny
 	 *
-	 * @param tiny
-	 * 		if this must render tiny
-	 *
+	 * @param tiny if this must render tiny
 	 * @return Always this class
-	 *
 	 * @see com.jwebmp.core.base.ComponentBase#setTiny(boolean)
 	 */
 	@Override
@@ -396,28 +375,27 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	{
 		for (E e : getEvents())
 		{
-			ComponentEventBase next = (ComponentEventBase) e;
+			ComponentEventBase<?, ?, ?> next = (ComponentEventBase<?, ?, ?>) e;
 			next.setTiny(tiny);
 		}
 		return super.setTiny(tiny);
 	}
-
+	
 	/**
 	 * Clones the component and all its events
 	 *
-	 * @return
-	 *
-	 * @see ComponentDependancyBase#cloneComponent()
+	 * @return The new cloned object
+	 * @see ComponentDependencyBase#cloneComponent()
 	 */
 	@Override
 	@NotNull
 	@SuppressWarnings("unchecked")
 	public J cloneComponent()
 	{
-		ComponentEventBase cloned = super.cloneComponent();
-		cloned.events = new LinkedHashSet();
+		ComponentEventBase<?, GlobalEvents, ?> cloned = (ComponentEventBase<?, GlobalEvents, ?>) super.cloneComponent();
+		cloned.events = new LinkedHashSet<>();
 		cloned.events.addAll(getEvents());
 		return (J) cloned;
 	}
-
+	
 }

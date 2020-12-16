@@ -18,6 +18,7 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.attributes.StyleAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.NoClassAttribute;
 import com.jwebmp.core.base.html.interfaces.NoFeatures;
 import com.jwebmp.core.base.html.interfaces.NoIDTag;
@@ -54,16 +55,10 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since 2013/11/12
  */
 @SuppressWarnings("MissingClassJavaDoc")
-public class Style<C extends IComponentHierarchyBase, J extends Style<C, J>>
+public class Style<C extends GlobalChildren, J extends Style<C, J>>
 		extends ComponentHierarchyBase<C, StyleAttributes, NoFeatures, NoEvents, J>
-		implements NoIDTag, HeadChildren<C, J>, NoClassAttribute
+		implements NoIDTag, HeadChildren, NoClassAttribute
 {
-
-	/**
-	 * Field serialVersionUID
-	 */
-
-
 	/**
 	 * Constructs a new blank Style tag
 	 */
@@ -118,7 +113,7 @@ public class Style<C extends IComponentHierarchyBase, J extends Style<C, J>>
 		if (Style.class.isAssignableFrom(o.getClass()))
 		{
 			return getText(0).toString()
-			                 .equals(((Style) o)
+			                 .equals(((Style<?,?>) o)
 					                         .getText(0)
 					                         .toString());
 		}

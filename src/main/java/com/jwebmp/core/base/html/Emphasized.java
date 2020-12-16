@@ -23,6 +23,7 @@ import com.jwebmp.core.base.html.interfaces.NoIDTag;
 import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
 import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
 import com.jwebmp.core.base.html.interfaces.children.PhraseChildren;
+import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
@@ -47,11 +48,9 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  */
 public class Emphasized<J extends Emphasized<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, NoEvents, J>
-		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, PhraseChildren<IComponentHierarchyBase, J>
+		extends Component<ParagraphChildren, NoAttributes, NoFeatures, NoEvents, J>
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, PhraseChildren
 {
-
-
 	/**
 	 * Constructs a new Emphasized Text String
 	 *

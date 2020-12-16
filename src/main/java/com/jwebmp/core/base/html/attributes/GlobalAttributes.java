@@ -112,7 +112,7 @@ public enum GlobalAttributes
 	/**
 	 * Sets the aria atomic values
 	 */
-	Aria_Atomic;;
+	Aria_Atomic;
 
 	GlobalAttributes()
 	{

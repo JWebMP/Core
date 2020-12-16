@@ -16,36 +16,7 @@ public class AjaxCallTest
 	public void fromCall()
 	{
 		AjaxCall call = new AjaxCall();
-		call.setComponent(new CSSComponent("TestComponent")
-		{
-			@Override
-			@NotNull
-			protected StringBuilder renderHTML(int tabCount)
-			{
-				return super.renderHTML(tabCount);
-			}
-
-			@NotNull
-			@Override
-			public String getJQueryID()
-			{
-				return super.getJQueryID();
-			}
-
-			@NotNull
-			@Override
-			public String getID(boolean jQueryHolder)
-			{
-				return super.getID(jQueryHolder);
-			}
-
-			@NotNull
-			@Override
-			public String getID()
-			{
-				return super.getID();
-			}
-		});
+		call.setComponent(new CSSComponent("TestComponent"));
 		call.setComponentId("ComponentID");
 		call.setDatetime(new Date(2017, 11, 18));
 		call.setEventType(EventTypes.undefined);

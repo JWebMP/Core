@@ -44,7 +44,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class OptionGroup<J extends OptionGroup<J>>
 		extends Component<SelectChildren, OptionGroupAttributes, GlobalFeatures, GlobalEvents, J>
-		implements SelectChildren<SelectChildren, J>, NoIDTag, NoNewLineBeforeClosingTag
+		implements SelectChildren, NoIDTag, NoNewLineBeforeClosingTag
 {
 	/**
 	 * Constructs a new OptionGroup for select Children

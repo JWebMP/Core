@@ -49,7 +49,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  */
 public class LineBreak<J extends LineBreak<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, NoEvents, J>
+		extends Component<IComponentHierarchyBase<?,?>, NoAttributes, NoFeatures, NoEvents, J>
 		implements NoNewLineBeforeClosingTag, NoClosingTag, NoNewLineForRawText, NoIDTag
 {
 

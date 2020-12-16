@@ -24,6 +24,7 @@ import com.jwebmp.core.base.html.interfaces.NoClosingTag;
 import com.jwebmp.core.base.html.interfaces.NoFeatures;
 import com.jwebmp.core.base.html.interfaces.NoIDTag;
 import com.jwebmp.core.base.html.interfaces.children.HeadChildren;
+import com.jwebmp.core.base.html.interfaces.children.NoChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.references.CSSReference;
@@ -67,8 +68,8 @@ import java.util.logging.Logger;
  * @since 2013/11/12
  */
 public class CSSLink<J extends CSSLink<J>>
-		extends Component<IComponentHierarchyBase, CSSLinkAttributes, NoFeatures, NoEvents, J>
-		implements NoClosingTag, HeadChildren<IComponentHierarchyBase, J>
+		extends Component<NoChildren, CSSLinkAttributes, NoFeatures, NoEvents, J>
+		implements NoClosingTag, HeadChildren
 {
 
 	private static final Logger LOG = LogFactory.getInstance()

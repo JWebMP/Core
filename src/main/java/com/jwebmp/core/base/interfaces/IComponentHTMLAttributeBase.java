@@ -16,7 +16,6 @@
  */
 package com.jwebmp.core.base.interfaces;
 
-import com.jwebmp.core.base.ComponentBase;
 import com.jwebmp.core.base.html.attributes.GlobalAttributes;
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
 
@@ -27,9 +26,8 @@ import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
  * @author GedMarc
  * @since Sep 26, 2016
  */
-public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, J extends ComponentBase>
+public interface IComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions, J extends IComponentHTMLAttributeBase<A,J>>
 {
-
 	/**
 	 * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
 	 * <p>
@@ -94,7 +92,11 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
 	 * @return
 	 */
 	J addAttribute(A attribute, Boolean value);
-
+	
+	/**
+	 * This component cloned
+	 * @return
+	 */
 	J cloneComponent();
 
 	/**
@@ -217,5 +219,70 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
 	 * @return A HashMap if this components local attributes. Never null
 	 */
 	Boolean getAttribute(A attributeValue, Boolean uselessInt);
-
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentHTMLBase<?> asTagBase()
+	{
+		return (IComponentHTMLBase<?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentEventBase<?, ?> asEventBase()
+	{
+		return (IComponentEventBase<?, ?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentFeatureBase<?, ?> asFeatureBase()
+	{
+		return (IComponentFeatureBase<?, ?>) this;
+	}
+	
+	/**
+	 * Returns the components exposed dependency methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentDependencyBase<?> asDependencyBase()
+	{
+		return (IComponentDependencyBase<?>) this;
+	}
+	
+	/**
+	 * Returns the base exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentBase<?> asBase()
+	{
+		return (IComponentBase<?>) this;
+	}
+	
+	/**
+	 * Shortcut to adding a style attribute
+	 *
+	 * @param property the style string to add
+	 * @return This object
+	 */
+	J addStyle(String property, String value);
+	
+	/**
+	 * Shortcut to adding a style attribute
+	 *
+	 * @param style the style string to add
+	 * @return This object
+	 */
+	J addStyle(String style);
 }

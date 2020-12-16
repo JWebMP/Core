@@ -27,7 +27,7 @@ import java.util.Map;
  * @author GedMarc
  * @since Sep 26, 2016
  */
-public interface IComponentDataBindingBase<J extends ComponentBase>
+public interface IComponentDataBindingBase<J extends IComponentDataBindingBase<J>>
 {
 	/**
 	 * Adds an object for watching across an application
@@ -61,5 +61,66 @@ public interface IComponentDataBindingBase<J extends ComponentBase>
 	 * @return Null if not available
 	 */
 	<T> T getDto(String name, Class<T> classType);
-
+	
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentHTMLAttributeBase<?, ?> asAttributeBase()
+	{
+		return (IComponentHTMLAttributeBase<?, ?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentHTMLBase<?> asTagBase()
+	{
+		return (IComponentHTMLBase<?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentEventBase<?, ?> asEventBase()
+	{
+		return (IComponentEventBase<?, ?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentFeatureBase<?, ?> asFeatureBase()
+	{
+		return (IComponentFeatureBase<?, ?>) this;
+	}
+	
+	/**
+	 * Returns the components exposed dependency methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentDependencyBase<?> asDependencyBase()
+	{
+		return (IComponentDependencyBase<?>) this;
+	}
+	
+	/**
+	 * Returns the base exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentBase<?> asBase()
+	{
+		return (IComponentBase<?>) this;
+	}
+	
 }

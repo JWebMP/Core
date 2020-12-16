@@ -16,15 +16,15 @@
  */
 package com.jwebmp.core.base.html.interfaces.children;
 
-import com.jwebmp.core.base.ComponentBase;
+import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 
 /**
  * @author GedMarc
  */
-public interface AddressChildren<C extends IComponentHierarchyBase, J extends ComponentBase>
-		extends ParagraphChildren<C, J>
+public interface AddressChildren
+		extends GlobalChildren
 {
 
 }

@@ -46,7 +46,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since 2014/12/21
  */
 public class Embed<J extends Embed<J>>
-		extends Component<IComponentHierarchyBase, EmbedAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<IComponentHierarchyBase<?,?>, EmbedAttributes, GlobalFeatures, GlobalEvents, J>
 		implements NoClosingTag
 {
 

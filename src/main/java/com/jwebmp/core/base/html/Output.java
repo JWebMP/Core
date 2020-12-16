@@ -43,7 +43,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * 		No support in I.E. - can't be used, the results are not compatible - may make as a server function but the point is client side.
  */
 public class Output<J extends Output<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, NoEvents, J>
+		extends Component<IComponentHierarchyBase<?,?>, NoAttributes, NoFeatures, NoEvents, J>
 {
 
 

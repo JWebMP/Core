@@ -30,45 +30,43 @@ import jakarta.validation.constraints.NotNull;
 /**
  * This Class is a data adapter
  *
- * @param <C>
- * 		The specified global children
- * @param <A>
- * 		The given component data adapaters
- * @param <F>
- * 		The given features
- * @param <E>
- * 		The given events
- * @param <J>
- * 		This component
- *
+ * @param <C> The specified global children
+ * @param <A> The given component data adapaters
+ * @param <F> The given features
+ * @param <E> The given events
+ * @param <J> This component
  * @author GedMarc
  * @since 01 Jan 2016
  */
-public class DataAdapter<C extends IComponentHierarchyBase, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends DataAdapter<C, A, F, E, J>>
+public class DataAdapter<C extends IComponentHierarchyBase<?, ?>,
+		A extends Enum<?> & AttributeDefinitions,
+		F extends GlobalFeatures,
+		E extends GlobalEvents,
+		J extends DataAdapter<C, A, F, E, J>>
 		extends Div<C, A, F, E, J>
 {
-
-
-	private Component linkedComponent;
+	
+	
+	private IComponentHierarchyBase<?,?> linkedComponent;
 	private String dataAdapterID;
-
+	
 	/**
 	 * The component this data adapter should render on
 	 *
 	 * @param linkedComponent
 	 */
-	public DataAdapter(Component linkedComponent)
+	public DataAdapter(IComponentHierarchyBase<?,?> linkedComponent)
 	{
 		setLinkedComponent(linkedComponent);
 	}
-
+	
 	@JsonRawValue
 	@JsonValue
 	public String getDAID()
 	{
 		return dataAdapterID;
 	}
-
+	
 	/**
 	 * Returns only this data adapters ID for the JSON rendering
 	 *
@@ -80,7 +78,7 @@ public class DataAdapter<C extends IComponentHierarchyBase, A extends Enum & Att
 	{
 		return getDAID();
 	}
-
+	
 	@Override
 	public int hashCode()
 	{
@@ -89,7 +87,7 @@ public class DataAdapter<C extends IComponentHierarchyBase, A extends Enum & Att
 		result = 31 * result + (getDataAdapterID() != null ? getDataAdapterID().hashCode() : 0);
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object o)
 	{
@@ -105,52 +103,52 @@ public class DataAdapter<C extends IComponentHierarchyBase, A extends Enum & Att
 		{
 			return false;
 		}
-
+		
 		DataAdapter<?, ?, ?, ?, ?> that = (DataAdapter<?, ?, ?, ?, ?>) o;
-
+		
 		if (!getLinkedComponent().equals(that.getLinkedComponent()))
 		{
 			return false;
 		}
 		return getDataAdapterID() != null ? getDataAdapterID().equals(that.getDataAdapterID()) : that.getDataAdapterID() == null;
 	}
-
+	
 	/**
 	 * Gets the component this adapter is added to
 	 *
 	 * @return
 	 */
-	public Component getLinkedComponent()
+	public IComponentHierarchyBase<?,?> getLinkedComponent()
 	{
 		return linkedComponent;
 	}
-
+	
 	public String getDataAdapterID()
 	{
 		return dataAdapterID;
 	}
-
+	
 	public final void setDataAdapterID(String dataAdapterID)
 	{
 		this.dataAdapterID = dataAdapterID;
 	}
-
+	
 	/**
 	 * Sets the component this data adapter is linked to
 	 *
 	 * @param linkedComponent
 	 */
-	public final void setLinkedComponent(Component linkedComponent)
+	public final void setLinkedComponent(IComponentHierarchyBase<?,?> linkedComponent)
 	{
 		if (this.linkedComponent != null)
 		{
-			this.linkedComponent.removeVariable(getDAID());
+			this.linkedComponent.asFeatureBase().removeVariable(getDAID());
 		}
 		this.linkedComponent = linkedComponent;
 		if (linkedComponent != null)
 		{
-			setDataAdapterID("da" + linkedComponent.getID());
-			linkedComponent.addVariable(getDAID());
+			setDataAdapterID("da" + linkedComponent.asBase().getID());
+			linkedComponent.asFeatureBase().addVariable(getDAID());
 		}
 	}
 }

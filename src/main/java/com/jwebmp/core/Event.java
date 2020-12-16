@@ -17,27 +17,26 @@
 package com.jwebmp.core;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.json.StaticStrings;
 import com.jwebmp.core.base.ComponentEventBase;
-import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.events.IEventConfigurator;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
-import com.guicedee.guicedinjection.json.StaticStrings;
-import com.guicedee.guicedinjection.GuiceContext;
-
 import jakarta.validation.constraints.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;
 import java.util.Set;
 
 import static com.guicedee.guicedinjection.json.StaticStrings.*;
-import static com.jwebmp.core.utilities.StaticStrings.*;
 
 /**
  * Container Class for Events. Splits from the component hierarchy
@@ -57,12 +56,12 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	 * A list of all queries to execute on ajax response
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private List<Event> runEvents;
+	private List<Event<?,?>> runEvents;
 	/**
 	 * Any features that must be run
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private List<Feature> runFeatures;
+	private List<Feature<?,?,?>> runFeatures;
 
 	/**
 	 * Constructs an event with the given name
@@ -99,7 +98,7 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	 * 		The component type of this event
 	 */
 	@SuppressWarnings("unchecked")
-	public Event(String name, EventTypes eventType, ComponentHierarchyBase component)
+	public Event(String name, EventTypes eventType, IComponentHierarchyBase<?,?> component)
 	{
 		super(ComponentTypes.Event);
 		setID(getClassCanonicalName());
@@ -107,36 +106,23 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 		setComponent(component);
 		setEventType(eventType);
 
+		@SuppressWarnings("rawtypes")
 		Set<IEventConfigurator> eventConfiguratorSet = GuiceContext.instance()
 		                                                           .getLoader(IEventConfigurator.class, ServiceLoader.load(IEventConfigurator.class));
-		for (IEventConfigurator iEventConfigurator : eventConfiguratorSet)
+		
+		for (IEventConfigurator<?> iEventConfigurator : eventConfiguratorSet)
 		{
 			iEventConfigurator.configureEvent(this);
 		}
 	}
-
-	/**
-	 * Sets the given component and class for this events. Component instance is destroyed on delivery
-	 *
-	 * @param component
-	 * 		The component to set
-	 *
-	 * @return
-	 */
-	@NotNull
-	@Override
-	public J setComponent(ComponentHierarchyBase component)
-	{
-		return super.setComponent(component);
-	}
-
+	
 	/**
 	 * Adds a variable to return on the call
 	 *
 	 * @param returnVariable
 	 * 		The name of the variable to return
 	 *
-	 * @return
+	 * @return This object
 	 */
 	@SuppressWarnings("unchecked")
 	public J returnVariable(String returnVariable)
@@ -153,7 +139,7 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	 * @param component
 	 * 		The component type of this event
 	 */
-	public Event(String name, ComponentHierarchyBase component)
+	public Event(String name, IComponentHierarchyBase<?,?> component)
 	{
 		this(name, EventTypes.undefined, component);
 	}
@@ -161,9 +147,9 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	/**
 	 * Creates an event with the given component and type
 	 *
-	 * @param component
+	 * @param component The component to use bind to
 	 */
-	public Event(ComponentHierarchyBase component)
+	public Event(IComponentHierarchyBase<?,?> component)
 	{
 		this(EventTypes.undefined, component);
 	}
@@ -171,10 +157,10 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	/**
 	 * Creates an event with the given component and type
 	 *
-	 * @param eventTypes
-	 * @param component
+	 * @param eventTypes This event type
+	 * @param component The component to bind to
 	 */
-	public Event(EventTypes eventTypes, ComponentHierarchyBase component)
+	public Event(EventTypes eventTypes, IComponentHierarchyBase<?,?> component)
 	{
 		this(eventTypes.name(), eventTypes, component);
 	}
@@ -182,7 +168,7 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	/**
 	 * Render the variable return array
 	 *
-	 * @return
+	 * @return The variables rendered string
 	 */
 	public StringBuilder renderVariables()
 	{
@@ -219,7 +205,7 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	 * @param response
 	 * 		The Response Object Being Returned
 	 */
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 
 	}
@@ -227,12 +213,12 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	/**
 	 * Adds an on demand event to be performed after ajax response
 	 *
-	 * @param event
+	 * @param event An on demand event (client side only)
 	 *
-	 * @return
+	 * @return  This object
 	 */
 	@SuppressWarnings("unchecked")
-	public J addOnDemandEvent(Event event)
+	public J addOnDemandEvent(Event<?,?> event)
 	{
 		getRunEvents().add(event);
 		return (J) this;
@@ -241,9 +227,9 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	/**
 	 * Return all the queries to execute on ajax response
 	 *
-	 * @return
+	 * @return The list of events to run
 	 */
-	public List<Event> getRunEvents()
+	public List<Event<?,?>> getRunEvents()
 	{
 		if (runEvents == null)
 		{
@@ -255,12 +241,12 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	/**
 	 * Returns all queries that are executed on ajax response
 	 *
-	 * @param onDemandQueries
+	 * @param onDemandQueries The list of on demand queries to execute
 	 *
-	 * @return
+	 * @return  This object
 	 */
 	@SuppressWarnings("unchecked")
-	public J setOnDemandQueries(List<Event> onDemandQueries)
+	public J setOnDemandQueries(List<Event<?,?>> onDemandQueries)
 	{
 		runEvents = onDemandQueries;
 		return (J) this;
@@ -307,7 +293,7 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	 * @param id
 	 * 		The ID
 	 *
-	 * @return
+	 * @return  This object
 	 */
 	@NotNull
 	@Override
@@ -319,9 +305,9 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	/**
 	 * Returns a list of runnable features that occur from an event
 	 *
-	 * @return
+	 * @return The list of features to run that is associated with this event
 	 */
-	public List<Feature> getRunFeatures()
+	public List<Feature<?,?,?>> getRunFeatures()
 	{
 		if (runFeatures == null)
 		{
@@ -333,9 +319,9 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	/**
 	 * Sets the running feature base
 	 *
-	 * @param runFeatures
+	 * @param runFeatures The list of features to run that is associated with this event
 	 */
-	public void setRunFeatures(List<Feature> runFeatures)
+	public void setRunFeatures(List<Feature<?,?,?>> runFeatures)
 	{
 		this.runFeatures = runFeatures;
 	}

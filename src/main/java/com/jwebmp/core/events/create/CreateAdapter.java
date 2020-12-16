@@ -37,9 +37,7 @@ import java.util.logging.Level;
  * @author GedMarc
  */
 @ComponentInformation(name = "Create Event",
-		description = "Server Side Event for Create.",
-		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
+		description = "Server Side Event for Create.")
 public abstract class CreateAdapter<J extends CreateAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
@@ -57,14 +55,14 @@ public abstract class CreateAdapter<J extends CreateAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public CreateAdapter(Component component)
+	public CreateAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.create, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -87,7 +85,7 @@ public abstract class CreateAdapter<J extends CreateAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onCreate(AjaxCall call, AjaxResponse response);
+	public abstract void onCreate(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

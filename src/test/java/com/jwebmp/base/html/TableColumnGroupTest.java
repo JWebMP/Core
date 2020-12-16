@@ -33,13 +33,8 @@ public class TableColumnGroupTest
 	@Test
 	public void testSomeMethod()
 	{
-		TableColumnGroup tc = new TableColumnGroup();
-		tc.add(new TableColumn()
-		{
-			{
-				addAttribute(TableColumnAttributes.Span, 2);
-			}
-		});
+		TableColumnGroup<?> tc = new TableColumnGroup<>();
+		tc.add(new TableColumn<>().addAttribute(TableColumnAttributes.Span, 2));
 		System.out.println(tc.toString(true));
 	}
 

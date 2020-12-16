@@ -32,7 +32,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since @version @author MMagon
  */
 public class Applet<J extends Applet<J>>
-		extends Component<IComponentHierarchyBase, AppletAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<IComponentHierarchyBase<?,?>, AppletAttributes, GlobalFeatures, GlobalEvents, J>
 {
 
 	/**

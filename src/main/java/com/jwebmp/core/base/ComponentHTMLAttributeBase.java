@@ -32,6 +32,7 @@ import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.logger.LogFactory;
 
 import jakarta.validation.constraints.NotNull;
+
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -40,19 +41,17 @@ import java.util.logging.Level;
 /**
  * Denotes a component that has a tag. By default these can add events, features, variables etc
  *
- * @param <A>
- * 		The allowed local attributes (Separate from Global Attributes)
- * @param <F>
- * 		The allowed feature JavaScripts
- * @param <E>
- * 		The allowed associated Events
- * @param <J>
- * 		Component output for cloning. Returned on CloneComponent
- *
+ * @param <A> The allowed local attributes (Separate from Global Attributes)
+ * @param <F> The allowed feature JavaScripts
+ * @param <E> The allowed associated Events
+ * @param <J> Component output for cloning. Returned on CloneComponent
  * @author GedMarc
  * @since 23 Apr 2016
  */
-public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHTMLAttributeBase<A, F, E, J>>
+public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions,
+		F extends GlobalFeatures,
+		E extends GlobalEvents,
+		J extends ComponentHTMLAttributeBase<A, F, E, J>>
 		extends ComponentHTMLBase<F, E, J>
 		implements IComponentHTMLAttributeBase<A, J>
 {
@@ -61,52 +60,49 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 */
 	@JsonIgnore
 	private static final java.util.logging.Logger LOG = LogFactory.getLog("ComponentAttributes");
-
+	
 	/**
 	 * The current stored attribute lists
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Map<String, String> attributes;
-
+	
 	/**
 	 * Specifies if this component should render an ID attribute
 	 */
 	private boolean renderIDAttibute = true;
-
+	
 	/**
 	 * Renders the attributes with a single colon instead of a double colon, and replaces single colon values with double colons
 	 */
 	private boolean invertColonRender = false;
-
+	
 	/**
 	 * Construct a new component that will render a tag
 	 *
 	 * @param componentType
 	 */
-	@SuppressWarnings("all")
 	public ComponentHTMLAttributeBase(ComponentTypes componentType)
 	{
 		super(componentType);
 	}
-
+	
 	/**
 	 * Returns an Attribute Base interface of this component
 	 *
 	 * @return A cleaner version
 	 */
 	@NotNull
-	@SuppressWarnings("unused")
-	public IComponentHTMLAttributeBase asAttributeBase()
+	public IComponentHTMLAttributeBase<?, ?> asAttributeBase()
 	{
 		return this;
 	}
-
+	
 	/**
 	 * Renders all the Attribute HTML. The All Custom attributes can contain any value=parameter pair
 	 * <p>
 	 *
 	 * @return The attribute HTML
-	 *
 	 * @see com.jwebmp.core.base.html.attributes.GlobalAttributes
 	 */
 	@Override
@@ -118,8 +114,6 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		{
 			addAttribute(GlobalAttributes.Class, sbClasses.toString());
 		}
-
-		//Build up the string builder
 		if (!getAttributes().isEmpty())
 		{
 			sb.append(StaticStrings.STRING_SPACE);
@@ -170,7 +164,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		}
 		return sb;
 	}
-
+	
 	/**
 	 * Adds the ID attribute to the component
 	 */
@@ -190,19 +184,19 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		}
 		super.preConfigure();
 	}
-
+	
 	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
 	}
-
+	
 	@Override
 	public boolean equals(Object o)
 	{
 		return super.equals(o);
 	}
-
+	
 	/**
 	 * Returns if this component should render for the ID attribute
 	 * <p>
@@ -221,13 +215,11 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 			return renderIDAttibute;
 		}
 	}
-
+	
 	/**
 	 * Removes a key from the attribute set
 	 *
-	 * @param key
-	 * 		The global attribute key
-	 *
+	 * @param key The global attribute key
 	 * @return This object
 	 */
 	@SuppressWarnings("unchecked")
@@ -237,7 +229,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		getAttributes().remove(key.toString());
 		return (J) this;
 	}
-
+	
 	/**
 	 * Renders the classes array as an in-line class string
 	 *
@@ -247,16 +239,13 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	{
 		return new StringBuilder();
 	}
-
+	
 	/**
 	 * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
 	 * <p>
 	 *
-	 * @param attribute
-	 * 		The GlobalAttribute to set the attribute to
-	 * @param value
-	 * 		The value of the attribute
-	 *
+	 * @param attribute The GlobalAttribute to set the attribute to
+	 * @param value     The value of the attribute
 	 * @return This object
 	 */
 	@Override
@@ -269,10 +258,10 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 			getAttributes().put(attribute.toString(), getAttributes().get(attribute.toString()) + StaticStrings.STRING_EMPTY + value);
 		}
 		getAttributes().put(attribute.toString(), value);
-
+		
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns the current raw attribute map
 	 *
@@ -287,7 +276,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		}
 		return attributes;
 	}
-
+	
 	/**
 	 * Renders the attributes with a single colon instead of a double colon, and replaces single colon values with double colons
 	 *
@@ -297,13 +286,11 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	{
 		return invertColonRender;
 	}
-
+	
 	/**
 	 * Renders the attributes with a single colon instead of a double colon, and replaces single colon values with double colons
 	 *
-	 * @param invertColonRender
-	 * 		set variable
-	 *
+	 * @param invertColonRender set variable
 	 * @return This object
 	 */
 	@SuppressWarnings("unchecked")
@@ -313,16 +300,13 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		this.invertColonRender = invertColonRender;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
 	 * <p>
 	 *
-	 * @param attribute
-	 * 		The GlobalAttribute to set the attribute to
-	 * @param value
-	 * 		The value of the attribute
-	 *
+	 * @param attribute The GlobalAttribute to set the attribute to
+	 * @param value     The value of the attribute
 	 * @return This Object
 	 */
 	@Override
@@ -330,20 +314,17 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	@NotNull
 	public J addAttribute(@NotNull A attribute, @NotNull String value)
 	{
-
+		
 		getAttributes().put(attribute.toString(), value);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
 	 * <p>
 	 *
-	 * @param attribute
-	 * 		The valid Local Attribute to add
-	 * @param value
-	 * 		The value of the attribute
-	 *
+	 * @param attribute The valid Local Attribute to add
+	 * @param value     The value of the attribute
 	 * @return This object
 	 */
 	@Override
@@ -354,16 +335,13 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		getAttributes().put(attribute, value);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
 	 * <p>
 	 *
-	 * @param attribute
-	 * 		The GlobalAttribute to set the attribute to
-	 * @param value
-	 * 		The value of the attribute
-	 *
+	 * @param attribute The GlobalAttribute to set the attribute to
+	 * @param value     The value of the attribute
 	 * @return This Object
 	 */
 	@Override
@@ -374,16 +352,13 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		getAttributes().put(attribute.toString(), value.toString());
 		return (J) this;
 	}
-
+	
 	/**
 	 * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
 	 * <p>
 	 *
-	 * @param attribute
-	 * 		The valid Local Attribute to add
-	 * @param value
-	 * 		The value of the attribute
-	 *
+	 * @param attribute The valid Local Attribute to add
+	 * @param value     The value of the attribute
 	 * @return This object
 	 */
 	@Override
@@ -394,17 +369,14 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		getAttributes().put(attribute.toString(), value.toString());
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns an enumerated HashMap for ease of access
 	 * <p>
 	 *
-	 * @param attribute
-	 * 		The Global Attribute to apply
-	 * @param bop
-	 * 		Place Holder for return type boolean
-	 * 		<p>
-	 *
+	 * @param attribute The Global Attribute to apply
+	 * @param bop       Place Holder for return type boolean
+	 *                  <p>
 	 * @return HashMap of Attributes with GlobalAttributes Enumeration as Identifier
 	 */
 	@Override
@@ -413,21 +385,17 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	{
 		return Boolean.parseBoolean(getAttributes().get(attribute.toString()));
 	}
-
+	
 	/**
 	 * Returns an enumerated HashMap for ease of access
 	 * <p>
 	 *
-	 * @param attribute
-	 * 		The Global Attribute to apply
-	 * @param bop
-	 * 		Place Holder for return type integer
-	 * 		<p>
-	 *
+	 * @param attribute The Global Attribute to apply
+	 * @param bop       Place Holder for return type integer
+	 *                  <p>
 	 * @return HashMap of Attributes with GlobalAttributes Enumeration as Identifier
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
 	@NotNull
 	public final Integer getAttribute(@NotNull GlobalAttributes attribute, @NotNull Integer bop)
 	{
@@ -441,15 +409,13 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 			return bop;
 		}
 	}
-
+	
 	/**
 	 * Returns an enumerated HashMap for ease of access
 	 * <p>
 	 *
-	 * @param attribute
-	 * 		The Global Attribute to apply
-	 * 		<p>
-	 *
+	 * @param attribute The Global Attribute to apply
+	 *                  <p>
 	 * @return HashMap of Attributes with GlobalAttributes Enumeration as Identifier
 	 */
 	@Override
@@ -458,15 +424,13 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		getAttributes().putIfAbsent(attribute.toString(), StaticStrings.STRING_EMPTY);
 		return getAttributes().get(attribute.toString());
 	}
-
+	
 	/**
 	 * Gets this list of local attribute values
 	 * <p>
 	 *
-	 * @param attributeValue
-	 * 		The Valid Local Attribute to Return
-	 * 		<p>
-	 *
+	 * @param attributeValue The Valid Local Attribute to Return
+	 *                       <p>
 	 * @return A String of the attribute value currently set
 	 */
 	@Override
@@ -480,14 +444,15 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		}
 		return s;
 	}
-
+	
 	/**
 	 * @param attributeValue The decoded value to Return
 	 *                       <p>
 	 * @return
 	 */
 	@Override
-	public String getAttribute(String attributeValue) {
+	public String getAttribute(String attributeValue)
+	{
 		String s = getAttributes().get(attributeValue);
 		if (s == null)
 		{
@@ -495,7 +460,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		}
 		return s;
 	}
-
+	
 	/**
 	 * @param attributeValue The decoded value to Return
 	 * @param uselessInt     A useless parameter purely to return the type integer
@@ -503,7 +468,8 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 * @return
 	 */
 	@Override
-	public Integer getAttribute(String attributeValue, Integer uselessInt) {
+	public Integer getAttribute(String attributeValue, Integer uselessInt)
+	{
 		String s = getAttributes().get(attributeValue);
 		if (s == null)
 		{
@@ -511,7 +477,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		}
 		return new StringToIntegerRelaxed().convert(s);
 	}
-
+	
 	/**
 	 * @param attributeValue The decoded value to Return
 	 * @param uselessInt     A useless parameter purely to return the type Boolean
@@ -519,7 +485,8 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 * @return
 	 */
 	@Override
-	public Boolean getAttribute(String attributeValue, Boolean uselessInt) {
+	public Boolean getAttribute(String attributeValue, Boolean uselessInt)
+	{
 		String s = getAttributes().get(attributeValue);
 		if (s == null)
 		{
@@ -527,17 +494,14 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		}
 		return new StringToBoolean().convert(s);
 	}
-
+	
 	/**
 	 * Gets this list of local attribute values
 	 * <p>
 	 *
-	 * @param attributeValue
-	 * 		The Valid Local Attribute to Return
-	 * @param uselessInt
-	 * 		A useless parameter purely to return the type integer
-	 * 		<p>
-	 *
+	 * @param attributeValue The Valid Local Attribute to Return
+	 * @param uselessInt     A useless parameter purely to return the type integer
+	 *                       <p>
 	 * @return A HashMap if this components local attributes. Never null
 	 */
 	@Override
@@ -551,17 +515,14 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		}
 		return Integer.valueOf(s);
 	}
-
+	
 	/**
 	 * Gets this list of local attribute values
 	 * <p>
 	 *
-	 * @param attributeValue
-	 * 		The Valid Local Attribute to Return
-	 * @param uselessInt
-	 * 		A useless parameter purely to return the type Boolean
-	 * 		<p>
-	 *
+	 * @param attributeValue The Valid Local Attribute to Return
+	 * @param uselessInt     A useless parameter purely to return the type Boolean
+	 *                       <p>
 	 * @return A HashMap if this components local attributes. Never null
 	 */
 	@Override
@@ -575,14 +536,12 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		}
 		return Boolean.valueOf(s);
 	}
-
+	
 	/**
 	 * Sets if this component should render an ID attribute
 	 * <p>
 	 *
-	 * @param renderIDAttribute
-	 * 		If the ID must be rendered
-	 *
+	 * @param renderIDAttribute If the ID must be rendered
 	 * @return This Object
 	 */
 	@NotNull
@@ -596,31 +555,26 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		}
 		return (J) this;
 	}
-
+	
 	/**
 	 * Adds an attribute with an enum value. The toString() method is read
 	 *
-	 * @param attribute
-	 * 		The attribute key to add
-	 * @param value
-	 * 		The value of the attribute or "" for keyword only
-	 *
+	 * @param attribute The attribute key to add
+	 * @param value     The value of the attribute or "" for keyword only
 	 * @return This object
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J addAttribute(@NotNull A attribute, @NotNull Enum value)
+	public J addAttribute(@NotNull A attribute, @NotNull Enum<?> value)
 	{
 		getAttributes().put(attribute.toString(), value.toString());
 		return (J) this;
 	}
-
+	
 	/**
 	 * Sets the ID and adds the attribute to the global set
 	 *
-	 * @param id
-	 * 		the id to add as an attribute
-	 *
+	 * @param id the id to add as an attribute
 	 * @return This object
 	 */
 	@Override
@@ -630,13 +584,11 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		addAttribute(GlobalAttributes.ID, id);
 		return super.setID(id);
 	}
-
+	
 	/**
 	 * Removes an attribute
 	 *
-	 * @param key
-	 * 		the key to remove
-	 *
+	 * @param key the key to remove
 	 * @return this object
 	 */
 	@SuppressWarnings("unchecked")
@@ -646,13 +598,11 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		getAttributes().remove(key);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Removes a key from the attribute set
 	 *
-	 * @param key
-	 * 		the key to remove
-	 *
+	 * @param key the key to remove
 	 * @return this attribute
 	 */
 	@SuppressWarnings("unchecked")
@@ -662,7 +612,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		getAttributes().remove(key.toString());
 		return (J) this;
 	}
-
+	
 	@Override
 	public void destroy()
 	{
@@ -673,7 +623,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		}
 		super.destroy();
 	}
-
+	
 	/**
 	 * Method cloneComponent ...
 	 *
@@ -684,12 +634,13 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	@NotNull
 	public J cloneComponent()
 	{
-		ComponentHTMLAttributeBase cloned = super.cloneComponent();
-		cloned.attributes = new TreeMap();
+		ComponentHTMLAttributeBase<?,?,?,?> cloned = super.cloneComponent();
+		cloned.attributes = new TreeMap<>();
 		cloned.attributes.putAll(getAttributes());
+		//noinspection CastCanBeRemovedNarrowingVariableType
 		return (J) cloned;
 	}
-
+	
 	/**
 	 * Shortcut to adding a style attribute
 	 *
@@ -697,22 +648,22 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
+	@Override
 	public J addStyle(String property, String value)
 	{
 		addStyle(property + StaticStrings.STRING_DOUBLE_COLON + value);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Shortcut to adding a style attribute
 	 *
-	 * @param style
-	 * 		the style string to add
-	 *
+	 * @param style the style string to add
 	 * @return This object
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
+	@Override
 	public J addStyle(String style)
 	{
 		if (!style.endsWith(StaticStrings.STRING_SEMICOLON))

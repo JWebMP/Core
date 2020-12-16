@@ -17,12 +17,12 @@
 package com.jwebmp.core;
 
 import com.jwebmp.core.base.ComponentFeatureBase;
-import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
-
 import jakarta.validation.constraints.NotNull;
+
 import java.util.Objects;
 
 /**
@@ -37,9 +37,9 @@ import java.util.Objects;
  * @since 23 Apr 2016
  */
 @SuppressWarnings("MissingClassJavaDoc")
-public abstract class Feature<F extends GlobalFeatures, O extends JavaScriptPart, J extends Feature<F, O, J>>
+public abstract class Feature<F extends GlobalFeatures, O extends JavaScriptPart<?>, J extends Feature<F, O, J>>
 		extends ComponentFeatureBase<F, J>
-		implements GlobalFeatures<F, J>
+		implements GlobalFeatures
 {
 	/**
 	 * The options object associated with this feature
@@ -76,14 +76,14 @@ public abstract class Feature<F extends GlobalFeatures, O extends JavaScriptPart
 	 * @param component
 	 * 		The given component
 	 */
-	public Feature(String name, ComponentHierarchyBase component)
+	public Feature(String name, IComponentHierarchyBase<?,?> component)
 	{
 		super(ComponentTypes.Feature);
 		setName(name);
 		super.setComponent(component);
 		if (component != null)
 		{
-			component.addFeature(this);
+			component.asFeatureBase().addFeature(this);
 		}
 	}
 
@@ -166,20 +166,19 @@ public abstract class Feature<F extends GlobalFeatures, O extends JavaScriptPart
 	 *
 	 * @return This component
 	 *
-	 * @see com.jwebmp.core.base.ComponentFeatureBase#setComponent(ComponentHierarchyBase)
+	 * @see com.jwebmp.core.base.ComponentFeatureBase#setComponent(IComponentHierarchyBase)
 	 */
-	@SuppressWarnings("unchecked")
 	@NotNull
 	@Override
-	public J setComponent(ComponentHierarchyBase component)
+	public J setComponent(IComponentHierarchyBase<?,?> component)
 	{
 		if (getComponent() != null)
 		{
-			getComponent().removeFeature((F) this);
+			getComponent().asFeatureBase().getFeatures().remove(this);
 		}
 		if (component != null)
 		{
-			component.addFeature(this);
+			component.asFeatureBase().addFeature(this);
 		}
 		return super.setComponent(component);
 	}

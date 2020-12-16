@@ -54,11 +54,11 @@ public class CSSPropertiesFactory<A extends Annotation>
 {
 	public static final int DefaultIntValue = Integer.MIN_VALUE;
 	public static final double DefaultDoubleValue = Integer.MIN_VALUE;
-	@JsonIgnore
 
 	/**
 	 * The default logger
 	 */
+	@JsonIgnore
 	private static final java.util.logging.Logger log = LogFactory.getInstance()
 	                                                              .getLogger("CSS Factory");
 	/**
@@ -80,10 +80,9 @@ public class CSSPropertiesFactory<A extends Annotation>
 		Map<StringBuilder, Object> implementedProperties2 = new HashMap<>();
 		classAnnotations.forEach(classAnnotation ->
 		                         {
-			                         Map<StringBuilder, Object> cssProperties = new HashMap<>();
-			                         cssProperties.putAll(processAnnotation(classAnnotation));
+			                         Map<StringBuilder, Object> cssProperties = new HashMap<>(processAnnotation(classAnnotation));
 			                         Object anotImplObject = getImplementationObject(classAnnotation, cssProperties);
-			                         Map<StringBuilder, Object> mmm = processImplementationObjectFields((CSSImplementationClass) anotImplObject, implementedProperties);
+			                         Map<StringBuilder, Object> mmm = processImplementationObjectFields((CSSImplementationClass<?,?>) anotImplObject, implementedProperties);
 			                         implementedProperties2.putAll(mmm);
 		                         });
 		return implementedProperties2;
@@ -98,7 +97,6 @@ public class CSSPropertiesFactory<A extends Annotation>
 	 * @return
 	 */
 	@NotNull
-	@SuppressWarnings("all")
 	public Map<StringBuilder, Object> processAnnotation(Annotation annotation)
 	{
 		Map<StringBuilder, Object> output = new HashMap<>();
@@ -149,7 +147,7 @@ public class CSSPropertiesFactory<A extends Annotation>
 	 * @return
 	 */
 	@NotNull
-	public Map<StringBuilder, Object> processImplementationObjectFields(CSSImplementationClass impClass, @NotNull Map<StringBuilder, Object> currentReturnList)
+	public Map<StringBuilder, Object> processImplementationObjectFields(CSSImplementationClass<?,?> impClass, @NotNull Map<StringBuilder, Object> currentReturnList)
 	{
 		if (impClass == null)
 		{
@@ -315,7 +313,7 @@ public class CSSPropertiesFactory<A extends Annotation>
 	 */
 	public <T> List<Annotation> getAllAppliedCSSAnnotations(T cssObjectIn)
 	{
-		Class clazz = cssObjectIn.getClass();
+		Class<?> clazz = cssObjectIn.getClass();
 		List<Annotation> arrayList = Lists.newArrayList(clazz.getAnnotations());
 		arrayList.removeIf(a -> !a.annotationType()
 		                          .isAnnotationPresent(CSSAnnotationType.class));
@@ -390,8 +388,10 @@ public class CSSPropertiesFactory<A extends Annotation>
 	 *
 	 * @return ArrayList of all applicable CSS annotations
 	 */
+	@SuppressWarnings("TypeParameterHidesVisibleType")
 	public <A extends Annotation> List<A> getAllAppliedCSSAnnotations(Field field)
 	{
+		@SuppressWarnings("unchecked")
 		List<A> arrayList = new ArrayList<>((Collection<? extends A>) Arrays.asList(field.getAnnotations()));
 		arrayList.removeIf(a -> !a.annotationType()
 		                          .isAnnotationPresent(CSSAnnotationType.class));
@@ -423,7 +423,7 @@ public class CSSPropertiesFactory<A extends Annotation>
 				Object obj = field.get(classImpl);
 				if (CSSImplementationClass.class.isAssignableFrom(obj.getClass()))
 				{
-					m.putAll(getCSSProperties((CSSImplementationClass) obj));
+					m.putAll(getCSSProperties((CSSImplementationClass<?,?>) obj));
 				}
 			}
 			catch (IllegalArgumentException | IllegalAccessException ex)
@@ -443,7 +443,7 @@ public class CSSPropertiesFactory<A extends Annotation>
 	 * @return
 	 */
 	@NotNull
-	public Map<StringBuilder, Object> getCSSProperties(CSSImplementationClass classAnnotations)
+	public Map<StringBuilder, Object> getCSSProperties(CSSImplementationClass<?,?> classAnnotations)
 	{
 		return processImplementationObjectFields(classAnnotations, new HashMap<>());
 	}
@@ -470,13 +470,7 @@ public class CSSPropertiesFactory<A extends Annotation>
 		newCSSBlock.setBlockIdentifer(blockIdentifier);
 		newCSSBlock.getCssLines()
 		           .setRenderBraces(true);
-		propertiesMap.entrySet()
-		             .forEach(entry ->
-		                      {
-			                      StringBuilder key = entry.getKey();
-			                      Object value = entry.getValue();
-			                      processBlock(newCSSBlock, key, value);
-		                      });
+		propertiesMap.forEach((key, value) -> processBlock(newCSSBlock, key, value));
 		return newCSSBlock;
 	}
 
@@ -597,7 +591,7 @@ public class CSSPropertiesFactory<A extends Annotation>
 			}
 			if (returnedObject instanceof CSSEnumeration)
 			{
-				CSSEnumeration enu = (CSSEnumeration) returnedObject;
+				CSSEnumeration<?> enu = (CSSEnumeration<?>) returnedObject;
 				if (enu.equals(enu.getDefault()))
 				{
 					return;
@@ -606,6 +600,7 @@ public class CSSPropertiesFactory<A extends Annotation>
 			if (returnedObject.getClass()
 			                  .isArray())
 			{
+				assert returnedObject instanceof Object[];
 				Object[] objArr = (Object[]) returnedObject;
 				if (objArr.length == 0)
 				{
@@ -664,16 +659,16 @@ public class CSSPropertiesFactory<A extends Annotation>
 		{
 			Object o = arrayObject[0];
 			Annotation ao = (Annotation) o;
-			Class aoType = ao.annotationType();
+			Class<?> aoType = ao.annotationType();
 			String aoTypeImpl = aoType.getCanonicalName() + "Impl";
-			Class aoTypeImplClass = Class.forName(aoTypeImpl);
+			Class<?> aoTypeImplClass = Class.forName(aoTypeImpl);
 			Object newOut = Array.newInstance(aoTypeImplClass, arrayObject.length + 1);
 			for (int i = 0; i < arrayObject.length; i++)
 			{
 				Object object = arrayObject[i];
 				Annotation innerAnnotation = (Annotation) object;
 				Map<StringBuilder, Object> innerFieldMapping = processAnnotation(innerAnnotation);
-				CSSImplementationClass innerImplementationObject = (CSSImplementationClass) getImplementationObject(innerAnnotation, innerFieldMapping);
+				CSSImplementationClass<?,?> innerImplementationObject = (CSSImplementationClass<?,?>) getImplementationObject(innerAnnotation, innerFieldMapping);
 				if (!innerImplementationObject.toString()
 				                              .isEmpty())
 				{
@@ -687,9 +682,9 @@ public class CSSPropertiesFactory<A extends Annotation>
 
 	private Object processFieldMapEntry(Object newInstance, StringBuilder field, Object fieldObject) throws NoSuchFieldException, IllegalAccessException, ClassNotFoundException
 	{
-		Character ch = field.charAt(0);
-		field = field.replace(0, 1, ch.toString()
-		                              .toLowerCase());
+		char ch = field.charAt(0);
+		field = field.replace(0, 1, Character.toString(ch)
+		                                     .toLowerCase());
 		Field f = newInstance.getClass()
 		                     .getDeclaredField(field.toString());
 		f.setAccessible(true);

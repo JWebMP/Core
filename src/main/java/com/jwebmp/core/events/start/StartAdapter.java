@@ -52,13 +52,13 @@ public abstract class StartAdapter<J extends StartAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public StartAdapter(Component component)
+	public StartAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.start, component);
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -80,7 +80,7 @@ public abstract class StartAdapter<J extends StartAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onStart(AjaxCall call, AjaxResponse response);
+	public abstract void onStart(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

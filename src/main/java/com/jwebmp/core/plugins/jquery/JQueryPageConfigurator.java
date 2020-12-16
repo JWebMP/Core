@@ -18,6 +18,7 @@ package com.jwebmp.core.plugins.jquery;
 
 import com.jwebmp.core.Page;
 import com.jwebmp.core.plugins.PluginInformation;
+import com.jwebmp.core.plugins.PluginStatus;
 import com.jwebmp.core.services.IPageConfigurator;
 
 import jakarta.validation.constraints.NotNull;
@@ -33,21 +34,25 @@ import jakarta.validation.constraints.NotNull;
 		pluginUniqueName = "jquery",
 		pluginDescription = "jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal " +
 		                    "and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that " +
-		                    "works" +
-		                    " across a multitude of browsers. With a combination of versatility and extensibility, " +
-		                    "jQuery has " +
-		                    "changed the way that millions of people write JavaScript.",
-		pluginVersion = "3.1.1",
-		pluginCategories = "javascript,jquery, framework, jwebswing",
+		                    "works across a multitude of browsers. With a combination of versatility and extensibility, " +
+		                    "jQuery has changed the way that millions of people write JavaScript.",
+		pluginVersion = "3.5.1",
+		pluginCategories = "javascript,jquery, framework, core",
 		pluginSubtitle = " jQuery has changed the way that millions of people write JavaScript",
 		pluginGitUrl = "https://github.com/GedMarc/JWebMP",
 		pluginSourceUrl = "https://github.com/jquery/jquery",
 		pluginWikiUrl = "https://github.com/GedMarc/JWebMP/wiki",
-		pluginDownloadUrl = "",
+		pluginDownloadUrl = "https://mvnrepository.com/artifact/com.jwebmp.core/jwebmp-core",
 		pluginIconUrl = "jquery_icon.png",
 		pluginIconImageUrl = "jquery_logo.png",
-		pluginLastUpdatedDate = "2017/03/13",
-		pluginOriginalHomepage = "http://www.jquery.com")
+		pluginLastUpdatedDate = "2020/04/14",
+		pluginOriginalHomepage = "http://www.jquery.com",
+		pluginModuleName = "com.jwebmp.core",
+		pluginGroupId = "com.jwebmp.core",
+		pluginArtifactId = "jwebmp-core",
+		pluginStatus = PluginStatus.Released,
+		pluginSourceDonateUrl = "https://js.foundation/about/donate"
+)
 public class JQueryPageConfigurator
 		implements IPageConfigurator<JQueryPageConfigurator>
 {
@@ -134,7 +139,6 @@ public class JQueryPageConfigurator
 	 * @param required
 	 * 		If is required
 	 */
-	@SuppressWarnings("unchecked")
 	public static void setRequired(boolean required)
 	{
 		JQueryPageConfigurator.required = required;
@@ -150,13 +154,12 @@ public class JQueryPageConfigurator
 	 */
 	@NotNull
 	@Override
-	public Page configure(Page page)
+	public Page<?> configure(Page<?> page)
 	{
 		if (JQueryPageConfigurator.required)
 		{
 			configureJQuery(page);
 		}
-
 		return page;
 	}
 
@@ -169,7 +172,7 @@ public class JQueryPageConfigurator
 	 * @return Page
 	 */
 	@SuppressWarnings("UnusedReturnValue")
-	private Page configureJQuery(Page page)
+	private Page<?> configureJQuery(Page<?> page)
 	{
 		page.getBody()
 		    .addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());

@@ -62,7 +62,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class TableHeaderGroup<J extends TableHeaderGroup<J>>
 		extends Component<TableHeaderGroupChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements TableChildren<TableHeaderGroupChildren, J>
+		implements TableChildren
 {
 
 

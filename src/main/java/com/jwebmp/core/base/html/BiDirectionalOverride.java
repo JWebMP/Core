@@ -37,7 +37,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * <p>
  * NONE. Tips and Notes
  * <p>
- * Note: According to the HTML 5 specification, the b tag should be used as a LAST resort when no other tag is more appropriate. The HTML 5 specification states that headings
+ * Note: According to the HTML 5 specification, the bdo tag should be used as a LAST resort when no other tag is more appropriate. The HTML 5 specification states that headings
  * should be denoted with
  * the h1 to h6 tags, emphasized text should be denoted with the em tag, important text should be denoted with the strong tag, and marked/highlighted text should use the mark tag.
  * <p>

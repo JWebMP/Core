@@ -14,27 +14,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.core.plugins.ajaxenabler;
+package com.jwebmp.core.plugins;
 
-import com.jwebmp.core.base.references.JavascriptReference;
+import java.lang.annotation.*;
 
 /**
- * @since @version @author MMagon
+ * Defines a plugin, attach to a Page Configurator
+ *
+ * @author GedMarc
+ * @since 19 Feb 2017
  */
-public enum AjaxEnablerReferencePool
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+public @interface FeatureInformation
 {
-	AjaxEnabler(new JQueryAjaxEnablerReference()),;
-
-	private final JavascriptReference reference;
-
-	AjaxEnablerReferencePool(JavascriptReference reference)
-	{
-		this.reference = reference;
-	}
-
-	public JavascriptReference getJavaScriptReference()
-	{
-		return reference;
-	}
-
+	String name() default "NotSet";
+	String purpose() default "NotSet";
 }

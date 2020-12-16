@@ -78,7 +78,7 @@ public class DataServlet
 		}
 		catch (Exception e)
 		{
-			Page p = getErrorPageHtml(e);
+			Page<?> p = getErrorPageHtml(e);
 			writeOutput(new StringBuilder(p.toString(0)), StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE, StaticStrings.UTF_CHARSET);
 			return;
 		}

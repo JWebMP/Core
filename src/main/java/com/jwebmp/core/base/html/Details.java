@@ -44,15 +44,12 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  * @param <J>
- *
  * @author GedMarc
  */
 public class Details<J extends Details<J>>
 		extends Component<DetailsChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements ParagraphChildren<DetailsChildren, J>, PhraseChildren<DetailsChildren, J>
+		implements ParagraphChildren, PhraseChildren
 {
-
-
 	/**
 	 * Constructs a new Details section.
 	 */

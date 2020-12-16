@@ -47,8 +47,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since Feb 9, 2015
  */
 public class Marker<J extends Marker<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements ParagraphChildren<IComponentHierarchyBase, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText
+		extends Component<IComponentHierarchyBase<?,?>, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
 

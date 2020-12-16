@@ -45,14 +45,9 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since Feb 9, 2015
  */
 public class NoScript<J extends NoScript<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements BodyChildren<IComponentHierarchyBase, J>, NoIDTag
+		extends Component<IComponentHierarchyBase<?,?>, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements BodyChildren, NoIDTag
 {
-
-
-	/**
-	 *
-	 */
 	public NoScript()
 	{
 		super(ComponentTypes.NoScript);
@@ -63,10 +58,9 @@ public class NoScript<J extends NoScript<J>>
 	 */
 	@Override
 	public void preConfigure()
-
 	{
 		setRenderIDAttribute(false);
-		super.preConfigure(); //To change body of generated methods, choose Tools | Templates.
+		super.preConfigure();
 	}
 
 }

@@ -18,7 +18,10 @@ package com.jwebmp.core.services;
 
 import com.guicedee.guicedinjection.interfaces.IDefaultService;
 import com.jwebmp.core.PageOptions;
+import com.jwebmp.core.base.ajax.AjaxCall;
+import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.DocumentType;
+import jakarta.validation.constraints.NotNull;
 import net.sf.uadetector.ReadableUserAgent;
 
 /**
@@ -37,14 +40,17 @@ public interface IPage<J extends IPage<J>>
 	 * @return Document Type
 	 */
 	@SuppressWarnings("unused")
-	DocumentType getDocumentType();
-
+	DocumentType<?> getDocumentType();
+	
+	@SuppressWarnings("unused")
+	@NotNull AjaxResponse<?> onConnect(AjaxCall<?> call, AjaxResponse<?> response);
+	
 	/**
 	 * Returns the fields available for entry on this page
 	 *
 	 * @return The Page Fields object
 	 */
-	PageOptions getOptions();
+	PageOptions<?> getOptions();
 
 
 	/**

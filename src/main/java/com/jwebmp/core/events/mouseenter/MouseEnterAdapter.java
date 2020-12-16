@@ -53,14 +53,14 @@ public abstract class MouseEnterAdapter<J extends MouseEnterAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public MouseEnterAdapter(Component component)
+	public MouseEnterAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.mouseEnter, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -82,7 +82,7 @@ public abstract class MouseEnterAdapter<J extends MouseEnterAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onMouseEnter(AjaxCall call, AjaxResponse response);
+	public abstract void onMouseEnter(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

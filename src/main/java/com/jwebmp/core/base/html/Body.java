@@ -21,14 +21,14 @@ import com.jwebmp.core.Page;
 import com.jwebmp.core.base.html.attributes.BodyAttributes;
 import com.jwebmp.core.base.html.interfaces.ContainerType;
 import com.jwebmp.core.base.html.interfaces.LayoutHandler;
+import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
 import com.jwebmp.core.base.html.interfaces.children.BodyFeatures;
 import com.jwebmp.core.base.html.interfaces.children.HtmlChildren;
 import com.jwebmp.core.base.html.interfaces.children.PageChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-
 import jakarta.validation.constraints.NotNull;
+
 import java.util.Objects;
 
 /**
@@ -54,24 +54,22 @@ import java.util.Objects;
  * .<p>
  * <p>
  *
- * @param <F>
- * 		Features Base
+ * @param <F> Features Base
  * @param <J>
- *
  * @author GedMarc
  * @version 1.0
  * @since 2013/11/20
  */
 public class Body<F extends BodyFeatures, J extends Body<F, J>>
-		extends Component<IComponentHierarchyBase, BodyAttributes, F, NoEvents, J>
-		implements PageChildren, HtmlChildren<IComponentHierarchyBase, J>, LayoutHandler, ContainerType<IComponentHierarchyBase, J>
+		extends Component<BodyChildren, BodyAttributes, F, NoEvents, J>
+		implements PageChildren, HtmlChildren, LayoutHandler, ContainerType
 {
-
+	
 	/**
 	 * If this body has rendered the scripts on itself
 	 */
 	private boolean renderedScripts;
-
+	
 	/**
 	 * Instantiates an empty body
 	 */
@@ -79,13 +77,13 @@ public class Body<F extends BodyFeatures, J extends Body<F, J>>
 	{
 		this(null);
 	}
-
+	
 	/**
 	 * Constructs a new Body with the given Page input
 	 *
 	 * @param page
 	 */
-	public Body(Page page)
+	public Body(Page<?> page)
 	{
 		super(ComponentTypes.Body);
 		if (page != null)
@@ -94,7 +92,7 @@ public class Body<F extends BodyFeatures, J extends Body<F, J>>
 		}
 		setID("body");
 	}
-
+	
 	@NotNull
 	@SuppressWarnings("unchecked")
 	public J setFullScreen()
@@ -103,13 +101,13 @@ public class Body<F extends BodyFeatures, J extends Body<F, J>>
 		getPage().addStyle("width:100%;height:100%;margin:0px;");
 		return (J) this;
 	}
-
+	
 	@Override
 	public int hashCode()
 	{
 		return Objects.hash(super.hashCode(), isRenderedScripts());
 	}
-
+	
 	@Override
 	public boolean equals(Object o)
 	{
@@ -128,7 +126,7 @@ public class Body<F extends BodyFeatures, J extends Body<F, J>>
 		Body<?, ?> body = (Body<?, ?>) o;
 		return isRenderedScripts() == body.isRenderedScripts();
 	}
-
+	
 	/**
 	 * If the scripts have been rendered
 	 *
@@ -138,15 +136,14 @@ public class Body<F extends BodyFeatures, J extends Body<F, J>>
 	{
 		return renderedScripts;
 	}
-
+	
 	/**
 	 * If the scripts have been rendered
 	 *
 	 * @param renderedScripts
-	 *
 	 * @return
 	 */
-	protected Body setRenderedScripts(boolean renderedScripts)
+	protected Body<?,?> setRenderedScripts(boolean renderedScripts)
 	{
 		this.renderedScripts = renderedScripts;
 		return this;

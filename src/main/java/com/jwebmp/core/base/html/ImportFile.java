@@ -20,7 +20,7 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
 import com.jwebmp.core.base.html.interfaces.NoFeatures;
-import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
+import com.jwebmp.core.base.html.interfaces.children.*;
 import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
@@ -41,8 +41,8 @@ import java.io.InputStreamReader;
  * @since 06 Feb 2017
  */
 public class ImportFile<J extends ImportFile<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, NoEvents, J>
-		implements BodyChildren<IComponentHierarchyBase, J>, ParagraphChildren<IComponentHierarchyBase, J>
+		extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+		implements BodyChildren, ParagraphChildren, FormChildren, ListItemChildren, PhraseChildren, ListChildren
 {
 	/**
 	 * The actual name for the template

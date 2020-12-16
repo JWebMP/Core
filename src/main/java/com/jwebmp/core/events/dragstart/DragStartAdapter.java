@@ -37,9 +37,7 @@ import java.util.logging.Level;
  * @author GedMarc
  */
 @ComponentInformation(name = "Drag Start Event",
-		description = "Server Side Event for Drag Start.",
-		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
+		description = "Server Side Event for Drag Start.")
 public abstract class DragStartAdapter<J extends DragStartAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
@@ -57,13 +55,13 @@ public abstract class DragStartAdapter<J extends DragStartAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public DragStartAdapter(Component component)
+	public DragStartAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.dragStart, component);
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -85,7 +83,7 @@ public abstract class DragStartAdapter<J extends DragStartAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onDragStart(AjaxCall call, AjaxResponse response);
+	public abstract void onDragStart(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

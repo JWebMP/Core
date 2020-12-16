@@ -98,7 +98,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	 */
 	@SuppressWarnings("unused")
 	@NotNull
-	public IComponentHTMLBase asTagBase()
+	public IComponentHTMLBase<J> asTagBase()
 	{
 		return this;
 	}

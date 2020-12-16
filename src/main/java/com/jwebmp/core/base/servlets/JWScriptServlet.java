@@ -17,15 +17,12 @@
 package com.jwebmp.core.base.servlets;
 
 import com.google.inject.Singleton;
+import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.json.StaticStrings;
+import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.SessionHelper;
-import com.guicedee.guicedinjection.json.StaticStrings;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.guicedservlets.GuicedServletKeys;
-import com.guicedee.logger.LogFactory;
-
 import jakarta.servlet.http.HttpServletRequest;
-import java.util.logging.Logger;
 
 /**
  * @author GedMarc
@@ -38,17 +35,6 @@ public class JWScriptServlet
 	 * Field FILE_TEMPLATE_NAME
 	 */
 	public static final String FILE_TEMPLATE_NAME = "jwscript";
-	/**
-	 * Field log
-	 */
-	@SuppressWarnings("unused")
-	private static final Logger log = LogFactory.getInstance()
-	                                            .getLogger("JWScriptServlet");
-	/**
-	 * Field serialVersionUID
-	 */
-
-
 	/**
 	 * When to perform any commands
 	 */

@@ -22,6 +22,7 @@ import com.jwebmp.core.base.html.interfaces.NoFeatures;
 import com.jwebmp.core.base.html.interfaces.NoIDTag;
 import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
 import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
+import com.jwebmp.core.base.html.interfaces.children.NoChildren;
 import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
@@ -51,11 +52,9 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since 2014/12/21
  */
 public class Definition<J extends Definition<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, NoEvents, J>
-		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, ParagraphChildren<IComponentHierarchyBase, J>, NoIDTag
+		extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, ParagraphChildren, NoIDTag
 {
-
-
 	/**
 	 * Specifies text that is defined as a definition
 	 * <p>

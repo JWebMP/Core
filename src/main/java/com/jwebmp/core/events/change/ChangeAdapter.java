@@ -16,16 +16,16 @@
  */
 package com.jwebmp.core.events.change;
 
-import com.jwebmp.core.Component;
+import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.logger.LogFactory;
 
 import java.util.ServiceLoader;
 import java.util.Set;
@@ -37,14 +37,11 @@ import java.util.logging.Level;
  * @author GedMarc
  */
 @ComponentInformation(name = "Change Event",
-		description = "Server Side Event for Change.",
-		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
+		description = "Server Side Event for Change.")
 public abstract class ChangeAdapter<J extends ChangeAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
 {
-
 	/**
 	 * Logger for the Component
 	 */
@@ -52,19 +49,19 @@ public abstract class ChangeAdapter<J extends ChangeAdapter<J>>
 	                                                              .getLogger("ChangeEvent");
 
 	/**
-	 * Performs a click
+	 * Performs on a change
 	 *
 	 * @param component
-	 * 		The component this click is going to be acting on
+	 * 		The component that will react will a change occurs
 	 */
-	public ChangeAdapter(Component component)
+	public ChangeAdapter(IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.change, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -86,11 +83,12 @@ public abstract class ChangeAdapter<J extends ChangeAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onChange(AjaxCall call, AjaxResponse response);
+	public abstract void onChange(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...
 	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	private void onCall()
 	{
 		Set<IOnChangeService> services = GuiceContext.instance()
@@ -112,7 +110,7 @@ public abstract class ChangeAdapter<J extends ChangeAdapter<J>>
 	/**
 	 * Occurs when the event is called
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	private void onCreate()
 	{
 		Set<IOnChangeService> services = GuiceContext.instance()

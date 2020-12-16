@@ -37,9 +37,7 @@ import java.util.logging.Level;
  * @author GedMarc
  */
 @ComponentInformation(name = "Complete Event",
-		description = "Server Side Event for Complete.",
-		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
+		description = "Server Side Event for Complete.")
 public abstract class CompleteAdapter<J extends CompleteAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
@@ -57,14 +55,14 @@ public abstract class CompleteAdapter<J extends CompleteAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public CompleteAdapter(Component component)
+	public CompleteAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.contextmenu, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -86,7 +84,7 @@ public abstract class CompleteAdapter<J extends CompleteAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onComplete(AjaxCall call, AjaxResponse response);
+	public abstract void onComplete(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

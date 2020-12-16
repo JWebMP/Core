@@ -64,12 +64,6 @@ public class Audio<J extends Audio<J>>
 		extends Component<AudioChildren, AudioAttributes, GlobalFeatures, GlobalEvents, J>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
-
-	/**
-	 * Serial Version for all Components and their compatibility
-	 */
-
-
 	/**
 	 * Constructs a new instance of audio
 	 */

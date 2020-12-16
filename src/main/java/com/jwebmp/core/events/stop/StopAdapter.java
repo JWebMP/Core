@@ -52,13 +52,13 @@ public abstract class StopAdapter<J extends StopAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public StopAdapter(Component component)
+	public StopAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.stop, component);
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -80,7 +80,7 @@ public abstract class StopAdapter<J extends StopAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onStop(AjaxCall call, AjaxResponse response);
+	public abstract void onStop(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

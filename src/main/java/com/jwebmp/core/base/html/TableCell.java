@@ -68,15 +68,9 @@ import jakarta.validation.constraints.NotNull;
  */
 @SuppressWarnings("MissingClassJavaDoc")
 public class TableCell<J extends TableCell<J>>
-		extends Component<IComponentHierarchyBase, TableCellAttributes, GlobalFeatures, GlobalEvents, J>
-		implements TableRowChildren<IComponentHierarchyBase, J>
+		extends Component<GlobalChildren, TableCellAttributes, GlobalFeatures, GlobalEvents, J>
+		implements TableRowChildren
 {
-
-	/**
-	 * Field serialVersionUID
-	 */
-
-
 	/**
 	 * Constructs a normal table cell
 	 */
@@ -96,7 +90,7 @@ public class TableCell<J extends TableCell<J>>
 		super(ComponentTypes.TableCell);
 		if (dataDisplay != null)
 		{
-			add((Component) dataDisplay);
+			add(dataDisplay);
 		}
 	}
 
@@ -124,7 +118,7 @@ public class TableCell<J extends TableCell<J>>
 		{
 			s = "0";
 		}
-		return Integer.valueOf(s);
+		return Integer.parseInt(s);
 	}
 
 	/**

@@ -109,7 +109,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 */
 	@NotNull
 	@SuppressWarnings("unused")
-	public IComponentBase asBase()
+	public IComponentBase<J> asBase()
 	{
 		return this;
 	}
@@ -380,23 +380,6 @@ public class ComponentBase<J extends ComponentBase<J>>
 	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J appendText(String text)
-	{
-		this.text = this.text + text;
-		return (J) this;
-	}
-	
-	
-	/**
-	 * Sets this components Raw Text
-	 * <p>
-	 *
-	 * @param text
-	 * 		The text to display as Raw Text
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	@NotNull
 	public J setText(String text)
 	{
 		this.text = text;
@@ -471,7 +454,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 			init();
 			preConfigure();
 		}
-		return new JavaScriptPart().objectAsString(this);
+		return new JavaScriptPart<>().objectAsString(this);
 	}
 
 	/**
@@ -515,6 +498,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 * @return The Component Enumeration of this component
 	 */
 	@NotNull
+	@Override
 	public ComponentTypes getComponentType()
 	{
 		return componentType;

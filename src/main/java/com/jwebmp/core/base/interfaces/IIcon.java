@@ -2,12 +2,14 @@ package com.jwebmp.core.base.interfaces;
 
 import com.jwebmp.core.base.ComponentBase;
 import com.jwebmp.core.base.ComponentHierarchyBase;
+import com.jwebmp.core.base.html.interfaces.children.*;
+import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 
 /**
  * Interface that denotes the type of Icon
  */
-public interface IIcon<C extends IComponentHierarchyBase,J extends ComponentBase<J> & IIcon<C,J>>
-		extends com.jwebmp.core.base.html.interfaces.children.ListItemChildren<C, J>
+public interface IIcon<C extends IComponentHierarchyBase<?,?>,J extends ComponentBase<J> & IIcon<C,J>>
+		extends FormChildren, BodyChildren, ParagraphChildren, PhraseChildren, ListItemChildren, ListChildren
 {
 	/**
 	 * If the string class or a component should be used.
@@ -32,5 +34,5 @@ public interface IIcon<C extends IComponentHierarchyBase,J extends ComponentBase
 	 *
 	 * @return
 	 */
-	ComponentHierarchyBase getIconComponent();
+	IComponentHierarchyBase<?,?> getIconComponent();
 }

@@ -56,8 +56,8 @@ import java.util.logging.Level;
  * @since Mar 1, 2015
  */
 public class Parameter<J extends Parameter<J>>
-		extends Component<IComponentHierarchyBase, ParameterAttributes, GlobalFeatures, GlobalEvents, J>
-		implements ObjectTagChildren<IComponentHierarchyBase, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText
+		extends Component<IComponentHierarchyBase<?,?>, ParameterAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ObjectTagChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
 	/**
@@ -65,11 +65,6 @@ public class Parameter<J extends Parameter<J>>
 	 */
 	private static final java.util.logging.Logger log = LogFactory.getInstance()
 	                                                              .getLogger("Parameter");
-	/**
-	 * Serial Version for all Components and their compatibility
-	 */
-
-
 	/**
 	 *
 	 */

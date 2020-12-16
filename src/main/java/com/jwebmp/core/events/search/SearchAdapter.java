@@ -52,14 +52,14 @@ public abstract class SearchAdapter<J extends SearchAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public SearchAdapter(Component component)
+	public SearchAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.search, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -81,7 +81,7 @@ public abstract class SearchAdapter<J extends SearchAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onSearch(AjaxCall call, AjaxResponse response);
+	public abstract void onSearch(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

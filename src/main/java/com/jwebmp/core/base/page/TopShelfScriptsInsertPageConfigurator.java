@@ -20,10 +20,13 @@ package com.jwebmp.core.base.page;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.Comment;
+import com.jwebmp.core.base.html.interfaces.children.HeadChildren;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
 
 import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class TopShelfScriptsInsertPageConfigurator
@@ -42,20 +45,18 @@ public class TopShelfScriptsInsertPageConfigurator
 
 	@NotNull
 	@Override
-	@SuppressWarnings("unchecked")
 	public Page<?> configure(Page<?> page)
 	{
 		if (!page.isConfigured() && enabled())
 		{
-			List<ComponentHierarchyBase<?, ?, ?, ?, ?>> reqs = getPriorityRequirements(page, RequirementsPriority.Top_Shelf, new ArrayList<>(), true, true);
+			List<IComponentHierarchyBase<?, ?>> reqs = getPriorityRequirements(page, RequirementsPriority.Top_Shelf, new ArrayList<>(), true, true);
 			if (!reqs.isEmpty())
 			{
 				page.getHead()
-				    .add(new Comment("Priority [" + RequirementsPriority.Top_Shelf + "] Values"));
+				    .add(new Comment<>("Priority [" + RequirementsPriority.Top_Shelf + "] Values"));
 			}
-			page.getHead()
-			    .getChildren()
-			    .addAll(reqs);
+			reqs.forEach(a-> page.getHead()
+		                     .add((HeadChildren) a));
 		}
 		return page;
 	}

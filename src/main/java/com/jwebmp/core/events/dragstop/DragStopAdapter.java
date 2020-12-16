@@ -37,9 +37,7 @@ import java.util.logging.Level;
  * @author GedMarc
  */
 @ComponentInformation(name = "Drag Stop Event",
-		description = "Server Side Event for Drag Stop.",
-		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
+		description = "Server Side Event for Drag Stop.")
 public abstract class DragStopAdapter<J extends DragStopAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
@@ -57,14 +55,14 @@ public abstract class DragStopAdapter<J extends DragStopAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public DragStopAdapter(Component component)
+	public DragStopAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.dragStop, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -86,7 +84,7 @@ public abstract class DragStopAdapter<J extends DragStopAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onDragStop(AjaxCall call, AjaxResponse response);
+	public abstract void onDragStop(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

@@ -22,6 +22,7 @@ import com.jwebmp.core.base.html.interfaces.NoFeatures;
 import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
 import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
 import com.jwebmp.core.base.html.interfaces.children.DescriptionListChildren;
+import com.jwebmp.core.base.html.interfaces.children.NoChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
@@ -47,11 +48,9 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  */
 public class DataDescription<J extends DataDescription<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, NoEvents, J>
-		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, DescriptionListChildren<IComponentHierarchyBase, J>
+		extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, DescriptionListChildren
 {
-
-
 	/**
 	 * Constructs a new Data Description object
 	 * <p>

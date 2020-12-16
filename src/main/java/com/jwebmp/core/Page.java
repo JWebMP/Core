@@ -18,35 +18,37 @@ package com.jwebmp.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.inject.servlet.RequestScoped;
+import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.annotations.PageConfiguration;
-import com.jwebmp.core.base.ComponentFeatureBase;
-import com.jwebmp.core.base.ComponentHierarchyBase;
+import com.jwebmp.core.base.ComponentDependencyBase;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.client.InternetExplorerCompatibilityMode;
 import com.jwebmp.core.base.html.*;
 import com.jwebmp.core.base.html.attributes.ScriptAttributes;
+import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
+import com.jwebmp.core.base.html.interfaces.children.HtmlChildren;
+import com.jwebmp.core.base.interfaces.IComponentFeatureBase;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.SessionStorageProperties;
 import com.jwebmp.core.services.IPage;
 import com.jwebmp.core.services.IPageConfigurator;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.utilities.StaticStrings;
+import jakarta.validation.constraints.NotNull;
 import net.sf.uadetector.*;
 
-import jakarta.validation.constraints.NotNull;
-import java.util.*;
 import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static com.guicedee.guicedinjection.GuiceContext.get;
 import static com.guicedee.guicedinjection.json.StaticStrings.STRING_EMPTY;
 import static com.guicedee.guicedinjection.json.StaticStrings.STRING_SEMICOLON;
-import static com.jwebmp.core.services.JWebMPServicesBindings.*;
-import static com.guicedee.guicedinjection.GuiceContext.*;
+import static com.jwebmp.core.services.JWebMPServicesBindings.IPageConfiguratorsKey;
 
 /**
  * Top level of any HTML page.
@@ -61,11 +63,11 @@ import static com.guicedee.guicedinjection.GuiceContext.*;
  * 		Replacement of the old page object
  * @since 24 Apr 2016
  */
-@SuppressWarnings({"NullableProblems", "unused"})
+@SuppressWarnings({"unused"})
 @PageConfiguration
 @RequestScoped
 public class Page<J extends Page<J>>
-		extends Html<IComponentHierarchyBase, J>
+		extends Html<HtmlChildren, J>
 		implements IPage<J>
 {
 	private static final Logger log = LogFactory.getInstance()
@@ -73,7 +75,7 @@ public class Page<J extends Page<J>>
 	/**
 	 * The options available
 	 */
-	private PageOptions options;
+	private PageOptions<?> options;
 
 	/**
 	 * The current user agent of the render
@@ -92,7 +94,7 @@ public class Page<J extends Page<J>>
 	 * @param compatibilityMode
 	 * 		Sets the Internet explorer mode to work on
 	 */
-	public Page(Title title, InternetExplorerCompatibilityMode compatibilityMode)
+	public Page(Title<?> title, InternetExplorerCompatibilityMode compatibilityMode)
 	{
 		this(title, compatibilityMode, null);
 	}
@@ -107,7 +109,7 @@ public class Page<J extends Page<J>>
 	 * @param base
 	 * 		Sets the base tag for the page. Convenience Parameter
 	 */
-	public Page(Title title, InternetExplorerCompatibilityMode compatibilityMode, Base base)
+	public Page(Title<?> title, InternetExplorerCompatibilityMode compatibilityMode, Base<?> base)
 	{
 		this.getOptions().setTitle(title);
 		this.getOptions().setCompatibilityMode(compatibilityMode);
@@ -119,7 +121,7 @@ public class Page<J extends Page<J>>
 	 * @param title
 	 * 		Sets the title of the page
 	 */
-	public Page(Title title)
+	public Page(Title<?> title)
 	{
 		this(title, null, null);
 	}
@@ -130,7 +132,7 @@ public class Page<J extends Page<J>>
 	 */
 	public Page(String title)
 	{
-		this(new Title(title), null, null);
+		this(new Title<>(title), null, null);
 	}
 
 	/**
@@ -182,7 +184,8 @@ public class Page<J extends Page<J>>
 	 */
 	@SuppressWarnings("unused")
 	@NotNull
-	public AjaxResponse onConnect(AjaxCall call, AjaxResponse response)
+	@Override
+	public AjaxResponse<?> onConnect(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		return response;
 	}
@@ -195,7 +198,7 @@ public class Page<J extends Page<J>>
 	 *
 	 * @return Always this
 	 *
-	 * @see com.jwebmp.core.base.ComponentDependancyBase#addCssReference(CSSReference)
+	 * @see ComponentDependencyBase#addCssReference(CSSReference)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -214,7 +217,7 @@ public class Page<J extends Page<J>>
 	 *
 	 * @return This page
 	 *
-	 * @see com.jwebmp.core.base.ComponentDependancyBase#addJavaScriptReference(JavascriptReference)
+	 * @see ComponentDependencyBase#addJavaScriptReference(JavascriptReference)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -230,7 +233,7 @@ public class Page<J extends Page<J>>
 	 *
 	 * @return A set of references
 	 *
-	 * @see com.jwebmp.core.base.ComponentDependancyBase#getCssReferences()
+	 * @see ComponentDependencyBase#getCssReferences()
 	 */
 	@Override
 	public Set<CSSReference> getCssReferences()
@@ -243,7 +246,7 @@ public class Page<J extends Page<J>>
 	 *
 	 * @return A set of javascript references
 	 *
-	 * @see com.jwebmp.core.base.ComponentDependancyBase#getJavascriptReferences()
+	 * @see ComponentDependencyBase#getJavascriptReferences()
 	 */
 	@Override
 	public Set<JavascriptReference> getJavascriptReferences()
@@ -261,7 +264,7 @@ public class Page<J extends Page<J>>
 	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J addFeature(@NotNull ComponentFeatureBase feature)
+	public J addFeature(@NotNull IComponentFeatureBase<?,?> feature)
 	{
 		getBody().addFeature(feature);
 		return (J) this;
@@ -290,11 +293,11 @@ public class Page<J extends Page<J>>
 	 */
 	@Override
 	@NotNull
-	public PageOptions getOptions()
+	public PageOptions<?> getOptions()
 	{
 		if (options == null)
 		{
-			options = new PageOptions(this);
+			options = new PageOptions<>(this);
 		}
 		return options;
 	}
@@ -350,7 +353,7 @@ public class Page<J extends Page<J>>
 	 *
 	 * @return Returns a trimmed out version of this page
 	 */
-	public IPage asMe()
+	public IPage<J> asMe()
 	{
 		return this;
 	}
@@ -409,9 +412,9 @@ public class Page<J extends Page<J>>
 	 */
 	@Override
 	@NotNull
-	public DocumentType getDocumentType()
+	public DocumentType<?> getDocumentType()
 	{
-		return new DocumentType(getBrowser().getHtmlVersion());
+		return new DocumentType<>(getBrowser().getHtmlVersion());
 	}
 
 
@@ -504,17 +507,16 @@ public class Page<J extends Page<J>>
 	 * @return J
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
-	public J add(@NotNull IComponentHierarchyBase child)
+	public J add(@NotNull BodyChildren child)
 	{
 		getBody().add(child);
 		return (J) this;
 	}
 
 	@Override
-	public @NotNull Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> getChildrenHierarchy()
+	public @NotNull Set<IComponentHierarchyBase<?,?>> getChildrenHierarchy()
 	{
-		Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> pageChildren = new LinkedHashSet<>();
+		Set<IComponentHierarchyBase<?,?>> pageChildren = new LinkedHashSet<>();
 		pageChildren.addAll(getHead().getChildrenHierarchy(true));
 		pageChildren.addAll(getBody().getChildrenHierarchy(true));
 		pageChildren.add(this);
@@ -530,7 +532,7 @@ public class Page<J extends Page<J>>
 	 */
 	@Override
 	@NotNull
-	public Page getPage()
+	public Page<?> getPage()
 	{
 		return this;
 	}
@@ -539,7 +541,6 @@ public class Page<J extends Page<J>>
 	 * Configures the page and all its components
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
 	public void preConfigure()
 	{
 		if (!isInitialized())
@@ -657,12 +658,12 @@ public class Page<J extends Page<J>>
 	/**
 	 * Method configurePage ...
 	 */
-	@SuppressWarnings("unchecked")
 	private void configurePage()
 	{
+		@SuppressWarnings("rawtypes")
 		Set<IPageConfigurator> sortedConfigurators = new LinkedHashSet<>(GuiceContext.get(IPageConfiguratorsKey));
 		sortedConfigurators.removeIf(a -> !a.enabled());
-		for (IPageConfigurator sortedConfigurator : sortedConfigurators)
+		for (IPageConfigurator<?> sortedConfigurator : sortedConfigurators)
 		{
 			Page.log.log(Level.FINEST, "Loading IPageConfigurator - " +
 			                           sortedConfigurator.getClass()
@@ -674,7 +675,6 @@ public class Page<J extends Page<J>>
 	/**
 	 * Builds up the Header Tag
 	 */
-	@SuppressWarnings("unchecked")
 	private void configurePageHeader()
 	{
 		if (this.getOptions().getTitle() != null)
@@ -722,7 +722,6 @@ public class Page<J extends Page<J>>
 	/**
 	 * Adds the variables in the application to the collection
 	 */
-	@SuppressWarnings("unchecked")
 	private void addVariablesScriptToPage()
 	{
 		StringBuilder variablesScriptBuilder = new StringBuilder();
@@ -735,7 +734,7 @@ public class Page<J extends Page<J>>
 		}
 		if (variablesScriptBuilder.length() > 0)
 		{
-			Script variablesScript = new Script();
+			Script<?,?> variablesScript = new Script<>();
 			variablesScript.setID("variables");
 			variablesScript.setNewLineForRawText(true);
 			variablesScript.addAttribute(ScriptAttributes.Type, StaticStrings.HTML_HEADER_JAVASCRIPT);
@@ -755,7 +754,7 @@ public class Page<J extends Page<J>>
 	@SuppressWarnings("unchecked")
 	public UUID getLocalStorageKey()
 	{
-		SessionStorageProperties sp = get(SessionStorageProperties.class);
+		SessionStorageProperties<?> sp = get(SessionStorageProperties.class);
 		Map<String, String> localStorage = sp.getLocalStorage();
 		if (!localStorage.containsKey(StaticStrings.LOCAL_STORAGE_PARAMETER_KEY))
 		{

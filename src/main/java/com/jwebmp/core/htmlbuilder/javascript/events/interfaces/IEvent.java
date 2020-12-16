@@ -17,7 +17,6 @@
 
 package com.jwebmp.core.htmlbuilder.javascript.events.interfaces;
 
-import com.jwebmp.core.base.ComponentBase;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
@@ -29,17 +28,14 @@ import com.jwebmp.core.base.servlets.interfaces.IFeature;
  *
  * @author GedMarc
  */
-public interface IEvent<F extends GlobalFeatures, J extends ComponentBase>
+public interface IEvent<F extends GlobalFeatures, J extends IEvent<F,J>>
 		extends IFeature<F, J>
 {
-
 	/**
 	 * The method that is fired on call
 	 *
-	 * @param call
-	 * 		The component that made the call
-	 * @param response
-	 * 		The Response Object Being Returned
+	 * @param call     The component that made the call
+	 * @param response The Response Object Being Returned
 	 */
-	void fireEvent(AjaxCall call, AjaxResponse response);
+	void fireEvent(AjaxCall<?> call, AjaxResponse<?> response);
 }

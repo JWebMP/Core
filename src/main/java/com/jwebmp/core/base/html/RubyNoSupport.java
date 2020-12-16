@@ -54,8 +54,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since Mar 1, 2015
  */
 public class RubyNoSupport<J extends RubyNoSupport<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements RubyChildren<IComponentHierarchyBase, J>
+		extends Component<IComponentHierarchyBase<?,?>, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements RubyChildren
 {
 
 

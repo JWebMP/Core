@@ -25,6 +25,7 @@ public class JWebMPServicesBindings
 	@Override
 	public void onBind(GuiceInjectorModule module)
 	{
+		//noinspection unchecked
 		module.bind(JWebMPServicesBindings.IPageConfiguratorsKey)
 		      .toProvider(() -> GuiceContext.instance()
 		                                    .getLoader(IPageConfigurator.class, ServiceLoader.load(IPageConfigurator.class)))

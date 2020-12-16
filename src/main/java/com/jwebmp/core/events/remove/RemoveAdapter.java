@@ -52,14 +52,14 @@ public abstract class RemoveAdapter<J extends RemoveAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public RemoveAdapter(Component component)
+	public RemoveAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.remove, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -81,7 +81,7 @@ public abstract class RemoveAdapter<J extends RemoveAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onRemove(AjaxCall call, AjaxResponse response);
+	public abstract void onRemove(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

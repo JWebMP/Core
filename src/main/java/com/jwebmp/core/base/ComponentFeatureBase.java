@@ -19,9 +19,8 @@ package com.jwebmp.core.base;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
+import com.guicedee.guicedinjection.json.StaticStrings;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
-import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentFeatureBase;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.references.CSSReference;
@@ -29,14 +28,11 @@ import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
-import com.guicedee.guicedinjection.json.StaticStrings;
-
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Null;
+
 import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * Allows a component to have features and events
@@ -48,16 +44,15 @@ import java.util.TreeSet;
  *
  * @since 23 Apr 2016
  */
-@SuppressWarnings({"MissingClassJavaDoc", "WeakerAccess", "UnusedReturnValue"})
 public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentFeatureBase<F, J>>
-		extends ComponentDependancyBase<J>
+		extends ComponentDependencyBase<J>
 		implements IComponentFeatureBase<F, J>, Comparator<J>, Comparable<J>
 {
 	/**
 	 * A linked component if required
 	 */
 	@JsonIgnore
-	private ComponentHierarchyBase component;
+	private IComponentHierarchyBase<?,?> component;
 	/**
 	 * The features of this component
 	 */
@@ -128,7 +123,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 */
 	@SuppressWarnings({"unused"})
 	@NotNull
-	public IComponentFeatureBase asFeatureBase()
+	public IComponentFeatureBase<?,?> asFeatureBase()
 	{
 		return this;
 	}
@@ -138,7 +133,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 *
 	 * @return All the CSS References
 	 *
-	 * @see ComponentDependancyBase#getCssReferencesAll()
+	 * @see ComponentDependencyBase#getCssReferencesAll()
 	 */
 	@Override
 	@NotNull
@@ -147,7 +142,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		Set<CSSReference> allCss = super.getCssReferencesAll();
 		getFeatures().forEach(feature ->
 		                      {
-			                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
+			                      ComponentFeatureBase<?,?> cfb = (ComponentFeatureBase<?,?>) feature;
 			                      for (Object css : cfb.getCssReferencesAll())
 			                      {
 				                      allCss.add((CSSReference) css);
@@ -161,17 +156,16 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 *
 	 * @return All the references
 	 *
-	 * @see ComponentDependancyBase#getJavascriptReferencesAll()
+	 * @see ComponentDependencyBase#getJavascriptReferencesAll()
 	 */
 	@Override
 	@NotNull
-	@SuppressWarnings("unchecked")
 	public Set<JavascriptReference> getJavascriptReferencesAll()
 	{
 		Set<JavascriptReference> allJs = super.getJavascriptReferencesAll();
 		getFeatures().forEach(feature ->
 		                      {
-			                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
+			                      ComponentFeatureBase<?,?> cfb = (ComponentFeatureBase<?,?>) feature;
 			                      for (Object js : cfb.getJavascriptReferencesAll())
 			                      {
 				                      allJs.add((JavascriptReference) js);
@@ -181,7 +175,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	}
 
 	/**
-	 * @see ComponentDependancyBase#hashCode()
+	 * @see ComponentDependencyBase#hashCode()
 	 */
 	@Override
 	public int hashCode()
@@ -235,12 +229,12 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 *
 	 * @return This class
 	 *
-	 * @see com.jwebmp.core.base.interfaces.IComponentFeatureBase#addFeature(ComponentFeatureBase)
+	 * @see com.jwebmp.core.base.interfaces.IComponentFeatureBase#addFeature(IComponentFeatureBase)
 	 */
 	@Override
 	@NotNull
 	@SuppressWarnings("unchecked")
-	public J addFeature(@NotNull ComponentFeatureBase feature)
+	public J addFeature(@NotNull IComponentFeatureBase<?,?> feature)
 	{
 		getFeatures().add((F) feature);
 		feature.init();
@@ -285,7 +279,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 * @see com.jwebmp.core.base.interfaces.IComponentFeatureBase#getOptions()
 	 */
 	@Override
-	public JavaScriptPart getOptions()
+	public JavaScriptPart<?> getOptions()
 	{
 		return null;
 	}
@@ -422,7 +416,6 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 * @see com.jwebmp.core.base.interfaces.IComponentFeatureBase#renderJavascript()
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
 	@NotNull
 	public StringBuilder renderJavascript()
 	{
@@ -475,7 +468,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	{
 		if (features == null)
 		{
-			features = new TreeSet<>();
+			features = new LinkedHashSet<>();
 		}
 		return features;
 	}
@@ -490,7 +483,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		{
 			if (!getFeatures().isEmpty())
 			{
-				getFeatures().forEach(IComponentFeatureBase::checkAssignedFunctions);
+				getFeatures().forEach(t -> t.asFeatureBase().checkAssignedFunctions());
 			}
 			assignFunctionsToComponent();
 			setRenderAfterLoad(true);
@@ -603,13 +596,11 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 */
 	@NotNull
 	@Override
-	@Null
-	@SuppressWarnings("unchecked")
 	public J setTiny(boolean tiny)
 	{
 		for (F f : getFeatures())
 		{
-			ComponentFeatureBase next = (ComponentFeatureBase) f;
+			ComponentFeatureBase<?,?> next = (ComponentFeatureBase<?,?>) f;
 			next.setTiny(tiny);
 		}
 		return super.setTiny(tiny);
@@ -687,7 +678,6 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 *
 	 * @return int
 	 */
-	@SuppressWarnings("ConstantConditions")
 	@Override
 	public int compareTo(@NotNull J o)
 	{
@@ -713,9 +703,9 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 * @return the assigned component
 	 */
 	@Override
-	public <C extends IComponentHierarchyBase, A extends Enum & AttributeDefinitions, E extends GlobalEvents, J extends ComponentHierarchyBase<C, A, F, E, J>> ComponentHierarchyBase<C, A, F, E, J> getComponent()
+	public IComponentHierarchyBase<?,?>  getComponent()
 	{
-		return component;
+		return  component;
 	}
 
 	/**
@@ -729,11 +719,9 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	@NotNull
 	@SuppressWarnings({"unused", "unchecked"})
 	@Override
-	public J setComponent(ComponentHierarchyBase component)
+	public J setComponent(IComponentHierarchyBase<?,?> component)
 	{
 		this.component = component;
 		return (J) this;
 	}
-
-
 }

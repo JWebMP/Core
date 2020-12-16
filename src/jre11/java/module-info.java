@@ -139,7 +139,6 @@ module com.jwebmp.core {
 	exports com.jwebmp.core.htmlbuilder.javascript.events.interfaces;
 
 	exports com.jwebmp.core.plugins;
-	exports com.jwebmp.core.plugins.ajaxenabler;
 	exports com.jwebmp.core.plugins.jquery;
 
 	exports com.jwebmp.core.utilities;
@@ -221,8 +220,7 @@ module com.jwebmp.core {
 
 	provides com.guicedee.guicedservlets.services.IGuiceSiteBinder with com.jwebmp.core.implementations.JWebMPSiteBinder;
 	provides com.guicedee.guicedinjection.interfaces.IGuiceDefaultBinder with com.jwebmp.core.services.JWebMPServicesBindings;
-
-	provides com.guicedee.guicedinjection.interfaces.IGuiceScanModuleExclusions with com.jwebmp.core.implementations.JWebMPModuleExclusions;
+	provides com.guicedee.guicedinjection.interfaces.IGuiceScanModuleInclusions with com.jwebmp.core.implementations.JWebMPModuleInclusions;
 
 	provides com.jwebmp.core.services.IDynamicRenderingServlet with com.jwebmp.core.implementations.JWebMPDynamicScriptRenderer, com.jwebmp.core.implementations.JWebMPJavaScriptDynamicScriptRenderer;
 

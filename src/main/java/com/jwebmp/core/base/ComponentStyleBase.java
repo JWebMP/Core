@@ -18,6 +18,7 @@ package com.jwebmp.core.base;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
+import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
@@ -28,63 +29,56 @@ import com.jwebmp.core.htmlbuilder.css.composer.CSSComposer;
 import com.jwebmp.core.htmlbuilder.css.enumarations.CSSTypes;
 
 import jakarta.validation.constraints.NotNull;
+
 import java.util.EnumMap;
 import java.util.Map;
 
 /**
  * The CSS Portion of the Component.
  *
- * @param <C>
- * 		All allowed children
- * @param <A>
- * 		All attributes for this component
- * @param <F>
- * 		All features allowed for this component
- * @param <E>
- * 		All events allowed for this component
- * @param <J>
- * 		Always this class
- *
+ * @param <C> All allowed children
+ * @param <A> All attributes for this component
+ * @param <F> All features allowed for this component
+ * @param <E> All events allowed for this component
+ * @param <J> Always this class
  * @author GedMarc
  * @since 24 Apr 2016
  */
 @SuppressWarnings("MissingClassJavaDoc")
-public abstract class ComponentStyleBase<C extends IComponentHierarchyBase, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentStyleBase<C, A, F, E, J>>
+public abstract class ComponentStyleBase<C extends GlobalChildren,
+		A extends Enum<?> & AttributeDefinitions,
+		F extends GlobalFeatures,
+		E extends GlobalEvents,
+		J extends ComponentStyleBase<C, A, F, E, J>>
 		extends ComponentHierarchyBase<C, A, F, E, J>
 		implements IComponentStyleBase<J>
 {
 	/**
-	 * Field serialVersionUID
-	 */
-
-
-	/**
 	 * The CSS Object for all styling
 	 */
 	private CSSImpl css;
-
+	
 	/**
 	 * The CSS Class name if required
 	 */
 	private String cssName;
-
+	
 	/**
 	 * Container for all the CSS Types
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Map<CSSTypes, CSSImpl> cssTypeHashMap;
-
+	
 	/**
 	 * Constructs a tag with styling options enabled
 	 *
-	 * @param componentType
-	 * 		The type of component this is
+	 * @param componentType The type of component this is
 	 */
 	public ComponentStyleBase(ComponentTypes componentType)
 	{
 		super(componentType);
 	}
-
+	
 	/**
 	 * Returns a ComponentStyleBase component of this
 	 *
@@ -92,19 +86,16 @@ public abstract class ComponentStyleBase<C extends IComponentHierarchyBase, A ex
 	 */
 	@SuppressWarnings("unused")
 	@NotNull
-	public IComponentStyleBase asStyleBase()
+	public IComponentStyleBase<?> asStyleBase()
 	{
 		return this;
 	}
-
+	
 	/**
 	 * Adds a CSS object to the component with the given type
 	 *
-	 * @param type
-	 * 		The CSS Type
-	 * @param cssItem
-	 * 		Thee CSS Item to add
-	 *
+	 * @param type    The CSS Type
+	 * @param cssItem Thee CSS Item to add
 	 * @return Always this object
 	 */
 	@Override
@@ -115,13 +106,11 @@ public abstract class ComponentStyleBase<C extends IComponentHierarchyBase, A ex
 		getCssTypeHashMap().put(type, cssItem);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Removes a CSS item for the component
 	 *
-	 * @param cssType
-	 * 		The CSS Type Entry to remove
-	 *
+	 * @param cssType The CSS Type Entry to remove
 	 * @return Always this object
 	 */
 	@Override
@@ -132,7 +121,7 @@ public abstract class ComponentStyleBase<C extends IComponentHierarchyBase, A ex
 		getCssTypeHashMap().remove(cssType);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Gets the CSS Object used for styling
 	 *
@@ -149,13 +138,11 @@ public abstract class ComponentStyleBase<C extends IComponentHierarchyBase, A ex
 		}
 		return css;
 	}
-
+	
 	/**
 	 * Sets the CSS Object used for styling
 	 *
-	 * @param css
-	 * 		The CSS Implementation object to add
-	 *
+	 * @param css The CSS Implementation object to add
 	 * @return Always this object
 	 */
 	@Override
@@ -166,7 +153,7 @@ public abstract class ComponentStyleBase<C extends IComponentHierarchyBase, A ex
 		this.css = css;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns the currently assigned CSS Name
 	 *
@@ -178,13 +165,11 @@ public abstract class ComponentStyleBase<C extends IComponentHierarchyBase, A ex
 	{
 		return cssName;
 	}
-
+	
 	/**
 	 * Sets the currently assigned CSS Name
 	 *
-	 * @param cssName
-	 * 		Sets the CSS Name to a valid value
-	 *
+	 * @param cssName Sets the CSS Name to a valid value
 	 * @return Always this object
 	 */
 	@Override
@@ -195,7 +180,7 @@ public abstract class ComponentStyleBase<C extends IComponentHierarchyBase, A ex
 		this.cssName = cssName;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns the current HashMap of all CSS Entries for the component
 	 *
@@ -211,14 +196,12 @@ public abstract class ComponentStyleBase<C extends IComponentHierarchyBase, A ex
 		}
 		return cssTypeHashMap;
 	}
-
+	
 	/**
 	 * Renders the component CSS at the specified tab count with the &lt;style&gt; tag
 	 * <p>
 	 *
-	 * @param tabCount
-	 * 		Tab indentation for the SQL
-	 *
+	 * @param tabCount Tab indentation for the SQL
 	 * @return The Component CSS
 	 */
 	@Override
@@ -227,23 +210,18 @@ public abstract class ComponentStyleBase<C extends IComponentHierarchyBase, A ex
 	{
 		return renderCss(tabCount, true, false, false);
 	}
-
+	
 	/**
 	 * Renders the component CSS at the specified tab count with the &lt;style&gt; tag This includes everything from this classes CSS, to
 	 * the CSS for each field. It will also populate the lower level
 	 * child CSS for fields in this class
 	 * <p>
 	 *
-	 * @param tabCount
-	 * 		Tab indentation for the SQL
-	 * @param renderOpening
-	 * 		Whether or not to render the opening XML tag for a CSS style
-	 * @param renderInQuotations
-	 * 		Sets whether to render the CSS Fields in Quotations
-	 * @param isAjaxCall
-	 * 		Sets whether the CSS is being called from an AJAX call
-	 * 		<p>
-	 *
+	 * @param tabCount           Tab indentation for the SQL
+	 * @param renderOpening      Whether or not to render the opening XML tag for a CSS style
+	 * @param renderInQuotations Sets whether to render the CSS Fields in Quotations
+	 * @param isAjaxCall         Sets whether the CSS is being called from an AJAX call
+	 *                           <p>
 	 * @return The Component CSS
 	 */
 	@Override
@@ -262,7 +240,7 @@ public abstract class ComponentStyleBase<C extends IComponentHierarchyBase, A ex
 		comp.addComponent(this, true);
 		return new StringBuilder(comp.toString());
 	}
-
+	
 	/**
 	 * @return hash-int
 	 */
@@ -271,13 +249,11 @@ public abstract class ComponentStyleBase<C extends IComponentHierarchyBase, A ex
 	{
 		return super.hashCode();
 	}
-
+	
 	/**
 	 * Method equals ...
 	 *
-	 * @param o
-	 * 		of type Object
-	 *
+	 * @param o of type Object
 	 * @return boolean
 	 */
 	@Override
@@ -285,7 +261,7 @@ public abstract class ComponentStyleBase<C extends IComponentHierarchyBase, A ex
 	{
 		return super.equals(o);
 	}
-
+	
 	/**
 	 * Method destroy ...
 	 */

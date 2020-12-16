@@ -29,9 +29,8 @@ import jakarta.validation.constraints.NotNull;
  * @since Sep 26, 2016
  */
 @SuppressWarnings({"UnusedReturnValue", "MissingClassJavaDoc"})
-public interface IComponentHTMLBase<J extends ComponentBase>
+public interface IComponentHTMLBase<J extends IComponentHTMLBase<J>>
 {
-
 	/**
 	 * Returns this tag
 	 * <p>
@@ -131,7 +130,6 @@ public interface IComponentHTMLBase<J extends ComponentBase>
 	 *
 	 * @return This Class
 	 */
-	@SuppressWarnings("unchecked")
 	J setTag(ComponentTypes tag);
 
 	/**
@@ -154,5 +152,44 @@ public interface IComponentHTMLBase<J extends ComponentBase>
 	 * @return The sting with the given tab counts
 	 */
 	String toString(Integer tabCount);
-
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentEventBase<?, ?> asEventBase()
+	{
+		return (IComponentEventBase<?, ?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentFeatureBase<?, ?> asFeatureBase()
+	{
+		return (IComponentFeatureBase<?, ?>) this;
+	}
+	
+	/**
+	 * Returns the components exposed dependency methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentDependencyBase<?> asDependencyBase()
+	{
+		return (IComponentDependencyBase<?>) this;
+	}
+	
+	/**
+	 * Returns the base exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentBase<?> asBase()
+	{
+		return (IComponentBase<?>) this;
+	}
 }

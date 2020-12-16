@@ -86,7 +86,7 @@ public class HtmlTest
 	}
 
 	public class HtmlImpl
-			extends Page
+			extends Page<HtmlImpl>
 	{
 
 		public HtmlImpl()

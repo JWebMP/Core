@@ -37,9 +37,7 @@ import java.util.logging.Level;
  * @author GedMarc
  */
 @ComponentInformation(name = "Before Activate Event",
-		description = "Server Side Event for Before Active Adapter.",
-		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
+		description = "Server Side Event for Before Active Adapter.")
 public abstract class BeforeActivateAdapter<J extends BeforeActivateAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
@@ -57,14 +55,14 @@ public abstract class BeforeActivateAdapter<J extends BeforeActivateAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public BeforeActivateAdapter(Component component)
+	public BeforeActivateAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.beforeActivate, component);
 	}
 
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -86,7 +84,7 @@ public abstract class BeforeActivateAdapter<J extends BeforeActivateAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onBeforeActivate(AjaxCall call, AjaxResponse response);
+	public abstract void onBeforeActivate(AjaxCall<?> call, AjaxResponse<?> response);
 
 	private void onCall()
 	{

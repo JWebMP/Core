@@ -17,7 +17,6 @@
 package com.jwebmp;
 
 import com.jwebmp.core.generics.WebReference;
-import com.jwebmp.core.plugins.ajaxenabler.AjaxEnablerReferencePool;
 import com.jwebmp.core.plugins.jquery.JQueryReferencePool;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -53,7 +52,7 @@ public class WebReferenceTest
 		                                  .setSortOrder(0));// new JQueryReferenceV2());
 
 		//w.add(AtmosphereReferencePool.JQueryAtmospherePush.getJavaScriptReference());
-		w.add(AjaxEnablerReferencePool.AjaxEnabler.getJavaScriptReference()
+		w.add(JQueryReferencePool.JQueryMigrate.getJavaScriptReference()
 		                                          .setSortOrder(0));
 
 		WebReference.sort(w);

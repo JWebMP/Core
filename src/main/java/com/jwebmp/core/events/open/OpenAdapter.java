@@ -53,14 +53,14 @@ public abstract class OpenAdapter<J extends OpenAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public OpenAdapter(Component component)
+	public OpenAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.open, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -82,7 +82,7 @@ public abstract class OpenAdapter<J extends OpenAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onOpen(AjaxCall call, AjaxResponse response);
+	public abstract void onOpen(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

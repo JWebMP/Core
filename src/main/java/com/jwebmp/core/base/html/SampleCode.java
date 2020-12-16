@@ -40,7 +40,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class SampleCode<J extends SampleCode<J>>
 		extends Component<PhraseChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements ParagraphChildren<PhraseChildren, J>, PhraseChildren<PhraseChildren, J>
+		implements ParagraphChildren, PhraseChildren
 {
 
 

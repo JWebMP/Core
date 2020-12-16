@@ -21,6 +21,8 @@ import com.jwebmp.core.base.html.attributes.GlobalAttributes;
 import com.jwebmp.core.base.html.attributes.InputTypes;
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
+import com.jwebmp.core.base.html.interfaces.children.FormChildren;
+import com.jwebmp.core.base.html.interfaces.children.ListItemChildren;
 import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
@@ -72,12 +74,10 @@ import jakarta.validation.constraints.NotNull;
  *
  * @author GedMarc
  */
-public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
-		extends Component<IComponentHierarchyBase, A, GlobalFeatures, GlobalEvents, J>
-		implements ParagraphChildren<IComponentHierarchyBase, J>
+public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, J>>
+		extends Component<IComponentHierarchyBase<?,?>, A, GlobalFeatures, GlobalEvents, J>
+		implements ParagraphChildren, FormChildren, ListItemChildren
 {
-
-
 	/**
 	 * The input type of this input tag
 	 */

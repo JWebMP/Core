@@ -22,12 +22,15 @@ import com.jwebmp.core.Page;
 import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.guicedservlets.GuicedServletKeys;
+import com.jwebmp.core.services.IPage;
 import com.jwebmp.interception.services.AjaxCallIntercepter;
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * This Servlet supplies all the JavaScript for a given HTML Page
@@ -54,7 +57,7 @@ public class JavaScriptServlet
 	@Override
 	public void perform()
 	{
-		Page page = GuiceContext.get(Page.class);
+		Page<?> page = (Page<?>) GuiceContext.get(IPage.class);
 		HttpServletRequest request = GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
 		readBrowserInformation(request);
 
@@ -66,7 +69,7 @@ public class JavaScriptServlet
 		FileTemplates.getTemplateVariables()
 		             .put(JavaScriptServlet.scriptReplacement, page.renderJavascript());
 		StringBuilder scripts = FileTemplates.renderTemplateScripts(JavaScriptServlet.scriptReplacement);
-		writeOutput(scripts, StaticStrings.HTML_HEADER_JAVASCRIPT, Charset.forName("UTF-8"));
+		writeOutput(scripts, StaticStrings.HTML_HEADER_JAVASCRIPT, UTF_8);
 		FileTemplates.getTemplateVariables()
 		             .remove(JavaScriptServlet.scriptReplacement);
 	}

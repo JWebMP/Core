@@ -20,6 +20,7 @@ import com.jwebmp.core.base.ComponentStyleBase;
 import com.jwebmp.core.base.html.Paragraph;
 import com.jwebmp.core.base.html.Span;
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
+import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
@@ -32,25 +33,22 @@ import jakarta.validation.constraints.NotNull;
  * The base class for all HTML generation, Everything must extend a component
  * <p>
  *
- * @param <C>
- * 		The allowed children for a component
- * @param <A>
- * 		The allowed local attributes (Separate from Global Attributes)
- * @param <F>
- * 		The allowed feature JavaScripts
- * @param <E>
- * 		The allowed associated Events
- * @param <J>
- * 		Component output for cloning. Returned on CloneComponent
- * 		<p>
- * 		<p>
- *
+ * @param <C> The allowed children for a component
+ * @param <A> The allowed local attributes (Separate from Global Attributes)
+ * @param <F> The allowed feature JavaScripts
+ * @param <E> The allowed associated Events
+ * @param <J> Component output for cloning. Returned on CloneComponent
+ *            <p>
+ *            <p>
  * @author GedMarc
  * @version 1.0
  * @since 2009/10/01
  */
 @SuppressWarnings("MissingClassJavaDoc")
-public class Component<C extends IComponentHierarchyBase, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component<C, A, F, E, J>>
+public class Component<C extends GlobalChildren, A extends Enum<?> & AttributeDefinitions,
+		F extends GlobalFeatures,
+		E extends GlobalEvents,
+		J extends Component<C, A, F, E, J>>
 		extends ComponentStyleBase<C, A, F, E, J>
 		implements ICssStructure<J>
 {
@@ -61,31 +59,26 @@ public class Component<C extends IComponentHierarchyBase, A extends Enum & Attri
 	{
 		this("notspecified", ComponentTypes.Span);
 	}
-
+	
 	/**
 	 * Construct a new Component with a custom tag
 	 * <p>
 	 *
-	 * @param tagName
-	 * 		The tag to apply
-	 * @param myComponent
-	 * 		The HTML component rendering for
+	 * @param tagName     The tag to apply
+	 * @param myComponent The HTML component rendering for
 	 */
 	public Component(String tagName, ComponentTypes myComponent)
 	{
 		this(tagName, myComponent, false);
 	}
-
+	
 	/**
 	 * Constructs a component with the tag name, it's associated base HTML component, and whether it closes in line or not
 	 * <p>
 	 *
-	 * @param tagName
-	 * 		The tag name to apply
-	 * @param myComponent
-	 * 		The component enumeration applied with this component
-	 * @param inlineTagClose
-	 * 		Whether or not to close the tag InLine or not
+	 * @param tagName        The tag name to apply
+	 * @param myComponent    The component enumeration applied with this component
+	 * @param inlineTagClose Whether or not to close the tag InLine or not
 	 */
 	public Component(String tagName, ComponentTypes myComponent, boolean inlineTagClose)
 	{
@@ -93,27 +86,24 @@ public class Component<C extends IComponentHierarchyBase, A extends Enum & Attri
 		setTag(tagName);
 		setInlineClosingTag(inlineTagClose);
 	}
-
+	
 	/**
 	 * Construct a new Component with a custom tag
 	 * <p>
 	 *
-	 * @param myComponent
-	 * 		The HTML component rendering for
+	 * @param myComponent The HTML component rendering for
 	 */
 	public Component(ComponentTypes myComponent)
 	{
 		this(myComponent.getComponentTag(), myComponent, false);
 	}
-
+	
 	/**
 	 * Adds a paragraph component with the attached text
 	 * <p>
 	 *
-	 * @param textToAdd
-	 * 		The text to add
-	 * 		<p>
-	 *
+	 * @param textToAdd The text to add
+	 *                  <p>
 	 * @return The new paragraph component
 	 */
 	@Override
@@ -121,22 +111,22 @@ public class Component<C extends IComponentHierarchyBase, A extends Enum & Attri
 	@NotNull
 	public J add(@NotNull String textToAdd)
 	{
-		Paragraph p = new Paragraph();
+		Paragraph<?> p = new Paragraph<>();
 		p.setText(textToAdd);
 		add((C) p);
 		return (J) this;
 	}
-
+	
 	@SuppressWarnings({"unused", "unchecked"})
 	@NotNull
 	public J add(String textToAdd, boolean inline)
 	{
-		Span p = new Span();
+		Span<?, ?, ?> p = new Span<>();
 		p.setText(textToAdd);
 		add((C) p);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns this component with all the shortcuts for CSS
 	 *
@@ -144,9 +134,9 @@ public class Component<C extends IComponentHierarchyBase, A extends Enum & Attri
 	 */
 	@SuppressWarnings("unused")
 	@NotNull
-	public ICssStructure asCSS()
+	public ICssStructure<?> asCSS()
 	{
-		return ICssStructure.class.cast(this);
+		return this;
 	}
-
+	
 }

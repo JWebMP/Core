@@ -18,7 +18,7 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
-import com.jwebmp.core.base.html.interfaces.FigureChildren;
+import com.jwebmp.core.base.html.interfaces.children.FigureChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.NoIDTag;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
@@ -41,7 +41,6 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  * @param <J>
- *
  * @author GedMarc
  * @since 2014/12/21
  */
@@ -49,11 +48,9 @@ public class Figure<J extends Figure<J>>
 		extends Component<FigureChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements NoIDTag
 {
-
-
 	public Figure()
 	{
 		super(ComponentTypes.Figure);
 	}
-
+	
 }

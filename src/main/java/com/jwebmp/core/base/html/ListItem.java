@@ -54,17 +54,14 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class ListItem<J extends ListItem<J>>
 		extends Component<ListItemChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements ListChildren<ListItemChildren, J>, NoNewLineForRawText, ListItemChildren<ListItemChildren, J>
+		implements ListChildren, NoNewLineForRawText, ListItemChildren
 {
-
-
 	/**
 	 * Constructs a blank text List Item
 	 */
 	public ListItem()
 	{
 		this("");
-
 	}
 
 	/**
@@ -87,7 +84,7 @@ public class ListItem<J extends ListItem<J>>
 	 */
 	public ListItemChildren addItem(String textToAdd)
 	{
-		ListItem li = new ListItem(textToAdd);
+		ListItem<?> li = new ListItem<>(textToAdd);
 		add(li);
 		return li;
 	}
@@ -99,10 +96,10 @@ public class ListItem<J extends ListItem<J>>
 	 *
 	 * @return
 	 */
-	public List addList(String textToAdd)
+	public List<?,?,?,?> addList(String textToAdd)
 	{
 		ListItem<?> lit = new ListItem<>(textToAdd);
-		List<?, ?, ?, ?> li = new List<>(false);
+		List<?,?, ?, ?> li = new List<>(false);
 		lit.add(li);
 		super.add(li);
 		return li;

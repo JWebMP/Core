@@ -37,9 +37,7 @@ import java.util.logging.Level;
  * @author GedMarc
  */
 @ComponentInformation(name = "DropEvent",
-		description = "Server Side Event for Drop",
-		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
+		description = "Server Side Event for Drop")
 public abstract class DropAdapter<J extends DropAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
@@ -57,14 +55,14 @@ public abstract class DropAdapter<J extends DropAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public DropAdapter(Component component)
+	public DropAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.drop, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -86,7 +84,7 @@ public abstract class DropAdapter<J extends DropAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onDrop(AjaxCall call, AjaxResponse response);
+	public abstract void onDrop(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

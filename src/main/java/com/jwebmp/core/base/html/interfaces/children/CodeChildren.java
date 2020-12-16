@@ -16,10 +16,12 @@
  */
 package com.jwebmp.core.base.html.interfaces.children;
 
+import com.jwebmp.core.base.html.interfaces.GlobalChildren;
+
 /**
  * @author GedMarc
  */
-public interface CodeChildren
+public interface CodeChildren extends GlobalChildren
 {
 
 }

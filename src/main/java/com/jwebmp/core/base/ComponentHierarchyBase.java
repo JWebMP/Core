@@ -19,6 +19,8 @@ package com.jwebmp.core.base;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.guicedee.guicedinjection.json.StaticStrings;
+import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.CSSComponent;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.Feature;
@@ -33,9 +35,6 @@ import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.htmlbuilder.css.themes.Theme;
-import com.guicedee.guicedinjection.json.StaticStrings;
-import com.guicedee.logger.LogFactory;
-
 import jakarta.validation.constraints.NotNull;
 
 import java.util.*;
@@ -43,7 +42,7 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static java.util.Comparator.*;
+import static java.util.Comparator.comparing;
 
 /**
  * Provides the Hierarchy for any component. Manages children and parent relationships
@@ -57,16 +56,15 @@ import static java.util.Comparator.*;
  * @since 24 Apr 2016
  */
 @SuppressWarnings({"unchecked", "MissingClassJavaDoc"})
-public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHierarchyBase<C, A, F, E, J>>
+public class ComponentHierarchyBase<C extends GlobalChildren,
+		A extends Enum<?> & AttributeDefinitions,
+		F extends GlobalFeatures,
+		E extends GlobalEvents,
+		J extends ComponentHierarchyBase<C, A, F, E, J>>
 		extends ComponentThemeBase<A, F, E, J>
-		implements IComponentHierarchyBase<C, J>, GlobalChildren
+		implements IComponentHierarchyBase<C, J>,
+		           GlobalChildren
 {
-	
-	/**
-	 * Field serialVersionUID
-	 */
-	
-	
 	/**
 	 * Field log
 	 */
@@ -83,7 +81,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 * My Parent
 	 */
 	@JsonIgnore
-	private ComponentHierarchyBase<?, ?, ?, ?, ?> parent;
+	private IComponentHierarchyBase<?, ?> parent;
 	
 	/**
 	 * The list of class names for this object
@@ -127,17 +125,17 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 * @see ComponentEventBase#findEvent(String)
 	 */
 	@Override
-	public ComponentEventBase findEvent(@NotNull String eventId)
+	public ComponentEventBase<?, ?, ?> findEvent(@NotNull String eventId)
 	{
 		for (C child : getChildren())
 		{
-			for (Object jScript : child.getEventsAll())
+			for (Object jScript : child.asHierarchyBase().getEventsAll())
 			{
-				if (((Event) jScript)
+				if (((Event<?, ?>) jScript)
 						.getID()
 						.equals(eventId))
 				{
-					return (ComponentEventBase) jScript;
+					return (ComponentEventBase<?, ?, ?>) jScript;
 				}
 			}
 		}
@@ -155,7 +153,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	@NotNull
 	public J setTiny(boolean tiny)
 	{
-		getChildren().forEach(child -> child.setTiny(tiny));
+		getChildren().forEach(child -> child.asBase().setTiny(tiny));
 		return super.setTiny(tiny);
 	}
 	
@@ -169,7 +167,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	{
 		if (getParent() != null)
 		{
-			return getParent().getID();
+			return getParent().asBase().getID();
 		}
 		return null;
 	}
@@ -187,7 +185,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		Set<CSSReference> allCss = super.getCssReferencesAll();
 		getChildren().forEach(child ->
 		                      {
-			                      for (Object jScript : child.getCssReferencesAll())
+			                      for (Object jScript : child.asDependencyBase().getCssReferencesAll())
 			                      {
 				                      allCss.add((CSSReference) jScript);
 			                      }
@@ -203,13 +201,12 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 */
 	@Override
 	@NotNull
-	@SuppressWarnings("unchecked")
 	public Set<JavascriptReference> getJavascriptReferencesAll()
 	{
 		Set<JavascriptReference> allJs = super.getJavascriptReferencesAll();
 		getChildren().forEach(child ->
 		                      {
-			                      for (Object jScript : child.getJavascriptReferencesAll())
+			                      for (Object jScript : child.asDependencyBase().getJavascriptReferencesAll())
 			                      {
 				                      allJs.add((JavascriptReference) jScript);
 			                      }
@@ -280,16 +277,16 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 */
 	@NotNull
 	@SuppressWarnings("unused")
-	public Set<Feature> getFeaturesAll()
+	public Set<Feature<?, ?, ?>> getFeaturesAll()
 	{
-		Set<Feature> allFeatures = new LinkedHashSet<>();
-		getChildrenHierarchy().forEach(child ->
-		                               {
-			                               for (Object event : child.getFeatures())
-			                               {
-				                               allFeatures.add((Feature) event);
-			                               }
-		                               });
+		Set<Feature<?, ?, ?>> allFeatures = new LinkedHashSet<>();
+		getChildrenHierarchy().forEach(child -> {
+			for (Object event : child.asFeatureBase()
+			                         .getFeatures())
+			{
+				allFeatures.add((Feature<?, ?, ?>) event);
+			}
+		});
 		return allFeatures;
 	}
 	
@@ -304,13 +301,13 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	@NotNull
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends ComponentHierarchyBase> T wrap(@NotNull T component)
+	public <T extends IComponentHierarchyBase<?, ?>> T wrap(@NotNull T component)
 	{
-		ComponentHierarchyBase existingParent = component.getParent();
+		IComponentHierarchyBase<T, ?> existingParent = (IComponentHierarchyBase<T, ?>) component.getParent();
 		if (existingParent != null)
 		{
 			existingParent.remove(component);
-			existingParent.add(this);
+			existingParent.add((T) this);
 		}
 		getChildren().add((C) component);
 		return component;
@@ -328,14 +325,12 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	@NotNull
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends ComponentHierarchyBase> T embed(@NotNull T component)
+	public <T extends IComponentHierarchyBase<?, ?>> T embed(@NotNull T component)
 	{
 		component.getChildren()
 		         .stream()
 		         .filter(Objects::nonNull)
-		         .forEach(a -> {
-			         add((C) a);
-		         });
+		         .forEach(a -> add((C) a));
 		return component;
 	}
 	
@@ -356,9 +351,9 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		{
 			return (J) this;
 		}
-		newChild.setParent(this);
-		newChild.setTiny(isTiny());
-		newChild.setPage(getPage());
+		newChild.asHierarchyBase().setParent(this);
+		newChild.asHierarchyBase().setTiny(isTiny());
+		newChild.asHierarchyBase().setPage(getPage());
 		getChildren().add(newChild);
 		return (J) this;
 	}
@@ -380,10 +375,10 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		{
 			return (J) this;
 		}
-		newChild.setParent(this);
-		newChild.setTiny(isTiny());
-		newChild.setPage(getPage());
-		ArrayList<C> componentHierarchyBases = new ArrayList(getChildren());
+		newChild.asHierarchyBase().setParent(this);
+		newChild.asHierarchyBase().setTiny(isTiny());
+		newChild.asHierarchyBase().setPage(getPage());
+		ArrayList<C> componentHierarchyBases = new ArrayList<>(getChildren());
 		componentHierarchyBases.add(position, newChild);
 		setChildren(new LinkedHashSet<>(componentHierarchyBases));
 		return (J) this;
@@ -415,7 +410,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public J addClass(@NotNull CSSComponent classComponent)
+	public J addClass(@NotNull CSSComponent<?> classComponent)
 	{
 		String className = classComponent.getID();
 		add((C) classComponent);
@@ -456,7 +451,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	public Map<String, Object> getAngularObjectsAll()
 	{
 		Map<String, Object> map = getJsonObjects();
-		for (ComponentHierarchyBase next : getChildrenHierarchy(true))
+		for (IComponentHierarchyBase<?, ?> next : getChildrenHierarchy(true))
 		{
 			processAngularObjects(next, map);
 		}
@@ -475,7 +470,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	{
 		if (children == null)
 		{
-			children = new java.util.concurrent.CopyOnWriteArraySet<>();
+			children = new LinkedHashSet<>();
 		}
 		return children;
 	}
@@ -498,7 +493,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 */
 	@Override
 	@NotNull
-	public Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> getChildrenHierarchy()
+	public Set<IComponentHierarchyBase<?, ?>> getChildrenHierarchy()
 	{
 		return getChildrenHierarchy(true);
 	}
@@ -513,12 +508,12 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 */
 	@Override
 	@NotNull
-	public Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> getChildrenHierarchy(boolean includeSelf)
+	public Set<IComponentHierarchyBase<?, ?>> getChildrenHierarchy(boolean includeSelf)
 	{
-		Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> components = new LinkedHashSet<>();
+		Set<IComponentHierarchyBase<?, ?>> components = new LinkedHashSet<>();
 		if (includeSelf)
 		{
-			components.add((ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>) this);
+			components.add(this);
 		}
 		getChildrenHierarchy(components);
 		
@@ -539,15 +534,15 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 */
 	@Override
 	@NotNull
-	public Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> getChildrenHierarchy(
-			@NotNull Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> componentsToAddTo)
+	public Set<IComponentHierarchyBase<?, ?>> getChildrenHierarchy(
+			@NotNull Set<IComponentHierarchyBase<?, ?>> componentsToAddTo)
 	{
 		getChildren().forEach(child ->
 		                      {
 			                      if (child != null)
 			                      {
-				                      componentsToAddTo.add((ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>) child);
-				                      child.getChildrenHierarchy(componentsToAddTo);
+				                      componentsToAddTo.add((IComponentHierarchyBase<?, ?>) child);
+				                      child.asHierarchyBase().getChildrenHierarchy(componentsToAddTo);
 			                      }
 		                      });
 		return componentsToAddTo;
@@ -560,19 +555,18 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 */
 	@Override
 	@NotNull
-	public Set<Event> getEventsAll()
+	public Set<Event<?, ?>> getEventsAll()
 	{
-		Set<Event> allEvents = new LinkedHashSet<>();
-		getChildrenHierarchy(true).forEach(child ->
-		                                   {
-			                                   if (child != null)
-			                                   {
-				                                   for (Object event : child.getEvents())
-				                                   {
-					                                   allEvents.add((Event) event);
-				                                   }
-			                                   }
-		                                   });
+		Set<Event<?, ?>> allEvents = new LinkedHashSet<>();
+		getChildrenHierarchy(true).stream()
+		                          .filter(Objects::nonNull)
+		                          .forEach(child -> {
+			                          for (Object event : child.asEventBase()
+			                                                   .getEvents())
+			                          {
+				                          allEvents.add((Event<?, ?>) event);
+			                          }
+		                          });
 		return allEvents;
 	}
 	
@@ -584,11 +578,11 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 */
 	@Override
 	@NotNull
-	public Page getPage()
+	public Page<?> getPage()
 	{
 		if (page == null)
 		{
-			setPage(new Page());
+			setPage(new Page<>());
 		}
 		return page;
 	}
@@ -599,8 +593,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 * @return The parent object
 	 */
 	@Override
-	
-	public ComponentHierarchyBase getParent()
+	public IComponentHierarchyBase<?, ?> getParent()
 	{
 		return parent;
 	}
@@ -613,7 +606,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	@Override
 	@NotNull
 	@SuppressWarnings("unchecked")
-	public J setParent(ComponentHierarchyBase parent)
+	public J setParent(IComponentHierarchyBase<?, ?> parent)
 	{
 		this.parent = parent;
 		return (J) this;
@@ -679,10 +672,10 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 * @return
 	 */
 	@Override
-	public J removeClass(@NotNull Enum className, Enum... classNames)
+	public J removeClass(@NotNull Enum<?> className, Enum<?>... classNames)
 	{
 		this.removeClass(className);
-		for (Enum name : classNames)
+		for (Enum<?> name : classNames)
 		{
 			this.removeClass(name);
 		}
@@ -696,7 +689,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 * @return
 	 */
 	@Override
-	public boolean removeClass(@NotNull Enum className)
+	public boolean removeClass(@NotNull Enum<?> className)
 	{
 		if (getClasses().contains(className.toString()))
 		{
@@ -721,15 +714,8 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	@SuppressWarnings("unchecked")
 	public J addClass(@NotNull ICssClassName className)
 	{
-		if (!getClasses().contains(className.toString()))
-		{
-			getClasses().add(className.toString());
-			return (J) this;
-		}
-		else
-		{
-			return (J) this;
-		}
+		getClasses().add(className.toString());
+		return (J) this;
 	}
 	
 	/**
@@ -795,13 +781,13 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	public Set<String> getVariablesAll()
 	{
 		Set<String> allVariables = new TreeSet<>();
-		getChildrenHierarchy().forEach(child ->
-		                               {
-			                               for (Object o : child.getVariables())
-			                               {
-				                               allVariables.add(o.toString());
-			                               }
-		                               });
+		getChildrenHierarchy().forEach(child -> {
+			for (Object o : child.asFeatureBase()
+			                     .getVariables())
+			{
+				allVariables.add(o.toString());
+			}
+		});
 		return allVariables;
 	}
 	
@@ -840,7 +826,6 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 */
 	@Override
 	@NotNull
-	@SuppressWarnings("unchecked")
 	public StringBuilder renderJavascriptAll()
 	{
 		preConfigure();
@@ -867,13 +852,9 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	@Override
 	public void preConfigure()
 	{
-		if (hasChildren())
+		if (!isConfigured())
 		{
-			setNewLineForClosingTag(true);
-		}
-		else
-		{
-			setNewLineForClosingTag(false);
+			setNewLineForClosingTag(hasChildren());
 		}
 		super.preConfigure();
 	}
@@ -889,7 +870,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	protected StringBuilder renderClasses()
 	{
 		StringBuilder sb = new StringBuilder();
-		Set eachClass = getClasses();
+		Set<String> eachClass = getClasses();
 		eachClass.forEach(a -> sb.append(a)
 		                         .append(StaticStrings.STRING_SPACE));
 		if (sb.length() > 0)
@@ -907,7 +888,8 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	@SuppressWarnings("unchecked")
 	public J cloneComponent()
 	{
-		ComponentHierarchyBase cloned = super.cloneComponent();
+		ComponentHierarchyBase<?, ?, ?, ?, ?> cloned = super.cloneComponent();
+		//noinspection CastCanBeRemovedNarrowingVariableType
 		return (J) cloned;
 	}
 	
@@ -922,8 +904,12 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	public Set<StringBuilder> getQueriesAll()
 	{
 		Set<StringBuilder> reallyAllQueries = new LinkedHashSet<>();
-		Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> allComponents = getChildrenHierarchy(true);
-		allComponents.forEach((Consumer<? super ComponentHierarchyBase>) componentQuery -> processComponentQueries(componentQuery, reallyAllQueries));
+		Set<IComponentHierarchyBase<?, ?>> allComponents = getChildrenHierarchy(true);
+		Consumer<? super IComponentHierarchyBase<?, ?>> action = componentQuery -> processComponentQueries(componentQuery, reallyAllQueries);
+		for (IComponentHierarchyBase<?, ?> allComponent : allComponents)
+		{
+			action.accept(allComponent);
+		}
 		return reallyAllQueries;
 	}
 	
@@ -954,17 +940,19 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 * @param reallyAllQueries
 	 */
 	@SuppressWarnings("unchecked")
-	private void processComponentQueries(@NotNull ComponentHierarchyBase componentQuery, @NotNull Set<StringBuilder> reallyAllQueries)
+	private void processComponentQueries(@NotNull IComponentHierarchyBase<?, ?> componentQuery, @NotNull Set<StringBuilder> reallyAllQueries)
 	{
 		reallyAllQueries.addAll(getQueries());
-		List<ComponentFeatureBase> features = new ArrayList<>(componentQuery.getFeatures());
+		@SuppressWarnings("rawtypes")
+		List<ComponentFeatureBase<?, ?>> features = new ArrayList(componentQuery.asFeatureBase()
+		                                                                        .getFeatures());
 		features.forEach(feature -> reallyAllQueries.add(feature.renderJavascript()));
 		features.sort(comparing(ComponentFeatureBase::getSortOrder));
-		Set<ComponentEventBase> events = componentQuery.getEvents();
-		events.forEach(event -> reallyAllQueries.add(event.renderJavascript()));
+		Set<GlobalEvents> events = (Set<GlobalEvents>) componentQuery.asEventBase()
+		                                                             .getEvents();
+		events.forEach(event -> reallyAllQueries.add(event.asFeatureBase()
+		                                                  .renderJavascript()));
 		features.sort(comparing(ComponentFeatureBase::getSortOrder));
-		List<ComponentHierarchyBase> myQueries = new ArrayList<>();
-		myQueries.forEach(query -> reallyAllQueries.add(query.renderJavascript()));
 	}
 	
 	/**
@@ -977,10 +965,10 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public J setPage(Page page)
+	public J setPage(Page<?> page)
 	{
 		this.page = page;
-		getChildren().forEach(child -> child.setPage(page));
+		getChildren().forEach(child -> child.asHierarchyBase().setPage(page));
 		return (J) this;
 	}
 	
@@ -990,16 +978,17 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 * @param next
 	 * @param map
 	 */
-	@SuppressWarnings("unchecked")
-	private void processAngularObjects(@NotNull ComponentHierarchyBase next, @NotNull Map<String, Object> map)
+	private void processAngularObjects(@NotNull IComponentHierarchyBase<?, ?> next, @NotNull Map<String, Object> map)
 	{
-		next.getJsonObjects()
+		next.asAngularBase()
+		    .getJsonObjects()
 		    .forEach((key, value) ->
 		             {
 			             try
 			             {
-				             map.put((String) key, next.getJsonObjects()
-				                                       .get(key));
+				             map.put(key, next.asAngularBase()
+				                              .getJsonObjects()
+				                              .get(key));
 			             }
 			             catch (ClassCastException cce)
 			             {
@@ -1022,11 +1011,14 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	@SuppressWarnings("unused")
 	public boolean readChildrenPropertyFirstResult(String propertyName, boolean returnBool)
 	{
-		for (ComponentHierarchyBase next : getChildrenHierarchy(true))
+		for (IComponentHierarchyBase<?, ?> next : getChildrenHierarchy(true))
 		{
-			if (next.hasProperty(propertyName))
+			if (next.asBase()
+			        .getProperties()
+			        .containsKey(propertyName))
 			{
-				String propertyValue = next.getProperties()
+				String propertyValue = next.asBase()
+				                           .getProperties()
 				                           .get(propertyName)
 				                           .toString();
 				try
@@ -1049,8 +1041,8 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 * @param parentType The type to look for
 	 * @return
 	 */
-	
-	public <T extends ComponentHierarchyBase> T findParent(Class<T> parentType)
+	@Override
+	public <T extends IComponentHierarchyBase<?, ?>> T findParent(Class<T> parentType)
 	{
 		return findParent(this, parentType);
 	}
@@ -1062,9 +1054,8 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 * @param parentType The parent type
 	 * @return
 	 */
-	
 	@SuppressWarnings("unchecked")
-	private <T extends ComponentHierarchyBase> T findParent(@NotNull ComponentHierarchyBase<?, ?, ?, ?, ?> root, @NotNull Class<T> parentType)
+	private <T extends IComponentHierarchyBase<?, ?>> T findParent(@NotNull IComponentHierarchyBase<?, ?> root, @NotNull Class<T> parentType)
 	{
 		if (root.getParent() != null)
 		{
@@ -1086,17 +1077,14 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 * @return T
 	 */
 	@SuppressWarnings({"unchecked", "unused"})
-	public <T extends ComponentHierarchyBase<?, ?, ?, ?, ?>> T findChild(@NotNull Class<T> childType)
+	@Override
+	public <T extends IComponentHierarchyBase<?, ?>> T findChild(@NotNull Class<T> childType)
 	{
-		for (C componentHierarchyBase : getChildren())
-		{
-			if (componentHierarchyBase.getClass()
-			                          .equals(childType))
-			{
-				return (T) componentHierarchyBase;
-			}
-		}
-		return null;
+		return (T) getChildren().stream()
+		                        .filter(componentHierarchyBase -> componentHierarchyBase.getClass()
+		                                                                                .equals(childType))
+		                        .findFirst()
+		                        .orElse(null);
 	}
 	
 	/**
@@ -1108,7 +1096,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 * @return The Obvious
 	 */
 	@SuppressWarnings("unused")
-	protected boolean containsClass(@NotNull Class classType)
+	protected boolean containsClass(@NotNull Class<?> classType)
 	{
 		for (C next : getChildren())
 		{

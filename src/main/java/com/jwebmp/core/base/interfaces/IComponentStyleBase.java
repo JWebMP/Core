@@ -33,7 +33,7 @@ import java.util.Map;
  * @author GedMarc
  * @since Sep 26, 2016
  */
-public interface IComponentStyleBase<J extends ComponentBase>
+public interface IComponentStyleBase<J extends IComponentStyleBase<J>>
 {
 
 	/**
@@ -130,15 +130,86 @@ public interface IComponentStyleBase<J extends ComponentBase>
 	 */
 	@NotNull
 	StringBuilder renderCss(int tabCount, boolean renderOpening, boolean renderInQuotations, boolean isAjaxCall);
-
+	
 	/**
-	 * Updates the ID of all the CSS Objects
+	 * This class with the associated exposed methods
 	 *
-	 * @param id
-	 * 		The ID to update with
-	 *
-	 * @return Me
+	 * @return This component type-casted
 	 */
-	J setID(String id);
-
+	default IComponentHierarchyBase<?, ?> asHierarchyBase()
+	{
+		return (IComponentHierarchyBase<?, ?>) this;
+	}
+	
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentHTMLAttributeBase<?, ?> asAttributeBase()
+	{
+		return (IComponentHTMLAttributeBase<?, ?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentHTMLBase<?> asTagBase()
+	{
+		return (IComponentHTMLBase<?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentEventBase<?, ?> asEventBase()
+	{
+		return (IComponentEventBase<?, ?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentFeatureBase<?, ?> asFeatureBase()
+	{
+		return (IComponentFeatureBase<?, ?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentThemeBase<?> asThemeBase()
+	{
+		return (IComponentThemeBase<?>) this;
+	}
+	
+	/**
+	 * Returns the components exposed dependency methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentDependencyBase<?> asDependencyBase()
+	{
+		return (IComponentDependencyBase<?>) this;
+	}
+	
+	/**
+	 * Returns the base exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentBase<?> asBase()
+	{
+		return (IComponentBase<?>) this;
+	}
+	
 }

@@ -37,9 +37,7 @@ import java.util.logging.Level;
  * @author GedMarc
  */
 @ComponentInformation(name = "Before Load Event",
-		description = "Server Side Event for Before Load Event.",
-		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
+		description = "Server Side Event for Before Load Event.")
 public abstract class BeforeLoadAdapter<J extends BeforeLoadAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
@@ -57,14 +55,14 @@ public abstract class BeforeLoadAdapter<J extends BeforeLoadAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public BeforeLoadAdapter(Component component)
+	public BeforeLoadAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.beforeLoad, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -86,7 +84,7 @@ public abstract class BeforeLoadAdapter<J extends BeforeLoadAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onBeforeLoad(AjaxCall call, AjaxResponse response);
+	public abstract void onBeforeLoad(AjaxCall<?> call, AjaxResponse<?> response);
 
 	private void onCall()
 	{

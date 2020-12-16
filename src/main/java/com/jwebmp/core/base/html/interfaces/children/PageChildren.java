@@ -16,8 +16,7 @@
  */
 package com.jwebmp.core.base.html.interfaces.children;
 
-import com.jwebmp.core.base.ComponentBase;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
+import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 
 /**
  * This interface sets the allowed children for the Page Component
@@ -25,7 +24,8 @@ import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
  * @author MMagon
  * @since 2013/07/16
  */
-public interface PageChildren<C extends IComponentHierarchyBase, J extends ComponentBase>
+public interface PageChildren
+		extends GlobalChildren
 {
 
 }

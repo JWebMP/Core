@@ -54,7 +54,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since forever, was created for the jwimagemap
  */
 public class Canvas<J extends Canvas<J>>
-		extends Component<IComponentHierarchyBase, CanvasAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<IComponentHierarchyBase<?,?>, CanvasAttributes, GlobalFeatures, GlobalEvents, J>
 		implements NoNewLineBeforeClosingTag
 {
 

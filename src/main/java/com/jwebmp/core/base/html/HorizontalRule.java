@@ -58,7 +58,7 @@ import java.util.logging.Level;
  * @author GedMarc
  */
 public class HorizontalRule<J extends HorizontalRule<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, NoEvents, J>
+		extends Component<IComponentHierarchyBase<?,?>, NoAttributes, NoFeatures, NoEvents, J>
 		implements NoIDTag, NoClassAttribute
 {
 

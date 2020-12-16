@@ -55,7 +55,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class S<J extends S<J>>
 		extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements ParagraphChildren<ParagraphChildren, J>, NoNewLineForRawText, NoNewLineBeforeClosingTag
+		implements ParagraphChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag
 {
 
 

@@ -26,15 +26,14 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
  * @param <J>
- *
  * @author GedMarc
  */
 public class DescriptionList<J extends DescriptionList<J>>
 		extends Component<DescriptionListChildren, NoAttributes, NoFeatures, NoEvents, J>
 		implements NoIDTag
 {
-
-
+	
+	
 	/**
 	 * Construct a new Definition List
 	 */

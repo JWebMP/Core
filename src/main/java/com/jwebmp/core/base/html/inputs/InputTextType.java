@@ -21,7 +21,6 @@ import com.jwebmp.core.base.html.attributes.InputTextAttributes;
 import com.jwebmp.core.base.html.attributes.InputTypes;
 import com.jwebmp.core.base.html.interfaces.children.FormChildren;
 import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 
 /**
  * @param <J>
@@ -30,7 +29,7 @@ import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
  */
 public class InputTextType<J extends InputTextType<J>>
 		extends Input<InputTextAttributes, J>
-		implements ParagraphChildren<IComponentHierarchyBase, J>, FormChildren<IComponentHierarchyBase, J>
+		implements ParagraphChildren, FormChildren
 {
 
 

@@ -54,10 +54,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class Superscript<J extends Superscript<J>>
 		extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, ParagraphChildren<ParagraphChildren, J>, PhraseChildren<ParagraphChildren, J>
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, ParagraphChildren, PhraseChildren
 {
-
-
 	/**
 	 * Constructs and empty super script tag
 	 */

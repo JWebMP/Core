@@ -38,40 +38,39 @@ import java.util.logging.Level;
  *
  * @author GedMarc
  */
+@ComponentInformation(name = "Click Event",
+		description = "Server Side Event for Click.")
 public abstract class ClickAdapter<J extends ClickAdapter<J>>
 		extends Event<GlobalFeatures, J>
-		implements ParagraphEvents<GlobalFeatures, J>, BodyEvents<GlobalFeatures, J>, GlobalEvents
+		implements ParagraphEvents<GlobalFeatures, J>,
+		           BodyEvents<GlobalFeatures, J>,
+		           GlobalEvents
 {
-
 	/**
 	 * Logger for the Component
 	 */
-	@ComponentInformation(name = "Click Event",
-			description = "Server Side Event for Click.",
-			url = "https://www.armineasy.com/JWebSwing",
-			wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
+	
 	private static final java.util.logging.Logger log = LogFactory.getInstance()
 	                                                              .getLogger("ClickEvent");
-
-
+	
+	
 	protected ClickAdapter()
 	{
 		super("ClickAdapter", EventTypes.click);
 	}
-
+	
 	/**
 	 * Performs a click
 	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
+	 * @param component The component this click is going to be acting on
 	 */
-	public ClickAdapter(ComponentHierarchyBase component)
+	public ClickAdapter(ComponentHierarchyBase<?,?,?,?,?> component)
 	{
 		super(EventTypes.click, component);
 	}
-
+	
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -83,18 +82,16 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
 			ClickAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
-
+	
 	/**
 	 * Triggers on Click
 	 * <p>
 	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
+	 * @param call     The physical AJAX call
+	 * @param response The physical Ajax Receiver
 	 */
-	public abstract void onClick(AjaxCall call, AjaxResponse response);
-
+	public abstract void onClick(AjaxCall<?> call, AjaxResponse<?> response);
+	
 	/**
 	 * Method onCall ...
 	 */
@@ -104,7 +101,7 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
 		                                            .getLoader(IOnClickService.class, ServiceLoader.load(IOnClickService.class));
 		services.forEach(service -> service.onCall(this));
 	}
-
+	
 	@Override
 	public void preConfigure()
 	{
@@ -114,7 +111,7 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
 		}
 		super.preConfigure();
 	}
-
+	
 	/**
 	 * Occurs when the event is called
 	 */

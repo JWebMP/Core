@@ -16,14 +16,13 @@
  */
 package com.jwebmp.core.events.buttonclick;
 
-import com.jwebmp.core.Component;
+import com.guicedee.guicedinjection.GuiceContext;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
-import com.guicedee.guicedinjection.GuiceContext;
 
 import java.util.ServiceLoader;
 import java.util.Set;
@@ -34,9 +33,7 @@ import java.util.Set;
  * @author GedMarc
  */
 @ComponentInformation(name = "Button Event",
-		description = "Server Side Event for Button Click Event.",
-		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
+		description = "Server Side Event for Button Click Event.")
 public abstract class ButtonClickAdapter<J extends ButtonClickAdapter<J>>
 		extends Event<GlobalFeatures, J>
 
@@ -47,7 +44,7 @@ public abstract class ButtonClickAdapter<J extends ButtonClickAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public ButtonClickAdapter(Component component)
+	public ButtonClickAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.buttonClickEvent, component);
 	}
@@ -61,7 +58,7 @@ public abstract class ButtonClickAdapter<J extends ButtonClickAdapter<J>>
 	 * 		The Response Object Being Returned
 	 */
 	@Override
-	public void fireEvent(AjaxCall ajaxObject, AjaxResponse ajaxReceiver)
+	public void fireEvent(AjaxCall<?> ajaxObject, AjaxResponse<?> ajaxReceiver)
 	{
 		onButtonClick(ajaxObject, ajaxReceiver);
 		onCall();
@@ -77,11 +74,12 @@ public abstract class ButtonClickAdapter<J extends ButtonClickAdapter<J>>
 	 * @param ajaxReceiver
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onButtonClick(AjaxCall ajaxObject, AjaxResponse ajaxReceiver);
+	public abstract void onButtonClick(AjaxCall<?> ajaxObject, AjaxResponse<?> ajaxReceiver);
 
 	/**
 	 * Method onCall ...
 	 */
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	private void onCall()
 	{
 		Set<IOnButtonClickService> services = GuiceContext.instance()
@@ -106,6 +104,7 @@ public abstract class ButtonClickAdapter<J extends ButtonClickAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
+		@SuppressWarnings("rawtypes")
 		Set<IOnButtonClickService> services = GuiceContext.instance()
 		                                                  .getLoader(IOnButtonClickService.class, ServiceLoader.load(IOnButtonClickService.class));
 		services.forEach(service -> service.onCreate(this));

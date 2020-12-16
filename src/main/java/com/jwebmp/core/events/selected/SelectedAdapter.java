@@ -60,7 +60,7 @@ public abstract class SelectedAdapter<J extends SelectedAdapter<J>>
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -82,7 +82,7 @@ public abstract class SelectedAdapter<J extends SelectedAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onSelected(AjaxCall call, AjaxResponse response);
+	public abstract void onSelected(AjaxCall<?> call, AjaxResponse<?> response);
 
 
 	/**

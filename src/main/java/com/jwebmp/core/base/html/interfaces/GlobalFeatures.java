@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.base.html.interfaces;
 
-import com.jwebmp.core.base.ComponentBase;
+import com.jwebmp.core.base.interfaces.IComponentBase;
+import com.jwebmp.core.base.interfaces.IComponentDependencyBase;
 import com.jwebmp.core.base.interfaces.IComponentFeatureBase;
 
 /**
@@ -24,8 +25,35 @@ import com.jwebmp.core.base.interfaces.IComponentFeatureBase;
  *
  * @author MMagon
  */
-public interface GlobalFeatures<F extends GlobalFeatures, J extends ComponentBase>
-		extends IComponentFeatureBase<F, J>
+public interface GlobalFeatures
 {
-
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentFeatureBase<?, ?> asFeatureBase()
+	{
+		return (IComponentFeatureBase<?, ?>) this;
+	}
+	
+	/**
+	 * Returns the components exposed dependency methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentDependencyBase<?> asDependencyBase()
+	{
+		return (IComponentDependencyBase<?>) this;
+	}
+	
+	/**
+	 * Returns the base exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentBase<?> asBase()
+	{
+		return (IComponentBase<?>) this;
+	}
 }

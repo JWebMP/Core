@@ -50,19 +50,12 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @version 1.0
  * @since 2013/11/22
  */
-public class Area<C extends IComponentHierarchyBase & AreaChildren, J extends Area<C, J>>
-		extends ComponentHierarchyBase<C, AreaAttributes, GlobalFeatures, GlobalEvents, J>
-		implements MapChildren<C, J>
+public class Area<J extends Area<J>>
+		extends ComponentHierarchyBase<AreaChildren, AreaAttributes, GlobalFeatures, GlobalEvents, J>
+		implements MapChildren
 {
-
-	/**
-	 * Serial Version for all Components and their compatibility
-	 */
-
-
 	public Area()
 	{
 		super(ComponentTypes.Area);
 	}
-
 }

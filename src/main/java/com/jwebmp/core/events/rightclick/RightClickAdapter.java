@@ -53,14 +53,14 @@ public abstract class RightClickAdapter<J extends RightClickAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public RightClickAdapter(Component component)
+	public RightClickAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.contextmenu, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -82,7 +82,7 @@ public abstract class RightClickAdapter<J extends RightClickAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onRightClick(AjaxCall call, AjaxResponse response);
+	public abstract void onRightClick(AjaxCall<?> call, AjaxResponse<?> response);
 
 
 	/**

@@ -35,14 +35,13 @@ import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 public abstract class PerformCommandEvent
 		extends Event<GlobalFeatures, PerformCommandEvent>
 {
-
-	public PerformCommandEvent(Component component)
+	public PerformCommandEvent(Component<?,?,?,?,?> component)
 	{
 		super(EventTypes.performCommand, component);
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		perform(call, response);
 	}
@@ -50,8 +49,8 @@ public abstract class PerformCommandEvent
 	/**
 	 * Executes the JavaScript lines of code directly after the component is executed
 	 *
-	 * @param call
-	 * @param response
+	 * @param call The call object
+	 * @param response The response object
 	 */
-	public abstract void perform(AjaxCall call, AjaxResponse response);
+	public abstract void perform(AjaxCall<?> call, AjaxResponse<?> response);
 }

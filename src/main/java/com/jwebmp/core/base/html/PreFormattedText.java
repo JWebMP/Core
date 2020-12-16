@@ -22,6 +22,9 @@ import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
 import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
 import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
+import com.jwebmp.core.base.html.interfaces.children.FormChildren;
+import com.jwebmp.core.base.html.interfaces.children.ListItemChildren;
+import com.jwebmp.core.base.html.interfaces.children.NoChildren;
 import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
@@ -53,8 +56,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since 2014/06/12
  */
 public class PreFormattedText<J extends PreFormattedText<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements BodyChildren<IComponentHierarchyBase, J>, NoNewLineForRawText, NoNewLineBeforeClosingTag, ParagraphChildren<IComponentHierarchyBase, J>
+		extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements BodyChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag, ParagraphChildren, FormChildren, ListItemChildren
 {
 	/**
 	 * Creates a new Pre tag

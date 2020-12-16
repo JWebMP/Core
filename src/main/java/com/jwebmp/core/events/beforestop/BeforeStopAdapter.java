@@ -37,9 +37,7 @@ import java.util.logging.Level;
  * @author GedMarc
  */
 @ComponentInformation(name = "Before Stop Event",
-		description = "Server Side Event for Before Stop Event.",
-		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
+		description = "Server Side Event for Before Stop Event.")
 public abstract class BeforeStopAdapter<J extends BeforeStopAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
@@ -57,14 +55,14 @@ public abstract class BeforeStopAdapter<J extends BeforeStopAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public BeforeStopAdapter(Component component)
+	public BeforeStopAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.beforeStop, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -87,7 +85,7 @@ public abstract class BeforeStopAdapter<J extends BeforeStopAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onBeforeStop(AjaxCall call, AjaxResponse response);
+	public abstract void onBeforeStop(AjaxCall<?> call, AjaxResponse<?> response);
 
 	private void onCall()
 	{

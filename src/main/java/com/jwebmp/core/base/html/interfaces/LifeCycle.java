@@ -26,7 +26,7 @@ public interface LifeCycle
 	/**
 	 * If it is initialized
 	 *
-	 * @return
+	 * @return if the component has been initialized
 	 */
 	boolean isInitialized();
 

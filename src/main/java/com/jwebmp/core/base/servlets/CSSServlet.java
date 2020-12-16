@@ -21,6 +21,7 @@ import com.jwebmp.core.Page;
 import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.guicedservlets.GuicedServletKeys;
+import com.jwebmp.core.services.IPage;
 
 /**
  * This Servlet supplies all the JavaScript for a given HTML Page
@@ -36,8 +37,9 @@ public class CSSServlet
 	@Override
 	public void perform()
 	{
+		@SuppressWarnings("MismatchedQueryAndUpdateOfStringBuilder")
 		StringBuilder scripts = new StringBuilder();
-		Page page = GuiceContext.get(Page.class);
+		Page<?> page = (Page<?>) GuiceContext.get(IPage.class);
 		readBrowserInformation(GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey()));
 		StringBuilder css = page.getBody()
 		                        .renderCss(0);

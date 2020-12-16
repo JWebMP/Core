@@ -63,17 +63,11 @@ import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 public abstract class JWDefaultServlet
 		extends HttpServlet
 {
-
 	/**
 	 * The Servlet base logger
 	 */
 	private static final Logger log = LogFactory.getInstance()
 	                                            .getLogger("ServletBase");
-	/**
-	 * Version 1
-	 */
-
-
 	/**
 	 * Field allowOrigin
 	 */
@@ -117,7 +111,7 @@ public abstract class JWDefaultServlet
 	 * @return If this call is valid
 	 */
 	@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
-	public boolean validateCall(AjaxCall ajaxCall) throws InvalidRequestException
+	public boolean validateCall(AjaxCall<?> ajaxCall) throws InvalidRequestException
 	{
 		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
 		if (ajaxCall.getComponentId() == null)
@@ -147,7 +141,7 @@ public abstract class JWDefaultServlet
 	@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 	public boolean validatePage() throws MissingComponentException
 	{
-		Page page = GuiceContext.inject()
+		Page<?> page = GuiceContext.inject()
 		                        .getInstance(Page.class);
 		if (page == null)
 		{
@@ -169,7 +163,7 @@ public abstract class JWDefaultServlet
 	 * 		If the request is invalid
 	 */
 	@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
-	public boolean validateRequest(AjaxCall ajaxCall) throws InvalidRequestException
+	public boolean validateRequest(AjaxCall<?> ajaxCall) throws InvalidRequestException
 	{
 		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
 		Date datetime = ajaxCall.getDatetime();
@@ -194,7 +188,7 @@ public abstract class JWDefaultServlet
 			throw new InvalidRequestException("Invalid Event Type From");
 		}
 
-		AjaxEventValue value = ajaxCall.getValue();
+		AjaxEventValue<?> value = ajaxCall.getValue();
 
 		if (value == null)
 		{
@@ -235,7 +229,7 @@ public abstract class JWDefaultServlet
 	 * @return The page instance
 	 */
 	@SuppressWarnings("WeakerAccess")
-	protected Page getPageFromGuice()
+	protected Page<?> getPageFromGuice()
 	{
 		return GuiceContext.inject()
 		                   .getInstance(Page.class);
@@ -249,8 +243,8 @@ public abstract class JWDefaultServlet
 	 *
 	 * @return The rendered HTML.
 	 */
-	@SuppressWarnings({"WeakerAccess", "unchecked"})
-	protected Page getErrorPageHtml(Throwable t)
+	@SuppressWarnings({"WeakerAccess"})
+	protected Page<?> getErrorPageHtml(Throwable t)
 	{
 		JWDefaultServlet.log.log(Level.SEVERE, "Exception incoming", t);
 		Set<IErrorPage> errorPages = GuiceContext.instance()
@@ -258,7 +252,7 @@ public abstract class JWDefaultServlet
 		if (!errorPages.iterator()
 		               .hasNext())
 		{
-			Page<?> p = new Page();
+			Page<?> p = new Page<>();
 			p.getOptions()
 			 .setTitle("Exception occurred in application");
 			p.getOptions()
@@ -268,14 +262,14 @@ public abstract class JWDefaultServlet
 			p.getOptions()
 			 .setGenerator("JWebSwing - https://sourceforge.net/projects/jwebswing/");
 
-			Body b = p.getBody();
+			Body<?,?> b = p.getBody();
 			b.add("The following error was encountered during render<br/><hr/>");
-			b.add(new PreFormattedText(TextUtilities.stackTraceToString(t)));
+			b.add(new PreFormattedText<>(TextUtilities.stackTraceToString(t)));
 			return p;
 		}
 		else
 		{
-			return (Page) GuiceContext.get(errorPages.iterator()
+			return (Page<?>) GuiceContext.get(errorPages.iterator()
 			                                         .next()
 			                                         .getClass());
 		}
@@ -321,7 +315,7 @@ public abstract class JWDefaultServlet
 		catch (MissingComponentException mce)
 		{
 			JWDefaultServlet.log.log(Level.SEVERE, "No Page For Servlet", mce);
-			Page p = new Page();
+			Page<?> p = new Page<>();
 			p.getBody()
 			 .add("No Page or Body Configured for the JWebSwingServlet. [getPage()] returned nothing");
 			writeOutput(new StringBuilder(p.toString(0)), StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE, StaticStrings.UTF_CHARSET);
@@ -351,7 +345,7 @@ public abstract class JWDefaultServlet
 	@SuppressWarnings("WeakerAccess")
 	protected void readRequestVariables(HttpServletRequest request) throws MissingComponentException
 	{
-		Page currentPage = getPageFromGuice();
+		Page<?> currentPage = getPageFromGuice();
 		HttpSession session = GuiceContext.get(GuicedServletKeys.getHttpSessionKey());
 		if (currentPage == null)
 		{

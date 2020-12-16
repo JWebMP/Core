@@ -18,6 +18,7 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.QuotationAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
 import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
@@ -52,8 +53,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since Mar 1, 2015
  */
 public class Quotation<J extends Quotation<J>>
-		extends Component<IComponentHierarchyBase, QuotationAttributes, GlobalFeatures, GlobalEvents, J>
-		implements ParagraphChildren<IComponentHierarchyBase, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText
+		extends Component<GlobalChildren, QuotationAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
 

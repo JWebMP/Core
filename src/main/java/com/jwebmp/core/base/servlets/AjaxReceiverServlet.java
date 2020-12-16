@@ -17,27 +17,27 @@
 package com.jwebmp.core.base.servlets;
 
 import com.google.inject.Singleton;
+import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.guicedservlets.GuicedServletKeys;
+import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.*;
 import com.jwebmp.core.exceptions.InvalidRequestException;
 import com.jwebmp.core.exceptions.MissingComponentException;
-import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
-import com.guicedee.guicedinjection.json.StaticStrings;
 import com.jwebmp.core.utilities.TextUtilities;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.AjaxCallIntercepter;
-import com.guicedee.logger.LogFactory;
-
 import jakarta.servlet.http.HttpServletRequest;
+
 import java.lang.reflect.Modifier;
-import java.nio.charset.Charset;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
+import static com.guicedee.guicedinjection.json.StaticStrings.CHAR_DOT;
+import static com.guicedee.guicedinjection.json.StaticStrings.CHAR_UNDERSCORE;
+import static com.jwebmp.interception.JWebMPInterceptionBinder.AjaxCallInterceptorKey;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Handles all AJAX Requests performed by a client connection. Session codes are used in order to identify
@@ -49,11 +49,9 @@ import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 public class AjaxReceiverServlet
 		extends JWDefaultServlet
 {
-
 	private static final Logger log = LogFactory.getInstance()
 	                                            .getLogger("AJAXServlet");
-
-
+	
 	public AjaxReceiverServlet()
 	{
 		//Quick construction
@@ -66,8 +64,8 @@ public class AjaxReceiverServlet
 		HttpServletRequest request = GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
 		try
 		{
-			AjaxCall ajaxCallIncoming = (AjaxCall) new JavaScriptPart().From(request.getInputStream(), AjaxCall.class);
-			AjaxCall ajaxCall = GuiceContext.get(AjaxCall.class);
+			AjaxCall<?> ajaxCallIncoming = new AjaxCall<>().From(request.getInputStream(), AjaxCall.class);
+			AjaxCall<?> ajaxCall = GuiceContext.get(AjaxCall.class);
 			ajaxCall.fromCall(ajaxCallIncoming);
 
 			AjaxResponse<?> ajaxResponse = GuiceContext.get(AjaxResponse.class);
@@ -76,7 +74,7 @@ public class AjaxReceiverServlet
 			validatePage();
 			validateRequest(ajaxCall);
 
-			Event triggerEvent = processEvent();
+			Event<?,?> triggerEvent = processEvent();
 
 			GuiceContext.get(AjaxCallInterceptorKey)
 			            .forEach(AjaxCallIntercepter::intercept);
@@ -87,9 +85,9 @@ public class AjaxReceiverServlet
 		}
 		catch (InvalidRequestException ie)
 		{
-			AjaxResponse ajaxResponse = new AjaxResponse();
+			AjaxResponse<?> ajaxResponse = new AjaxResponse<>();
 			ajaxResponse.setSuccess(false);
-			AjaxResponseReaction arr = new AjaxResponseReaction("Invalid Request Value", "A value in the request was found to be incorrect.<br>" + ie.getMessage(),
+			AjaxResponseReaction<?> arr = new AjaxResponseReaction<>("Invalid Request Value", "A value in the request was found to be incorrect.<br>" + ie.getMessage(),
 			                                                    ReactionType.DialogDisplay);
 			arr.setResponseType(AjaxResponseType.Danger);
 			ajaxResponse.addReaction(arr);
@@ -99,9 +97,9 @@ public class AjaxReceiverServlet
 		}
 		catch (MissingComponentException mce)
 		{
-			AjaxResponse ajaxResponse = new AjaxResponse();
+			AjaxResponse<?> ajaxResponse = new AjaxResponse<>();
 			ajaxResponse.setSuccess(false);
-			AjaxResponseReaction arr = new AjaxResponseReaction("Invalid Request Value", "The specified Component ID does not seem linked to the page.<br>" + mce.getMessage(),
+			AjaxResponseReaction<?> arr = new AjaxResponseReaction<>("Invalid Request Value", "The specified Component ID does not seem linked to the page.<br>" + mce.getMessage(),
 			                                                    ReactionType.DialogDisplay);
 			arr.setResponseType(AjaxResponseType.Danger);
 			ajaxResponse.addReaction(arr);
@@ -111,9 +109,9 @@ public class AjaxReceiverServlet
 		}
 		catch (Exception T)
 		{
-			AjaxResponse ajaxResponse = new AjaxResponse();
+			AjaxResponse<?> ajaxResponse = new AjaxResponse<>();
 			ajaxResponse.setSuccess(false);
-			AjaxResponseReaction arr = new AjaxResponseReaction("Unknown Error",
+			AjaxResponseReaction<?> arr = new AjaxResponseReaction<>("Unknown Error",
 			                                                    "An AJAX call resulted in an unknown server error<br>" + T.getMessage() + "<br>" + TextUtilities.stackTraceToString(
 					                                                    T), ReactionType.DialogDisplay);
 			arr.setResponseType(AjaxResponseType.Danger);
@@ -123,29 +121,29 @@ public class AjaxReceiverServlet
 		}
 		finally
 		{
-			writeOutput(output, "application/json;charset=UTF-8", Charset.forName("UTF-8"));
+			writeOutput(output, "application/json;charset=UTF-8", UTF_8);
 		}
 	}
-
-	@SuppressWarnings("unchecked")
-	protected Event processEvent() throws InvalidRequestException
+	
+	protected Event<?,?> processEvent() throws InvalidRequestException
 	{
-		Event triggerEvent = null;
+		Event<?,?> triggerEvent = null;
 		try
 		{
-			AjaxCall call = GuiceContext.get(AjaxCall.class);
-			Class eventClass = Class.forName(call.getClassName()
-			                                     .replace(StaticStrings.CHAR_UNDERSCORE, StaticStrings.CHAR_DOT));
-			triggerEvent = (Event) GuiceContext.get(eventClass);
+			AjaxCall<?> call = GuiceContext.get(AjaxCall.class);
+			Class<?> eventClass = Class.forName(call.getClassName()
+			                                     .replace(CHAR_UNDERSCORE, CHAR_DOT));
+			triggerEvent = (Event<?,?>) GuiceContext.get(eventClass);
 			triggerEvent.setID(call.getEventId());
 		}
 		catch (ClassNotFoundException cnfe)
 		{
-			Set<Class<? extends Event>> events = new HashSet(GuiceContext.instance().getScanResult().getSubclasses(Event.class.getCanonicalName()).loadClasses());
+			@SuppressWarnings({"rawtypes", "unchecked"})
+			Set<Class<? extends Event<?,?>>> events = new HashSet(GuiceContext.instance().getScanResult().getSubclasses(Event.class.getCanonicalName()).loadClasses());
 			events.removeIf(event -> Modifier.isAbstract(event.getModifiers()));
-			for (Class<? extends Event> event : events)
+			for (Class<? extends Event<?,?>> event : events)
 			{
-				Event instance = GuiceContext.get(event);
+				Event<?,?> instance = GuiceContext.get(event);
 				if (instance.getID()
 				            .equals(GuiceContext.get(AjaxCall.class)
 				                                .getEventId()))

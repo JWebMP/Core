@@ -21,10 +21,8 @@ import com.jwebmp.core.base.html.attributes.NoAttributes;
 import com.jwebmp.core.base.html.interfaces.NoFeatures;
 import com.jwebmp.core.base.html.interfaces.children.*;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.utilities.TextUtilities;
-
 import jakarta.validation.constraints.NotNull;
 
 /**
@@ -32,12 +30,10 @@ import jakarta.validation.constraints.NotNull;
  *
  * @author GedMarc
  */
-public class Comment<C extends IComponentHierarchyBase, J extends Comment<C, J>>
-		extends ComponentHierarchyBase<C, NoAttributes, NoFeatures, NoEvents, J>
-		implements HtmlChildren<C, J>, HeadChildren<C, J>, ImageMapChildren<C, J>, BodyChildren<C, J>, PageChildren
+public class Comment<J extends Comment<J>>
+		extends ComponentHierarchyBase<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+		implements HtmlChildren, HeadChildren, ImageMapChildren, BodyChildren, PageChildren
 {
-
-
 	/**
 	 * Adds the specified comment in a comment block for HTML
 	 * <p>
@@ -49,15 +45,13 @@ public class Comment<C extends IComponentHierarchyBase, J extends Comment<C, J>>
 		super(ComponentTypes.Comment);
 		setText(comment);
 	}
-
+	
 	/**
 	 * Over-rides the render HTML tag
 	 * <p>
 	 *
-	 * @param tabCount
-	 * 		The specified tab count
-	 * 		<p>
-	 *
+	 * @param tabCount The specified tab count
+	 *                 <p>
 	 * @return A customized string for comments
 	 */
 	@Override

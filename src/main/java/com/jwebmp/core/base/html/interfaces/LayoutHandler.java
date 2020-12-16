@@ -24,7 +24,7 @@ package com.jwebmp.core.base.html.interfaces;
  * @since 2013/11/20
  */
 
-public interface LayoutHandler
+public interface LayoutHandler extends GlobalChildren
 {
 
 }

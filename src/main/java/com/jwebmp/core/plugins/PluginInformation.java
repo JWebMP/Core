@@ -24,7 +24,7 @@ import java.lang.annotation.*;
  * @author GedMarc
  * @since 19 Feb 2017
  */
-@Target({ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface PluginInformation
@@ -167,4 +167,28 @@ public @interface PluginInformation
 	 * @return
 	 */
 	boolean pluginCommercial() default false;
+	
+	/**
+	 * The name of the hosting module
+	 * @return
+	 */
+	String pluginModuleName() default "NotEntered";
+	
+	/**
+	 * The pom plugin group id
+	 * @return
+	 */
+	String pluginGroupId() default "NotEntered";
+	
+	/**
+	 * The pom artifact id
+	 * @return
+	 */
+	String pluginArtifactId() default "NotEntered";
+	
+	/**
+	 * The current status
+	 * @return
+	 */
+	PluginStatus pluginStatus() default PluginStatus.Planned;
 }

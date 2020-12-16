@@ -53,14 +53,14 @@ public abstract class MouseOutAdapter<J extends MouseOutAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public MouseOutAdapter(Component component)
+	public MouseOutAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.mouseOut, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -82,7 +82,7 @@ public abstract class MouseOutAdapter<J extends MouseOutAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onMouseOut(AjaxCall call, AjaxResponse response);
+	public abstract void onMouseOut(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

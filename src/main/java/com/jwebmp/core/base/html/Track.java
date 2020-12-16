@@ -32,7 +32,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since Mar 1, 2015
  */
 public class Track<J extends Track<J>>
-		extends Component<IComponentHierarchyBase, TrackAttributes, NoFeatures, NoEvents, J>
+		extends Component<IComponentHierarchyBase<?,?>, TrackAttributes, NoFeatures, NoEvents, J>
 {
 
 

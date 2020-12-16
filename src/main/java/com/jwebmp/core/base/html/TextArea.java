@@ -51,7 +51,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since Mar 1, 2015
  */
 public class TextArea<J extends TextArea<J>>
-		extends Component<IComponentHierarchyBase, TextAreaAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<IComponentHierarchyBase<?,?>, TextAreaAttributes, GlobalFeatures, GlobalEvents, J>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, GlobalChildren
 {
 

@@ -44,7 +44,7 @@ public class CSSLinksInsertPageConfigurator
 			for (Object o : page.getHead()
 			                    .getChildren())
 			{
-				ComponentHierarchyBase headObject = (ComponentHierarchyBase) o;
+				ComponentHierarchyBase<?,?,?,?,?> headObject = (ComponentHierarchyBase<?,?,?,?,?>) o;
 				headObject.preConfigure();
 			}
 			renderAfterLinks(page);
@@ -55,7 +55,7 @@ public class CSSLinksInsertPageConfigurator
 	private void renderBeforeLinks(Page<?> page)
 	{
 		Set<RenderBeforeLinks> renderB = GuiceContext.get(RenderBeforeLinksKey);
-		Paragraph before = new Paragraph().setTextOnly(true);
+		Paragraph<?> before = new Paragraph<>().setTextOnly(true);
 		for (RenderBeforeLinks render : renderB)
 		{
 			before.setText(before.getText(0)
@@ -75,7 +75,7 @@ public class CSSLinksInsertPageConfigurator
 	private void renderAfterLinks(Page<?> page)
 	{
 		Set<RenderAfterLinks> renderA = GuiceContext.get(RenderAfterLinksKey);
-		Paragraph after = new Paragraph().setTextOnly(true);
+		Paragraph<?> after = new Paragraph<>().setTextOnly(true);
 		for (RenderAfterLinks render : renderA)
 		{
 			after.setText(after.getText(0)

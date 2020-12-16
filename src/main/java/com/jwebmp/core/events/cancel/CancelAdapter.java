@@ -37,9 +37,7 @@ import java.util.logging.Level;
  * @author GedMarc
  */
 @ComponentInformation(name = "Cancel Event",
-		description = "Server Side Event for Cancel Click Event.",
-		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
+		description = "Server Side Event for Cancel Click Event.")
 public abstract class CancelAdapter<J extends CancelAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
@@ -57,13 +55,13 @@ public abstract class CancelAdapter<J extends CancelAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public CancelAdapter(Component component)
+	public CancelAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.cancel, component);
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -85,7 +83,7 @@ public abstract class CancelAdapter<J extends CancelAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onCancel(AjaxCall call, AjaxResponse response);
+	public abstract void onCancel(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

@@ -20,9 +20,7 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.ParagraphAttributes;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
-import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
-import com.jwebmp.core.base.html.interfaces.children.DetailsChildren;
-import com.jwebmp.core.base.html.interfaces.children.HeadChildren;
+import com.jwebmp.core.base.html.interfaces.children.*;
 import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
@@ -60,7 +58,8 @@ import jakarta.validation.constraints.NotNull;
  */
 public class Paragraph<J extends Paragraph<J>>
 		extends Component<ParagraphChildren, ParagraphAttributes, GlobalFeatures, GlobalEvents, J>
-		implements BodyChildren<ParagraphChildren, J>, NoNewLineForRawText, ParagraphChildren<ParagraphChildren, J>, DetailsChildren<ParagraphChildren, J>, HeadChildren<ParagraphChildren, J>
+		implements BodyChildren, NoNewLineForRawText, ParagraphChildren, DetailsChildren,
+		           FormChildren, ListItemChildren,ListChildren,HeadChildren
 {
 
 
@@ -96,7 +95,7 @@ public class Paragraph<J extends Paragraph<J>>
 		if (isTextOnly())
 		{
 			return TextUtilities.getTabString(tabCount)
-			                    .append(new StringBuilder(getText(tabCount)));
+			                    .append(getText(tabCount));
 		}
 		else
 		{
@@ -121,6 +120,7 @@ public class Paragraph<J extends Paragraph<J>>
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public J setTextOnly(boolean textOnly)
 	{
 		this.textOnly = textOnly;

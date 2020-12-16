@@ -20,6 +20,7 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.FormAttributes;
 import com.jwebmp.core.base.html.attributes.GlobalAttributes;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
+import com.jwebmp.core.base.html.interfaces.children.FormChildren;
 import com.jwebmp.core.base.html.interfaces.children.ListItemChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
@@ -68,8 +69,8 @@ import jakarta.validation.constraints.NotNull;
  * @since forever
  */
 public class Form<J extends Form<J>>
-		extends Component<IComponentHierarchyBase, FormAttributes, GlobalFeatures, GlobalEvents, J>
-		implements ListItemChildren<IComponentHierarchyBase, J>
+		extends Component<FormChildren, FormAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ListItemChildren
 {
 
 

@@ -20,7 +20,7 @@ public class JWebMPDynamicScriptRenderer
 	}
 
 	@Override
-	public Script renderScript(Page<?> page)
+	public Script<?,?> renderScript(Page<?> page)
 	{
 		return getSiteLoaderScript();
 	}
@@ -42,7 +42,7 @@ public class JWebMPDynamicScriptRenderer
 		{
 			return newScript(jsScript.toString());
 		}
-		return new Script();
+		return new Script<>().setText("could not find site loader script");
 	}
 
 	/**

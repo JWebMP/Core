@@ -50,7 +50,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since Feb 9, 2015
  */
 public class NavigationSection<J extends NavigationSection<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<IComponentHierarchyBase<?,?>, NoAttributes, GlobalFeatures, GlobalEvents, J>
 {
 
 

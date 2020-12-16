@@ -17,22 +17,23 @@
 
 package com.jwebmp.core.base.page;
 
+import com.guicedee.guicedinjection.GuiceContext;
 import com.jwebmp.core.Page;
-import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.Paragraph;
+import com.jwebmp.core.base.html.interfaces.GlobalChildren;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
 import com.jwebmp.core.services.RenderAfterScripts;
 import com.jwebmp.core.services.RenderBeforeScripts;
-import com.guicedee.guicedinjection.GuiceContext;
-
 import jakarta.validation.constraints.NotNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArrayList;
 
-import static com.jwebmp.core.services.JWebMPServicesBindings.*;
+import static com.jwebmp.core.services.JWebMPServicesBindings.RenderAfterScriptsKey;
+import static com.jwebmp.core.services.JWebMPServicesBindings.RenderBeforeScriptsKey;
 
 public class ScriptsInsertPageConfigurator
 		extends RequirementsPriorityAbstractInsertPageConfigurator<ScriptsInsertPageConfigurator>
@@ -44,12 +45,11 @@ public class ScriptsInsertPageConfigurator
 
 	@NotNull
 	@Override
-	@SuppressWarnings("unchecked")
 	public Page<?> configure(Page<?> page)
 	{
 		if (!page.isConfigured() && enabled())
 		{
-			ComponentHierarchyBase addable;
+			IComponentHierarchyBase<?,?> addable;
 			if (page.getOptions()
 			        .isScriptsInHead())
 			{
@@ -59,30 +59,30 @@ public class ScriptsInsertPageConfigurator
 			{
 				addable = page.getBody();
 			}
-
-			getScripts(page, addable);
+			
+			//noinspection unchecked
+			getScripts(page, (IComponentHierarchyBase<GlobalChildren, ?>) addable);
 			for (Object o : page.getHead()
 			                    .getChildren())
 			{
-				ComponentHierarchyBase headObject = (ComponentHierarchyBase) o;
+				IComponentHierarchyBase<?,?> headObject = (IComponentHierarchyBase<?,?>) o;
 				headObject.preConfigure();
 			}
 		}
 		return page;
 	}
 
-	private void getScripts(Page page, ComponentHierarchyBase scriptAddTo)
+	private void getScripts(Page<?> page, IComponentHierarchyBase<GlobalChildren,?> scriptAddTo)
 	{
 		renderBeforeScripts(scriptAddTo);
 		addScriptsTo(page, scriptAddTo);
 		renderAfterScripts(scriptAddTo);
 	}
-
-	@SuppressWarnings("unchecked")
-	private void renderBeforeScripts(ComponentHierarchyBase scriptAddTo)
+	
+	private void renderBeforeScripts(IComponentHierarchyBase<GlobalChildren,?> scriptAddTo)
 	{
 		Set<RenderBeforeScripts> renderB = GuiceContext.get(RenderBeforeScriptsKey);
-		Paragraph before = new Paragraph().setTextOnly(true);
+		Paragraph<?> before = new Paragraph<>().setTextOnly(true);
 		renderB.forEach(render -> before.setText(before.getText(0)
 		                                               .toString() + render.render(scriptAddTo.getPage())
 		                                                                   .toString()));
@@ -103,10 +103,9 @@ public class ScriptsInsertPageConfigurator
 	 * @param component
 	 * 		The component to add scripts to
 	 */
-	@SuppressWarnings("unchecked")
-	private void addScriptsTo(Page<?> page, ComponentHierarchyBase component)
+	private void addScriptsTo(Page<?> page, IComponentHierarchyBase<GlobalChildren,?> component)
 	{
-		List<ComponentHierarchyBase<?, ?, ?, ?, ?>> requirements = new CopyOnWriteArrayList<>();
+		List<IComponentHierarchyBase<?,?>> requirements = new ArrayList<>();
 
 		List<RequirementsPriority> arrs = new ArrayList<>(Arrays.asList(RequirementsPriority.values()));
 		for (RequirementsPriority priority : arrs)
@@ -115,16 +114,15 @@ public class ScriptsInsertPageConfigurator
 			{
 				continue;
 			}
-			List<ComponentHierarchyBase<?, ?, ?, ?, ?>> alls = getPriorityRequirements(page, priority, requirements, false, true);
+			List<IComponentHierarchyBase<?,?>> alls = getPriorityRequirements(page, priority, requirements, false, true);
 			alls.forEach(component::add);
 		}
 	}
-
-	@SuppressWarnings("unchecked")
-	private void renderAfterScripts(ComponentHierarchyBase scriptAddTo)
+	
+	private void renderAfterScripts(IComponentHierarchyBase<GlobalChildren,?> scriptAddTo)
 	{
 		Set<RenderAfterScripts> renderA = GuiceContext.get(RenderAfterScriptsKey);
-		Paragraph after = new Paragraph().setTextOnly(true);
+		Paragraph<?> after = new Paragraph<>().setTextOnly(true);
 		for (RenderAfterScripts render : renderA)
 		{
 			after.setText(after.getText(0)

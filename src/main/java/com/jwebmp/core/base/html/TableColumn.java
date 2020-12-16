@@ -52,8 +52,8 @@ import java.util.logging.Logger;
  * @since 2014/12/20
  */
 public class TableColumn<J extends TableColumn<J>>
-		extends Component<IComponentHierarchyBase, TableColumnAttributes, GlobalFeatures, GlobalEvents, J>
-		implements TableColumnGroupChildren<IComponentHierarchyBase, J>
+		extends Component<IComponentHierarchyBase<?,?>, TableColumnAttributes, GlobalFeatures, GlobalEvents, J>
+		implements TableColumnGroupChildren
 {
 
 	private static final Logger log = LogFactory.getInstance()

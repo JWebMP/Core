@@ -52,13 +52,13 @@ public abstract class KeyDownAdapter<J extends KeyDownAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public KeyDownAdapter(Component component)
+	public KeyDownAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.keyDown, component);
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -81,7 +81,7 @@ public abstract class KeyDownAdapter<J extends KeyDownAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onKeyDown(AjaxCall call, AjaxResponse response);
+	public abstract void onKeyDown(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

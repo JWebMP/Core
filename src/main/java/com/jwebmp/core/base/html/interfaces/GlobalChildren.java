@@ -16,6 +16,8 @@
  */
 package com.jwebmp.core.base.html.interfaces;
 
+import com.jwebmp.core.base.interfaces.*;
+
 /**
  * Defines the general interface for components that is allowed on most components
  *
@@ -35,4 +37,123 @@ public interface GlobalChildren
 	boolean isInitialized();
 
 	void destroy();
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentStyleBase<?> asStyleBase()
+	{
+		return (IComponentStyleBase<?>) this;
+	}
+	
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentHierarchyBase<?,?> asHierarchyBase()
+	{
+		return (IComponentHierarchyBase<?,?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentDataBindingBase<?> asAngularBase()
+	{
+		return (IComponentDataBindingBase<?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentHTMLAttributeBase<?, ?> asAttributeBase()
+	{
+		return (IComponentHTMLAttributeBase<?, ?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentHTMLBase<?> asTagBase()
+	{
+		return (IComponentHTMLBase<?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentEventBase<?, ?> asEventBase()
+	{
+		return (IComponentEventBase<?, ?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentFeatureBase<?, ?> asFeatureBase()
+	{
+		return (IComponentFeatureBase<?, ?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentThemeBase<?> asThemeBase()
+	{
+		return (IComponentThemeBase<?>) this;
+	}
+	
+	/**
+	 * Returns the components exposed dependency methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentDependencyBase<?> asDependencyBase()
+	{
+		return (IComponentDependencyBase<?>) this;
+	}
+	
+	/**
+	 * Returns the base exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentBase<?> asBase()
+	{
+		return (IComponentBase<?>) this;
+	}
+	
+	/**
+	 * Returns the HTML for the given object
+	 * <p>
+	 *
+	 * @param outputHtml Dummy holder for specifying HTML output
+	 * @return The class and the associated ID and children count
+	 */
+	String toString(boolean outputHtml);
+	
+	/**
+	 * Returns this components HTML after configuration and pre-rendering
+	 *
+	 * @param tabCount The number of tabs to indent by
+	 * @return The sting with the given tab counts
+	 */
+	String toString(Integer tabCount);
+	
 }

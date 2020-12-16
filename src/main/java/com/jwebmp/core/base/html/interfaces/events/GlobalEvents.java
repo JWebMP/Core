@@ -17,7 +17,7 @@
 package com.jwebmp.core.base.html.interfaces.events;
 
 import com.jwebmp.core.base.html.interfaces.LifeCycle;
-import com.jwebmp.core.base.interfaces.IComponentEventBase;
+import com.jwebmp.core.base.interfaces.*;
 
 /**
  * Defines a global event that can be added to all components
@@ -32,9 +32,55 @@ public interface GlobalEvents
 	 * Checks if this feature has been configured and rendered with all the features
 	 */
 	void checkAssignedFunctions();
-
-	default IComponentEventBase asEventBase()
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentEventBase<?, ?> asEventsBase()
 	{
-		return (IComponentEventBase) this;
+		return (IComponentEventBase<?, ?>) this;
+	}
+	
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentFeatureBase<?, ?> asFeatureBase()
+	{
+		return (IComponentFeatureBase<?, ?>) this;
+	}
+	
+	/**
+	 * This class with the associated exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentThemeBase asThemeBase()
+	{
+		return (IComponentThemeBase) this;
+	}
+	
+	/**
+	 * Returns the components exposed dependency methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentDependencyBase<?> asDependencyBase()
+	{
+		return (IComponentDependencyBase<?>) this;
+	}
+	
+	/**
+	 * Returns the base exposed methods
+	 *
+	 * @return This component type-casted
+	 */
+	default IComponentBase<?> asBase()
+	{
+		return (IComponentBase<?>) this;
 	}
 }

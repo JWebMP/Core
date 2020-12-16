@@ -51,7 +51,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since Mar 1, 2015
  */
 public class Time<J extends Time<J>>
-		extends Component<IComponentHierarchyBase, TimeAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<IComponentHierarchyBase<?,?>, TimeAttributes, GlobalFeatures, GlobalEvents, J>
 		implements GlobalChildren
 {
 

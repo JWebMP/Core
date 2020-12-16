@@ -53,14 +53,14 @@ public abstract class CheckedAdapter<J extends CheckedAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public CheckedAdapter(Component component)
+	public CheckedAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.checked, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -82,7 +82,7 @@ public abstract class CheckedAdapter<J extends CheckedAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onChecked(AjaxCall call, AjaxResponse response);
+	public abstract void onChecked(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

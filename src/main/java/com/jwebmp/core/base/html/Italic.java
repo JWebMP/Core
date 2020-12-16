@@ -18,10 +18,8 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
-import com.jwebmp.core.base.html.interfaces.NoIDTag;
-import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
-import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
+import com.jwebmp.core.base.html.interfaces.*;
+import com.jwebmp.core.base.html.interfaces.children.FormChildren;
 import com.jwebmp.core.base.html.interfaces.children.ListItemChildren;
 import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
@@ -64,11 +62,9 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  */
 public class Italic<J extends Italic<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, ParagraphChildren<IComponentHierarchyBase, J>, ListItemChildren<IComponentHierarchyBase, J>
+		extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, ParagraphChildren, ListItemChildren, FormChildren
 {
-
-
 	/**
 	 * Constructs a new paragraph child of Italic
 	 */

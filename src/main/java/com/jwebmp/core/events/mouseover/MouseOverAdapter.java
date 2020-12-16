@@ -53,13 +53,13 @@ public abstract class MouseOverAdapter<J extends MouseOverAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public MouseOverAdapter(Component component)
+	public MouseOverAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.mouseOver, component);
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -81,7 +81,7 @@ public abstract class MouseOverAdapter<J extends MouseOverAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onMouseOver(AjaxCall call, AjaxResponse response);
+	public abstract void onMouseOver(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

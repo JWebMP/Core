@@ -17,6 +17,8 @@
 package com.jwebmp.core.base.interfaces;
 
 import com.jwebmp.core.base.ComponentBase;
+import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -30,10 +32,9 @@ import java.util.Map;
  * @author GedMarc
  * @since 2016/09/26
  */
-public interface IComponentBase<J extends ComponentBase<J>>
+public interface IComponentBase<J extends IComponentBase<J>>
 		extends Cloneable, Serializable
 {
-
 	/**
 	 * Clones this component and assigns a new ID
 	 * <p>
@@ -145,8 +146,17 @@ public interface IComponentBase<J extends ComponentBase<J>>
 	 */
 	J setProperties(Map<String, Object> properties);
 	
+	/**
+	 * Appends the text to the raw text
+	 * @param text
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
-	J appendText(String text);
+	default J appendText(String text)
+	{
+		setText(getText(0) + text);
+		return (J)this;
+	}
 	
 	/**
 	 * Sets this components Raw Text
@@ -199,5 +209,6 @@ public interface IComponentBase<J extends ComponentBase<J>>
 	 * @return
 	 */
 	J setTouched(boolean touched);
-
+	
+	@NotNull ComponentTypes getComponentType();
 }

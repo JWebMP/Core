@@ -16,23 +16,24 @@ import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.logging.Level;
 
+@SuppressWarnings("rawtypes")
 public class PageProvider
-		implements Provider<Page>
+		implements Provider<IPage>
 {
 	private static final java.util.logging.Logger log = LogFactory.getLog("PageProvider");
 
 	@Override
-	public Page get()
+	public IPage<?> get()
 	{
-		Set<IPage> pages = getPages();
+		Set<IPage<?>> pages = getPages();
 		if (!pages.iterator()
 		          .hasNext())
 		{
 			PageProvider.log.log(Level.WARNING, "Returning blank page since no class was found that extends page or matches the given url");
-			return new Page();
+			return new Page<>();
 		}
-		IPage outputPage = null;
-		for (IPage page : pages)
+		IPage<?> outputPage = null;
+		for (IPage<?> page : pages)
 		{
 			outputPage = findPage(page);
 			if (outputPage != null)
@@ -45,11 +46,11 @@ public class PageProvider
 			if (!Page.class.isAssignableFrom(outputPage.getClass()))
 			{
 				PageProvider.log.severe("Page Binding IPage Services must Extend Page.class");
-				return new Page();
+				return new Page<>();
 			}
-			return (Page) outputPage;
+			return outputPage;
 		}
-		return new Page();
+		return new Page<>();
 	}
 
 	/**
@@ -57,10 +58,13 @@ public class PageProvider
 	 *
 	 * @return the pages (type ServiceLoader IPage ) of this PageProvider object.
 	 */
-	public static Set<IPage> getPages()
+	@SuppressWarnings({"unchecked"})
+	public static Set<IPage<?>> getPages()
 	{
-		return GuiceContext.instance()
-		                   .getLoader(IPage.class, ServiceLoader.load(IPage.class));
+		@SuppressWarnings("UnnecessaryLocalVariable")
+		Set pages = GuiceContext.instance()
+		                        .getLoader(IPage.class, ServiceLoader.load(IPage.class));
+		return pages;
 	}
 
 	/**
@@ -71,7 +75,7 @@ public class PageProvider
 	 *
 	 * @return IPage
 	 */
-	private IPage findPage(IPage next)
+	private IPage<?> findPage(IPage<?> next)
 	{
 		try
 		{
@@ -90,7 +94,7 @@ public class PageProvider
 			if (pathInfo.startsWith(pcUrl) || SessionHelper.getServletUrl()
 			                                                     .startsWith(pc.url()))
 			{
-				IPage page = GuiceContext.inject()
+				IPage<?> page = GuiceContext.inject()
 				                         .getInstance(next.getClass());
 				String headerInformation = request.getHeader("User-Agent");
 				ReadableUserAgent agent = GuiceContext.inject()

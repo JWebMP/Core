@@ -60,7 +60,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class TableFooterGroup<J extends TableFooterGroup<J>>
 		extends Component<TableFooterGroupChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements TableChildren<TableFooterGroupChildren, J>
+		implements TableChildren
 {
 
 

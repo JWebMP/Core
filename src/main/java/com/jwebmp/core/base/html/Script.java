@@ -22,6 +22,7 @@ import com.jwebmp.core.base.html.interfaces.NoClassAttribute;
 import com.jwebmp.core.base.html.interfaces.NoFeatures;
 import com.jwebmp.core.base.html.interfaces.NoIDTag;
 import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
+import com.jwebmp.core.base.html.interfaces.children.FormChildren;
 import com.jwebmp.core.base.html.interfaces.children.HeadChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
@@ -78,9 +79,9 @@ import java.util.logging.Logger;
  * @version 1.0
  * @since 2013/11/12
  */
-public class Script<C extends IComponentHierarchyBase, J extends Script<C, J>>
+public class Script<C extends IComponentHierarchyBase<?,?>, J extends Script<C, J>>
 		extends ComponentHierarchyBase<C, ScriptAttributes, NoFeatures, NoEvents, J>
-		implements NoIDTag, HeadChildren<C, J>, NoClassAttribute, BodyChildren<C, J>
+		implements NoIDTag, HeadChildren, NoClassAttribute, BodyChildren, FormChildren
 {
 
 	private static final Logger logger = LogFactory.getInstance()
@@ -200,7 +201,7 @@ public class Script<C extends IComponentHierarchyBase, J extends Script<C, J>>
 			return false;
 		}
 
-		Script<?, ?> s = (Script) obj;
+		Script<?, ?> s = (Script<?,?>) obj;
 		if (s.getAttribute(ScriptAttributes.Src)
 		     .equals(getAttribute(ScriptAttributes.Src)))
 		{
@@ -241,11 +242,10 @@ public class Script<C extends IComponentHierarchyBase, J extends Script<C, J>>
 				             .name()
 				             .startsWith("X"))
 				{
-					StringBuilder sb = new StringBuilder();
-					sb.append("//<![CDATA[");
-					sb.append(getText(0));
-					sb.append("//]]");
-					setText(sb.toString());
+					String sb = "//<![CDATA[" +
+							getText(0) +
+							"//]]";
+					setText(sb);
 				}
 			}
 			catch (Exception e)

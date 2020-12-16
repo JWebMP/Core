@@ -46,10 +46,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class TableRow<J extends TableRow<J>>
 		extends Component<TableRowChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements TableChildren<TableRowChildren, J>, TableHeaderGroupChildren<TableRowChildren, J>, TableBodyGroupChildren<TableRowChildren, J>, TableFooterGroupChildren<TableRowChildren, J>
+		implements TableChildren, TableHeaderGroupChildren, TableBodyGroupChildren, TableFooterGroupChildren
 {
-
-
 	/**
 	 * Construct a new default table row with no Ajax support
 	 */

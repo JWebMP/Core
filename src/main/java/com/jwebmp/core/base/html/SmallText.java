@@ -47,8 +47,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since Mar 1, 2015
  */
 public class SmallText<J extends SmallText<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements ParagraphChildren<IComponentHierarchyBase, J>, PhraseChildren<IComponentHierarchyBase, J>
+		extends Component<IComponentHierarchyBase<?,?>, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ParagraphChildren, PhraseChildren
 {
 
 

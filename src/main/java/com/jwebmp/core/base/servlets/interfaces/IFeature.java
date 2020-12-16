@@ -28,8 +28,8 @@ import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
  * 		1.0 - Initial Creation 1.2 Added minified support 1.3 CSS file additional support
  * @since 2011/05/03
  */
-public interface IFeature<F extends GlobalFeatures, J extends ComponentBase>
-		extends GlobalFeatures<F, J>
+public interface IFeature<F extends GlobalFeatures, J extends IFeature<F,J>>
+		extends GlobalFeatures
 {
 
 }

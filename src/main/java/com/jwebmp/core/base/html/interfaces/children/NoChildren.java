@@ -14,22 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.core.plugins.ajaxenabler;
+package com.jwebmp.core.base.html.interfaces.children;
 
-import com.jwebmp.core.base.references.JavascriptReference;
+import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 
 /**
- * @since @version @author MMagon
+ * @author GedMarc
  */
-public class JQueryAjaxEnablerReference
-		extends JavascriptReference
+public interface NoChildren
+		extends GlobalChildren
 {
-
-
-	public JQueryAjaxEnablerReference()
-	{
-		super("AjaxEnabler", 1.0, "javascript/jwebswing/ajax-enabler.js", "javascript/jwebswing/ajax-enabler.js");
-		setSortOrder(1);
-	}
 
 }

@@ -52,14 +52,14 @@ public abstract class ResizeStopAdapter<J extends ResizeStopAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public ResizeStopAdapter(Component component)
+	public ResizeStopAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.resizeStop, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -81,7 +81,7 @@ public abstract class ResizeStopAdapter<J extends ResizeStopAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onResizeStop(AjaxCall call, AjaxResponse response);
+	public abstract void onResizeStop(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

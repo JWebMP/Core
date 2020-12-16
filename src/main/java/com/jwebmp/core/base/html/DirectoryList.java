@@ -38,14 +38,11 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  * @param <J>
- *
  * @author GedMarc
  */
 public class DirectoryList<J extends DirectoryList<J>>
-		extends Component<DirectoryListChildren<DirectoryListChildren, J>, DirectoryListAttributes, NoFeatures, NoEvents, J>
+		extends Component<DirectoryListChildren, DirectoryListAttributes, NoFeatures, NoEvents, J>
 {
-
-
 	/**
 	 *
 	 */

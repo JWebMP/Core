@@ -24,6 +24,7 @@ import com.jwebmp.core.base.html.interfaces.children.TableRowChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
+import com.jwebmp.core.base.html.interfaces.children.TableHeaderGroupChildren;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -66,8 +67,8 @@ import jakarta.validation.constraints.NotNull;
  * @since 2012/10/01
  */
 public class TableHeaderCell<J extends TableHeaderCell<J>>
-		extends Component<IComponentHierarchyBase, TableCellAttributes, GlobalFeatures, GlobalEvents, J>
-		implements TableRowChildren<IComponentHierarchyBase, J>
+		extends Component<GlobalChildren, TableCellAttributes, GlobalFeatures, GlobalEvents, J>
+		implements TableRowChildren,TableHeaderGroupChildren
 {
 
 	/**
@@ -89,7 +90,7 @@ public class TableHeaderCell<J extends TableHeaderCell<J>>
 		super(ComponentTypes.TableCell);
 		if (dataDisplay != null)
 		{
-			add((Component) dataDisplay);
+			add(dataDisplay);
 		}
 		setTag("th");
 	}

@@ -18,6 +18,7 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.CodeAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.children.PhraseChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
@@ -49,17 +50,14 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * 1
  *
  * @param <J>
- *
  * @author GedMarc
  * @version 1.0
  * @since Forever
  */
 public class Code<J extends Code<J>>
-		extends Component<IComponentHierarchyBase, CodeAttributes, GlobalFeatures, GlobalEvents, J>
-		implements PhraseChildren<IComponentHierarchyBase, J>
+		extends Component<GlobalChildren, CodeAttributes, GlobalFeatures, GlobalEvents, J>
+		implements PhraseChildren
 {
-
-
 	/**
 	 * Constructs a new Code Objects
 	 */

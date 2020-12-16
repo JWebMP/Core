@@ -52,14 +52,14 @@ public abstract class ResponseAdapter<J extends ResponseAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public ResponseAdapter(Component component)
+	public ResponseAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.response, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -81,7 +81,7 @@ public abstract class ResponseAdapter<J extends ResponseAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onResponse(AjaxCall call, AjaxResponse response);
+	public abstract void onResponse(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

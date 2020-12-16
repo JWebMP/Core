@@ -16,14 +16,14 @@
  */
 package com.jwebmp.core.base.html;
 
+import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.attributes.MetaAttributes;
 import com.jwebmp.core.base.html.interfaces.*;
 import com.jwebmp.core.base.html.interfaces.children.HeadChildren;
+import com.jwebmp.core.base.html.interfaces.children.NoChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.guicedee.logger.LogFactory;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.logging.Level;
@@ -55,14 +55,12 @@ import java.util.logging.Logger;
  * @version 1.0
  * @since 2013/11/12
  */
-public class Meta<C extends IComponentHierarchyBase & GlobalChildren>
-		extends ComponentHierarchyBase<C, MetaAttributes, NoFeatures, NoEvents, Meta<C>>
-		implements NoIDTag, NoClosingTag, HeadChildren<C, Meta<C>>, NoClassAttribute, NoNewLineBeforeClosingTag
+public class Meta
+		extends ComponentHierarchyBase<NoChildren, MetaAttributes, NoFeatures, NoEvents, Meta>
+		implements NoIDTag, NoClosingTag, HeadChildren, NoClassAttribute, NoNewLineBeforeClosingTag
 {
-
-
-	private static Logger log = LogFactory.getInstance()
-	                                      .getLogger("<META>");
+	private static final Logger log = LogFactory.getInstance()
+	                                            .getLogger("<META>");
 
 	/**
 	 * Constructs an empty Meta tag
@@ -94,6 +92,7 @@ public class Meta<C extends IComponentHierarchyBase & GlobalChildren>
 	public Meta(MetadataFields field, String value)
 	{
 		super(ComponentTypes.Metadata);
+		//noinspection EnhancedSwitchMigration
 		switch (field)
 		{
 			case http_equiv:
@@ -157,7 +156,7 @@ public class Meta<C extends IComponentHierarchyBase & GlobalChildren>
 	{
 		if (o instanceof Meta)
 		{
-			Meta<?> m = (Meta<?>) o;
+			Meta m = (Meta) o;
 			return getAttributes().entrySet()
 			                      .equals(m.getAttributes()
 			                               .entrySet());

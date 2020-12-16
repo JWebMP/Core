@@ -19,13 +19,13 @@ package com.jwebmp.core.base.html;
 import com.google.common.base.Strings;
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.ImageAttributes;
-import com.jwebmp.core.base.html.interfaces.FigureChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
+import com.jwebmp.core.base.html.interfaces.children.FigureChildren;
 import com.jwebmp.core.base.html.interfaces.children.ImageMapChildren;
 import com.jwebmp.core.base.html.interfaces.children.ListItemChildren;
+import com.jwebmp.core.base.html.interfaces.children.NoChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -58,8 +58,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  */
 public class Image<J extends Image<J>>
-        extends Component<IComponentHierarchyBase, ImageAttributes, GlobalFeatures, GlobalEvents, J>
-        implements ImageMapChildren<IComponentHierarchyBase, J>, FigureChildren<IComponentHierarchyBase, J>, GlobalChildren, ListItemChildren<IComponentHierarchyBase, J>
+        extends Component<NoChildren, ImageAttributes, GlobalFeatures, GlobalEvents, J>
+        implements ImageMapChildren, FigureChildren, GlobalChildren, ListItemChildren
 {
     /**
      * Construct a new Image
@@ -81,6 +81,7 @@ public class Image<J extends Image<J>>
         addAttribute(ImageAttributes.Src, image);
     }
 
+    @SuppressWarnings("unchecked")
     public J bind(String binding)
     {
         if (Strings.isNullOrEmpty(binding))
@@ -90,7 +91,8 @@ public class Image<J extends Image<J>>
             addAttribute("ng-src", "{{" + binding + "}}");
         return (J) this;
     }
-
+    
+    @SuppressWarnings("unchecked")
     public J bindAlt(String binding)
     {
         if (Strings.isNullOrEmpty(binding))
@@ -106,7 +108,7 @@ public class Image<J extends Image<J>>
     {
         return 7;
     }
-
+    
     @Override
     public boolean equals(Object obj)
     {
@@ -115,7 +117,7 @@ public class Image<J extends Image<J>>
             return false;
         }
 
-        return getAttribute(ImageAttributes.Src).equals(((Image) obj)
+        return getAttribute(ImageAttributes.Src).equals(((Image<?>) obj)
                 .getAttribute(ImageAttributes.Src));
     }
 

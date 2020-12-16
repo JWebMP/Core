@@ -1,5 +1,5 @@
 {
-  "directory": "jar-resources/META-INF/resources/bower_components",
+  "directory": "jar-resources/bower_components",
   "ignoredDependencies": [
     "jquery-ui",
     "font-awesome",

@@ -18,6 +18,7 @@ package com.jwebmp.core.base.ajax;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jwebmp.core.base.ComponentHierarchyBase;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 
 import jakarta.validation.constraints.NotNull;
@@ -28,8 +29,6 @@ import jakarta.validation.constraints.NotNull;
 public class AjaxComponentUpdates<J extends AjaxComponentUpdates<J>>
 		extends JavaScriptPart<J>
 {
-
-
 	/**
 	 * The stored HTML
 	 */
@@ -51,11 +50,11 @@ public class AjaxComponentUpdates<J extends AjaxComponentUpdates<J>>
 	 *
 	 * @param component
 	 */
-	public AjaxComponentUpdates(ComponentHierarchyBase component)
+	public AjaxComponentUpdates(IComponentHierarchyBase<?,?> component)
 	{
 		component.setTiny(true);
 		html = component.toString(true);
-		id = component.getID();
+		id = component.asBase().getID();
 		insertType = AjaxComponentInsertType.Replace;
 	}
 

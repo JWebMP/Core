@@ -27,7 +27,7 @@ import java.lang.annotation.Target;
  * @author GedMarc
  * @since 19 Feb 2017
  */
-@Target({ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ComponentInformation
 {
@@ -51,14 +51,14 @@ public @interface ComponentInformation
 	 *
 	 * @return
 	 */
-	String url();
+	String url() default "https://github.com/GedMarc/JWebMP";
 
 	/**
 	 * The wiki url of the component
 	 *
 	 * @return
 	 */
-	String wikiUrl() default "";
+	String wikiUrl() default "https://github.com/GedMarc/JWebMP/wiki";
 
 	/**
 	 * The icon of the component

@@ -16,8 +16,7 @@
  */
 package com.jwebmp.core.base.html.interfaces.children;
 
-import com.jwebmp.core.base.ComponentBase;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
+import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 
 /**
  * Describes a valid HTML Child
@@ -26,8 +25,8 @@ import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
  * @version 1.0
  * @since 2013/11/12
  */
-public interface HtmlChildren<C extends IComponentHierarchyBase, J extends ComponentBase>
-		extends IComponentHierarchyBase<C, J>
+public interface HtmlChildren
+		extends GlobalChildren
 {
 
 }

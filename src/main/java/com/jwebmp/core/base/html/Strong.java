@@ -42,10 +42,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class Strong<J extends Strong<J>>
 		extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements PhraseChildren<ParagraphChildren, J>, ParagraphChildren<ParagraphChildren, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText
+		implements PhraseChildren, ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
-
-
 	/**
 	 * Constructs a blank instance of strong
 	 */

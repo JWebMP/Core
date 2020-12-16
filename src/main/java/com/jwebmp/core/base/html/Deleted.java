@@ -51,8 +51,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since 2014/12/21
  */
 public class Deleted<J extends Deleted<J>>
-		extends Component<IComponentHierarchyBase, DeletedAttributes, NoFeatures, NoEvents, J>
-		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, ParagraphChildren<IComponentHierarchyBase, J>
+		extends Component<ParagraphChildren, DeletedAttributes, NoFeatures, NoEvents, J>
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, ParagraphChildren
 {
 	/**
 	 * The text marked as deleted

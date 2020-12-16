@@ -19,6 +19,7 @@ package com.jwebmp.core.htmlbuilder.javascript.events.commandevent;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.Feature;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.guicedee.guicedinjection.json.StaticStrings;
 
@@ -32,7 +33,7 @@ import java.util.List;
  * @since 2012-12-30
  */
 public abstract class PerformCommandFeature
-		extends Feature<PerformCommandFeature, JavaScriptPart, PerformCommandFeature>
+		extends Feature<PerformCommandFeature, JavaScriptPart<?>, PerformCommandFeature>
 {
 
 
@@ -53,7 +54,7 @@ public abstract class PerformCommandFeature
 	/*
 	 * Constructs a new command feature
 	 */
-	public PerformCommandFeature(String commandName, Component assignedComponent, String name)
+	public PerformCommandFeature(String commandName, IComponentHierarchyBase<?,?> assignedComponent, String name)
 	{
 		super(name);
 		this.commandName = commandName;
@@ -78,10 +79,9 @@ public abstract class PerformCommandFeature
 		for (Iterator<String> it = getJQueryValuesForCommand().iterator(); it.hasNext(); )
 		{
 			String string = it.next();
-
-			String showDiv = "$('" + getComponent().getID() + "').show();" + (getComponent().isTiny() ? "" : "\n");
+			String showDiv = getComponent().asBase().getJQueryID() + ".show();" + (getComponent().asBase().isTiny() ? "" : getNewLine());
 			addQuery(showDiv);
-			String jQuery = "performCommand('" + getComponent().getID() + "','" + getName() + "'," + string + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON;
+			String jQuery = "performCommand('" + getComponent().asBase().getID() + "','" + getName() + "'," + string + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON;
 			addQuery(jQuery);
 		}
 	}

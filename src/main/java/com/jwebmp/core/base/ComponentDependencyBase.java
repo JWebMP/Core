@@ -17,7 +17,7 @@
 package com.jwebmp.core.base;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.jwebmp.core.base.interfaces.IComponentDependancyBase;
+import com.jwebmp.core.base.interfaces.IComponentDependencyBase;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
@@ -38,9 +38,9 @@ import java.util.concurrent.CopyOnWriteArraySet;
  * @author GedMarc
  * @since 23 Apr 2016
  */
-public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
+public class ComponentDependencyBase<J extends ComponentDependencyBase<J>>
 		extends ComponentBase<J>
-		implements IComponentDependancyBase<J>
+		implements IComponentDependencyBase<J>
 {
 	/**
 	 * The CSS String List of this component
@@ -58,7 +58,7 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	 *
 	 * @param componentType
 	 */
-	public ComponentDependancyBase(ComponentTypes componentType)
+	public ComponentDependencyBase(ComponentTypes componentType)
 	{
 		super(componentType);
 	}
@@ -70,7 +70,7 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	 */
 	@NotNull
 	@SuppressWarnings("unused")
-	public IComponentDependancyBase asDependancyBase()
+	public IComponentDependencyBase<J> asDependencyBase()
 	{
 		return this;
 	}
@@ -260,13 +260,14 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	@NotNull
 	public J cloneComponent()
 	{
-		ComponentDependancyBase cloned = super.cloneComponent();
+		ComponentDependencyBase<J> cloned = super.cloneComponent();
 
-		cloned.cssReferences = new TreeSet();
-		cloned.javascriptReferences = new TreeSet();
+		cloned.cssReferences = new TreeSet<>();
+		cloned.javascriptReferences = new TreeSet<>();
 		cloned.cssReferences.addAll(getCssReferences());
 		cloned.javascriptReferences.addAll(getJavascriptReferences());
-
+		
+		//noinspection CastCanBeRemovedNarrowingVariableType
 		return (J) cloned;
 	}
 

@@ -17,6 +17,7 @@
 package com.jwebmp.core.htmlbuilder.css.borders;
 
 import com.jwebmp.core.base.html.Div;
+import com.jwebmp.core.base.html.DivSimple;
 import com.jwebmp.core.base.html.H1;
 import com.jwebmp.core.htmlbuilder.css.colours.ColourCSS;
 import com.jwebmp.core.htmlbuilder.css.colours.ColourNames;
@@ -32,7 +33,7 @@ import org.junit.jupiter.api.Test;
 		BorderLeftStyle = BorderStyles.Double,
 		Border = @Border(Border = @BorderLeftCSS(BorderLeftColor = @ColourCSS("really deep colour"))))
 public class BorderCSSObjectTest
-		extends Div
+		extends DivSimple<BorderCSSObjectTest>
 {
 
 	@BorderCSS(BorderBottomColor$ = ColourNames.AntiqueWhite,

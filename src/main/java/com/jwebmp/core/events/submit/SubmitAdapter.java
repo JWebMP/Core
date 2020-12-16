@@ -38,22 +38,20 @@ import java.util.logging.Level;
  *
  * @author GedMarc
  */
+@SuppressWarnings("unused")
+@ComponentInformation(name = "Submit Event",
+		description = "Server Side Event for Submit.")
 public abstract class SubmitAdapter
 		extends Event<GlobalFeatures, SubmitAdapter>
-		implements ParagraphEvents<GlobalFeatures, SubmitAdapter>, BodyEvents<GlobalFeatures, SubmitAdapter>, GlobalEvents
+		implements ParagraphEvents<GlobalFeatures, SubmitAdapter>,
+		           BodyEvents<GlobalFeatures, SubmitAdapter>, GlobalEvents
 {
-
 	/**
 	 * Logger for the Component
 	 */
-	@ComponentInformation(name = "Click Event",
-			description = "Server Side Event for Click.",
-			url = "https://www.armineasy.com/JWebSwing",
-			wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
 	private static final java.util.logging.Logger log = LogFactory.getInstance()
-	                                                              .getLogger("ClickEvent");
-
-
+	                                                              .getLogger("SubmitAdapter");
+	
 	protected SubmitAdapter()
 	{
 		super("Submit", EventTypes.submit);
@@ -71,7 +69,7 @@ public abstract class SubmitAdapter
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -93,11 +91,12 @@ public abstract class SubmitAdapter
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onSubmit(AjaxCall call, AjaxResponse response);
+	public abstract void onSubmit(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...
 	 */
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	private void onCall()
 	{
 		Set<IOnSubmitService> services = GuiceContext.instance()
@@ -122,6 +121,7 @@ public abstract class SubmitAdapter
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
+		@SuppressWarnings({"rawtypes", "unchecked"})
 		Set<IOnSubmitService> services = GuiceContext.instance()
 		                                             .getLoader(IOnSubmitService.class, ServiceLoader.load(IOnSubmitService.class));
 		services.forEach(service -> service.onCreate(this));

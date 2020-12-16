@@ -52,13 +52,13 @@ public abstract class SlideAdapter<J extends SlideAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public SlideAdapter(Component component)
+	public SlideAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.slide, component);
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -80,7 +80,7 @@ public abstract class SlideAdapter<J extends SlideAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onSlide(AjaxCall call, AjaxResponse response);
+	public abstract void onSlide(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

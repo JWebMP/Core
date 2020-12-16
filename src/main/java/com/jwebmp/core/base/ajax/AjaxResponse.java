@@ -22,14 +22,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.inject.servlet.RequestScoped;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.Feature;
-import com.jwebmp.core.base.ComponentDependancyBase;
-import com.jwebmp.core.base.ComponentHierarchyBase;
-import com.jwebmp.core.base.ComponentStyleBase;
+import com.jwebmp.core.base.interfaces.IComponentDependencyBase;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
+import com.jwebmp.core.base.interfaces.IComponentStyleBase;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
-
 import jakarta.validation.constraints.NotNull;
+
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -49,55 +49,55 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 */
 	@JsonProperty("success")
 	private boolean success = true;
-
+	
 	/**
 	 * All angular variable updates to be performed
 	 */
 	@JsonProperty("variables")
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Set<JsonVariable> jsonVariables;
-
+	
 	/**
 	 * All relevant client reactions to perform
 	 */
 	@JsonProperty("reactions")
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private Set<AjaxResponseReaction> reactions;
-
+	private Set<AjaxResponseReaction<?>> reactions;
+	
 	/**
 	 * All components that must be updated
 	 */
 	@JsonIgnore
-	private Set<ComponentHierarchyBase> components;
-
+	private Set<IComponentHierarchyBase<?, ?>> components;
+	
 	/**
 	 * A complete list of the component update objects
 	 */
 	@JsonIgnore
-	private Set<AjaxComponentUpdates> componentUpdates;
-
+	private Set<AjaxComponentUpdates<?>> componentUpdates;
+	
 	/**
 	 * An additional list of events that can fire, not stored in memory
 	 */
 	@JsonIgnore
-	private Set<Event> events;
-
+	private Set<Event<?, ?>> events;
+	
 	/**
 	 * An additional list of features that can fire
 	 */
 	@JsonIgnore
 	private Set<Feature<?, ?, ?>> features;
-
+	
 	/**
 	 * A list of local storage items and their keys
 	 */
 	private Map<String, String> localStorage;
-
+	
 	/**
 	 * A list of local storage items and their keys
 	 */
 	private Map<String, String> sessionStorage;
-
+	
 	/**
 	 * Returns all the feature queries for the given response
 	 *
@@ -117,7 +117,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 		                      });
 		return list;
 	}
-
+	
 	/**
 	 * Gets features assigned to the response
 	 *
@@ -131,7 +131,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 		}
 		return features;
 	}
-
+	
 	/**
 	 * Sets features assigned to the response
 	 *
@@ -141,21 +141,19 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	{
 		this.features = features;
 	}
-
+	
 	/**
 	 * Adds a DTO to the response call
 	 *
-	 * @param name
-	 * 		The name of the variable
-	 * @param object
-	 * 		The DTO to pass through
+	 * @param name   The name of the variable
+	 * @param object The DTO to pass through
 	 */
 	public void addDto(String name, String object)
 	{
 		JsonVariable variable = new JsonVariable(name, object);
 		getJsonVariables().add(variable);
 	}
-
+	
 	/**
 	 * Returns the list of angular variables from the server
 	 *
@@ -169,7 +167,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 		}
 		return jsonVariables;
 	}
-
+	
 	/**
 	 * Sets the list of angular variables
 	 *
@@ -179,7 +177,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	{
 		this.jsonVariables = jsonVariables;
 	}
-
+	
 	/**
 	 * If the server action was a success
 	 *
@@ -189,7 +187,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	{
 		return success;
 	}
-
+	
 	/**
 	 * If the server action was a success, default is no
 	 *
@@ -199,13 +197,11 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	{
 		this.success = success;
 	}
-
+	
 	/**
 	 * Convenience method to add a feature to the feature group
 	 *
-	 * @param feature
-	 * 		The feature to add
-	 *
+	 * @param feature The feature to add
 	 * @return J Always this
 	 */
 	@SuppressWarnings("unchecked")
@@ -214,49 +210,48 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 		getFeatures().add(feature);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Adds a component to be returned to the client
 	 *
 	 * @param component
-	 *
 	 * @return
 	 */
-	public AjaxComponentUpdates addComponent(ComponentHierarchyBase component)
+	public AjaxComponentUpdates<?> addComponent(IComponentHierarchyBase<?, ?> component)
 	{
 		getComponents().add(component);
-		AjaxComponentUpdates newComponent = new AjaxComponentUpdates(component);
+		AjaxComponentUpdates<?> newComponent = new AjaxComponentUpdates<>(component);
 		getComponentUpdates().add(newComponent);
 		component.init();
 		component.preConfigure();
 		return newComponent;
 	}
-
+	
 	/**
 	 * Returns the list of components sending back
 	 *
 	 * @return
 	 */
-	protected Set<ComponentHierarchyBase> getComponents()
+	protected Set<IComponentHierarchyBase<?, ?>> getComponents()
 	{
 		if (components == null)
 		{
-			components = new TreeSet<>();
+			components = new LinkedHashSet<>();
 		}
 		return components;
 	}
-
-	protected void setComponents(Set<ComponentHierarchyBase> components)
+	
+	protected void setComponents(Set<IComponentHierarchyBase<?, ?>> components)
 	{
 		this.components = components;
 	}
-
+	
 	/**
 	 * Returns a list of the needed component updates
 	 *
 	 * @return
 	 */
-	public Set<AjaxComponentUpdates> getComponentUpdates()
+	public Set<AjaxComponentUpdates<?>> getComponentUpdates()
 	{
 		if (componentUpdates == null)
 		{
@@ -264,7 +259,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 		}
 		return componentUpdates;
 	}
-
+	
 	/**
 	 * Adds a client reaction to be performed
 	 *
@@ -272,18 +267,18 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J addReaction(AjaxResponseReaction reaction)
+	public J addReaction(AjaxResponseReaction<?> reaction)
 	{
 		getReactions().add(reaction);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns the list of client reactions available
 	 *
 	 * @return
 	 */
-	public Set<AjaxResponseReaction> getReactions()
+	public Set<AjaxResponseReaction<?>> getReactions()
 	{
 		if (reactions == null)
 		{
@@ -291,7 +286,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 		}
 		return reactions;
 	}
-
+	
 	/**
 	 * Returns all the event queries from the components
 	 *
@@ -306,13 +301,13 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 		                                           .toString()));
 		return list;
 	}
-
+	
 	/**
 	 * Gets events assigned to the response
 	 *
 	 * @return
 	 */
-	public Set<Event> getEvents()
+	public Set<Event<?, ?>> getEvents()
 	{
 		if (events == null)
 		{
@@ -320,17 +315,17 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 		}
 		return events;
 	}
-
+	
 	/**
 	 * Sets events assigned to the response
 	 *
 	 * @param events
 	 */
-	public void setEvents(Set<Event> events)
+	public void setEvents(Set<Event<?, ?>> events)
 	{
 		this.events = events;
 	}
-
+	
 	/**
 	 * Gets all the CSS References
 	 *
@@ -341,18 +336,17 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	protected Set<String> getAllCssReferences()
 	{
 		Set<String> output = new LinkedHashSet<>();
-		getComponents().forEach(next -> output.addAll(getCssReferences(next)));
+		getComponents().forEach(next -> output.addAll(getCssReferences((IComponentDependencyBase<?>) next)));
 		return output;
 	}
-
+	
 	/**
 	 * Returns all the CSS references for all the components
 	 *
 	 * @param component
-	 *
 	 * @return
 	 */
-	public Set<String> getCssReferences(ComponentDependancyBase component)
+	public Set<String> getCssReferences(IComponentDependencyBase<?> component)
 	{
 		Set<String> cssRender = new TreeSet<>();
 		for (Object o : component.getCssReferencesAll())
@@ -362,7 +356,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 		}
 		return cssRender;
 	}
-
+	
 	/**
 	 * Gets all the CSS Renders
 	 *
@@ -373,27 +367,26 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	protected String getAllCss()
 	{
 		StringBuilder sb = new StringBuilder();
-		List<ComponentHierarchyBase> workable = new ArrayList<>(getComponents());
-		workable.forEach(next -> sb.append(getCssRenders((ComponentStyleBase) next)));
-
+		List<IComponentHierarchyBase<?, ?>> workable = new ArrayList<>(getComponents());
+		workable.forEach(next -> sb.append(getCssRenders((IComponentStyleBase<?>) next)));
+		
 		return sb.toString();
 	}
-
+	
 	/**
 	 * Gets all the CSS renders for a component and its children
 	 *
 	 * @param component
-	 *
 	 * @return
 	 */
-	public StringBuilder getCssRenders(ComponentStyleBase component)
+	public StringBuilder getCssRenders(IComponentStyleBase<?> component)
 	{
 		StringBuilder cssRender = new StringBuilder();
 		cssRender.append(component.renderCss(0)
 		                          .toString());
 		return cssRender;
 	}
-
+	
 	/**
 	 * Gets all the JavaScript References
 	 *
@@ -404,24 +397,17 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	protected Set<String> getAllJsReferences()
 	{
 		Set<String> output = new LinkedHashSet<>();
-		getComponents().forEach(next ->
-		                        {
-			                        for (String a : getJsReferences(next))
-			                        {
-				                        output.add(a);
-			                        }
-		                        });
+		getComponents().forEach(next -> output.addAll(getJsReferences((IComponentDependencyBase<?>) next)));
 		return output;
 	}
-
+	
 	/**
 	 * Gets all JavaScript references for a component and it's children
 	 *
 	 * @param component
-	 *
 	 * @return
 	 */
-	public Set<String> getJsReferences(ComponentDependancyBase component)
+	public Set<String> getJsReferences(IComponentDependencyBase<?> component)
 	{
 		Set<String> cssRender = new LinkedHashSet<>();
 		for (Object o : component.getJavascriptReferencesAll())
@@ -431,7 +417,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 		}
 		return cssRender;
 	}
-
+	
 	/**
 	 * Gets all the JavaScript and inserts it into the JSON response
 	 *
@@ -448,9 +434,11 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 			                                                   {
 				                                                   if (!rendered.isEmpty())
 				                                                   {
-					                                                   if (!rendered.endsWith(next.getNewLine()))
+					                                                   if (!rendered.endsWith(next.asBase()
+					                                                                              .getNewLine()))
 					                                                   {
-						                                                   rendered = rendered + next.getNewLine();
+						                                                   rendered = rendered + next.asBase()
+						                                                                             .getNewLine();
 					                                                   }
 					                                                   output.add(rendered);
 				                                                   }
@@ -460,19 +448,18 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 		                        });
 		return output;
 	}
-
+	
 	/**
 	 * Gets all the JavaScript to render for a component and its children
 	 *
 	 * @param component
-	 *
 	 * @return
 	 */
 	@SuppressWarnings("WeakerAccess")
-	public Set<String> getJsRenders(ComponentHierarchyBase<?, ?, ?, ?, ?> component)
+	public Set<String> getJsRenders(IComponentHierarchyBase<?, ?> component)
 	{
 		Set<String> jsRenders = new LinkedHashSet<>();
-		for (ComponentHierarchyBase<?, ?, ?, ?, ?> componentHierarchyBase : component.getChildrenHierarchy())
+		for (IComponentHierarchyBase<?, ?> componentHierarchyBase : component.getChildrenHierarchy())
 		{
 			for (StringBuilder stringBuilder : componentHierarchyBase.getQueriesAll())
 			{
@@ -489,23 +476,24 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 		}
 		return jsRenders;
 	}
-
-	private Set<String> buildEventQueries(ComponentHierarchyBase next, Set<String> output)
+	
+	private Set<String> buildEventQueries(IComponentHierarchyBase<?, ?> next, Set<String> output)
 	{
 		if (Event.class.isAssignableFrom(next.getClass()))
 		{
+			//noinspection RedundantClassCall
 			for (Object o : Event.class.cast(next)
 			                           .getRunEvents())
 			{
-				Event next1 = (Event) o;
+				Event<?, ?> next1 = (Event<?, ?>) o;
 				next1.preConfigure();
 				addEventQuery(next1, output);
 			}
 		}
 		return output;
 	}
-
-	private void addEventQuery(Event next1, Set<String> output)
+	
+	private void addEventQuery(Event<?, ?> next1, Set<String> output)
 	{
 		next1.preConfigure();
 		for (Object o : next1.getQueriesAll())
@@ -514,7 +502,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 			output.add(query.toString());
 		}
 	}
-
+	
 	/**
 	 * Removes the registered variable from the client. Use to clean up memory or assigned variables on the client
 	 *
@@ -529,7 +517,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 			getJsonVariables().add(variable);
 		}
 	}
-
+	
 	/**
 	 * Removes the registered variable from the client. Use to clean up memory or assigned variables on the client
 	 *
@@ -537,10 +525,10 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 */
 	public void clearVariable(String variableName)
 	{
-		JsonVariable var = new JsonVariable(variableName, (JavaScriptPart) null);
+		JsonVariable var = new JsonVariable(variableName, (JavaScriptPart<?>) null);
 		getJsonVariables().add(var);
 	}
-
+	
 	/**
 	 * Returns the updates
 	 *
@@ -548,16 +536,16 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 */
 	@JsonProperty("components")
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	protected Set<AjaxComponentUpdates> getUpdates()
+	protected Set<AjaxComponentUpdates<?>> getUpdates()
 	{
 		return getComponentUpdates();
 	}
-
+	
 	@Override
 	@SuppressWarnings("unchecked")
 	public String toString()
 	{
-		for (ComponentHierarchyBase component : getComponents())
+		for (IComponentHierarchyBase<?, ?> component : getComponents())
 		{
 			for (Object o : component.getAngularObjectsAll()
 			                         .entrySet())
@@ -570,21 +558,19 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 		}
 		return super.toString();
 	}
-
+	
 	/**
 	 * Adds a DTO to the response call
 	 *
-	 * @param name
-	 * 		The name of the variable
-	 * @param object
-	 * 		The DTO to pass through
+	 * @param name   The name of the variable
+	 * @param object The DTO to pass through
 	 */
 	public void addDto(String name, Object object)
 	{
 		JsonVariable variable = new JsonVariable(name, object);
 		getJsonVariables().add(variable);
 	}
-
+	
 	/**
 	 * Returns the map going back for the local storage
 	 *
@@ -598,7 +584,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 		}
 		return localStorage;
 	}
-
+	
 	/**
 	 * Sets the map for the local storage going back
 	 *
@@ -608,7 +594,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	{
 		this.localStorage = localStorage;
 	}
-
+	
 	/**
 	 * Gets the local session going back
 	 *
@@ -622,7 +608,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 		}
 		return sessionStorage;
 	}
-
+	
 	/**
 	 * The session storage going back
 	 *
@@ -632,5 +618,5 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	{
 		this.sessionStorage = sessionStorage;
 	}
-
+	
 }

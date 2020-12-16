@@ -22,6 +22,7 @@ import com.jwebmp.core.Page;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.CSSLink;
 import com.jwebmp.core.base.html.Script;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
@@ -88,9 +89,9 @@ abstract class RequirementsPriorityAbstractInsertPageConfigurator<J extends Requ
 	 * @param javascript
 	 * 		to return JavaScript or not
 	 */
-	List<ComponentHierarchyBase<?, ?, ?, ?, ?>> getPriorityRequirements(Page<?> page, RequirementsPriority priority, List<ComponentHierarchyBase<?, ?, ?, ?, ?>> input, boolean css, boolean javascript)
+	List<IComponentHierarchyBase<?,?>> getPriorityRequirements(Page<?> page, RequirementsPriority priority, List<IComponentHierarchyBase<?,?>> input, boolean css, boolean javascript)
 	{
-		Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> requirements = new LinkedHashSet<>();
+		Set<IComponentHierarchyBase<?,?>> requirements = new LinkedHashSet<>();
 		if (css)
 		{
 			List<CSSLink<?>> links = getAllCssLinks(page, priority);

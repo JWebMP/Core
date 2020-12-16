@@ -18,10 +18,7 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.OptionAttributes;
-import com.jwebmp.core.base.html.interfaces.DisplayObjectType;
-import com.jwebmp.core.base.html.interfaces.NoFeatures;
-import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
-import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
+import com.jwebmp.core.base.html.interfaces.*;
 import com.jwebmp.core.base.html.interfaces.children.DataListChildren;
 import com.jwebmp.core.base.html.interfaces.children.SelectChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
@@ -42,12 +39,12 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * Tip: If you have a long list of options, you can group related options with the &gt;optgroup&lt; tag.<p>
  *
  * @param <J>
- *
  * @author GedMarc
  */
 public class Option<J extends Option<J>>
-		extends Component<IComponentHierarchyBase, OptionAttributes, NoFeatures, NoEvents, J>
-		implements DataListChildren<IComponentHierarchyBase, J>, SelectChildren<IComponentHierarchyBase, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText, DisplayObjectType<IComponentHierarchyBase, J>
+		extends Component<GlobalChildren, OptionAttributes, NoFeatures, NoEvents, J>
+		implements DataListChildren, SelectChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText,
+		           DisplayObjectType
 {
 	/**
 	 * Constructs a new Option tag
@@ -57,7 +54,7 @@ public class Option<J extends Option<J>>
 	{
 		this(null);
 	}
-
+	
 	/**
 	 * Constructs a new Option tag
 	 * <p>
@@ -72,7 +69,7 @@ public class Option<J extends Option<J>>
 		addAttribute(OptionAttributes.Label, optionValue);
 		setText(optionValue);
 	}
-
+	
 	/**
 	 * Returns the label
 	 * <p>
@@ -83,21 +80,21 @@ public class Option<J extends Option<J>>
 	{
 		return getAttribute(OptionAttributes.Label);
 	}
-
+	
 	/**
 	 * Sets the label of this option tag
 	 * <p>
 	 *
 	 * @param label
-	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public J setLabel(String label)
 	{
 		addAttribute(OptionAttributes.Label, label);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns the label
 	 * <p>
@@ -108,15 +105,15 @@ public class Option<J extends Option<J>>
 	{
 		return getAttribute(OptionAttributes.Value);
 	}
-
+	
 	/**
 	 * Sets the value of this option
 	 * <p>
 	 *
 	 * @param value
-	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public J setValue(String value)
 	{
 		addAttribute(OptionAttributes.Value, value);

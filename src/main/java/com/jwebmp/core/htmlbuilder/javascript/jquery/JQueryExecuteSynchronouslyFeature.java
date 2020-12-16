@@ -19,6 +19,7 @@ package com.jwebmp.core.htmlbuilder.javascript.jquery;
 
 import com.jwebmp.core.Feature;
 import com.jwebmp.core.base.ComponentFeatureBase;
+import com.jwebmp.core.base.interfaces.IComponentFeatureBase;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 
 import java.util.ArrayList;
@@ -31,24 +32,24 @@ import java.util.List;
  * @author MMagon
  */
 public class JQueryExecuteSynchronouslyFeature
-		extends Feature<JQueryExecuteSynchronouslyFeature, JavaScriptPart, JQueryExecuteSynchronouslyFeature>
+		extends Feature<JQueryExecuteSynchronouslyFeature, JavaScriptPart<?>, JQueryExecuteSynchronouslyFeature>
 {
 
-	private List<ComponentFeatureBase> orderedWhenList = new ArrayList<>();
-	private List<ComponentFeatureBase> orderedThenList = new ArrayList<>();
+	private final List<IComponentFeatureBase<?,?>> orderedWhenList = new ArrayList<>();
+	private final List<IComponentFeatureBase<?,?>> orderedThenList = new ArrayList<>();
 
 	public JQueryExecuteSynchronouslyFeature()
 	{
 		super("JQueryWhenThen");
 	}
 
-	public boolean addFeatureToWhen(ComponentFeatureBase newWhen)
+	public boolean addFeatureToWhen(IComponentFeatureBase<?,?> newWhen)
 	{
 		orderedWhenList.add(newWhen);
 		return true;
 	}
 
-	public boolean addFeatureToThen(ComponentFeatureBase newWhen)
+	public boolean addFeatureToThen(IComponentFeatureBase<?,?> newWhen)
 	{
 		orderedThenList.add(newWhen);
 		return true;
@@ -70,15 +71,16 @@ public class JQueryExecuteSynchronouslyFeature
 	public void assignFunctionsToComponent()
 	{
 		StringBuilder query = new StringBuilder("$.when(");
-		for (ComponentFeatureBase feature : orderedWhenList)
+		for (IComponentFeatureBase<?,?> feature : orderedWhenList)
 		{
 			query.append(feature.renderJavascript());
 		}
 		query.append(").then(");
-		for (ComponentFeatureBase feature : orderedThenList)
+		for (IComponentFeatureBase<?,?> feature : orderedThenList)
 		{
 			query.append(feature.renderJavascript());
 		}
 		query.append(");");
+		addQuery(query);
 	}
 }

@@ -29,7 +29,7 @@ import java.util.Set;
  *
  * @author GedMarc
  */
-public interface IComponentDependancyBase<J extends ComponentBase>
+public interface IComponentDependencyBase<J extends ComponentBase>
 {
 
 	/**

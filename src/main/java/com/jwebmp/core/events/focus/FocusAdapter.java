@@ -37,9 +37,7 @@ import java.util.logging.Level;
  * @author GedMarc
  */
 @ComponentInformation(name = "Focus Event",
-		description = "Server Side Event for Focus",
-		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
+		description = "Server Side Event for Focus")
 public abstract class FocusAdapter<J extends FocusAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
@@ -57,14 +55,14 @@ public abstract class FocusAdapter<J extends FocusAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public FocusAdapter(Component component)
+	public FocusAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.focus, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -86,7 +84,7 @@ public abstract class FocusAdapter<J extends FocusAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onFocus(AjaxCall call, AjaxResponse response);
+	public abstract void onFocus(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

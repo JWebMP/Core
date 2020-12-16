@@ -37,9 +37,7 @@ import java.util.logging.Level;
  * @author GedMarc
  */
 @ComponentInformation(name = "Close Event",
-		description = "Server Side Event for Close.",
-		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
+		description = "Server Side Event for Close.")
 public abstract class CloseAdapter<J extends CloseAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
@@ -57,13 +55,13 @@ public abstract class CloseAdapter<J extends CloseAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public CloseAdapter(Component component)
+	public CloseAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.contextmenu, component);
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -85,7 +83,7 @@ public abstract class CloseAdapter<J extends CloseAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onClose(AjaxCall call, AjaxResponse response);
+	public abstract void onClose(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

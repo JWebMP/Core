@@ -52,14 +52,14 @@ public abstract class ResizeStartAdapter<J extends ResizeStartAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public ResizeStartAdapter(Component component)
+	public ResizeStartAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.resizeStart, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -81,7 +81,7 @@ public abstract class ResizeStartAdapter<J extends ResizeStartAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onResizeStart(AjaxCall call, AjaxResponse response);
+	public abstract void onResizeStart(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

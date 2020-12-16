@@ -21,6 +21,7 @@ import com.jwebmp.core.base.html.attributes.BlockQuoteAttributes;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -48,15 +49,12 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  * @param <J>
- *
  * @author GedMarc
  */
 public class BlockQuote<J extends BlockQuote<J>>
 		extends Component<ParagraphChildren, BlockQuoteAttributes, GlobalFeatures, GlobalEvents, J>
 
 {
-
-
 	/**
 	 * Constructs a new block quote with the given text
 	 *
@@ -67,7 +65,7 @@ public class BlockQuote<J extends BlockQuote<J>>
 		this();
 		setText(text);
 	}
-
+	
 	/**
 	 * Constructs a new Block Quote Item
 	 */
@@ -75,7 +73,7 @@ public class BlockQuote<J extends BlockQuote<J>>
 	{
 		super(ComponentTypes.BlockQuotes);
 	}
-
+	
 	/**
 	 * Constructs a new block quote with the given text and footer
 	 *
@@ -86,8 +84,9 @@ public class BlockQuote<J extends BlockQuote<J>>
 	{
 		this();
 		add(text);
-		Div d = new Div();
+		Span d = new Span();
 		d.setTag("footer");
 		d.setText(footer);
+		add(d);
 	}
 }

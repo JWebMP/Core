@@ -51,14 +51,14 @@ public abstract class UpdateAdapter<J extends UpdateAdapter<J>>
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public UpdateAdapter(Component component)
+	public UpdateAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.update, component);
 
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
+	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		try
 		{
@@ -80,7 +80,7 @@ public abstract class UpdateAdapter<J extends UpdateAdapter<J>>
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onUpdate(AjaxCall call, AjaxResponse response);
+	public abstract void onUpdate(AjaxCall<?> call, AjaxResponse<?> response);
 
 	/**
 	 * Method onCall ...

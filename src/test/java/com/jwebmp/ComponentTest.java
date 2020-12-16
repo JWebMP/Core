@@ -39,8 +39,7 @@ public class ComponentTest
 	@Test
 	public void test()
 	{
-		Component head = new Component(ComponentTypes.Head)
-		{};
+		Component head = new Component(ComponentTypes.Head);
 		head.add(new Meta("name"));
 		head.add(new Meta(Meta.MetadataFields.Author, "Author Me"));
 		ComponentHierarchyBase body = new ComponentHierarchyBase(ComponentTypes.Body);

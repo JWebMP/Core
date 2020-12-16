@@ -23,6 +23,7 @@ import com.jwebmp.core.base.html.interfaces.NoIDTag;
 import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
 import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
 import com.jwebmp.core.base.html.interfaces.children.DescriptionListChildren;
+import com.jwebmp.core.base.html.interfaces.children.NoChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
@@ -48,15 +49,12 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * &lt;p&gt;
  *
  * @param <J>
- *
  * @author GedMarc
  */
 public class DescriptionTag<J extends DescriptionTag<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, NoEvents, J>
-		implements NoIDTag, NoNewLineBeforeClosingTag, NoNewLineForRawText, DescriptionListChildren<IComponentHierarchyBase, J>
+		extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+		implements NoIDTag, NoNewLineBeforeClosingTag, NoNewLineForRawText, DescriptionListChildren
 {
-
-
 	/**
 	 * Constructs a new Description Tag
 	 */

@@ -22,8 +22,7 @@ import com.jwebmp.core.base.html.attributes.NoAttributes;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
 import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
-import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
-import com.jwebmp.core.base.html.interfaces.children.HeaderGroupChildren;
+import com.jwebmp.core.base.html.interfaces.children.*;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 
@@ -59,20 +58,17 @@ import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
  * <p>
  *
  * @param <J>
- *
  * @author GedMarc
  * @since forever
  */
 public class HeaderText<J extends HeaderText<J>>
-		extends Component<IComponentHierarchyBase, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements BodyChildren<IComponentHierarchyBase, J>,
-				           HeaderGroupChildren<IComponentHierarchyBase, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText
+		extends Component<IComponentHierarchyBase<?, ?>, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements BodyChildren,
+		           HeaderGroupChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, FormChildren, ListItemChildren, ListChildren
 
 {
-
-
 	private HeaderTypes headerType;
-
+	
 	/**
 	 * Constructs a new blank header of type H1
 	 */
@@ -80,14 +76,12 @@ public class HeaderText<J extends HeaderText<J>>
 	{
 		this(HeaderTypes.H1, "");
 	}
-
+	
 	/**
 	 * Constructs a new header of specified type with the text
 	 *
-	 * @param headerType
-	 * 		The type of header
-	 * @param text
-	 * 		The text for the header
+	 * @param headerType The type of header
+	 * @param text       The text for the header
 	 */
 	public HeaderText(HeaderTypes headerType, String text)
 	{
@@ -95,7 +89,7 @@ public class HeaderText<J extends HeaderText<J>>
 		setText(text == null ? "" : text);
 		this.headerType = headerType;
 	}
-
+	
 	/**
 	 * Returns the current header text
 	 *
@@ -105,21 +99,20 @@ public class HeaderText<J extends HeaderText<J>>
 	{
 		return getText(0).toString();
 	}
-
+	
 	/**
 	 * Sets the current text
 	 *
-	 * @param headerText
-	 * 		The text for the header
-	 *
+	 * @param headerText The text for the header
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public final J setHeaderText(String headerText)
 	{
 		setText(headerText);
 		return (J) this;
 	}
-
+	
 	@Override
 	public int hashCode()
 	{
@@ -127,7 +120,7 @@ public class HeaderText<J extends HeaderText<J>>
 		result = 31 * result + getHeaderType().hashCode();
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object o)
 	{
@@ -143,12 +136,12 @@ public class HeaderText<J extends HeaderText<J>>
 		{
 			return false;
 		}
-
+		
 		HeaderText<?> that = (HeaderText<?>) o;
-
+		
 		return getHeaderType() == that.getHeaderType();
 	}
-
+	
 	/**
 	 * Returns the current header type
 	 *
@@ -158,15 +151,14 @@ public class HeaderText<J extends HeaderText<J>>
 	{
 		return headerType;
 	}
-
+	
 	/**
 	 * Sets this headers type
 	 *
-	 * @param headerType
-	 * 		The type of header this is
-	 *
+	 * @param headerType The type of header this is
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public J setHeaderType(HeaderTypes headerType)
 	{
 		this.headerType = headerType;
