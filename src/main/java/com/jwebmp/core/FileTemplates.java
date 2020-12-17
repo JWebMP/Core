@@ -239,18 +239,18 @@ public class FileTemplates
 		StringBuilder template = TemplateScripts.get(templateName);
 		if (template == null || alwaysRefresh)
 		{
+			String templateFileName = fileName;
+			if (!(fileName.contains(".html") || fileName.contains(".htm") || fileName.contains(".js") || fileName.contains(".css") || fileName.contains(
+					".min") || fileName.contains(".txt")))
+			{
+				templateFileName += ".js";
+			}
+			if (templateFileName.endsWith(".min"))
+			{
+				templateFileName = templateFileName + ".js";
+			}
 			try
 			{
-				String templateFileName = fileName;
-				if (!(fileName.contains(".html") || fileName.contains(".htm") || fileName.contains(".js") || fileName.contains(".css") || fileName.contains(
-						".min") || fileName.contains(".txt")))
-				{
-					templateFileName += ".js";
-				}
-				if (templateFileName.endsWith(".min"))
-				{
-					templateFileName = templateFileName + ".js";
-				}
 				String contents = IOUtils.toString(referenceClass.getResourceAsStream(templateFileName), StaticStrings.UTF_CHARSET);
 				setTemplateScript(templateName, new StringBuilder(contents));
 			}
@@ -265,7 +265,7 @@ public class FileTemplates
 			}
 			catch (NullPointerException npe)
 			{
-				LOG.log(Level.SEVERE, "template file [" + fileName + "(.js)] not found.", npe);
+				LOG.log(Level.SEVERE, "template file [" + templateFileName + "] not found.", npe);
 			}
 			catch (Exception npe)
 			{

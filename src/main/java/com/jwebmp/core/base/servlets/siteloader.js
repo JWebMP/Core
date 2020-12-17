@@ -186,7 +186,9 @@ jw.actions.processSessionStorage = function (result) {
  * @returns {undefined}
  */
 jw.actions.processCss = function (result) {
-    $('head').append('<style>' + result + '</style>');
+    $('.dynamic-css').remove();
+    if(result.css)
+        $('head').append('<style class="dynamic-css">' + result.css + '</style>');
 };
 
 /*
