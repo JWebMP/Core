@@ -76,7 +76,7 @@ public class PageTest
 	@Test
 	public void testBlankPage()
 	{
-		Page p = getInstance();
+		Page<?> p = getInstance();
 		System.out.println(p);
 		System.out.println(p.toString(0));
 	}
@@ -84,7 +84,7 @@ public class PageTest
 	@Test
 	public void testCSS()
 	{
-		Page p = getInstance();
+		Page<?> p = getInstance();
 		p.getBody()
 		 .add(new Comment("Meh"));
 		p.getBody()
@@ -109,7 +109,7 @@ public class PageTest
 	@Test
 	public void testCSSWithChildren()
 	{
-		Page p = getInstance();
+		Page<?> p = getInstance();
 		p.getBody()
 		 .add(new Comment("Meh"));
 		p.getBody()

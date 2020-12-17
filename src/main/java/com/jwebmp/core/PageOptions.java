@@ -48,7 +48,7 @@ public class PageOptions<J extends PageOptions<J>>
 	 * The back reference to the page
 	 */
 	@JsonIgnore
-	private final Page page;
+	private final Page<?> page;
 	/**
 	 * Page Author
 	 */
@@ -105,7 +105,7 @@ public class PageOptions<J extends PageOptions<J>>
 	 *
 	 * @param page
 	 */
-	protected PageOptions(Page page)
+	protected PageOptions(Page<?> page)
 	{
 		this.page = page;
 	}

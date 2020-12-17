@@ -42,7 +42,7 @@ public class CSSLinkTest
 	@Test
 	public void testOutput()
 	{
-		Page page = getInstance();
+		Page<?> page = getInstance();
 		page.getBody()
 		    .add(new Comment("meh"));
 		page.getHead()

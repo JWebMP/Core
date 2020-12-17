@@ -107,7 +107,7 @@ public class CSSComposerTest
 	@Test
 	public void testCSSRender()
 	{
-		Page p = new Page();
+		Page<?> p = new Page();
 		Body b = new Body(p);
 		InnerClass ic;
 		b.add(ic = new InnerClass());

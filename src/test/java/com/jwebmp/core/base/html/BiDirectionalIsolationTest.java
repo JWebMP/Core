@@ -29,7 +29,7 @@ public class BiDirectionalIsolationTest
 {
 
 	private BiDirectionalIsolation bdi = new BiDirectionalIsolation();
-	private Page p = new Page();
+	private Page<?> p = new Page();
 	private Body b = new Body(p);
 
 	public BiDirectionalIsolationTest()

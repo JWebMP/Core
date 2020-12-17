@@ -195,7 +195,7 @@ public class ScriptsDynamicPageConfigurator
                        *       	   	   ,
                        *       	   	   ?>
 	 */
-	private Style<?, ?> getCss(Page page)
+	private Style<?, ?> getCss(Page<?> page)
 	{
 		CSSComposer comp = new CSSComposer();
 		comp.addComponent(page, true);

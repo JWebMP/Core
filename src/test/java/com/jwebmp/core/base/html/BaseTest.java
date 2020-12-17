@@ -70,7 +70,7 @@ public class BaseTest
 	public void testBaseOutputTiny()
 	{
 		JQueryPageConfigurator.setRequired(false);
-		Page page = getInstance();
+		Page<?> page = getInstance();
 		Base instance = new Base();
 		page.getOptions()
 		    .setBase(instance);
@@ -87,7 +87,7 @@ public class BaseTest
 	public void testBaseOutputOldBrowsers()
 	{
 		JQueryPageConfigurator.setRequired(false);
-		Page page = getInstance();
+		Page<?> page = getInstance();
 		Base instance = new Base();
 		page.getOptions()
 		    .setBase(instance);
@@ -107,7 +107,7 @@ public class BaseTest
 	public void testBaseOutputOldBrowsersTiny()
 	{
 		JQueryPageConfigurator.setRequired(false);
-		Page page = getInstance();
+		Page<?> page = getInstance();
 		Base instance = new Base();
 		page.getOptions()
 		    .setBase(instance);
@@ -127,7 +127,7 @@ public class BaseTest
 	public void testBaseOutput()
 	{
 		JQueryPageConfigurator.setRequired(false);
-		Page page = getInstance();
+		Page<?> page = getInstance();
 		Base instance = new Base();
 		page.getOptions()
 		    .setBase(instance);
@@ -143,7 +143,7 @@ public class BaseTest
 	public void testBaseTiny()
 	{
 		JQueryPageConfigurator.setRequired(false);
-		Page page = getInstance();
+		Page<?> page = getInstance();
 		Base instance = new Base();
 		page.getOptions()
 		    .setBase(instance);
@@ -163,7 +163,7 @@ public class BaseTest
 	public void testBaseTinyPage()
 	{
 		JQueryPageConfigurator.setRequired(false);
-		Page page = getInstance();
+		Page<?> page = getInstance();
 		Base instance = new Base();
 		page.getOptions()
 		    .setBase(instance);

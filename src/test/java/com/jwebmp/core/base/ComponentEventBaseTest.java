@@ -175,7 +175,7 @@ public class ComponentEventBaseTest
 		           .setID("clickEvent");
 		d.addEvent(e);
 
-		Page page = getInstance();
+		Page<?> page = getInstance();
 		page.getBody()
 		    .add(d);
 		System.out.println(page.toString(true));

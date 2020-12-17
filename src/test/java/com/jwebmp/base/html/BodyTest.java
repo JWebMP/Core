@@ -32,7 +32,7 @@ public class BodyTest
 		extends BaseTestClass
 {
 
-	private Page p;
+	private Page<?> p;
 	private Body b;
 
 	public BodyTest()

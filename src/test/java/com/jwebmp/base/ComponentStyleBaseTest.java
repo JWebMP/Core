@@ -51,7 +51,7 @@ public class ComponentStyleBaseTest
 	@Test
 	public void testCSS()
 	{
-		Page p = getInstance();
+		Page<?> p = getInstance();
 		Body b = p.getBody();
 
 		b.getCss()

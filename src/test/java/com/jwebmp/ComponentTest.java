@@ -54,7 +54,7 @@ public class ComponentTest
 	@Test
 	public void testAdd()
 	{
-		Page p = new Page();
+		Page<?> p = new Page();
 		Body b = p.getBody();
 		Paragraph pa = new Paragraph("String adds a paragraph");
 		b.add(pa);

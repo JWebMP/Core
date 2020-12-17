@@ -28,7 +28,7 @@ public class PageProvider
 	private static final Map<String, Class<? extends IPage<?>>> urlToClass = new HashMap<>();
 	
 	@Override
-	public Page get()
+	 public Page<?> get()
 	{
 		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
 		String pathInfo = request.getRequestURI();
