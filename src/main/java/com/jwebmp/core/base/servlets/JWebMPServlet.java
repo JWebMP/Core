@@ -34,7 +34,7 @@ import java.util.logging.Logger;
  * @since 2012/10/09
  */
 @Singleton
-public class JWebSwingServlet
+public class JWebMPServlet
 		extends JWDefaultServlet
 {
 
@@ -47,7 +47,7 @@ public class JWebSwingServlet
 	/**
 	 * Constructs a new JWebSwing Servlet that is not session aware
 	 */
-	public JWebSwingServlet()
+	public JWebMPServlet()
 	{
 		//Nothing Needed
 	}
@@ -82,12 +82,12 @@ public class JWebSwingServlet
 	{
 		try
 		{
-			JWebSwingServlet.log.log(Level.INFO, "Destroying Servlet JWebSwing Servlet and all Static Objects");
+			JWebMPServlet.log.log(Level.INFO, "Destroying Servlet JWebMP Servlet and all Static Objects");
 			GuiceContext.destroy();
 		}
 		catch (Exception t)
 		{
-			JWebSwingServlet.log.log(Level.SEVERE, "Unable to destroy", t);
+			JWebMPServlet.log.log(Level.SEVERE, "Unable to destroy", t);
 		}
 		super.destroy();
 	}

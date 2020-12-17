@@ -17,7 +17,8 @@ import static com.jwebmp.core.base.servlets.enumarations.ComponentTypes.*;
 
 @RequestScoped
 public class ContentSecurityPolicy<J extends ContentSecurityPolicy<J>>
-        extends DivSimple<J> implements IContentSecurityPolicy<J>
+        extends DivSimple<J> implements IContentSecurityPolicy<J>,
+                                        com.jwebmp.core.base.html.interfaces.children.HeadChildren
 {
     private static final String httpEquivName = "Content-Security-Policy";
     public static final String self = "'self'";

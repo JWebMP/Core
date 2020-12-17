@@ -17,7 +17,7 @@
 package com.jwebmp.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.inject.servlet.RequestScoped;
+import com.google.inject.Inject;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.annotations.PageConfiguration;
@@ -30,7 +30,6 @@ import com.jwebmp.core.base.html.attributes.ScriptAttributes;
 import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
 import com.jwebmp.core.base.html.interfaces.children.HtmlChildren;
 import com.jwebmp.core.base.interfaces.IComponentFeatureBase;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.SessionStorageProperties;
@@ -65,7 +64,6 @@ import static com.jwebmp.core.services.JWebMPServicesBindings.IPageConfigurators
  */
 @SuppressWarnings({"unused"})
 @PageConfiguration
-@RequestScoped
 public class Page<J extends Page<J>>
 		extends Html<HtmlChildren, J>
 		implements IPage<J>
@@ -81,6 +79,7 @@ public class Page<J extends Page<J>>
 	 * The current user agent of the render
 	 */
 	@JsonIgnore
+	@Inject
 	private ReadableUserAgent userAgent;
 
 	/**
@@ -428,7 +427,8 @@ public class Page<J extends Page<J>>
 	@Override
 	public boolean isMobileOrSmartTablet()
 	{
-		Set<ReadableDeviceCategory.Category> mobiles = EnumSet.of(ReadableDeviceCategory.Category.SMARTPHONE, ReadableDeviceCategory.Category.SMART_TV,
+		Set<ReadableDeviceCategory.Category> mobiles = EnumSet.of(ReadableDeviceCategory.Category.SMARTPHONE,
+		                                                          ReadableDeviceCategory.Category.SMART_TV,
 		                                                          ReadableDeviceCategory.Category.TABLET);
 		return mobiles.contains(getUserAgent().getDeviceCategory()
 		                                      .getCategory());
@@ -513,16 +513,6 @@ public class Page<J extends Page<J>>
 		return (J) this;
 	}
 
-	@Override
-	public @NotNull Set<IComponentHierarchyBase<?,?>> getChildrenHierarchy()
-	{
-		Set<IComponentHierarchyBase<?,?>> pageChildren = new LinkedHashSet<>();
-		pageChildren.addAll(getHead().getChildrenHierarchy(true));
-		pageChildren.addAll(getBody().getChildrenHierarchy(true));
-		pageChildren.add(this);
-		return pageChildren;
-	}
-
 	/**
 	 * Overidden method to return this, beware circular joins
 	 *
@@ -536,31 +526,35 @@ public class Page<J extends Page<J>>
 	{
 		return this;
 	}
-
+	
+	
 	/**
-	 * Configures the page and all its components
+	 * Initialize all children
 	 */
 	@Override
-	public void preConfigure()
+	public void init()
 	{
 		if (!isInitialized())
 		{
-			init();
-		}
-		if (!isConfigured())
-		{
-			configurePage();
-
-			getHead().preConfigure();
-			getBody().preConfigure();
-
 			configurePageHeader();
 			addVariablesScriptToPage();
+			
+			if(!getHead().getChildren().isEmpty())
+			{
+				add(getHead());
+				getHead().init();
+			}
+			getBody().init();
+			if(!getBody().getChildren().isEmpty())
+			{
+				add(getBody());
+			}
+			configurePage();
+			pageInitialized = true;
 		}
-		super.preConfigure();
-		setConfigured(true);
+		super.init();
 	}
-
+	
 	/**
 	 * Returns all the feature queries associated to this component and all its children
 	 *
@@ -571,51 +565,6 @@ public class Page<J extends Page<J>>
 	public Set<StringBuilder> getQueriesAll()
 	{
 		return getBody().getQueriesAll();
-	}
-
-	/**
-	 * Renders all the children to a string builder
-	 *
-	 * @return The string representation of this page
-	 *
-	 * @see com.jwebmp.core.base.ComponentHierarchyBase#renderChildren()
-	 */
-	@NotNull
-	@Override
-	protected StringBuilder renderChildren()
-	{
-		StringBuilder pageOutput = new StringBuilder();
-		StringBuilder bodyOutput = null;
-
-		boolean bodied = false;
-		boolean headed = false;
-
-		if (!isBodyEmpty())
-		{
-			bodyOutput = new StringBuilder(getBody().toString(1));
-		}
-		if (!isHeadEmpty())
-		{
-			pageOutput.append(getNewLine())
-			          .append(getCurrentTabIndentString())
-			          .append(getHead().toString(1))
-			          .append(getNewLine());
-			headed = true;
-		}
-		if (bodyOutput != null)
-		{
-			pageOutput.append(getNewLine())
-			          .append(getCurrentTabIndentString())
-			          .append(bodyOutput)
-			          .append(getNewLine());
-			bodied = true;
-		}
-
-		if (!headed && !bodied)
-		{
-			pageOutput.append(getNewLine());
-		}
-		return pageOutput;
 	}
 
 	/**
@@ -638,21 +587,6 @@ public class Page<J extends Page<J>>
 	{
 		return getHead().getChildren()
 		                .isEmpty();
-	}
-
-	/**
-	 * Initialize all children
-	 */
-	@Override
-	public void init()
-	{
-		if (!pageInitialized)
-		{
-			getHead().init();
-			getBody().init();
-			pageInitialized = true;
-		}
-		setInitialized(true);
 	}
 
 	/**

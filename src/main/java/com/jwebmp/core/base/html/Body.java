@@ -91,6 +91,7 @@ public class Body<F extends BodyFeatures, J extends Body<F, J>>
 			setPage(page);
 		}
 		setID("body");
+		
 	}
 	
 	@NotNull
@@ -100,31 +101,6 @@ public class Body<F extends BodyFeatures, J extends Body<F, J>>
 		addStyle("width:100%;height:100%;margin:0px;");
 		getPage().addStyle("width:100%;height:100%;margin:0px;");
 		return (J) this;
-	}
-	
-	@Override
-	public int hashCode()
-	{
-		return Objects.hash(super.hashCode(), isRenderedScripts());
-	}
-	
-	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof Body))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-		Body<?, ?> body = (Body<?, ?>) o;
-		return isRenderedScripts() == body.isRenderedScripts();
 	}
 	
 	/**

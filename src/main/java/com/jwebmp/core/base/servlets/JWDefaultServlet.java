@@ -231,8 +231,11 @@ public abstract class JWDefaultServlet
 	@SuppressWarnings("WeakerAccess")
 	protected Page<?> getPageFromGuice()
 	{
-		return GuiceContext.inject()
+		Page<?> p = GuiceContext.inject()
 		                   .getInstance(Page.class);
+		p.getOptions()
+		 .setGenerator("JWebMP - https://www.jwebmp.com");
+		return p;
 	}
 
 	/**
@@ -258,9 +261,9 @@ public abstract class JWDefaultServlet
 			p.getOptions()
 			 .setAuthor("Marc Magon");
 			p.getOptions()
-			 .setDescription("JWebSwing Error Generated Page");
+			 .setDescription("JWebMP Error Generated Page");
 			p.getOptions()
-			 .setGenerator("JWebSwing - https://sourceforge.net/projects/jwebswing/");
+			 .setGenerator("JWebMP - https://www.jwebmp.com");
 
 			Body<?,?> b = p.getBody();
 			b.add("The following error was encountered during render<br/><hr/>");

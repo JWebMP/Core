@@ -203,10 +203,11 @@ public class JWebMPSiteBinder
 		      .in(SessionScoped.class);
 
 		JWebMPSiteBinder.log.fine("Bound Page.class");
-
+		
 		module.bind(IPage.class)
-		      .toProvider(new PageProvider())
-		      .in(RequestScoped.class);
+		      .toProvider(new PageProvider());
+		module.bind(Page.class)
+		      .toProvider(new PageProvider());
 		
 		@SuppressWarnings("rawtypes")
 		Set<IPage> notInjectedPages = GuiceContext.instance()
@@ -227,7 +228,9 @@ public class JWebMPSiteBinder
 				   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
 				   .append(")");
 				module.serveRegex$(url.toString())
-				      .with(JWebSwingServlet.class);
+				      .with(JWebMPServlet.class);
+				PageProvider.getUrlToClass()
+				            .put(pc.url(), (Class<? extends IPage<?>>) page.getClass());
 				JWebMPSiteBinder.log.log(Level.CONFIG, "Serving Page URL [{0}] with [{1}]", new Object[]{pc.url(), page.getClass().getCanonicalName()});
 			}
 		}

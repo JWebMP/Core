@@ -229,13 +229,13 @@ module com.jwebmp.core {
 	provides com.jwebmp.core.services.IPageConfigurator with com.jwebmp.core.base.page.ScriptsDynamicPageConfigurator, com.jwebmp.core.base.page.CSSLinksInsertPageConfigurator, com.jwebmp.core.base.page.ScriptsInsertPageConfigurator, com.jwebmp.core.base.page.TopShelfScriptsInsertPageConfigurator, com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 
 	opens com.jwebmp.core.base.servlets to com.google.guice, com.fasterxml.jackson.databind;
-
+	
 	opens com.jwebmp.core.base.page to com.google.guice;
 	opens com.jwebmp.core.base.ajax to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.base.html to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.htmlbuilder.javascript to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.base to com.fasterxml.jackson.databind;
-	opens com.jwebmp.core to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core to com.google.guice, com.fasterxml.jackson.databind;
 
 	opens com.jwebmp.core.implementations to com.google.guice, com.fasterxml.jackson.databind;
 

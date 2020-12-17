@@ -28,10 +28,8 @@ import com.jwebmp.core.base.html.interfaces.HTMLFeatures;
 import com.jwebmp.core.base.html.interfaces.NoClassAttribute;
 import com.jwebmp.core.base.html.interfaces.NoIDTag;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.base.servlets.enumarations.DevelopmentEnvironments;
-
 import jakarta.validation.constraints.NotNull;
 
 /**
