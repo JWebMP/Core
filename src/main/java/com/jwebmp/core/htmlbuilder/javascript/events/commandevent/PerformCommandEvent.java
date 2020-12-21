@@ -17,12 +17,17 @@
 
 package com.jwebmp.core.htmlbuilder.javascript.events.commandevent;
 
+import com.guicedee.guicedinjection.json.StaticStrings;
 import com.jwebmp.core.Component;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * This class enables a JQuery call to execute a java function directly after it
@@ -35,11 +40,19 @@ import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 public abstract class PerformCommandEvent
 		extends Event<GlobalFeatures, PerformCommandEvent>
 {
-	public PerformCommandEvent(Component<?,?,?,?,?> component)
+	public PerformCommandEvent(IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.performCommand, component);
 	}
 
+	@Override
+	public void assignFunctionsToComponent()
+	{
+		String jQuery = "jw.env.controller.makeCall(jw.env.controller.makeEmptyArticle('" +
+				getComponent().asBase().getID() + "','" + getClassCanonicalName() + "'," + renderVariables()+ "));";
+		addQuery(new StringBuilder(jQuery));
+	}
+	
 	@Override
 	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{

@@ -16,31 +16,26 @@
  */
 package com.jwebmp.core.base.servlets;
 
+import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.json.StaticStrings;
+import com.guicedee.guicedservlets.GuicedServletKeys;
+import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxEventValue;
-import com.jwebmp.core.base.client.Browsers;
 import com.jwebmp.core.base.html.Body;
 import com.jwebmp.core.base.html.PreFormattedText;
 import com.jwebmp.core.exceptions.InvalidRequestException;
 import com.jwebmp.core.exceptions.MissingComponentException;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.services.IErrorPage;
-import com.guicedee.guicedinjection.json.StaticStrings;
 import com.jwebmp.core.utilities.TextUtilities;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.SiteCallIntercepter;
-import com.guicedee.logger.LogFactory;
-import net.sf.uadetector.ReadableUserAgent;
-import net.sf.uadetector.UserAgentStringParser;
-
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.constraints.NotNull;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
@@ -50,7 +45,8 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
+import static com.guicedee.guicedinjection.GuiceContext.get;
+import static com.jwebmp.interception.JWebMPInterceptionBinder.SiteCallInterceptorKey;
 
 /**
  * Provides default methods for authentication authorization etc
@@ -113,7 +109,7 @@ public abstract class JWDefaultServlet
 	@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 	public boolean validateCall(AjaxCall<?> ajaxCall) throws InvalidRequestException
 	{
-		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
+		HttpServletRequest request = get(GuicedServletKeys.getHttpServletRequestKey());
 		if (ajaxCall.getComponentId() == null)
 		{
 			JWDefaultServlet.log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Component ID Not Found]", request.getSession()
@@ -141,8 +137,7 @@ public abstract class JWDefaultServlet
 	@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 	public boolean validatePage() throws MissingComponentException
 	{
-		Page<?> page = GuiceContext.inject()
-		                        .getInstance(Page.class);
+		Page<?> page = get(Page.class);
 		if (page == null)
 		{
 			throw new MissingComponentException(
@@ -165,7 +160,7 @@ public abstract class JWDefaultServlet
 	@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 	public boolean validateRequest(AjaxCall<?> ajaxCall) throws InvalidRequestException
 	{
-		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
+		HttpServletRequest request = get(GuicedServletKeys.getHttpServletRequestKey());
 		Date datetime = ajaxCall.getDatetime();
 		if (datetime == null)
 		{
@@ -197,7 +192,7 @@ public abstract class JWDefaultServlet
 			throw new InvalidRequestException("Invalid Event Value");
 		}
 
-		GuiceContext.get(SiteCallInterceptorKey)
+		get(SiteCallInterceptorKey)
 		            .forEach(SiteCallIntercepter::intercept);
 
 		return true;
@@ -231,8 +226,7 @@ public abstract class JWDefaultServlet
 	@SuppressWarnings("WeakerAccess")
 	protected Page<?> getPageFromGuice()
 	{
-		Page<?> p = GuiceContext.inject()
-		                   .getInstance(Page.class);
+		Page<?> p = get(Page.class);
 		p.getOptions()
 		 .setGenerator("JWebMP - https://www.jwebmp.com");
 		return p;
@@ -272,9 +266,10 @@ public abstract class JWDefaultServlet
 		}
 		else
 		{
-			return (Page<?>) GuiceContext.get(errorPages.iterator()
+			IErrorPage p = get(errorPages.iterator()
 			                                         .next()
 			                                         .getClass());
+			return p.renderPage(t);
 		}
 	}
 
@@ -291,7 +286,6 @@ public abstract class JWDefaultServlet
 	{
 		try
 		{
-			processRequest(req, resp);
 			perform();
 		}
 		catch (Exception e)
@@ -301,111 +295,9 @@ public abstract class JWDefaultServlet
 	}
 
 	/**
-	 * Processes requests for the WebSwing Servlet.
-	 *
-	 * @param request
-	 * 		The Default Servlet request
-	 * @param response
-	 * 		The Default Servlet response
-	 */
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-	{
-		try
-		{
-			readRequestVariables(request);
-			readBrowserInformation(request);
-		}
-		catch (MissingComponentException mce)
-		{
-			JWDefaultServlet.log.log(Level.SEVERE, "No Page For Servlet", mce);
-			Page<?> p = new Page<>();
-			p.getBody()
-			 .add("No Page or Body Configured for the JWebSwingServlet. [getPage()] returned nothing");
-			writeOutput(new StringBuilder(p.toString(0)), StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE, StaticStrings.UTF_CHARSET);
-		}
-		catch (Exception t)
-		{
-			JWDefaultServlet.log.log(Level.SEVERE, "Unable to render page", t);
-			response.setContentType(StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE);
-			writeOutput(new StringBuilder(getErrorPageHtml(t).toString(0)), StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE, StaticStrings.UTF_CHARSET);
-		}
-	}
-
-	/**
 	 * When to perform any commands
 	 */
 	public abstract void perform();
-
-	/**
-	 * Reads the variables into the HTTP session
-	 *
-	 * @param request
-	 * 		The physical request
-	 *
-	 * @throws com.jwebmp.core.exceptions.MissingComponentException
-	 * 		If something is wrong with the page
-	 */
-	@SuppressWarnings("WeakerAccess")
-	protected void readRequestVariables(HttpServletRequest request) throws MissingComponentException
-	{
-		Page<?> currentPage = getPageFromGuice();
-		HttpSession session = GuiceContext.get(GuicedServletKeys.getHttpSessionKey());
-		if (currentPage == null)
-		{
-			throw new MissingComponentException("[No Page]-[getPage() returning null in servlet class]");
-		}
-		if (session.isNew())
-		{
-			JWDefaultServlet.log.log(Level.FINER, "[SessionID]-[{0}];[Name]-[User Login];[Action]-[Session Page Added];", request.getSession()
-			                                                                                                                     .getId());
-		}
-	}
-
-	/**
-	 * Reads the user agent header into the browser object and places it for the page to render
-	 *
-	 * @param request
-	 * 		The request to read from
-	 */
-	@SuppressWarnings("WeakerAccess")
-	protected void readBrowserInformation(HttpServletRequest request)
-	{
-		String headerInformation = request.getHeader("User-Agent");
-		ReadableUserAgent agent = GuiceContext.get(UserAgentStringParser.class)
-		                                      .parse(headerInformation);
-		getPageFromGuice().setUserAgent(agent);
-		Browsers b;
-		if (agent.getVersionNumber()
-		         .getMajor()
-		         .isEmpty() && agent.getVersionNumber()
-		                            .getMinor()
-		                            .isEmpty())
-		{
-			b = Browsers.getBrowserFromNameAndVersion("Edge", 13);
-		}
-		else
-		{
-			b = Browsers.getBrowserFromNameAndVersion(agent.getName(), Double.parseDouble(agent.getVersionNumber()
-			                                                                                   .getMajor() + StaticStrings.STRING_DOT + agent.getVersionNumber()
-			                                                                                                                                 .getMinor()));
-		}
-		getPageFromGuice().setBrowser(b);
-
-		if (agent.getVersionNumber()
-		         .getMajor()
-		         .isEmpty())
-		{
-			JWDefaultServlet.log.log(Level.FINER,
-			                         "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}];[Operating System]-[{3}];[Device Category]-[{4}];[Device]-[{5}];[CSS]-[{6}];[HTML]-[{7}];",
-			                         new Object[]{request.getSession().getId(), b.getBrowserGroup().toString(), b.getBrowserVersion(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()});
-		}
-		else
-		{
-			JWDefaultServlet.log.log(Level.FINER,
-			                         "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}.{3}];[Operating System]-[{4}];[Device Category]-[{5}];[Device]-[{6}];[CSS]-[{7}];[HTML]-[{8}];",
-			                         new Object[]{request.getSession().getId(), agent.getName(), agent.getVersionNumber().getMajor(), agent.getVersionNumber().getMinor(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()});
-		}
-	}
 
 	/**
 	 * The output to write to the output stream
@@ -419,7 +311,7 @@ public abstract class JWDefaultServlet
 	 */
 	public void writeOutput(StringBuilder output, String contentType, Charset charSet)
 	{
-		HttpServletResponse response = GuiceContext.get(HttpServletResponse.class);
+		HttpServletResponse response =  get(GuicedServletKeys.getHttpServletResponseKey());
 		try (PrintWriter out = response.getWriter())
 		{
 			Date dataTransferDate = new Date();
@@ -455,33 +347,11 @@ public abstract class JWDefaultServlet
 	{
 		try
 		{
-			validate(req);
-			processRequest(req, resp);
 			perform();
 		}
 		catch (Exception e)
 		{
 			JWDefaultServlet.log.log(Level.SEVERE, "Security Exception in Validation", e);
-		}
-	}
-
-	/**
-	 * Validates the session
-	 *
-	 * @param request
-	 * 		The physical request
-	 *
-	 * @throws jakarta.servlet.ServletException
-	 * 		When any security check fails
-	 */
-	public void validate(HttpServletRequest request) throws ServletException
-	{
-		HttpSession session = request.getSession();
-		String sessionID = session.getId();
-		if (sessionID == null)
-		{
-			JWDefaultServlet.log.log(Level.SEVERE, "Session Doesn't Exist", new ServletException("There is no session for a data pull"));
-			throw new ServletException("There is no session for a data pull");
 		}
 	}
 

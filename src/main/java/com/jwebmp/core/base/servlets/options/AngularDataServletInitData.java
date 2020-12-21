@@ -30,8 +30,6 @@ import java.util.Map;
 public class AngularDataServletInitData<J extends AngularDataServletInitData<J>>
 		extends JavaScriptPart<J>
 {
-
-
 	/**
 	 * The local storage map to be set for the provider
 	 */

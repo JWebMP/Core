@@ -29,6 +29,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
+import static com.guicedee.guicedinjection.GuiceContext.get;
 import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -57,11 +58,9 @@ public class JavaScriptServlet
 	@Override
 	public void perform()
 	{
-		Page<?> page = (Page<?>) GuiceContext.get(IPage.class);
-		HttpServletRequest request = GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
-		readBrowserInformation(request);
-
-		GuiceContext.get(AjaxCallInterceptorKey)
+		Page<?> page = (Page<?>) get(IPage.class);
+		HttpServletRequest request = get(GuicedServletKeys.getHttpServletRequestKey());
+		get(AjaxCallInterceptorKey)
 		            .forEach(AjaxCallIntercepter::intercept);
 		page.toString(0);
 		FileTemplates.removeTemplate(JavaScriptServlet.scriptReplacement);

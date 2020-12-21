@@ -32,15 +32,12 @@ import com.jwebmp.core.services.IPage;
 public class CSSServlet
 		extends JWDefaultServlet
 {
-
-
 	@Override
 	public void perform()
 	{
 		@SuppressWarnings("MismatchedQueryAndUpdateOfStringBuilder")
 		StringBuilder scripts = new StringBuilder();
 		Page<?> page = (Page<?>) GuiceContext.get(IPage.class);
-		readBrowserInformation(GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey()));
 		StringBuilder css = page.getBody()
 		                        .renderCss(0);
 		scripts.append(css);

@@ -177,31 +177,6 @@ public class JWebMPSiteBinder
 		JWebMPSiteBinder.log.fine("Bound AjaxCall.class");
 		module.bind(AjaxCall.class)
 		      .in(RequestScoped.class);
-		//Bind Local Storage
-		JWebMPSiteBinder.log.fine("Bound Map.class with @Named(LocalStorage)");
-		module.bind(Map.class)
-		      .annotatedWith(Names.named("LocalStorage"))
-		      .toProvider(() -> GuiceContext.get(SessionStorageProperties.class)
-		                                    .getLocalStorage());
-		module.bind(JWebMPSiteBinder.localStorageTypeLiteral)
-		      .annotatedWith(Names.named("LocalStorage"))
-		      .toProvider(() -> GuiceContext.get(SessionStorageProperties.class)
-		                                    .getLocalStorage());
-
-		//Bind Session Storage
-		JWebMPSiteBinder.log.fine("Bound Map.class with @Named(SessionStorage)");
-		module.bind(Map.class)
-		      .annotatedWith(Names.named("SessionStorage"))
-		      .toProvider(() -> GuiceContext.get(SessionStorageProperties.class)
-		                                    .getSessionStorage());
-		module.bind(JWebMPSiteBinder.sessionStorageTypeLiteral)
-		      .annotatedWith(Names.named("SessionStorage"))
-		      .toProvider(() -> GuiceContext.get(SessionStorageProperties.class)
-		                                    .getSessionStorage());
-		JWebMPSiteBinder.log.fine("Bound SessionStorageProperties.class");
-		module.bind(SessionStorageProperties.class)
-		      .in(SessionScoped.class);
-
 		JWebMPSiteBinder.log.fine("Bound Page.class");
 		
 		module.bind(IPage.class)

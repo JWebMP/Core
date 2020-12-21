@@ -37,7 +37,6 @@ import static java.lang.String.*;
  * @since A long time ago in a galaxy far away
  */
 public class FileTemplates
-
 {
 	private static final java.util.logging.Logger LOG = LogFactory.getLog("FileTemplates");
 	/**
@@ -50,11 +49,10 @@ public class FileTemplates
 	 */
 	@JsonIgnore
 	private static final Map<String, StringBuilder> TemplateVariables = new ConcurrentHashMap<>();
-
-
+	
 	private FileTemplates()
 	{
-
+		//no config
 	}
 
 	/**
@@ -186,7 +184,7 @@ public class FileTemplates
 	 *
 	 * @return the name
 	 */
-	public static StringBuilder compileTemplate(Class referenceClass, String templateName)
+	public static StringBuilder compileTemplate(Class<?> referenceClass, String templateName)
 	{
 		String template = getFileTemplate(referenceClass, templateName).toString();
 		return processTemplate(templateName, template);
@@ -202,7 +200,7 @@ public class FileTemplates
 	 *
 	 * @return The string for the file
 	 */
-	public static StringBuilder getFileTemplate(Class referenceClass, String templateName)
+	public static StringBuilder getFileTemplate(Class<?> referenceClass, String templateName)
 	{
 		return getFileTemplate(referenceClass, templateName, templateName);
 	}
@@ -218,7 +216,7 @@ public class FileTemplates
 	 *
 	 * @return The string for the file
 	 */
-	public static StringBuilder getFileTemplate(Class referenceClass, String templateName, String fileName)
+	public static StringBuilder getFileTemplate(Class<?> referenceClass, String templateName, String fileName)
 	{
 		return getFileTemplate(referenceClass, templateName, fileName, false);
 	}
@@ -234,7 +232,7 @@ public class FileTemplates
 	 *
 	 * @return The string for the file
 	 */
-	public static StringBuilder getFileTemplate(Class referenceClass, String templateName, String fileName, boolean alwaysRefresh)
+	public static StringBuilder getFileTemplate(Class<?> referenceClass, String templateName, String fileName, boolean alwaysRefresh)
 	{
 		StringBuilder template = TemplateScripts.get(templateName);
 		if (template == null || alwaysRefresh)

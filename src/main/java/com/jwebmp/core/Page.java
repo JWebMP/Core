@@ -32,7 +32,6 @@ import com.jwebmp.core.base.html.interfaces.children.HtmlChildren;
 import com.jwebmp.core.base.interfaces.IComponentFeatureBase;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
-import com.jwebmp.core.base.servlets.SessionStorageProperties;
 import com.jwebmp.core.services.IPage;
 import com.jwebmp.core.services.IPageConfigurator;
 import com.jwebmp.core.utilities.StaticStrings;
@@ -680,28 +679,4 @@ public class Page<J extends Page<J>>
 			}
 		}
 	}
-
-
-	/**
-	 * Gets the local storage key from the system
-	 */
-	@SuppressWarnings("unchecked")
-	public UUID getLocalStorageKey()
-	{
-		SessionStorageProperties<?> sp = get(SessionStorageProperties.class);
-		Map<String, String> localStorage = sp.getLocalStorage();
-		if (!localStorage.containsKey(StaticStrings.LOCAL_STORAGE_PARAMETER_KEY))
-		{
-			String uuid = UUID.randomUUID()
-			                  .toString();
-			String clientIP = SessionHelper.getClientIPAddress();
-			get(AjaxResponse.class).getLocalStorage()
-			                       .put(StaticStrings.LOCAL_STORAGE_PARAMETER_KEY, uuid);
-
-			localStorage.put(StaticStrings.LOCAL_STORAGE_PARAMETER_KEY, uuid);
-		}
-		String guid = localStorage.get(StaticStrings.LOCAL_STORAGE_PARAMETER_KEY);
-		return UUID.fromString(guid);
-	}
-
 }

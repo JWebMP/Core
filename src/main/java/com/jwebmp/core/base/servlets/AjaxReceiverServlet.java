@@ -21,6 +21,7 @@ import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.Event;
+import com.jwebmp.core.Page;
 import com.jwebmp.core.base.ajax.*;
 import com.jwebmp.core.exceptions.InvalidRequestException;
 import com.jwebmp.core.exceptions.MissingComponentException;
@@ -34,6 +35,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static com.guicedee.guicedinjection.GuiceContext.get;
 import static com.guicedee.guicedinjection.json.StaticStrings.CHAR_DOT;
 import static com.guicedee.guicedinjection.json.StaticStrings.CHAR_UNDERSCORE;
 import static com.jwebmp.interception.JWebMPInterceptionBinder.AjaxCallInterceptorKey;
@@ -61,26 +63,31 @@ public class AjaxReceiverServlet
 	public void perform()
 	{
 		StringBuilder output = new StringBuilder();
-		HttpServletRequest request = GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
+		HttpServletRequest request = get(GuicedServletKeys.getHttpServletRequestKey());
 		try
 		{
 			AjaxCall<?> ajaxCallIncoming = new AjaxCall<>().From(request.getInputStream(), AjaxCall.class);
-			AjaxCall<?> ajaxCall = GuiceContext.get(AjaxCall.class);
+			AjaxCall<?> ajaxCall = get(AjaxCall.class);
 			ajaxCall.fromCall(ajaxCallIncoming);
 
-			AjaxResponse<?> ajaxResponse = GuiceContext.get(AjaxResponse.class);
+			AjaxResponse<?> ajaxResponse = get(AjaxResponse.class);
 
 			validateCall(ajaxCall);
 			validatePage();
-			validateRequest(ajaxCall);
-
-			Event<?,?> triggerEvent = processEvent();
-
-			GuiceContext.get(AjaxCallInterceptorKey)
-			            .forEach(AjaxCallIntercepter::intercept);
-
-			triggerEvent.fireEvent(ajaxCall, ajaxResponse);
-
+			if("body".equals(ajaxCall.getComponentId()))
+			{
+				Page<?> p = get(Page.class);
+				ajaxResponse = p.onConnect(ajaxCall, ajaxResponse);
+			}else
+			{
+				validateRequest(ajaxCall);
+				Event<?, ?> triggerEvent = processEvent();
+				
+				get(AjaxCallInterceptorKey)
+				            .forEach(AjaxCallIntercepter::intercept);
+				
+				triggerEvent.fireEvent(ajaxCall, ajaxResponse);
+			}
 			output = new StringBuilder(ajaxResponse.toString());
 		}
 		catch (InvalidRequestException ie)
@@ -130,10 +137,10 @@ public class AjaxReceiverServlet
 		Event<?,?> triggerEvent = null;
 		try
 		{
-			AjaxCall<?> call = GuiceContext.get(AjaxCall.class);
+			AjaxCall<?> call = get(AjaxCall.class);
 			Class<?> eventClass = Class.forName(call.getClassName()
 			                                     .replace(CHAR_UNDERSCORE, CHAR_DOT));
-			triggerEvent = (Event<?,?>) GuiceContext.get(eventClass);
+			triggerEvent = (Event<?,?>) get(eventClass);
 			triggerEvent.setID(call.getEventId());
 		}
 		catch (ClassNotFoundException cnfe)
@@ -143,9 +150,9 @@ public class AjaxReceiverServlet
 			events.removeIf(event -> Modifier.isAbstract(event.getModifiers()));
 			for (Class<? extends Event<?,?>> event : events)
 			{
-				Event<?,?> instance = GuiceContext.get(event);
+				Event<?,?> instance = get(event);
 				if (instance.getID()
-				            .equals(GuiceContext.get(AjaxCall.class)
+				            .equals(get(AjaxCall.class)
 				                                .getEventId()))
 				{
 					triggerEvent = instance;
