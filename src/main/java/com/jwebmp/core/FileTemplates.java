@@ -127,8 +127,7 @@ public class FileTemplates
 				        iae);
 			}
 		}
-		TemplateScripts.put(templateName, new StringBuilder(templateOutput.trim()));
-		return TemplateScripts.get(templateName);
+		return new StringBuilder(templateOutput);
 	}
 
 	//public boolean doesFileExist()
