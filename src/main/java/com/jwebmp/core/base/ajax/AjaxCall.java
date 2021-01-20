@@ -26,6 +26,8 @@ import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.websocket.Session;
+
 import java.util.*;
 
 /**
@@ -94,7 +96,15 @@ public class AjaxCall<J extends AjaxCall<J>>
 	 * The given hash bang
 	 */
 	private String hashBang;
-
+	/**
+	 * If this call originates through a web socket (so there is no request or session scope),
+	 * or if it is a direct page call
+	 */
+	private boolean isWebSocketCall;
+	/**
+	 * The web socket session for this call
+	 */
+	private Session websocketSession;
 	/**
 	 * JSon Jackson Constructor
 	 */
@@ -324,7 +334,51 @@ public class AjaxCall<J extends AjaxCall<J>>
 		this.variableData = variableData;
 		return (J) this;
 	}
-
+	
+	/**
+	 * If this call originates through a web socket (so there is no request or session scope),
+	 * 	 * or if it is a direct page call
+	 * @return
+	 */
+	public boolean isWebSocketCall()
+	{
+		return isWebSocketCall;
+	}
+	
+	/**
+	 * If this call originates through a web socket (so there is no request or session scope),
+	 * 	 * or if it is a direct page call
+	 * @param webSocketCall
+	 */
+	@SuppressWarnings("unchecked")
+	public J setWebSocketCall(boolean webSocketCall)
+	{
+		isWebSocketCall = webSocketCall;
+		return (J)this;
+	}
+	
+	/**
+	 * The web socket session for this call
+	 * @return
+	 */
+	public Session getWebsocketSession()
+	{
+		return websocketSession;
+	}
+	
+	/**
+	 * The web socket session for this call
+	 *
+	 * @param websocketSession
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public J setWebsocketSession(Session websocketSession)
+	{
+		this.websocketSession = websocketSession;
+		return (J)this;
+	}
+	
 	@Override
 	@NotNull
 	public Map<String, String> getParameters()

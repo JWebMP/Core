@@ -23,6 +23,7 @@ import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxEventValue;
+import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.Body;
 import com.jwebmp.core.base.html.PreFormattedText;
 import com.jwebmp.core.exceptions.InvalidRequestException;
@@ -68,7 +69,7 @@ public abstract class JWDefaultServlet
 	 * Field allowOrigin
 	 */
 	private static String allowOrigin = "*";
-
+	
 	/**
 	 * Construct a new default servlett
 	 */
@@ -76,7 +77,7 @@ public abstract class JWDefaultServlet
 	{
 		//Nothing needed
 	}
-
+	
 	/**
 	 * Sets the stream allow origins
 	 *
@@ -86,23 +87,21 @@ public abstract class JWDefaultServlet
 	{
 		return JWDefaultServlet.allowOrigin;
 	}
-
+	
 	/**
 	 * Sets the streams allow origins
 	 *
-	 * @param allowOrigin
-	 * 		The allowed origins, default *
+	 * @param allowOrigin The allowed origins, default *
 	 */
 	public static void setAllowOrigin(@NotNull String allowOrigin)
 	{
 		JWDefaultServlet.allowOrigin = allowOrigin;
 	}
-
+	
 	/**
 	 * Validates the given call for the servlet
 	 *
-	 * @param ajaxCall
-	 * 		optional parameter to validate on more fields
+	 * @param ajaxCall optional parameter to validate on more fields
 	 *
 	 * @return If this call is valid
 	 */
@@ -116,7 +115,7 @@ public abstract class JWDefaultServlet
 			                                                                                                       .getId());
 			throw new InvalidRequestException("There is no Component ID in this call.");
 		}
-
+		
 		String componentId = ajaxCall.getComponentId();
 		if (componentId.isEmpty())
 		{
@@ -125,14 +124,13 @@ public abstract class JWDefaultServlet
 		}
 		return true;
 	}
-
+	
 	/**
 	 * Validates if the page is found and correct
 	 *
 	 * @return If the page can be retrieved
 	 *
-	 * @throws com.jwebmp.core.exceptions.MissingComponentException
-	 * 		if page returned is null
+	 * @throws com.jwebmp.core.exceptions.MissingComponentException if page returned is null
 	 */
 	@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 	public boolean validatePage() throws MissingComponentException
@@ -145,17 +143,15 @@ public abstract class JWDefaultServlet
 		}
 		return true;
 	}
-
+	
 	/**
 	 * Validates the request if it from a legitimate source
 	 *
-	 * @param ajaxCall
-	 * 		The incoming call object
+	 * @param ajaxCall The incoming call object
 	 *
 	 * @return if the request was validated
 	 *
-	 * @throws InvalidRequestException
-	 * 		If the request is invalid
+	 * @throws InvalidRequestException If the request is invalid
 	 */
 	@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 	public boolean validateRequest(AjaxCall<?> ajaxCall) throws InvalidRequestException
@@ -182,22 +178,24 @@ public abstract class JWDefaultServlet
 			                                                                                                     .getId());
 			throw new InvalidRequestException("Invalid Event Type From");
 		}
-
+		
 		AjaxEventValue<?> value = ajaxCall.getValue();
-
+		
 		if (value == null)
 		{
 			JWDefaultServlet.log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Value Is Missing]", request.getSession()
 			                                                                                                 .getId());
 			throw new InvalidRequestException("Invalid Event Value");
 		}
-
-		get(SiteCallInterceptorKey)
-		            .forEach(SiteCallIntercepter::intercept);
-
+		
+		for (SiteCallIntercepter<?> siteCallIntercepter : get(SiteCallInterceptorKey))
+		{
+			siteCallIntercepter.intercept(ajaxCall, GuiceContext.get(AjaxResponse.class));
+		}
+		
 		return true;
 	}
-
+	
 	/**
 	 * Generates the Page HTML
 	 *
@@ -217,7 +215,7 @@ public abstract class JWDefaultServlet
 		}
 		return html;
 	}
-
+	
 	/**
 	 * Finds the page for the current URL
 	 *
@@ -231,12 +229,11 @@ public abstract class JWDefaultServlet
 		 .setGenerator("JWebMP - https://www.jwebmp.com");
 		return p;
 	}
-
+	
 	/**
 	 * In the event of any error return this page.
 	 *
-	 * @param t
-	 * 		The exception thrown
+	 * @param t The exception thrown
 	 *
 	 * @return The rendered HTML.
 	 */
@@ -258,8 +255,8 @@ public abstract class JWDefaultServlet
 			 .setDescription("JWebMP Error Generated Page");
 			p.getOptions()
 			 .setGenerator("JWebMP - https://www.jwebmp.com");
-
-			Body<?,?> b = p.getBody();
+			
+			Body<?, ?> b = p.getBody();
 			b.add("The following error was encountered during render<br/><hr/>");
 			b.add(new PreFormattedText<>(TextUtilities.stackTraceToString(t)));
 			return p;
@@ -267,19 +264,17 @@ public abstract class JWDefaultServlet
 		else
 		{
 			IErrorPage p = get(errorPages.iterator()
-			                                         .next()
-			                                         .getClass());
+			                             .next()
+			                             .getClass());
 			return p.renderPage(t);
 		}
 	}
-
+	
 	/**
 	 * Does a default security check on the request
 	 *
-	 * @param req
-	 * 		The request
-	 * @param resp
-	 * 		The response
+	 * @param req  The request
+	 * @param resp The response
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -293,37 +288,34 @@ public abstract class JWDefaultServlet
 			JWDefaultServlet.log.log(Level.SEVERE, "Unable to Do Get", e);
 		}
 	}
-
+	
 	/**
 	 * When to perform any commands
 	 */
 	public abstract void perform();
-
+	
 	/**
 	 * The output to write to the output stream
 	 *
-	 * @param output
-	 * 		The specified output
-	 * @param contentType
-	 * 		The content type to send out
-	 * @param charSet
-	 * 		The charset to use
+	 * @param output      The specified output
+	 * @param contentType The content type to send out
+	 * @param charSet     The charset to use
 	 */
 	public void writeOutput(StringBuilder output, String contentType, Charset charSet)
 	{
-		HttpServletResponse response =  get(GuicedServletKeys.getHttpServletResponseKey());
+		HttpServletResponse response = get(GuicedServletKeys.getHttpServletResponseKey());
 		try (PrintWriter out = response.getWriter())
 		{
 			Date dataTransferDate = new Date();
 			response.setContentType(contentType);
 			response.setCharacterEncoding(charSet == null ? StaticStrings.UTF_CHARSET
-					                                                .toString() : charSet.displayName());
+					.toString() : charSet.displayName());
 			response.setHeader(StaticStrings.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER_NAME, JWDefaultServlet.allowOrigin);
 			response.setHeader(StaticStrings.ACCESS_CONTROL_ALLOW_CREDENTIALS_HEADER_NAME, "true");
 			response.setHeader(StaticStrings.ACCESS_CONTROL_ALLOW_METHODS_HEADER_NAME, "GET, POST");
 			response.setHeader(StaticStrings.ACCESS_CONTROL_ALLOW_HEADERS_HEADER_NAME, "Content-Type, Accept");
 			out.write(output.toString());
-
+			
 			long transferTime = new Date().getTime() - dataTransferDate.getTime();
 			JWDefaultServlet.log.log(Level.FINER, "[Network Reply Data Size]-[" + output.length() + "];");
 			JWDefaultServlet.log.log(Level.FINER, "[Network Reply]-[" + output + "];[Time]-[" + transferTime + "];");
@@ -333,14 +325,12 @@ public abstract class JWDefaultServlet
 			JWDefaultServlet.log.log(Level.SEVERE, "Unable to send response to client", io);
 		}
 	}
-
+	
 	/**
 	 * Does a default security check on the request
 	 *
-	 * @param req
-	 * 		The request
-	 * @param resp
-	 * 		The response
+	 * @param req  The request
+	 * @param resp The response
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -354,5 +344,5 @@ public abstract class JWDefaultServlet
 			JWDefaultServlet.log.log(Level.SEVERE, "Security Exception in Validation", e);
 		}
 	}
-
+	
 }

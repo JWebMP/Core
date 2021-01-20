@@ -83,8 +83,10 @@ public class AjaxReceiverServlet
 				validateRequest(ajaxCall);
 				Event<?, ?> triggerEvent = processEvent();
 				
-				get(AjaxCallInterceptorKey)
-				            .forEach(AjaxCallIntercepter::intercept);
+				for (AjaxCallIntercepter<?> ajaxCallIntercepter : get(AjaxCallInterceptorKey))
+				{
+					ajaxCallIntercepter.intercept(ajaxCall,ajaxResponse);
+				}
 				
 				triggerEvent.fireEvent(ajaxCall, ajaxResponse);
 			}

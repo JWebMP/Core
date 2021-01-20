@@ -8,6 +8,11 @@ import com.jwebmp.core.base.servlets.JWScriptServlet;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import com.jwebmp.core.services.IDynamicRenderingServlet;
 import com.guicedee.guicedinjection.json.StaticStrings;
+import jakarta.servlet.http.HttpServletRequest;
+
+import java.time.LocalDateTime;
+
+import static com.guicedee.guicedinjection.GuiceContext.*;
 
 public class JWebMPDynamicScriptRenderer
 		implements IDynamicRenderingServlet<JWebMPDynamicScriptRenderer>
@@ -15,8 +20,18 @@ public class JWebMPDynamicScriptRenderer
 	@Override
 	public String getScriptLocation(Page<?> page)
 	{
+		String queryParams = "";
+		try
+		{
+			HttpServletRequest hsr = get(HttpServletRequest.class);
+			queryParams = hsr.getQueryString();
+		}
+		catch (Throwable T)
+		{
+		
+		}
 		return JWebMPSiteBinder.getJWScriptLocation()
-		                       .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY);
+		                       .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY) + "?" + queryParams  + "&dt=" + LocalDateTime.now();
 	}
 
 	@Override

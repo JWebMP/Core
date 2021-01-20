@@ -2,7 +2,6 @@ module com.jwebmp.core {
 
 	requires transitive com.guicedee.logmaster;
 	requires transitive com.guicedee.guicedinjection;
-	requires transitive com.jwebmp.interception;
 	requires transitive com.guicedee.guicedservlets;
 
 	requires net.sf.uadetector.core;
@@ -19,6 +18,8 @@ module com.jwebmp.core {
 
 	requires com.fasterxml.jackson.databind;
 	requires com.fasterxml.jackson.core;
+	
+	requires jakarta.websocket.api;
 
 	requires com.google.common;
 	requires org.apache.commons.io;
@@ -132,6 +133,9 @@ module com.jwebmp.core {
 	exports com.jwebmp.core.htmlbuilder.css.tables;
 	exports com.jwebmp.core.htmlbuilder.css.text;
 	exports com.jwebmp.core.htmlbuilder.css.themes;
+	
+	exports com.jwebmp.interception.services;
+	exports com.jwebmp.interception;
 
 	exports com.jwebmp.core.htmlbuilder.javascript;
 	exports com.jwebmp.core.htmlbuilder.javascript.events.commandevent;
@@ -146,7 +150,11 @@ module com.jwebmp.core {
 	exports com.jwebmp.core.utilities.regex;
 
 	exports com.jwebmp.core.base.references;
-
+	
+	uses com.jwebmp.interception.services.AjaxCallIntercepter;
+	uses com.jwebmp.interception.services.DataCallIntercepter;
+	uses com.jwebmp.interception.services.SiteCallIntercepter;
+	
 	uses com.jwebmp.core.services.IRegularExpressions;
 
 	uses com.jwebmp.core.services.IPageConfigurator;
@@ -219,7 +227,7 @@ module com.jwebmp.core {
 	uses com.jwebmp.core.events.IEventConfigurator;
 
 	provides com.guicedee.guicedservlets.services.IGuiceSiteBinder with com.jwebmp.core.implementations.JWebMPSiteBinder;
-	provides com.guicedee.guicedinjection.interfaces.IGuiceDefaultBinder with com.jwebmp.core.services.JWebMPServicesBindings;
+	provides com.guicedee.guicedinjection.interfaces.IGuiceDefaultBinder with com.jwebmp.core.services.JWebMPServicesBindings,com.jwebmp.interception.JWebMPInterceptionBinder;
 	provides com.guicedee.guicedinjection.interfaces.IGuiceScanModuleInclusions with com.jwebmp.core.implementations.JWebMPModuleInclusions;
 
 	provides com.jwebmp.core.services.IDynamicRenderingServlet with com.jwebmp.core.implementations.JWebMPDynamicScriptRenderer, com.jwebmp.core.implementations.JWebMPJavaScriptDynamicScriptRenderer;
@@ -227,7 +235,7 @@ module com.jwebmp.core {
 	provides com.jwebmp.core.services.IRegularExpressions with com.jwebmp.core.utilities.regex.TextRegExPatterns, com.jwebmp.core.utilities.regex.EmailAddressRegExPatterns, com.jwebmp.core.utilities.regex.DateFormatRegExPatterns;
 
 	provides com.jwebmp.core.services.IPageConfigurator with com.jwebmp.core.base.page.ScriptsDynamicPageConfigurator, com.jwebmp.core.base.page.CSSLinksInsertPageConfigurator, com.jwebmp.core.base.page.ScriptsInsertPageConfigurator, com.jwebmp.core.base.page.TopShelfScriptsInsertPageConfigurator, com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
-
+	
 	opens com.jwebmp.core.base.servlets to com.google.guice, com.fasterxml.jackson.databind;
 	
 	opens com.jwebmp.core.base.page to com.google.guice;

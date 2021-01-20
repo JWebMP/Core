@@ -22,10 +22,13 @@ import com.jwebmp.core.Page;
 import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.guicedservlets.GuicedServletKeys;
+import com.jwebmp.core.base.ajax.AjaxCall;
+import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.services.IPage;
 import com.jwebmp.interception.services.AjaxCallIntercepter;
 
 import jakarta.servlet.http.HttpServletRequest;
+
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
@@ -46,12 +49,12 @@ public class JavaScriptServlet
 	 * Field scriptReplacement
 	 */
 	private static final String scriptReplacement = "JW_JAVASCRIPT";
-
+	
 	/**
 	 * Field serialVersionUID
 	 */
-
-
+	
+	
 	/**
 	 * When to perform any commands
 	 */
@@ -60,8 +63,11 @@ public class JavaScriptServlet
 	{
 		Page<?> page = (Page<?>) get(IPage.class);
 		HttpServletRequest request = get(GuicedServletKeys.getHttpServletRequestKey());
-		get(AjaxCallInterceptorKey)
-		            .forEach(AjaxCallIntercepter::intercept);
+		for (AjaxCallIntercepter<?> ajaxCallIntercepter : get(AjaxCallInterceptorKey))
+		{
+			
+			ajaxCallIntercepter.intercept(GuiceContext.get(AjaxCall.class), GuiceContext.get(AjaxResponse.class));
+		}
 		page.toString(0);
 		FileTemplates.removeTemplate(JavaScriptServlet.scriptReplacement);
 		FileTemplates.getFileTemplate(JavaScriptServlet.class, JavaScriptServlet.scriptReplacement, "javascriptScript");

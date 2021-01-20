@@ -20,6 +20,8 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Singleton;
 import com.jwebmp.core.Page;
+import com.jwebmp.core.base.ajax.AjaxCall;
+import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.servlets.interfaces.IDataComponent;
 import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
@@ -30,6 +32,7 @@ import com.guicedee.logger.LogFactory;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.logging.Logger;
 
+import static com.guicedee.guicedinjection.GuiceContext.*;
 import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 
 /**
@@ -65,14 +68,14 @@ public class DataServlet
 	@SuppressWarnings("unchecked")
 	public void perform()
 	{
-		HttpServletRequest request = GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
+		HttpServletRequest request = get(GuicedServletKeys.getHttpServletRequestKey());
 		String componentID = request.getParameter("component");
 		StringBuilder responseString = new StringBuilder();
 		try
 		{
 			Class<? extends IDataComponent> clazz = (Class<? extends IDataComponent>) Class.forName(
 					componentID.replace(StaticStrings.CHAR_UNDERSCORE, StaticStrings.CHAR_DOT));
-			IDataComponent component = GuiceContext.get(clazz);
+			IDataComponent component = get(clazz);
 			StringBuilder renderData = component.renderData();
 			responseString.append(renderData);
 		}
@@ -82,8 +85,10 @@ public class DataServlet
 			writeOutput(new StringBuilder(p.toString(0)), StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE, StaticStrings.UTF_CHARSET);
 			return;
 		}
-		GuiceContext.get(DataCallInterceptorKey)
-		            .forEach(DataCallIntercepter::intercept);
+		for (DataCallIntercepter<?> dataCallIntercepter : get(DataCallInterceptorKey))
+		{
+			dataCallIntercepter.intercept(get(AjaxCall.class),get(AjaxResponse.class));
+		}
 		writeOutput(responseString, StaticStrings.HTML_HEADER_JSON, StaticStrings.UTF_CHARSET);
 	}
 
