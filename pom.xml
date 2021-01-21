@@ -52,7 +52,7 @@
         <dependency>
             <groupId>com.guicedee.servlets</groupId>
             <artifactId>guiced-websockets</artifactId>
-            <version>0.0.0_0-SNAPSHOT</version>
+            <version>0.70.0.7</version>
         </dependency>
 
         <dependency>
