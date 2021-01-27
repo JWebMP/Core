@@ -104,6 +104,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 	/**
 	 * The web socket session for this call
 	 */
+	@JsonIgnore
 	private Session websocketSession;
 	/**
 	 * JSon Jackson Constructor
@@ -206,6 +207,13 @@ public class AjaxCall<J extends AjaxCall<J>>
 		setValue(incoming.getValue());
 		setVariableData(incoming.getVariableData());
 		setClassName(incoming.getClassName());
+		setParameters(incoming.getParameters());
+		setHashBang(incoming.getHashBang());
+		setValue(incoming.getValue());
+		setVariableData(incoming.getVariableData());
+		setVariableWatchers(incoming.getVariableWatchers());
+		setWebsocketSession(incoming.getWebsocketSession());
+		setWebSocketCall(incoming.isWebSocketCall());
 		return (J) this;
 	}
 
