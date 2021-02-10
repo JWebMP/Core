@@ -24,6 +24,7 @@ import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.BodyEvents;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.html.interfaces.events.ParagraphEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
 import com.guicedee.guicedinjection.GuiceContext;
@@ -64,7 +65,7 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
 	 *
 	 * @param component The component this click is going to be acting on
 	 */
-	public ClickAdapter(ComponentHierarchyBase<?,?,?,?,?> component)
+	public ClickAdapter(IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.click, component);
 	}

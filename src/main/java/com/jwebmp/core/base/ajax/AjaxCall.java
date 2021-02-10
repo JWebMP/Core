@@ -19,12 +19,10 @@ package com.jwebmp.core.base.ajax;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.google.inject.servlet.RequestScoped;
-import com.jwebmp.core.base.ComponentHierarchyBase;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.databind.ClientVariableWatcher;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-
 import jakarta.validation.constraints.NotNull;
 import jakarta.websocket.Session;
 
@@ -42,7 +40,6 @@ import java.util.*;
 		getterVisibility = JsonAutoDetect.Visibility.NONE,
 		setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@RequestScoped
 public class AjaxCall<J extends AjaxCall<J>>
 		extends JavaScriptPart<J>
 		implements IAjaxCall<J>
@@ -71,7 +68,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 	 * The component object that this call is linked to
 	 */
 	@JsonIgnore
-	private ComponentHierarchyBase<?,?,?,?,?> component;
+	private IComponentHierarchyBase<?,?> component;
 	/**
 	 * Is an incoming string of angular data
 	 */
@@ -225,7 +222,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public J setComponent(ComponentHierarchyBase<?,?,?,?,?> component)
+	public J setComponent(IComponentHierarchyBase<?,?> component)
 	{
 		this.component = component;
 		return (J) this;
@@ -274,7 +271,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 	}
 
 	@Override
-	public ComponentHierarchyBase<?,?,?,?,?> getComponent()
+	public IComponentHierarchyBase<?,?> getComponent()
 	{
 		return component;
 	}

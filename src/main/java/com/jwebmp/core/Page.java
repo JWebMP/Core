@@ -22,6 +22,7 @@ import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.annotations.PageConfiguration;
 import com.jwebmp.core.base.ComponentDependencyBase;
+import com.jwebmp.core.base.ContentSecurityPolicy;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.client.InternetExplorerCompatibilityMode;
@@ -80,6 +81,9 @@ public class Page<J extends Page<J>>
 	@JsonIgnore
 	@Inject
 	private ReadableUserAgent userAgent;
+
+	@Inject
+	private ContentSecurityPolicy contentSecurityPolicy;
 
 	/**
 	 * If this page has already gone through initialization

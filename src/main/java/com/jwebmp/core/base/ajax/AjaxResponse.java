@@ -40,7 +40,6 @@ import java.util.Map.Entry;
  * @since 27 Apr 2016
  */
 @SuppressWarnings("MissingClassJavaDoc")
-@RequestScoped
 public class AjaxResponse<J extends AjaxResponse<J>>
 		extends JavaScriptPart<J>
 {

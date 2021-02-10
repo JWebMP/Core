@@ -149,6 +149,8 @@ module com.jwebmp.core {
 	exports com.jwebmp.core.utilities.dualquickpivot;
 	exports com.jwebmp.core.utilities.regex;
 
+//	exports com.jwebmp.core.services.scopes;
+
 	exports com.jwebmp.core.base.references;
 	
 	uses com.jwebmp.interception.services.AjaxCallIntercepter;
@@ -246,6 +248,7 @@ module com.jwebmp.core {
 	opens com.jwebmp.core to com.google.guice, com.fasterxml.jackson.databind;
 
 	opens com.jwebmp.core.implementations to com.google.guice, com.fasterxml.jackson.databind;
+//	opens com.jwebmp.core.services.scopes to com.google.guice, com.fasterxml.jackson.databind;
 
 	opens com.jwebmp.core.htmlbuilder.css to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.htmlbuilder.css.annotations to com.fasterxml.jackson.databind;

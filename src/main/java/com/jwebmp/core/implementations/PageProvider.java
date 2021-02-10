@@ -1,6 +1,7 @@
 package com.jwebmp.core.implementations;
 
 import com.google.inject.Provider;
+import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.SessionHelper;
 import com.jwebmp.core.annotations.PageConfiguration;
@@ -30,7 +31,7 @@ public class PageProvider
 	@Override
 	 public Page<?> get()
 	{
-		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
+		HttpServletRequest request = GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
 		String pathInfo = request.getRequestURI();
 		if (pathInfo == null)
 		{

@@ -49,12 +49,7 @@ public class JavaScriptServlet
 	 * Field scriptReplacement
 	 */
 	private static final String scriptReplacement = "JW_JAVASCRIPT";
-	
-	/**
-	 * Field serialVersionUID
-	 */
-	
-	
+
 	/**
 	 * When to perform any commands
 	 */

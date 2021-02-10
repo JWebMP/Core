@@ -17,10 +17,10 @@
 
 package com.jwebmp.core.base.ajax;
 
-import com.jwebmp.core.base.ComponentHierarchyBase;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-
 import jakarta.validation.constraints.NotNull;
+
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
@@ -39,7 +39,7 @@ public interface IAjaxCall<J extends AjaxCall<J>>
 	 *
 	 * @param incoming
 	 */
-	@SuppressWarnings("unchecked")
+	
 	J fromCall(AjaxCall<?> incoming);
 
 	/**
@@ -54,8 +54,8 @@ public interface IAjaxCall<J extends AjaxCall<J>>
 	 *
 	 * @param component
 	 */
-	@SuppressWarnings("unchecked")
-	J setComponent(ComponentHierarchyBase<?,?,?,?,?> component);
+	
+	J setComponent(IComponentHierarchyBase<?,?> component);
 
 	/**
 	 * Gets event type
@@ -69,7 +69,7 @@ public interface IAjaxCall<J extends AjaxCall<J>>
 	 *
 	 * @param componentId
 	 */
-	@SuppressWarnings("unchecked")
+	
 	J setComponentId(String componentId);
 
 	/**
@@ -84,7 +84,7 @@ public interface IAjaxCall<J extends AjaxCall<J>>
 	 *
 	 * @param datetime
 	 */
-	@SuppressWarnings("unchecked")
+	
 	J setDatetime(Date datetime);
 
 	/**
@@ -99,7 +99,7 @@ public interface IAjaxCall<J extends AjaxCall<J>>
 	 *
 	 * @param eventId
 	 */
-	@SuppressWarnings("unchecked")
+	
 	J setEventId(String eventId);
 
 	/**
@@ -107,14 +107,14 @@ public interface IAjaxCall<J extends AjaxCall<J>>
 	 *
 	 * @return
 	 */
-	ComponentHierarchyBase<?,?,?,?,?> getComponent();
+	IComponentHierarchyBase<?,?> getComponent();
 
 	/**
 	 * Sets the event type
 	 *
 	 * @param eventType
 	 */
-	@SuppressWarnings("unchecked")
+	
 	J setEventType(EventTypes eventType);
 
 	/**
@@ -130,7 +130,7 @@ public interface IAjaxCall<J extends AjaxCall<J>>
 	 *
 	 * @param eventTypeFrom
 	 */
-	@SuppressWarnings("unchecked")
+	
 	J setEventTypeFrom(EventTypes eventTypeFrom);
 
 	/**
@@ -155,7 +155,7 @@ public interface IAjaxCall<J extends AjaxCall<J>>
 	 *
 	 * @param value
 	 */
-	@SuppressWarnings("unchecked")
+	
 	J setValue(AjaxEventValue<?> value);
 
 	/**
@@ -163,7 +163,7 @@ public interface IAjaxCall<J extends AjaxCall<J>>
 	 *
 	 * @param variableData
 	 */
-	@SuppressWarnings("unchecked")
+	
 	@NotNull
 	J setVariableData(Set<JsonVariable> variableData);
 
@@ -180,7 +180,7 @@ public interface IAjaxCall<J extends AjaxCall<J>>
 	 *
 	 * @param parameters
 	 */
-	@SuppressWarnings("unchecked")
+	
 	J setParameters(Map<String, String> parameters);
 
 	/**
@@ -197,6 +197,6 @@ public interface IAjaxCall<J extends AjaxCall<J>>
 	 * @param className
 	 */
 	@NotNull
-	@SuppressWarnings("unchecked")
+	
 	J setClassName(String className);
 }
