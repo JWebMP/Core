@@ -19,6 +19,7 @@ package com.jwebmp.core.base;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Strings;
 import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.CSSComponent;
@@ -29,6 +30,7 @@ import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
 import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentFeatureBase;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.interfaces.ICssClassName;
 import com.jwebmp.core.base.references.CSSReference;
@@ -131,6 +133,9 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 		{
 			for (Object jScript : child.asHierarchyBase().getEventsAll())
 			{
+				if (jScript == null) {
+					continue;
+				}
 				if (((Event<?, ?>) jScript)
 						.getID()
 						.equals(eventId))
@@ -185,6 +190,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 		Set<CSSReference> allCss = super.getCssReferencesAll();
 		getChildren().forEach(child ->
 		                      {
+		                      	if(child != null)
 			                      for (Object jScript : child.asDependencyBase().getCssReferencesAll())
 			                      {
 				                      allCss.add((CSSReference) jScript);
@@ -206,8 +212,10 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 		Set<JavascriptReference> allJs = super.getJavascriptReferencesAll();
 		getChildren().forEach(child ->
 		                      {
+		                      	if(child != null)
 			                      for (Object jScript : child.asDependencyBase().getJavascriptReferencesAll())
 			                      {
+			                      	if(jScript != null)
 				                      allJs.add((JavascriptReference) jScript);
 			                      }
 		                      });
@@ -281,9 +289,11 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 	{
 		Set<Feature<?, ?, ?>> allFeatures = new LinkedHashSet<>();
 		getChildrenHierarchy().forEach(child -> {
+			if(child != null)
 			for (Object event : child.asFeatureBase()
 			                         .getFeatures())
 			{
+				if(event != null)
 				allFeatures.add((Feature<?, ?, ?>) event);
 			}
 		});
@@ -564,6 +574,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 			                          for (Object event : child.asEventBase()
 			                                                   .getEvents())
 			                          {
+			                          	if(event != null)
 				                          allEvents.add((Event<?, ?>) event);
 			                          }
 		                          });
@@ -782,9 +793,11 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 	{
 		Set<String> allVariables = new TreeSet<>();
 		getChildrenHierarchy().forEach(child -> {
+			if(child != null)
 			for (Object o : child.asFeatureBase()
 			                     .getVariables())
 			{
+				if(o != null)
 				allVariables.add(o.toString());
 			}
 		});
@@ -834,8 +847,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 		Set<StringBuilder> queries = getQueriesAll();
 		queries.forEach(a ->
 		                {
-			                if (!a.toString()
-			                      .isEmpty())
+			                if (!Strings.isNullOrEmpty(a.toString()))
 			                {
 				                allScripts.add(a.toString());
 			                }
@@ -908,6 +920,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 		Consumer<? super IComponentHierarchyBase<?, ?>> action = componentQuery -> processComponentQueries(componentQuery, reallyAllQueries);
 		for (IComponentHierarchyBase<?, ?> allComponent : allComponents)
 		{
+			if(allComponent != null)
 			action.accept(allComponent);
 		}
 		return reallyAllQueries;
@@ -925,6 +938,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 	{
 		getChildren().forEach(next ->
 		                      {
+		                      	if(next != null)
 			                      if (!next.isConfigured())
 			                      {
 				                      next.preConfigure();
@@ -950,8 +964,10 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 		features.sort(comparing(ComponentFeatureBase::getSortOrder));
 		Set<GlobalEvents> events = (Set<GlobalEvents>) componentQuery.asEventBase()
 		                                                             .getEvents();
-		events.forEach(event -> reallyAllQueries.add(event.asFeatureBase()
+
+		events.forEach(event -> reallyAllQueries.add(((IComponentFeatureBase<?,?>)event).asFeatureBase()
 		                                                  .renderJavascript()));
+
 		features.sort(comparing(ComponentFeatureBase::getSortOrder));
 	}
 	
@@ -980,25 +996,19 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 	 */
 	private void processAngularObjects(@NotNull IComponentHierarchyBase<?, ?> next, @NotNull Map<String, Object> map)
 	{
-		next.asAngularBase()
-		    .getJsonObjects()
-		    .forEach((key, value) ->
-		             {
-			             try
-			             {
-				             map.put(key, next.asAngularBase()
-				                              .getJsonObjects()
-				                              .get(key));
-			             }
-			             catch (ClassCastException cce)
-			             {
-				             ComponentHierarchyBase.log.log(Level.WARNING, "Incorrect Object Type, Perhaps JavaScriptPart?", cce);
-			             }
-			             catch (Exception e)
-			             {
-				             ComponentHierarchyBase.log.log(Level.WARNING, "Unable to render angular object", e);
-			             }
-		             });
+		for (Map.Entry<String, Object> entry : next.asAngularBase()
+				.getJsonObjects().entrySet()) {
+			String key = entry.getKey();
+			Object value = entry.getValue();
+			if(key != null)
+			try {
+				map.put(key, value);
+			} catch (ClassCastException cce) {
+				ComponentHierarchyBase.log.log(Level.WARNING, "Incorrect Object Type, Perhaps JavaScriptPart?", cce);
+			} catch (Exception e) {
+				ComponentHierarchyBase.log.log(Level.WARNING, "Unable to render angular object", e);
+			}
+		}
 	}
 	
 	/**
@@ -1013,6 +1023,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 	{
 		for (IComponentHierarchyBase<?, ?> next : getChildrenHierarchy(true))
 		{
+			if(next != null)
 			if (next.asBase()
 			        .getProperties()
 			        .containsKey(propertyName))

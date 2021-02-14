@@ -116,7 +116,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	public J addEvent(@NotNull E event)
 	{
 		//noinspection RedundantClassCall
-		if (!IComponentEventBase.class.cast(event)
+		if (!IComponentFeatureBase.class.cast(event)
 		                              .asBase()
 		                              .getComponentType()
 		                              .equals(ComponentTypes.Event))
@@ -127,9 +127,9 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 		{
 			getEvents().add(event);
 		}
-		if (IComponentHierarchyBase.class.isAssignableFrom(getClass()))
+		if (IComponentFeatureBase.class.isAssignableFrom(getClass()))
 		{
-			event.asFeatureBase()
+			((IComponentFeatureBase<?,?>)event).asFeatureBase()
 			     .setComponent((IComponentHierarchyBase<?, ?>) this);
 		}
 		event.init();

@@ -16,7 +16,6 @@
  */
 package com.jwebmp.core.base.html.interfaces.events;
 
-import com.jwebmp.core.base.ComponentBase;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.htmlbuilder.javascript.events.interfaces.IEvent;
 

@@ -17,17 +17,12 @@
 
 package com.jwebmp.core.htmlbuilder.javascript.events.commandevent;
 
-import com.guicedee.guicedinjection.json.StaticStrings;
-import com.jwebmp.core.Component;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * This class enables a JQuery call to execute a java function directly after it
@@ -37,8 +32,8 @@ import java.util.List;
  * @author MMagon
  * @since 2012-12-30
  */
-public abstract class PerformCommandEvent
-		extends Event<GlobalFeatures, PerformCommandEvent>
+public abstract class PerformCommandEvent<J extends PerformCommandEvent<J>>
+		extends Event<GlobalFeatures, J>
 {
 	public PerformCommandEvent(IComponentHierarchyBase<?,?> component)
 	{

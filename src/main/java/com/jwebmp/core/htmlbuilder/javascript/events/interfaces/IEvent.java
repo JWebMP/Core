@@ -20,6 +20,7 @@ package com.jwebmp.core.htmlbuilder.javascript.events.interfaces;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
+import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.servlets.interfaces.IFeature;
 
 /**
@@ -29,7 +30,8 @@ import com.jwebmp.core.base.servlets.interfaces.IFeature;
  * @author GedMarc
  */
 public interface IEvent<F extends GlobalFeatures, J extends IEvent<F,J>>
-		extends IFeature<F, J>
+		extends IFeature<F, J>,
+		GlobalEvents
 {
 	/**
 	 * The method that is fired on call

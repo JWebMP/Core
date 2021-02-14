@@ -74,22 +74,16 @@ public class AjaxReceiverServlet
 
 			validateCall(ajaxCall);
 			validatePage();
-			if("body".equals(ajaxCall.getComponentId()))
+			validateRequest(ajaxCall);
+			Event<?, ?> triggerEvent = processEvent();
+
+			for (AjaxCallIntercepter<?> ajaxCallIntercepter : get(AjaxCallInterceptorKey))
 			{
-				Page<?> p = get(Page.class);
-				ajaxResponse = p.onConnect(ajaxCall, ajaxResponse);
-			}else
-			{
-				validateRequest(ajaxCall);
-				Event<?, ?> triggerEvent = processEvent();
-				
-				for (AjaxCallIntercepter<?> ajaxCallIntercepter : get(AjaxCallInterceptorKey))
-				{
-					ajaxCallIntercepter.intercept(ajaxCall,ajaxResponse);
-				}
-				
-				triggerEvent.fireEvent(ajaxCall, ajaxResponse);
+				ajaxCallIntercepter.intercept(ajaxCall,ajaxResponse);
 			}
+
+			triggerEvent.fireEvent(ajaxCall, ajaxResponse);
+
 			output = new StringBuilder(ajaxResponse.toString());
 		}
 		catch (InvalidRequestException ie)

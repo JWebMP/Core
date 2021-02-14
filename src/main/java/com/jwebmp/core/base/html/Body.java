@@ -20,11 +20,13 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.html.attributes.BodyAttributes;
 import com.jwebmp.core.base.html.interfaces.ContainerType;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.LayoutHandler;
 import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
 import com.jwebmp.core.base.html.interfaces.children.BodyFeatures;
 import com.jwebmp.core.base.html.interfaces.children.HtmlChildren;
 import com.jwebmp.core.base.html.interfaces.children.PageChildren;
+import com.jwebmp.core.base.html.interfaces.events.BodyEvents;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import jakarta.validation.constraints.NotNull;
@@ -61,7 +63,7 @@ import java.util.Objects;
  * @since 2013/11/20
  */
 public class Body<F extends BodyFeatures, J extends Body<F, J>>
-		extends Component<BodyChildren, BodyAttributes, F, NoEvents, J>
+		extends Component<BodyChildren, BodyAttributes, F, BodyEvents, J>
 		implements PageChildren, HtmlChildren, LayoutHandler, ContainerType
 {
 	

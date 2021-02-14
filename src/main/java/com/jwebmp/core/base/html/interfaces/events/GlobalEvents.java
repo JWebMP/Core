@@ -25,62 +25,12 @@ import com.jwebmp.core.base.interfaces.*;
  * @author GedMarc
  * @since 214/12/20
  */
-public interface GlobalEvents
+public interface GlobalEvents<J extends GlobalEvents<J>>
 		extends LifeCycle
 {
 	/**
 	 * Checks if this feature has been configured and rendered with all the features
 	 */
 	void checkAssignedFunctions();
-	
-	/**
-	 * This class with the associated exposed methods
-	 *
-	 * @return This component type-casted
-	 */
-	default IComponentEventBase<?, ?> asEventsBase()
-	{
-		return (IComponentEventBase<?, ?>) this;
-	}
-	
-	
-	/**
-	 * This class with the associated exposed methods
-	 *
-	 * @return This component type-casted
-	 */
-	default IComponentFeatureBase<?, ?> asFeatureBase()
-	{
-		return (IComponentFeatureBase<?, ?>) this;
-	}
-	
-	/**
-	 * This class with the associated exposed methods
-	 *
-	 * @return This component type-casted
-	 */
-	default IComponentThemeBase asThemeBase()
-	{
-		return (IComponentThemeBase) this;
-	}
-	
-	/**
-	 * Returns the components exposed dependency methods
-	 *
-	 * @return This component type-casted
-	 */
-	default IComponentDependencyBase<?> asDependencyBase()
-	{
-		return (IComponentDependencyBase<?>) this;
-	}
-	
-	/**
-	 * Returns the base exposed methods
-	 *
-	 * @return This component type-casted
-	 */
-	default IComponentBase<?> asBase()
-	{
-		return (IComponentBase<?>) this;
-	}
+
 }
