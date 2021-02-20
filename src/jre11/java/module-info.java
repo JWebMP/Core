@@ -238,7 +238,6 @@ module com.jwebmp.core {
 
 	provides com.jwebmp.core.services.IPageConfigurator with com.jwebmp.core.base.page.ScriptsDynamicPageConfigurator, com.jwebmp.core.base.page.CSSLinksInsertPageConfigurator, com.jwebmp.core.base.page.ScriptsInsertPageConfigurator, com.jwebmp.core.base.page.TopShelfScriptsInsertPageConfigurator, com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 
-	exports com.jwebmp.core.implementations to com.jwebmp.core.angularjs;
 
 	opens com.jwebmp.core.base.servlets to com.google.guice, com.fasterxml.jackson.databind;
 	
@@ -249,7 +248,7 @@ module com.jwebmp.core {
 	opens com.jwebmp.core.base to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core to com.google.guice, com.fasterxml.jackson.databind;
 
-	opens com.jwebmp.core.implementations to com.google.guice, com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.implementations to com.google.guice, com.fasterxml.jackson.databind,com.jwebmp.core.angularjs;
 //	opens com.jwebmp.core.services.scopes to com.google.guice, com.fasterxml.jackson.databind;
 
 	opens com.jwebmp.core.htmlbuilder.css to com.fasterxml.jackson.databind;
@@ -280,7 +279,10 @@ module com.jwebmp.core {
 	opens com.jwebmp.core.base.servlets.options to com.fasterxml.jackson.databind;
 
 	opens com.jwebmp.core.utilities.regex to com.fasterxml.jackson.databind;
+
 	exports com.jwebmp.core.components;
 	exports com.jwebmp.core.events;
 	exports com.jwebmp.core.enumerations;
+	exports com.jwebmp.core.implementations;
+
 }
