@@ -16,9 +16,12 @@
  */
 package com.jwebmp.core.base.servlets;
 
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.guicedservlets.GuicedServletKeys;
+import com.guicedee.guicedservlets.services.scopes.CallScoper;
 import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.ajax.AjaxCall;
@@ -69,7 +72,7 @@ public abstract class JWDefaultServlet
 	 * Field allowOrigin
 	 */
 	private static String allowOrigin = "*";
-	
+
 	/**
 	 * Construct a new default servlett
 	 */
@@ -205,6 +208,9 @@ public abstract class JWDefaultServlet
 	protected StringBuilder getPageHTML()
 	{
 		StringBuilder html;
+
+
+
 		try
 		{
 			html = new StringBuilder(getPageFromGuice().toString(true));
@@ -250,7 +256,7 @@ public abstract class JWDefaultServlet
 			p.getOptions()
 			 .setTitle("Exception occurred in application");
 			p.getOptions()
-			 .setAuthor("Marc Magon");
+			 .setAuthor("GedMarc");
 			p.getOptions()
 			 .setDescription("JWebMP Error Generated Page");
 			p.getOptions()
@@ -279,6 +285,7 @@ public abstract class JWDefaultServlet
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 	{
+	//	scope.enter();
 		try
 		{
 			perform();
@@ -286,6 +293,8 @@ public abstract class JWDefaultServlet
 		catch (Exception e)
 		{
 			JWDefaultServlet.log.log(Level.SEVERE, "Unable to Do Get", e);
+		}finally {
+		//	scope.exit();
 		}
 	}
 	

@@ -455,9 +455,7 @@ public class Page<J extends Page<J>>
 			catch (Throwable T)
 			{
 				Page.log.log(Level.FINER, "Readable User Agent can't be fetched, returning default", T);
-				userAgent = new UserAgent(DeviceCategory.EMPTY, UserAgentFamily.FIREFOX, STRING_EMPTY, STRING_EMPTY, OperatingSystem.EMPTY,
-				                          STRING_EMPTY, STRING_EMPTY,
-				                          UserAgentType.BROWSER, STRING_EMPTY, STRING_EMPTY, VersionNumber.UNKNOWN);
+
 			}
 		}
 		return userAgent;

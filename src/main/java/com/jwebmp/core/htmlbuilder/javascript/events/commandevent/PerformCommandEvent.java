@@ -43,7 +43,7 @@ public abstract class PerformCommandEvent<J extends PerformCommandEvent<J>>
 	@Override
 	public void assignFunctionsToComponent()
 	{
-		String jQuery = "jw.env.controller.makeCall(jw.env.controller.makeEmptyArticle('" +
+		String jQuery = "jw.makeCall(jw.makeEmptyArticle('" +
 				getComponent().asBase().getID() + "','" + getClassCanonicalName() + "'," + renderVariables()+ "));";
 		addQuery(new StringBuilder(jQuery));
 	}
