@@ -25,7 +25,7 @@ public interface IDynamicRenderingServlet<J extends IDynamicRenderingServlet<J>>
 	 *
 	 * @return The string builder for the script
 	 */
-	Script renderScript(Page<?> page);
+	Script<?,?> renderScript(Page<?> page);
 
 	/**
 	 * Method newScript ...
@@ -37,7 +37,7 @@ public interface IDynamicRenderingServlet<J extends IDynamicRenderingServlet<J>>
 	 */
 	default Script<?, ?> newScript(String contents)
 	{
-		Script<?, ?> s = new Script();
+		Script<?, ?> s = new Script<>();
 		s.addAttribute(ScriptAttributes.Type, StaticStrings.HTML_HEADER_JAVASCRIPT);
 		s.setText(contents);
 		return s;

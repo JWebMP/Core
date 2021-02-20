@@ -632,14 +632,8 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	@NotNull
 	public J addQuery(@NotNull StringBuilder query)
 	{
-		for (StringBuilder existingQuery : getQueriesAll())
-		{
-			if (existingQuery.toString()
-			                 .equalsIgnoreCase(query.toString()))
-			{
-				return (J) this;
-			}
-		}
+		if(!query.toString().endsWith(getNewLine()))
+			query.append(getNewLine());
 		getQueries().add(query);
 		return (J) this;
 	}

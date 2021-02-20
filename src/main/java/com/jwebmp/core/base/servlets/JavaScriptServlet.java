@@ -33,6 +33,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import static com.guicedee.guicedinjection.GuiceContext.get;
+import static com.jwebmp.core.implementations.JWebMPJavaScriptDynamicScriptRenderer.renderJavascript;
 import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -48,7 +49,7 @@ public class JavaScriptServlet
 	/**
 	 * Field scriptReplacement
 	 */
-	private static final String scriptReplacement = "JW_JAVASCRIPT";
+	private static final String scriptReplacement = "JW_JAVASCRIPT;";
 
 	/**
 	 * When to perform any commands
@@ -56,21 +57,21 @@ public class JavaScriptServlet
 	@Override
 	public void perform()
 	{
-		Page<?> page = (Page<?>) get(IPage.class);
-		HttpServletRequest request = get(GuicedServletKeys.getHttpServletRequestKey());
-		for (AjaxCallIntercepter<?> ajaxCallIntercepter : get(AjaxCallInterceptorKey))
-		{
-			
-			ajaxCallIntercepter.intercept(GuiceContext.get(AjaxCall.class), GuiceContext.get(AjaxResponse.class));
+		if(renderJavascript) {
+			Page<?> page = (Page<?>) get(IPage.class);
+			for (AjaxCallIntercepter<?> ajaxCallIntercepter : get(AjaxCallInterceptorKey)) {
+
+				ajaxCallIntercepter.intercept(GuiceContext.get(AjaxCall.class), GuiceContext.get(AjaxResponse.class));
+			}
+			page.toString(0);
+			FileTemplates.removeTemplate(JavaScriptServlet.scriptReplacement);
+			FileTemplates.getFileTemplate(JavaScriptServlet.class, JavaScriptServlet.scriptReplacement, "javascriptScript");
+			FileTemplates.getTemplateVariables()
+					.put(JavaScriptServlet.scriptReplacement, page.renderJavascript());
+			StringBuilder scripts = FileTemplates.renderTemplateScripts(JavaScriptServlet.scriptReplacement);
+			writeOutput(scripts, StaticStrings.HTML_HEADER_JAVASCRIPT, UTF_8);
+			FileTemplates.getTemplateVariables()
+					.remove(JavaScriptServlet.scriptReplacement);
 		}
-		page.toString(0);
-		FileTemplates.removeTemplate(JavaScriptServlet.scriptReplacement);
-		FileTemplates.getFileTemplate(JavaScriptServlet.class, JavaScriptServlet.scriptReplacement, "javascriptScript");
-		FileTemplates.getTemplateVariables()
-		             .put(JavaScriptServlet.scriptReplacement, page.renderJavascript());
-		StringBuilder scripts = FileTemplates.renderTemplateScripts(JavaScriptServlet.scriptReplacement);
-		writeOutput(scripts, StaticStrings.HTML_HEADER_JAVASCRIPT, UTF_8);
-		FileTemplates.getTemplateVariables()
-		             .remove(JavaScriptServlet.scriptReplacement);
 	}
 }

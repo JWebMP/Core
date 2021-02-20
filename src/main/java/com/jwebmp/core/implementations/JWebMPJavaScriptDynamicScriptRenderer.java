@@ -1,5 +1,6 @@
 package com.jwebmp.core.implementations;
 
+import com.google.common.base.Strings;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.html.Script;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
@@ -14,6 +15,8 @@ import static com.guicedee.guicedinjection.GuiceContext.*;
 public class JWebMPJavaScriptDynamicScriptRenderer
 		implements IDynamicRenderingServlet<JWebMPJavaScriptDynamicScriptRenderer>
 {
+	public static boolean renderJavascript = true;
+
 	@Override
 	public String getScriptLocation(Page<?> page)
 	{
@@ -28,7 +31,7 @@ public class JWebMPJavaScriptDynamicScriptRenderer
 		
 		}
 		return JWebMPSiteBinder.getJavaScriptLocation()
-		                       .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY) +  "?" + queryParams + "&dt=" + LocalDateTime.now();
+		                       .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY) +  "?" +  Strings.nullToEmpty(queryParams);
 	}
 	
 	@Override
@@ -45,26 +48,9 @@ public class JWebMPJavaScriptDynamicScriptRenderer
 	 */
 	private Script<?, ?> getJavascriptScript(Page<?> page)
 	{
-		StringBuilder js = page.renderJavascript();
-		if (!js.toString()
-		       .trim()
-		       .isEmpty())
-		{
-			String[] lines = js.toString()
-			                   .split(page.getNewLine());
-			StringBuilder output = new StringBuilder();
-			for (String line : lines)
-			{
-				if (line == null || line.isEmpty())
-				{
-					continue;
-				}
-				output.append("\t\t\t")
-				      .append(line)
-				      .append(page.getNewLine());
-			}
-			
-			return newScript(page.getNewLine() + output);
+		if(renderJavascript) {
+			StringBuilder js = page.renderJavascript();
+			return newScript(page.getNewLine() + js);
 		}
 		return null;
 	}

@@ -1,5 +1,6 @@
 package com.jwebmp.core.implementations;
 
+import com.google.common.base.Strings;
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.SessionHelper;
@@ -31,7 +32,7 @@ public class JWebMPDynamicScriptRenderer
 		
 		}
 		return JWebMPSiteBinder.getJWScriptLocation()
-		                       .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY) + "?" + queryParams  + "&dt=" + LocalDateTime.now();
+		                       .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY) + "?" + Strings.nullToEmpty(queryParams);
 	}
 
 	@Override
