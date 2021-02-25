@@ -115,25 +115,23 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	@SuppressWarnings("unchecked")
 	public J addEvent(@NotNull E event)
 	{
-		//noinspection RedundantClassCall
-		if (!IComponentFeatureBase.class.cast(event)
-		                              .asBase()
-		                              .getComponentType()
-		                              .equals(ComponentTypes.Event))
-		{
-			ComponentEventBase.LOG.log(Level.WARNING, "Tried to add a non event to the event collection");
+		if(event != null) {
+			//noinspection RedundantClassCall
+			if (!IComponentFeatureBase.class.cast(event)
+					.asBase()
+					.getComponentType()
+					.equals(ComponentTypes.Event)) {
+				ComponentEventBase.LOG.log(Level.WARNING, "Tried to add a non event to the event collection");
+			} else {
+				getEvents().add(event);
+			}
+			if (IComponentFeatureBase.class.isAssignableFrom(getClass())) {
+				((IComponentFeatureBase<?, ?>) event).asFeatureBase()
+						.setComponent((IComponentHierarchyBase<?, ?>) this);
+			}
+			event.init();
+			event.preConfigure();
 		}
-		else
-		{
-			getEvents().add(event);
-		}
-		if (IComponentFeatureBase.class.isAssignableFrom(getClass()))
-		{
-			((IComponentFeatureBase<?,?>)event).asFeatureBase()
-			     .setComponent((IComponentHierarchyBase<?, ?>) this);
-		}
-		event.init();
-		event.preConfigure();
 		return (J) this;
 	}
 	

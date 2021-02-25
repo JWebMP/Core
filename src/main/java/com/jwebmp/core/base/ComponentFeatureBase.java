@@ -16,6 +16,7 @@
  */
 package com.jwebmp.core.base;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -52,6 +53,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 * A linked component if required
 	 */
 	@JsonIgnore
+	@JsonIdentityReference(alwaysAsId = true)
 	private IComponentHierarchyBase<?,?> component;
 	/**
 	 * The features of this component
