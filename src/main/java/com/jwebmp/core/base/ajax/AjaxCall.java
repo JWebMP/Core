@@ -19,6 +19,7 @@ package com.jwebmp.core.base.ajax;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.guicedee.guicedservlets.services.scopes.CallScope;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.databind.ClientVariableWatcher;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
@@ -40,6 +41,7 @@ import java.util.*;
 		getterVisibility = JsonAutoDetect.Visibility.NONE,
 		setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
+@CallScope
 public class AjaxCall<J extends AjaxCall<J>>
 		extends JavaScriptPart<J>
 		implements IAjaxCall<J>

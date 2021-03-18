@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.inject.servlet.RequestScoped;
+import com.guicedee.guicedservlets.services.scopes.CallScope;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.Feature;
 import com.jwebmp.core.base.interfaces.IComponentDependencyBase;
@@ -40,6 +41,7 @@ import java.util.Map.Entry;
  * @since 27 Apr 2016
  */
 @SuppressWarnings("MissingClassJavaDoc")
+@CallScope
 public class AjaxResponse<J extends AjaxResponse<J>>
 		extends JavaScriptPart<J>
 {
