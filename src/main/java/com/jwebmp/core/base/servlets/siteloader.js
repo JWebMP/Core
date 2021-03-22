@@ -361,12 +361,14 @@ jw.actions.showDialog = function (title, message, type, options) {
         if (options) {
             options.title = title;
             options.message = message;
+            options.size = BootstrapDialog.SIZE_LARGE;
             BootstrapDialog.show(options);
         }
         if (type === 'Danger')
             BootstrapDialog.show({
                 title: title,
                 message: message,
+                size: BootstrapDialog.SIZE_LARGE,
                 type: BootstrapDialog.TYPE_DANGER
             });
         else if (type === 'Success')
