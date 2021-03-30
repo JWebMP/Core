@@ -69,14 +69,4 @@ public interface IPage<J extends IPage<J>>
 	 * @return The output HTML for this page
 	 */
 	String toString(boolean renderHtml);
-
-	/**
-	 * Sets the readable user agent to identify browser and device
-	 *
-	 * @param agent
-	 * 		The new agent to read from
-	 *
-	 * @return This object
-	 */
-	J setUserAgent(ReadableUserAgent agent);
 }

@@ -51,6 +51,21 @@ public class JWebMPDynamicScriptRenderer
 		FileTemplates.getFileTemplate(JWScriptServlet.class, JWScriptServlet.FILE_TEMPLATE_NAME, "siteloader");
 		FileTemplates.getTemplateVariables()
 		             .put("SITEADDRESSINSERT", new StringBuilder(SessionHelper.getServerPath()));
+		try
+		{
+			HttpServletRequest hsr = get(HttpServletRequest.class);
+			FileTemplates.getTemplateVariables()
+					.put("%USERAGENT%", new StringBuilder(hsr.getHeader("user-agent")));
+			FileTemplates.getTemplateVariables()
+					.put("%MYIP%", new StringBuilder(hsr.getRemoteAddr()));
+			FileTemplates.getTemplateVariables()
+					.put("%REFERER%", new StringBuilder(hsr.getHeader("referer")));
+		}
+		catch (Throwable T)
+		{
+
+		}
+
 		StringBuilder jsScript = FileTemplates.renderTemplateScripts(JWScriptServlet.FILE_TEMPLATE_NAME);
 		if (!jsScript.toString()
 		             .trim()

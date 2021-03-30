@@ -24,6 +24,8 @@ import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.SessionHelper;
 import jakarta.servlet.http.HttpServletRequest;
 
+import static com.guicedee.guicedinjection.GuiceContext.get;
+
 /**
  * @author GedMarc
  */
@@ -45,6 +47,20 @@ public class JWScriptServlet
 		FileTemplates.getFileTemplate(JWScriptServlet.class, JWScriptServlet.FILE_TEMPLATE_NAME, "siteloader");
 		FileTemplates.getTemplateVariables()
 		             .put("SITEADDRESSINSERT", new StringBuilder(SessionHelper.getServerPath()));
+		try
+		{
+			HttpServletRequest hsr = get(HttpServletRequest.class);
+			FileTemplates.getTemplateVariables()
+					.put("%USERAGENT%", new StringBuilder(hsr.getHeader("user-agent")));
+			FileTemplates.getTemplateVariables()
+					.put("%MYIP%", new StringBuilder(hsr.getRemoteAddr()));
+			FileTemplates.getTemplateVariables()
+					.put("%REFERER%", new StringBuilder(hsr.getHeader("referer")));
+		}
+		catch (Throwable T)
+		{
+
+		}
 		StringBuilder output = FileTemplates.renderTemplateScripts(JWScriptServlet.FILE_TEMPLATE_NAME);
 		writeOutput(output, StaticStrings.HTML_HEADER_JAVASCRIPT, StaticStrings.UTF_CHARSET);
 	}

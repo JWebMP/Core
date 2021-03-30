@@ -50,6 +50,9 @@ function DeltaTimer(render, interval) {
 var jw = {isLoading: false, pageLoading: true};
 window.jw = jw;
 jw.siteAddress = 'SITEADDRESSINSERT';
+jw.useragent = '%USERAGENT%';
+jw.myIP = '%MYIP%';
+jw.referer = '%REFERER%';
 jw.sessionid = document.cookie.match(/JSESSIONID=[^;]+/);
 jw.angularExists = false;
 
@@ -347,6 +350,9 @@ jw.actions.processReactions = function (result) {
             jw.actions.showDialog(title, message, dialogType, options);
         } else if (type === 'RedirectHome') {
             setTimeout('location.reload();', timeout);
+        } else if (type === 'RedirectUrl') {
+            var location = 'window.location.assign("' + message + '")';
+            setTimeout(location, timeout);
         }
     });
 };
@@ -361,14 +367,13 @@ jw.actions.showDialog = function (title, message, type, options) {
         if (options) {
             options.title = title;
             options.message = message;
-            options.size = BootstrapDialog.SIZE_LARGE;
             BootstrapDialog.show(options);
         }
         if (type === 'Danger')
             BootstrapDialog.show({
                 title: title,
                 message: message,
-                size: BootstrapDialog.SIZE_LARGE,
+                size : BootstrapDialog.SIZE_EXTRAWIDE,
                 type: BootstrapDialog.TYPE_DANGER
             });
         else if (type === 'Success')

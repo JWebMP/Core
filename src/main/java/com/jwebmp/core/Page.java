@@ -75,13 +75,6 @@ public class Page<J extends Page<J>>
 	 */
 	private PageOptions<?> options;
 
-	/**
-	 * The current user agent of the render
-	 */
-	@JsonIgnore
-	@Inject
-	private ReadableUserAgent userAgent;
-
 	@Inject
 	private ContentSecurityPolicy contentSecurityPolicy;
 
@@ -345,8 +338,6 @@ public class Page<J extends Page<J>>
 			getBody().destroy();
 		}
 		options = null;
-		userAgent = null;
-
 		super.destroy();
 	}
 
@@ -445,37 +436,15 @@ public class Page<J extends Page<J>>
 	@NotNull
 	public ReadableUserAgent getUserAgent()
 	{
-		if (userAgent == null)
+		try
 		{
-			try
-			{
-				ReadableUserAgent agent = GuiceContext.get(ReadableUserAgent.class);
-				setUserAgent(agent);
-			}
-			catch (Throwable T)
-			{
-				Page.log.log(Level.FINER, "Readable User Agent can't be fetched, returning default", T);
-
-			}
+			return GuiceContext.get(ReadableUserAgent.class);
 		}
-		return userAgent;
-	}
-
-	/**
-	 * Sets the userAgent
-	 *
-	 * @param userAgent
-	 * 		Sets the referenced user agent
-	 *
-	 * @see com.jwebmp.core.services.IPage#setUserAgent(ReadableUserAgent)
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J setUserAgent(ReadableUserAgent userAgent)
-	{
-		this.userAgent = userAgent;
-		return (J) this;
+		catch (Throwable T)
+		{
+			Page.log.log(Level.FINER, "Readable User Agent can't be fetched, returning default", T);
+			return null;
+		}
 	}
 
 	/**
@@ -527,8 +496,8 @@ public class Page<J extends Page<J>>
 	{
 		return this;
 	}
-	
-	
+
+
 	/**
 	 * Initialize all children
 	 */
@@ -539,7 +508,7 @@ public class Page<J extends Page<J>>
 		{
 			configurePageHeader();
 			addVariablesScriptToPage();
-			
+
 			if(!getHead().getChildren().isEmpty())
 			{
 				add(getHead());
@@ -555,7 +524,7 @@ public class Page<J extends Page<J>>
 		}
 		super.init();
 	}
-	
+
 	/**
 	 * Returns all the feature queries associated to this component and all its children
 	 *
