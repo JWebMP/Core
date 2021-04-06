@@ -24,6 +24,7 @@ import com.jwebmp.core.base.html.interfaces.children.ListItemChildren;
 import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
+import com.jwebmp.core.base.interfaces.IIcon;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -63,7 +64,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class Italic<J extends Italic<J>>
 		extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, ParagraphChildren, ListItemChildren, FormChildren
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, ParagraphChildren, ListItemChildren, FormChildren, IIcon<IComponentHierarchyBase<?,?>,J>
 {
 	/**
 	 * Constructs a new paragraph child of Italic
@@ -86,4 +87,13 @@ public class Italic<J extends Italic<J>>
 		setText(text);
 	}
 
+	@Override
+	public String getClassName() {
+		return "";
+	}
+
+	@Override
+	public IComponentHierarchyBase<?, ?> getIconComponent() {
+		return this;
+	}
 }
