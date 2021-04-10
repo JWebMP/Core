@@ -16,7 +16,6 @@
  */
 package com.jwebmp.core;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.inject.Inject;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.logger.LogFactory;
@@ -37,15 +36,15 @@ import com.jwebmp.core.services.IPage;
 import com.jwebmp.core.services.IPageConfigurator;
 import com.jwebmp.core.utilities.StaticStrings;
 import jakarta.validation.constraints.NotNull;
-import net.sf.uadetector.*;
+import net.sf.uadetector.ReadableDeviceCategory;
+import net.sf.uadetector.ReadableUserAgent;
 
-import java.util.Map;
-import java.util.*;
+import java.util.EnumSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.guicedee.guicedinjection.GuiceContext.get;
-import static com.guicedee.guicedinjection.json.StaticStrings.STRING_EMPTY;
 import static com.guicedee.guicedinjection.json.StaticStrings.STRING_SEMICOLON;
 import static com.jwebmp.core.services.JWebMPServicesBindings.IPageConfiguratorsKey;
 
@@ -77,6 +76,9 @@ public class Page<J extends Page<J>>
 
 	@Inject
 	private ContentSecurityPolicy contentSecurityPolicy;
+
+	@Inject
+	private ReadableUserAgent readableUserAgent;
 
 	/**
 	 * If this page has already gone through initialization
@@ -436,15 +438,7 @@ public class Page<J extends Page<J>>
 	@NotNull
 	public ReadableUserAgent getUserAgent()
 	{
-		try
-		{
-			return GuiceContext.get(ReadableUserAgent.class);
-		}
-		catch (Throwable T)
-		{
-			Page.log.log(Level.FINER, "Readable User Agent can't be fetched, returning default", T);
-			return null;
-		}
+		return readableUserAgent;
 	}
 
 	/**
@@ -621,6 +615,10 @@ public class Page<J extends Page<J>>
 		{
 			getHead().add(this.getOptions().getFavIconLink());
 		}
+	}
+
+	public ContentSecurityPolicy getContentSecurityPolicy() {
+		return contentSecurityPolicy;
 	}
 
 	/**

@@ -65,13 +65,24 @@ public class SessionHelper
 		{
 			HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
 			StringBuffer buff = request.getRequestURL();
-			if (request.getHeader(StaticStrings.REQUEST_SITE_HEADER_NAME) != null && !request.getHeader(StaticStrings.REQUEST_SITE_HEADER_NAME)
+			if (request.getHeader(StaticStrings.REQUEST_SITE_HEADER_NAME) != null
+					&& !request.getHeader(StaticStrings.REQUEST_SITE_HEADER_NAME)
 			                                                                                 .isEmpty())
 			{
 				buff = new StringBuffer(request.getHeader(StaticStrings.REQUEST_SITE_HEADER_NAME));
 			}
 			String address = buff.substring(0, buff.lastIndexOf(STRING_FORWARD_SLASH) + 1);
 			SessionHelper.address = address;
+
+			if ("[::1]".equals(address)) {
+				return "localhost";
+			}
+			if ("127.0.0.1".equals(address)) {
+				return "localhost";
+			}
+			if ("[0:0:0:0:0:0:0:1]".equals(address)) {
+				return "localhost";
+			}
 			return address;
 		}
 		catch (Exception e)
@@ -80,6 +91,8 @@ public class SessionHelper
 			return SessionHelper.addressToBeUsedWhenNull;
 		}
 	}
+
+
 
 	/**
 	 * If the helper is using the cached address

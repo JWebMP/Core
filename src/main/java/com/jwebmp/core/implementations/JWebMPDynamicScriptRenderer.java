@@ -41,6 +41,29 @@ public class JWebMPDynamicScriptRenderer
 		return getSiteLoaderScript();
 	}
 
+	private static final String[] HEADERS_TO_TRY = {
+			"X-Forwarded-For",
+			"Proxy-Client-IP",
+			"WL-Proxy-Client-IP",
+			"HTTP_X_FORWARDED_FOR",
+			"HTTP_X_FORWARDED",
+			"HTTP_X_CLUSTER_CLIENT_IP",
+			"HTTP_CLIENT_IP",
+			"HTTP_FORWARDED_FOR",
+			"HTTP_FORWARDED",
+			"HTTP_VIA",
+			"REMOTE_ADDR" };
+
+	private String getClientIpAddress(HttpServletRequest request) {
+		for (String header : HEADERS_TO_TRY) {
+			String ip = request.getHeader(header);
+			if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
+				return ip;
+			}
+		}
+		return request.getRemoteAddr();
+	}
+
 	/**
 	 * Method getSiteLoaderScript returns the siteLoaderScript of this ScriptsDynamicPageConfigurator object.
 	 *
@@ -56,8 +79,20 @@ public class JWebMPDynamicScriptRenderer
 			HttpServletRequest hsr = get(HttpServletRequest.class);
 			FileTemplates.getTemplateVariables()
 					.put("%USERAGENT%", new StringBuilder(hsr.getHeader("user-agent")));
+
+			String ipAddress = getClientIpAddress(hsr);
+			if ("[::1]".equals(ipAddress)) {
+				ipAddress= "localhost";
+			}
+			if ("127.0.0.1".equals(ipAddress)) {
+				ipAddress= "localhost";
+			}
+			if ("[0:0:0:0:0:0:0:1]".equals(ipAddress)) {
+				ipAddress= "localhost";
+			}
 			FileTemplates.getTemplateVariables()
-					.put("%MYIP%", new StringBuilder(hsr.getRemoteAddr()));
+					.put("%MYIP%", new StringBuilder(ipAddress));
+
 			FileTemplates.getTemplateVariables()
 					.put("%REFERER%", new StringBuilder(hsr.getHeader("referer")));
 		}
