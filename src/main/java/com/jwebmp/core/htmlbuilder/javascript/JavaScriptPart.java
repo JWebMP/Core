@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.common.base.CaseFormat;
 import com.google.inject.Key;
 import com.google.inject.name.Names;
+import com.guicedee.guicedinjection.representations.IJsonRepresentation;
 import com.jwebmp.core.FileTemplates;
 import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
@@ -52,7 +53,7 @@ import static com.guicedee.guicedinjection.interfaces.ObjectBinderKeys.*;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JavaScriptPart<J extends JavaScriptPart<J>>
-		implements Serializable
+		implements Serializable, IJsonRepresentation<J>
 {
 
 	/**
@@ -112,24 +113,6 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	}
 
 	/**
-	 * Read direct from the stream
-	 *
-	 * @param <T>
-	 * @param file
-	 * 		the stream
-	 * @param clazz
-	 *
-	 * @return
-	 *
-	 * @throws IOException
-	 */
-	public <T> T From(InputStream file, Class<T> clazz) throws IOException
-	{
-		return getJsonObjectReader().forType(clazz)
-		                            .readValue(file);
-	}
-
-	/**
 	 * Returns the JSON Renderer
 	 *
 	 * @return
@@ -149,175 +132,6 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	public ObjectMapper getFunctionObjectMapper()
 	{
 		return GuiceContext.get(Key.get(ObjectMapper.class, Names.named("JSFUNCTION")));
-	}
-
-	/**
-	 * Read from a file
-	 *
-	 * @param <T>
-	 * @param file
-	 * @param clazz
-	 *
-	 * @return
-	 *
-	 * @throws IOException
-	 */
-	public <T> T From(File file, Class<T> clazz) throws IOException
-	{
-		return getJsonObjectReader().forType(clazz)
-		                            .readValue(file);
-	}
-
-	/**
-	 * Read from a reader
-	 *
-	 * @param <T>
-	 * @param file
-	 * @param clazz
-	 *
-	 * @return
-	 *
-	 * @throws IOException
-	 */
-	public <T> T From(Reader file, Class<T> clazz) throws IOException
-	{
-		return getJsonObjectReader().forType(clazz)
-		                            .readValue(file);
-	}
-
-	/**
-	 * Read from a content string
-	 *
-	 * @param <T>
-	 * @param content
-	 * @param clazz
-	 *
-	 * @return
-	 *
-	 * @throws IOException
-	 */
-	public <T> T From(String content, Class<T> clazz) throws IOException
-	{
-		return getJsonObjectReader().forType(clazz)
-		                            .readValue(content);
-	}
-
-	/**
-	 * Read from a URL
-	 *
-	 * @param <T>
-	 * @param content
-	 * @param clazz
-	 *
-	 * @return
-	 *
-	 * @throws IOException
-	 */
-	public <T> T From(URL content, Class<T> clazz) throws IOException
-	{
-		return getJsonObjectReader().forType(clazz)
-		                            .readValue(content);
-	}
-
-	/**
-	 * Read direct from the stream
-	 *
-	 * @param <T>
-	 * @param file
-	 * 		the stream
-	 * @param clazz
-	 *
-	 * @return
-	 *
-	 * @throws IOException
-	 */
-	public <T> List<T> FromToList(InputStream file, Class<T> clazz) throws IOException
-	{
-		T list = getJsonObjectReader().forType(clazz)
-		                              .readValue(file);
-		ArrayList<T> lists = new ArrayList<>();
-		lists.addAll(Arrays.asList((T[]) list));
-		return lists;
-	}
-
-	/**
-	 * Read from a URL
-	 *
-	 * @param <T>
-	 * @param content
-	 * @param clazz
-	 *
-	 * @return
-	 *
-	 * @throws IOException
-	 */
-	public <T> List<T> FromToList(URL content, Class<T> clazz) throws IOException
-	{
-		T list = getJsonObjectReader().forType(clazz)
-		                              .readValue(content);
-		ArrayList<T> lists = new ArrayList<>();
-		lists.addAll(Arrays.asList((T[]) list));
-		return lists;
-	}
-
-	/**
-	 * Read from a file
-	 *
-	 * @param <T>
-	 * @param file
-	 * @param clazz
-	 *
-	 * @return
-	 *
-	 * @throws IOException
-	 */
-	public <T> List<T> FromToList(File file, Class<T> clazz) throws IOException
-	{
-		T list = getJsonObjectReader().forType(clazz)
-		                              .readValue(file);
-		ArrayList<T> lists = new ArrayList<>();
-		lists.addAll(Arrays.asList((T[]) list));
-		return lists;
-	}
-
-	/**
-	 * Read from a reader
-	 *
-	 * @param <T>
-	 * @param file
-	 * @param clazz
-	 *
-	 * @return
-	 *
-	 * @throws IOException
-	 */
-	public <T> List<T> FromToList(Reader file, Class<T> clazz) throws IOException
-	{
-		T list = getJsonObjectReader().forType(clazz)
-		                              .readValue(file);
-		ArrayList<T> lists = new ArrayList<>();
-		lists.addAll(Arrays.asList((T[]) list));
-		return lists;
-	}
-
-	/**
-	 * Read from a content string
-	 *
-	 * @param <T>
-	 * @param content
-	 * @param clazz
-	 *
-	 * @return
-	 *
-	 * @throws IOException
-	 */
-	public <T> List<T> FromToList(String content, Class<T> clazz) throws IOException
-	{
-		T list = getJsonObjectReader().forType(clazz)
-		                              .readValue(content);
-		ArrayList<T> lists = new ArrayList<>();
-		lists.addAll(Arrays.asList((T[]) list));
-		return lists;
 	}
 
 	/**

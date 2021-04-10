@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.guicedee.guicedinjection.interfaces.ObjectBinderKeys;
+import com.guicedee.guicedinjection.representations.IJsonRepresentation;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.logger.LogFactory;
@@ -117,7 +118,7 @@ public class JsonVariable
      * @throws IOException
      */
     public <T extends Serializable> T getDto(Class<T> classType) throws IOException {
-        T output = new JavaScriptPart<>().From(variableText, classType);
+        T output = IJsonRepresentation.From(variableText, classType);
         variable = output;
         return output;
     }
@@ -204,8 +205,8 @@ public class JsonVariable
      */
     public <T> T as(Class<T> classType) {
         try {
-
-            return new JavaScriptPart<>().From(getVariableText(), classType);
+            T instance = GuiceContext.get(classType);
+            return IJsonRepresentation.From(getVariableText(), classType);
         } catch (Exception e) {
             log.log(Level.WARNING, "Error in decoding Ajax Response Variable", e);
             return null;

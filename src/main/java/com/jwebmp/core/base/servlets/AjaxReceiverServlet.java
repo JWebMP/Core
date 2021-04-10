@@ -18,6 +18,7 @@ package com.jwebmp.core.base.servlets;
 
 import com.google.inject.Singleton;
 import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.representations.IJsonRepresentation;
 import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.Event;
@@ -66,7 +67,7 @@ public class AjaxReceiverServlet
 		HttpServletRequest request = get(GuicedServletKeys.getHttpServletRequestKey());
 		try
 		{
-			AjaxCall<?> ajaxCallIncoming = new AjaxCall<>().From(request.getInputStream(), AjaxCall.class);
+			AjaxCall<?> ajaxCallIncoming = IJsonRepresentation.From(request.getInputStream(), AjaxCall.class);
 			AjaxCall<?> ajaxCall = get(AjaxCall.class);
 			ajaxCall.fromCall(ajaxCallIncoming);
 
