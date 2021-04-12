@@ -21,6 +21,8 @@ import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.utilities.StaticStrings;
 
 import jakarta.servlet.http.HttpServletRequest;
+
+import java.net.InetAddress;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,23 +68,14 @@ public class SessionHelper
 			HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
 			StringBuffer buff = request.getRequestURL();
 			if (request.getHeader(StaticStrings.REQUEST_SITE_HEADER_NAME) != null
-					&& !request.getHeader(StaticStrings.REQUEST_SITE_HEADER_NAME)
-			                                                                                 .isEmpty())
+					&& !request.getHeader(StaticStrings.REQUEST_SITE_HEADER_NAME).isEmpty())
 			{
 				buff = new StringBuffer(request.getHeader(StaticStrings.REQUEST_SITE_HEADER_NAME));
 			}
 			String address = buff.substring(0, buff.lastIndexOf(STRING_FORWARD_SLASH) + 1);
+			address = address.replace("[0:0:0:0:0:0:0:1]", "localhost");
 			SessionHelper.address = address;
 
-			if ("[::1]".equals(address)) {
-				return "localhost";
-			}
-			if ("127.0.0.1".equals(address)) {
-				return "localhost";
-			}
-			if ("[0:0:0:0:0:0:0:1]".equals(address)) {
-				return "localhost";
-			}
 			return address;
 		}
 		catch (Exception e)
@@ -153,18 +146,6 @@ public class SessionHelper
 			log.log(Level.WARNING, "Unable to get request, returning default /", T);
 			return "/";
 		}
-	}
-
-	/**
-	 * Returns the client IP Address
-	 *
-	 * @return String of the client ip
-	 */
-	public static String getClientIPAddress()
-	{
-		HttpServletRequest request = GuiceContext.inject()
-		                                         .getInstance(HttpServletRequest.class);
-		return request.getRemoteAddr();
 	}
 
 	public static String getAddressToBeUsedWhenNull()
