@@ -189,6 +189,7 @@ abstract class RequirementsPriorityAbstractInsertPageConfigurator<J extends Requ
 				}
 			}
 			script.setNewLineForClosingTag(false);
+			script.addAttribute("type", reference.getScriptType());
 			allScripts.add(script);
 		}
 		return allScripts;

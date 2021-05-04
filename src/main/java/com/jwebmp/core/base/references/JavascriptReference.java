@@ -34,6 +34,7 @@ public class JavascriptReference
 {
 	private boolean defer;
 	private boolean async;
+	private String scriptType = "text/javascript";
 
 	/**
 	 * @param name
@@ -206,6 +207,26 @@ public class JavascriptReference
 		{
 			getAdditionalOptions().remove("async");
 		}
+		return this;
+	}
+	
+	/**
+	 * Returns the script type for this reference
+	 * @return
+	 */
+	public String getScriptType()
+	{
+		return scriptType;
+	}
+	
+	/**
+	 * Sets the script type for this reference
+	 * @param scriptType
+	 * @return
+	 */
+	public JavascriptReference setScriptType(String scriptType)
+	{
+		this.scriptType = scriptType;
 		return this;
 	}
 }
