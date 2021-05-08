@@ -67,13 +67,14 @@ public class InputSelectType<J extends InputSelectType<J>>
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	@NotNull
-	public Option<?> addOption(String label, String value)
+	public J addOption(String label, String value)
 	{
 		Option<?> option = new Option<>(value);
 		option.setLabel(label);
 		add(option);
-		return option;
+		return (J) this;
 	}
 
 	@Override

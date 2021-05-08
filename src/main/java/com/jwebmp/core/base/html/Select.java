@@ -18,6 +18,7 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
+import com.jwebmp.core.base.html.inputs.InputSelectType;
 import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.children.SelectChildren;
@@ -54,7 +55,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since Mar 1, 2015
  */
 public class Select<J extends Select<J>>
-		extends Component<SelectChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		extends InputSelectType<J>
 		implements GlobalChildren
 {
 	/**
@@ -62,7 +63,7 @@ public class Select<J extends Select<J>>
 	 */
 	public Select()
 	{
-		super(ComponentTypes.Select);
+		//super(ComponentTypes.Select);
 	}
 
 

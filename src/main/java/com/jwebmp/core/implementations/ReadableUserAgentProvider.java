@@ -29,15 +29,20 @@ public class ReadableUserAgentProvider implements Provider<ReadableUserAgent> {
             }
             return defaultAgent();
         } catch (ProvisionException | OutOfScopeException e) {
-
-            AjaxCall<?> call = GuiceContext.get(AjaxCall.class);
-            HeadersDTO headers = call.getVariable("headers")
-                    .as(HeadersDTO.class);
-            if (!Strings.isNullOrEmpty(headers.useragent)) {
-                ReadableUserAgent agent = userAgentStringParser.parse(headers.useragent);
-                return agent;
+            try
+            {
+                AjaxCall<?> call = GuiceContext.get(AjaxCall.class);
+                HeadersDTO headers = call.getVariable("headers")
+                                         .as(HeadersDTO.class);
+                if (!Strings.isNullOrEmpty(headers.useragent))
+                {
+                    ReadableUserAgent agent = userAgentStringParser.parse(headers.useragent);
+                    return agent;
+                }
+            }catch (Throwable T)
+            {
+                return defaultAgent();
             }
-
             return defaultAgent();
         }
     }
