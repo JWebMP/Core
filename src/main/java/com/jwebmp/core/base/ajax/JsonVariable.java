@@ -183,10 +183,10 @@ public class JsonVariable
      * @return
      */
     @SuppressWarnings("Convert2Diamond")
-    public Map<String, String> asMap() {
+    public Map<String, Object> asMap() {
         String variableText = getVariableText();
-        TypeReference<HashMap<String, String>> typeRef
-                = new TypeReference<HashMap<String, String>>() {
+        TypeReference<HashMap<String, Object>> typeRef
+                = new TypeReference<HashMap<String, Object>>() {
         };
         try {
             return GuiceContext.get(ObjectBinderKeys.DefaultObjectMapper).readValue(variableText, typeRef);
