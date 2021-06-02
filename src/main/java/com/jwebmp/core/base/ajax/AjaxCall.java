@@ -135,6 +135,13 @@ public class AjaxCall<J extends AjaxCall<J>>
 		this.eventType = EventTypes.valueOf(eventType);
 		this.eventTypeFrom = EventTypes.valueOf(eventTypeFrom);
 	}
+	
+	public String getAttribute(String attribute)
+	{
+		return getValue().getAttributes()
+		                 .get(attribute)
+		                 .toString();
+	}
 
 	/**
 	 * Returns a list of variable angular watchers to apply on the ajax call.

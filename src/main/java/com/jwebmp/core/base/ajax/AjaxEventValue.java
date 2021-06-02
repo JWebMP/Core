@@ -21,6 +21,8 @@ import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 
 import jakarta.validation.constraints.NotNull;
 
+import java.util.Map;
+
 /**
  * An angular event that is returned
  *
@@ -115,6 +117,8 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	 * Which and Where to put it
 	 */
 	private String which;
+	
+	private Map<String,Object> attributes;
 
 	/**
 	 * Blank Constructor
@@ -607,5 +611,16 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.which = which;
 		return (J) this;
 	}
-
+	
+	public Map<String, Object> getAttributes()
+	{
+		return attributes;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public J setAttributes(Map<String, Object> attributes)
+	{
+		this.attributes = attributes;
+		return (J) this;
+	}
 }
