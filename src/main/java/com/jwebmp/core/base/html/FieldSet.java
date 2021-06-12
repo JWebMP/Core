@@ -89,6 +89,11 @@ public class FieldSet<J extends FieldSet<J>>
 		}
 	}
 	
+	public Legend<?> getLegend()
+	{
+		return legend;
+	}
+	
 	@Override
 	public int hashCode()
 	{
