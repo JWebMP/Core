@@ -81,10 +81,6 @@ public abstract class Feature<F extends GlobalFeatures, O extends JavaScriptPart
 		super(ComponentTypes.Feature);
 		setName(name);
 		super.setComponent(component);
-		if (component != null)
-		{
-			component.asFeatureBase().addFeature(this);
-		}
 	}
 
 	/**
@@ -175,10 +171,6 @@ public abstract class Feature<F extends GlobalFeatures, O extends JavaScriptPart
 		if (getComponent() != null)
 		{
 			getComponent().asFeatureBase().getFeatures().remove(this);
-		}
-		if (component != null)
-		{
-			component.asFeatureBase().addFeature(this);
 		}
 		return super.setComponent(component);
 	}

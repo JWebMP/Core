@@ -31,9 +31,7 @@ import com.guicedee.logger.LogFactory;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -195,7 +193,25 @@ public class JsonVariable
         }
 
     }
-
+    
+    /**
+     * @return
+     */
+    @SuppressWarnings("Convert2Diamond")
+    public List<Map<String, Object>> asListMap() {
+        String variableText = getVariableText();
+        TypeReference<List<Map<String, Object>>> typeRef
+                = new TypeReference<List<Map<String, Object>>>() {
+        };
+        try {
+            return GuiceContext.get(ObjectBinderKeys.DefaultObjectMapper).readValue(variableText, typeRef);
+        } catch (JsonProcessingException e) {
+            return new ArrayList<>();
+        }
+        
+    }
+    
+    
     /**
      * Returns the variable object in the format requested
      *

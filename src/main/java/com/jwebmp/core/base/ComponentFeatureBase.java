@@ -238,6 +238,11 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	@SuppressWarnings("unchecked")
 	public J addFeature(@NotNull IComponentFeatureBase<?,?> feature)
 	{
+		if(feature.getComponent() == null && this instanceof ComponentHierarchyBase)
+		{
+			ComponentHierarchyBase chb = (ComponentHierarchyBase) this;
+			feature.setComponent(chb);
+		}
 		getFeatures().add((F) feature);
 		feature.init();
 		feature.preConfigure();
@@ -694,7 +699,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	}
 
 	/**
-	 * Returns any hierarchal assigned component
+	 * Returns any assigned component
 	 *
 	 * @return the assigned component
 	 */

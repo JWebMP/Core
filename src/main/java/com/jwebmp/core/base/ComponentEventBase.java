@@ -16,20 +16,16 @@
  */
 package com.jwebmp.core.base;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
+import com.guicedee.logger.LogFactory;
+import com.jwebmp.core.Event;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
-import com.jwebmp.core.base.interfaces.IComponentEventBase;
-import com.jwebmp.core.base.interfaces.IComponentFeatureBase;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
+import com.jwebmp.core.base.interfaces.*;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.guicedee.logger.LogFactory;
-
 import jakarta.validation.constraints.NotNull;
 
 import java.util.LinkedHashSet;
@@ -115,19 +111,32 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	@SuppressWarnings("unchecked")
 	public J addEvent(@NotNull E event)
 	{
-		if(event != null) {
+		if (event != null)
+		{
+			if (event instanceof Event)
+			{
+				Event chb = (Event) event;
+				if (chb.getComponent() == null)
+				{
+					chb.setComponent((IComponentHierarchyBase<?, ?>) this);
+				}
+			}
 			//noinspection RedundantClassCall
 			if (!IComponentFeatureBase.class.cast(event)
-					.asBase()
-					.getComponentType()
-					.equals(ComponentTypes.Event)) {
+			                                .asBase()
+			                                .getComponentType()
+			                                .equals(ComponentTypes.Event))
+			{
 				ComponentEventBase.LOG.log(Level.WARNING, "Tried to add a non event to the event collection");
-			} else {
+			}
+			else
+			{
 				getEvents().add(event);
 			}
-			if (IComponentFeatureBase.class.isAssignableFrom(getClass())) {
+			if (IComponentFeatureBase.class.isAssignableFrom(getClass()))
+			{
 				((IComponentFeatureBase<?, ?>) event).asFeatureBase()
-						.setComponent((IComponentHierarchyBase<?, ?>) this);
+				                                     .setComponent((IComponentHierarchyBase<?, ?>) this);
 			}
 			event.init();
 			event.preConfigure();
@@ -281,13 +290,13 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	{
 		Set<CSSReference> allCss = super.getCssReferencesAll();
 		getEvents().forEach((E feature) ->
-		                    {
-			                    for (Object css : ComponentEventBase.class.cast(feature)
-			                                                              .getCssReferencesAll())
-			                    {
-				                    allCss.add(CSSReference.class.cast(css));
-			                    }
-		                    });
+		{
+			for (Object css : ComponentEventBase.class.cast(feature)
+			                                          .getCssReferencesAll())
+			{
+				allCss.add(CSSReference.class.cast(css));
+			}
+		});
 		return allCss;
 	}
 	
@@ -303,13 +312,13 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	{
 		Set<JavascriptReference> allJs = super.getJavascriptReferencesAll();
 		getEvents().forEach(feature ->
-		                    {
-			                    for (Object js : ComponentEventBase.class.cast(feature)
-			                                                             .getJavascriptReferencesAll())
-			                    {
-				                    allJs.add(JavascriptReference.class.cast(js));
-			                    }
-		                    });
+		{
+			for (Object js : ComponentEventBase.class.cast(feature)
+			                                         .getJavascriptReferencesAll())
+			{
+				allJs.add(JavascriptReference.class.cast(js));
+			}
+		});
 		return allJs;
 	}
 	
