@@ -58,6 +58,7 @@ public class JWebMPServlet
 	@Override
 	public void perform()
 	{
+		
 		HttpServletResponse response = GuiceContext.get(GuicedServletKeys.getHttpServletResponseKey());
 		sendPage(response);
 	}

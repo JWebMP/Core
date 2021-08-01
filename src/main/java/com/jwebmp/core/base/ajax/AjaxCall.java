@@ -112,6 +112,11 @@ public class AjaxCall<J extends AjaxCall<J>>
 	private Session websocketSession;
 	
 	/**
+	 * If this is a page or a supporting servlet call
+	 */
+	private boolean pageCall;
+	
+	/**
 	 * JSon Jackson Constructor
 	 */
 	public AjaxCall()
@@ -460,6 +465,27 @@ public class AjaxCall<J extends AjaxCall<J>>
 	public J setClassName(String className)
 	{
 		this.className = className;
+		return (J) this;
+	}
+	
+	/**
+	 * If the call originates as a live page call, or a supporting servlet call
+	 * @return
+	 */
+	public boolean isPageCall()
+	{
+		return pageCall;
+	}
+	
+	/**
+	 * If the call originates as a live page call, or a supporting servlet call
+	 * @param pageCall
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public J setPageCall(boolean pageCall)
+	{
+		this.pageCall = pageCall;
 		return (J) this;
 	}
 	

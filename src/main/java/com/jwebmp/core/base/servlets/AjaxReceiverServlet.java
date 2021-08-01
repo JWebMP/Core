@@ -70,7 +70,7 @@ public class AjaxReceiverServlet
 			AjaxCall<?> ajaxCallIncoming = IJsonRepresentation.From(request.getInputStream(), AjaxCall.class);
 			AjaxCall<?> ajaxCall = get(AjaxCall.class);
 			ajaxCall.fromCall(ajaxCallIncoming);
-
+			ajaxCall.setPageCall(true);
 			AjaxResponse<?> ajaxResponse = get(AjaxResponse.class);
 
 			validateCall(ajaxCall);
