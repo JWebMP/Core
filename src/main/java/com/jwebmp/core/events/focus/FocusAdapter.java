@@ -40,7 +40,7 @@ import java.util.logging.Level;
 		description = "Server Side Event for Focus")
 public abstract class FocusAdapter<J extends FocusAdapter<J>>
 		extends Event<GlobalFeatures, J>
-		implements GlobalEvents
+		implements GlobalEvents<J>
 {
 
 	/**

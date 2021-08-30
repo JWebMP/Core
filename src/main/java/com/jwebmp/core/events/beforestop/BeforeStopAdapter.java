@@ -40,7 +40,7 @@ import java.util.logging.Level;
 		description = "Server Side Event for Before Stop Event.")
 public abstract class BeforeStopAdapter<J extends BeforeStopAdapter<J>>
 		extends Event<GlobalFeatures, J>
-		implements GlobalEvents
+		implements GlobalEvents<J>
 {
 
 	/**

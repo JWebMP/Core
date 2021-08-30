@@ -492,6 +492,11 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 			{
 				getFeatures().forEach(t -> t.asFeatureBase().checkAssignedFunctions());
 			}
+			if(!isInitialized())
+				init();
+			if(!isConfigured())
+				preConfigure();
+			
 			assignFunctionsToComponent();
 			setRenderAfterLoad(true);
 		}

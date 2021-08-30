@@ -40,7 +40,7 @@ import java.util.logging.Level;
 		description = "Server Side Event for Change.")
 public abstract class ChangeAdapter<J extends ChangeAdapter<J>>
 		extends Event<GlobalFeatures, J>
-		implements GlobalEvents
+		implements GlobalEvents<J>
 {
 	/**
 	 * Logger for the Component

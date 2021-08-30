@@ -191,7 +191,7 @@ jw.actions.processSessionStorage = function (result) {
  */
 jw.actions.processCss = function (result) {
     $('.dynamic-css').remove();
-    if(result.css)
+    if (result.css)
         $('head').append('<style class="dynamic-css">' + result.css + '</style>');
 };
 
@@ -268,16 +268,11 @@ jw.actions.processJsScripts = function (result) {
 };
 
 jw.actions.loadScript = function (item, tries) {
-    if (!tries)
-        tries = 0;
     try {
         var result = eval(item);
     } catch (e) {
         console.error('cannot run script -' + item);
         console.log(e);
-        tries = tries + 1;
-        if (tries < 10)
-            setTimeout(jw.actions.loadScript(item, tries), 1500);
     }
 };
 
@@ -373,7 +368,7 @@ jw.actions.showDialog = function (title, message, type, options) {
             BootstrapDialog.show({
                 title: title,
                 message: message,
-                size : BootstrapDialog.SIZE_EXTRAWIDE,
+                size: BootstrapDialog.SIZE_EXTRAWIDE,
                 type: BootstrapDialog.TYPE_DANGER
             });
         else if (type === 'Success')

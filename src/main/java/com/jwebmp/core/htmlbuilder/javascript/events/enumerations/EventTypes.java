@@ -46,7 +46,7 @@ import com.jwebmp.core.events.stop.StopAdapter;
 import com.jwebmp.core.events.submit.SubmitAdapter;
 import com.jwebmp.core.events.unselected.UnselectedAdapter;
 import com.jwebmp.core.events.update.UpdateAdapter;
-import com.jwebmp.core.htmlbuilder.javascript.events.commandevent.PerformCommandEvent;
+import com.jwebmp.core.htmlbuilder.javascript.events.commandevent.OnComponentLoadedEvent;
 
 /**
  * Everything is a click so that makes it nice
@@ -63,7 +63,7 @@ public enum EventTypes
 	/**
 	 * Sends an Ajax call to the server to perform any command on document render. Very flexible, Maybe overly so
 	 */
-	performCommand(PerformCommandEvent.class, null),
+	performCommand(OnComponentLoadedEvent.class, null),
 	/**
 	 * Registers a Mouse Over event
 	 */

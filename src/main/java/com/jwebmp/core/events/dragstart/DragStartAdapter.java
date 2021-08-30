@@ -40,7 +40,7 @@ import java.util.logging.Level;
 		description = "Server Side Event for Drag Start.")
 public abstract class DragStartAdapter<J extends DragStartAdapter<J>>
 		extends Event<GlobalFeatures, J>
-		implements GlobalEvents
+		implements GlobalEvents<J>
 {
 
 	/**

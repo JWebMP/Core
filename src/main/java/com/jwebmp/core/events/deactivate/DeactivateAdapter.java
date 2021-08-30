@@ -40,7 +40,7 @@ import java.util.logging.Level;
 		description = "Server Side Event for DeActivate.")
 public abstract class DeactivateAdapter<J extends DeactivateAdapter<J>>
 		extends Event<GlobalFeatures, J>
-		implements GlobalEvents
+		implements GlobalEvents<J>
 {
 
 	/**

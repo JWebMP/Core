@@ -32,10 +32,10 @@ import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
  * @author MMagon
  * @since 2012-12-30
  */
-public abstract class PerformCommandEvent<J extends PerformCommandEvent<J>>
+public abstract class OnComponentLoadedEvent<J extends OnComponentLoadedEvent<J>>
 		extends Event<GlobalFeatures, J>
 {
-	public PerformCommandEvent(IComponentHierarchyBase<?,?> component)
+	public OnComponentLoadedEvent(IComponentHierarchyBase<?,?> component)
 	{
 		super(EventTypes.performCommand, component);
 	}

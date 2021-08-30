@@ -37,7 +37,7 @@ import java.util.logging.Level;
  */
 public abstract class SpinAdapter<J extends SpinAdapter<J>>
 		extends Event<GlobalFeatures, J>
-		implements GlobalEvents
+		implements GlobalEvents<J>
 {
 
 	/**

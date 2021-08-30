@@ -40,7 +40,7 @@ import java.util.logging.Level;
 		description = "Server Side Event for Blur Event.")
 public abstract class BlurAdapter<J extends BlurAdapter<J>>
 		extends Event<GlobalFeatures, J>
-		implements GlobalEvents
+		implements GlobalEvents<J>
 {
 
 	/**

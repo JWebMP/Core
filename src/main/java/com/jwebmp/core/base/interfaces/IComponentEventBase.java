@@ -34,7 +34,7 @@ import java.util.Set;
  * @since $(date)
  */
 public interface IComponentEventBase<E extends GlobalEvents, J extends IComponentEventBase<E, J>>
-		extends GlobalEvents,
+		extends GlobalEvents<J>,
 		        LifeCycle
 {
 	/**

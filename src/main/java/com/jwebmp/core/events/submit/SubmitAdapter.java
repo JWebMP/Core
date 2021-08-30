@@ -41,10 +41,10 @@ import java.util.logging.Level;
 @SuppressWarnings("unused")
 @ComponentInformation(name = "Submit Event",
 		description = "Server Side Event for Submit.")
-public abstract class SubmitAdapter
-		extends Event<GlobalFeatures, SubmitAdapter>
-		implements ParagraphEvents<GlobalFeatures, SubmitAdapter>,
-		           BodyEvents<GlobalFeatures, SubmitAdapter>, GlobalEvents
+public abstract class SubmitAdapter<J extends SubmitAdapter<J>>
+		extends Event<GlobalFeatures, J>
+		implements ParagraphEvents<GlobalFeatures, J>,
+		           BodyEvents<GlobalFeatures, J>, GlobalEvents<J>
 {
 	/**
 	 * Logger for the Component

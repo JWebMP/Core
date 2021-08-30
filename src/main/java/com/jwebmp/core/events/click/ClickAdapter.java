@@ -45,7 +45,7 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements ParagraphEvents<GlobalFeatures, J>,
 		           BodyEvents<GlobalFeatures, J>,
-		           GlobalEvents
+		           GlobalEvents<J>
 {
 	/**
 	 * Logger for the Component

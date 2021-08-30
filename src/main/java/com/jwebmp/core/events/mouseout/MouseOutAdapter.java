@@ -37,7 +37,7 @@ import java.util.logging.Level;
  */
 public abstract class MouseOutAdapter<J extends MouseOutAdapter<J>>
 		extends Event<GlobalFeatures, J>
-		implements GlobalEvents
+		implements GlobalEvents<J>
 {
 
 	/**

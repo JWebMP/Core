@@ -40,7 +40,7 @@ import java.util.logging.Level;
 		description = "Server Side Event for Drop Out")
 public abstract class DropOutAdapter<J extends DropOutAdapter<J>>
 		extends Event<GlobalFeatures, J>
-		implements GlobalEvents
+		implements GlobalEvents<J>
 {
 
 	/**

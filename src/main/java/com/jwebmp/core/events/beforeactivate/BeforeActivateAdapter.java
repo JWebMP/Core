@@ -40,7 +40,7 @@ import java.util.logging.Level;
 		description = "Server Side Event for Before Active Adapter.")
 public abstract class BeforeActivateAdapter<J extends BeforeActivateAdapter<J>>
 		extends Event<GlobalFeatures, J>
-		implements GlobalEvents
+		implements GlobalEvents<J>
 {
 
 	/**

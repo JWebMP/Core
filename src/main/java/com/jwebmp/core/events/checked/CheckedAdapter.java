@@ -37,7 +37,7 @@ import java.util.logging.Level;
  */
 public abstract class CheckedAdapter<J extends CheckedAdapter<J>>
 		extends Event<GlobalFeatures, J>
-		implements GlobalEvents
+		implements GlobalEvents<J>
 {
 
 	/**

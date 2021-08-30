@@ -50,7 +50,7 @@ import static com.guicedee.guicedinjection.json.StaticStrings.*;
 @SuppressWarnings("unused")
 public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 		extends ComponentEventBase<F, GlobalEvents, J>
-		implements GlobalEvents
+		implements GlobalEvents<J>
 {
 	/**
 	 * A list of all queries to execute on ajax response

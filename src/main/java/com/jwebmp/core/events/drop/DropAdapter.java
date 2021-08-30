@@ -40,7 +40,7 @@ import java.util.logging.Level;
 		description = "Server Side Event for Drop")
 public abstract class DropAdapter<J extends DropAdapter<J>>
 		extends Event<GlobalFeatures, J>
-		implements GlobalEvents
+		implements GlobalEvents<J>
 {
 
 	/**

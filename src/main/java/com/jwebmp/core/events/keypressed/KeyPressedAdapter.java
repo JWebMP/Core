@@ -37,7 +37,7 @@ import java.util.logging.Level;
  */
 public abstract class KeyPressedAdapter<J extends KeyPressedAdapter<J>>
 		extends Event<GlobalFeatures, J>
-		implements GlobalEvents
+		implements GlobalEvents<J>
 {
 
 	/**

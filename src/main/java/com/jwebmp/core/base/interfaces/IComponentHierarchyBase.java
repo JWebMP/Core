@@ -16,13 +16,14 @@
  */
 package com.jwebmp.core.base.interfaces;
 
-import com.jwebmp.core.CSSComponent;
-import com.jwebmp.core.Event;
-import com.jwebmp.core.Page;
+import com.jwebmp.core.*;
+import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.interfaces.GlobalChildren;
+import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.htmlbuilder.css.themes.Theme;
+import com.jwebmp.core.htmlbuilder.javascript.events.interfaces.IEvent;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Map;
@@ -188,6 +189,13 @@ public interface IComponentHierarchyBase<C extends GlobalChildren, J extends ICo
 	 * @return
 	 */
 	Set<String> getVariablesAll();
+	
+	/**
+	 * Creates loading part objects that return an injected instance of the class associated to that part
+	 *
+	 * @return
+	 */
+	ComponentHierarchyBase<GlobalChildren, ?, ?, GlobalEvents, ?> getLoadingPart(IEvent... events);
 	
 	/**
 	 * Returns if this object has children or not

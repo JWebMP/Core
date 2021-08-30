@@ -40,7 +40,7 @@ import java.util.logging.Level;
 		description = "Server Side Event for Complete.")
 public abstract class CompleteAdapter<J extends CompleteAdapter<J>>
 		extends Event<GlobalFeatures, J>
-		implements GlobalEvents
+		implements GlobalEvents<J>
 {
 
 	/**

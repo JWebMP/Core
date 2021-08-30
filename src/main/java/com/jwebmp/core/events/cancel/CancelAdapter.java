@@ -40,7 +40,7 @@ import java.util.logging.Level;
 		description = "Server Side Event for Cancel Click Event.")
 public abstract class CancelAdapter<J extends CancelAdapter<J>>
 		extends Event<GlobalFeatures, J>
-		implements GlobalEvents
+		implements GlobalEvents<J>
 {
 
 	/**

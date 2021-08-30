@@ -16,17 +16,14 @@
  */
 package com.jwebmp.core.events.rightclick;
 
-import com.jwebmp.core.Component;
+import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
-import com.jwebmp.core.base.html.interfaces.events.BodyEvents;
-import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
-import com.jwebmp.core.base.html.interfaces.events.ParagraphEvents;
+import com.jwebmp.core.base.html.interfaces.events.*;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.logger.LogFactory;
 
 import java.util.ServiceLoader;
 import java.util.Set;
@@ -39,26 +36,25 @@ import java.util.logging.Level;
  */
 public abstract class RightClickAdapter<J extends RightClickAdapter<J>>
 		extends Event<GlobalFeatures, J>
-		implements ParagraphEvents<GlobalFeatures, J>, BodyEvents<GlobalFeatures, J>, GlobalEvents
+		implements ParagraphEvents<GlobalFeatures, J>, BodyEvents<GlobalFeatures, J>, GlobalEvents<J>
 {
 	/**
 	 * Logger for the Component
 	 */
 	private static final java.util.logging.Logger log = LogFactory.getInstance()
 	                                                              .getLogger("RightClickEvent");
-
+	
 	/**
 	 * Performs a click
 	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
+	 * @param component The component this click is going to be acting on
 	 */
-	public RightClickAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
+	public RightClickAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?, ?> component)
 	{
 		super(EventTypes.contextmenu, component);
-
+		
 	}
-
+	
 	@Override
 	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
 	{
@@ -72,19 +68,17 @@ public abstract class RightClickAdapter<J extends RightClickAdapter<J>>
 			RightClickAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
-
+	
 	/**
 	 * Triggers on Click
 	 * <p>
 	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
+	 * @param call     The physical AJAX call
+	 * @param response The physical Ajax Receiver
 	 */
 	public abstract void onRightClick(AjaxCall<?> call, AjaxResponse<?> response);
-
-
+	
+	
 	/**
 	 * Method onCall ...
 	 */
@@ -94,7 +88,7 @@ public abstract class RightClickAdapter<J extends RightClickAdapter<J>>
 		                                                 .getLoader(IOnRightClickService.class, ServiceLoader.load(IOnRightClickService.class));
 		services.forEach(service -> service.onCall(this));
 	}
-
+	
 	@Override
 	public void preConfigure()
 	{
@@ -104,7 +98,7 @@ public abstract class RightClickAdapter<J extends RightClickAdapter<J>>
 		}
 		super.preConfigure();
 	}
-
+	
 	/**
 	 * Occurs when the event is called
 	 */

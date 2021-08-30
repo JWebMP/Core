@@ -31,7 +31,7 @@ import com.jwebmp.core.base.servlets.interfaces.IFeature;
  */
 public interface IEvent<F extends GlobalFeatures, J extends IEvent<F,J>>
 		extends IFeature<F, J>,
-		GlobalEvents
+		GlobalEvents<J>
 {
 	/**
 	 * The method that is fired on call

@@ -45,7 +45,7 @@ import java.util.logging.Level;
 public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents,
 		J extends ComponentEventBase<F, E, J>>
 		extends ComponentFeatureBase<F, J>
-		implements IComponentEventBase<E, J>
+		implements IComponentEventBase<E, J>,GlobalEvents<J>
 {
 	
 	/**

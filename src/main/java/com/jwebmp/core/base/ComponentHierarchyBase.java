@@ -16,27 +16,21 @@
  */
 package com.jwebmp.core.base;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import com.google.common.base.Strings;
+import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.logger.LogFactory;
-import com.jwebmp.core.CSSComponent;
-import com.jwebmp.core.Event;
-import com.jwebmp.core.Feature;
-import com.jwebmp.core.Page;
-import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
-import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
+import com.jwebmp.core.*;
+import com.jwebmp.core.base.html.interfaces.*;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
-import com.jwebmp.core.base.interfaces.IComponentFeatureBase;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
-import com.jwebmp.core.base.interfaces.ICssClassName;
+import com.jwebmp.core.base.interfaces.*;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.htmlbuilder.css.themes.Theme;
+import com.jwebmp.core.htmlbuilder.javascript.events.interfaces.IEvent;
+import com.jwebmp.core.implementations.JWebMPSiteBinder;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.*;
@@ -45,7 +39,7 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static java.util.Comparator.comparing;
+import static java.util.Comparator.*;
 
 /**
  * Provides the Hierarchy for any component. Manages children and parent relationships
@@ -834,6 +828,27 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 			}
 		});
 		return allVariables;
+	}
+	
+	/**
+	 * Creates loading part objects that return an injected instance of the class associated to that part
+	 *
+	 * @return
+	 */
+	@Override
+	public ComponentHierarchyBase<GlobalChildren, ?, ?, GlobalEvents, ?> getLoadingPart(IEvent... events)
+	{
+		if (JWebMPSiteBinder.loadingPartClass != null)
+		{
+			ComponentHierarchyBase<GlobalChildren, ?, ?, GlobalEvents, ?> loadingPart = (ComponentHierarchyBase<GlobalChildren, ?, ?, GlobalEvents, ?>) GuiceContext.get(JWebMPSiteBinder.loadingPartClass);
+			loadingPart.setID(getID());
+			for (IEvent<GlobalFeatures, ?> event : events)
+			{
+				loadingPart.addEvent(event);
+			}
+			return loadingPart;
+		}
+		return null;
 	}
 	
 	/**

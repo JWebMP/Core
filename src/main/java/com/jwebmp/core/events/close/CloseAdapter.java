@@ -40,7 +40,7 @@ import java.util.logging.Level;
 		description = "Server Side Event for Close.")
 public abstract class CloseAdapter<J extends CloseAdapter<J>>
 		extends Event<GlobalFeatures, J>
-		implements GlobalEvents
+		implements GlobalEvents<J>
 {
 
 	/**
