@@ -126,7 +126,7 @@ public class ComponentHTMLAttributeTest
 		                        "  },\n" +
 		                        "  \"componentClass\" : \"com.jwebmp.core.base.ComponentHTMLAttributeBase\"\n" +
 		                        "}";
-		//		Assertions.assertEquals(shell.toString(), shellExpected);
-		//	Assertions.assertEquals(shell2.toString(), shell2Expected);
+		//		Assertions.assertEquals(shell.toJson(), shellExpected);
+		//	Assertions.assertEquals(shell2.toJson(), shell2Expected);
 	}
 }

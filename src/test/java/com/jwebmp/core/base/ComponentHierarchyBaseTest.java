@@ -42,7 +42,7 @@ public class ComponentHierarchyBaseTest
 		head.add(new Meta("name"));
 		head.add(new Meta(Meta.MetadataFields.Author, "Author Me"));
 		ComponentHierarchyBase body = new ComponentHierarchyBase(ComponentTypes.Body);
-		System.out.println(head.toString());
+		System.out.println(head.toJson());
 		System.out.println(head.toString(true));
 		System.out.println(body.toString(true));
 	}

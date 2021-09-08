@@ -99,6 +99,25 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 */
 	private Map<String, String> sessionStorage;
 	
+	private Map<String, String> properties = new HashMap<>();
+	
+	
+	public Map<String, String> getProperties()
+	{
+		return properties;
+	}
+	
+	/**
+	 * Sets the properties for this response
+	 * @param properties
+	 * @return
+	 */
+	public AjaxResponse<J> setProperties(Map<String, String> properties)
+	{
+		this.properties = properties;
+		return this;
+	}
+	
 	/**
 	 * Returns all the feature queries for the given response
 	 *
@@ -223,8 +242,6 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 		getComponents().add(component);
 		AjaxComponentUpdates<?> newComponent = new AjaxComponentUpdates<>(component);
 		getComponentUpdates().add(newComponent);
-		component.init();
-		component.preConfigure();
 		return newComponent;
 	}
 	

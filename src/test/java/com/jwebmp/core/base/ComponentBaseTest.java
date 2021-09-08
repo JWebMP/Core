@@ -48,7 +48,7 @@ public class ComponentBaseTest
 				"  \"touched\" : false,\n" +
 				"  \"componentClass\" : \"com.jwebmp.core.base.ComponentBase\"\n" +
 				"}",
-				shell.toString());
+				shell.toJson());
 	}
 
 	@Test
@@ -69,7 +69,7 @@ public class ComponentBaseTest
 				"  \"touched\" : false,\n" +
 				"  \"componentClass\" : \"com.jwebmp.core.base.ComponentBase\"\n" +
 				"}",
-				shell.toString());
+				shell.toJson());
 	}
 
 	@Test
@@ -89,7 +89,7 @@ public class ComponentBaseTest
 				"  \"touched\" : false,\n" +
 				"  \"componentClass\" : \"com.jwebmp.core.base.ComponentBase\"\n" +
 				"}",
-				shell.toString());
+				shell.toJson());
 	}
 
 	@Test
@@ -119,8 +119,8 @@ public class ComponentBaseTest
 		                        "  \"touched\" : false,\n" +
 		                        "  \"componentClass\" : \"com.jwebmp.core.base.ComponentBase\"\n" +
 		                        "}";
-		Assertions.assertEquals(shell.toString(), shellExpected);
-		Assertions.assertEquals(shell2.toString(), shell2Expected);
+		Assertions.assertEquals(shell.toJson(), shellExpected);
+		Assertions.assertEquals(shell2.toJson(), shell2Expected);
 	}
 
 	@Test
@@ -145,6 +145,6 @@ public class ComponentBaseTest
 		                       "  \"componentClass\" : \"com.jwebmp.core.base.ComponentBase\"\n" +
 		                       "}";
 
-		Assertions.assertEquals(shell.toString(), shellExpected);
+		Assertions.assertEquals(shell.toJson(), shellExpected);
 	}
 }

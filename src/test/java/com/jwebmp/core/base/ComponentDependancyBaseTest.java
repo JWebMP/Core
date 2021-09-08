@@ -52,7 +52,7 @@ public class ComponentDependancyBaseTest
 		System.out.println(cd);
 /*		Assertions.assertEquals(
 				"{\n" + "  \"id\" : \"ID\",\n" + "  \"componentType\" : \"abbreviation\",\n" + "  \"tiny\" : false,\n" + "  " + "\"configured\"" + " : true,\n" + "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  " + "\"javascriptReferences\" : [ {\n" + "    \"cordovaRequired\" : false,\n" + "    \"name\" : \"AjaxEnabler\",\n" + "    \"version\" : 1.0,\n" + "    " + "\"reference\" : \"javascript/jwebswing/ajax-enabler.js\"\n" + "  } ],\n" + "  \"componentClass\" : \"com.jwebmp.core.base.ComponentDependancyBase\"\n" + "}",
-				cd.toString());*/
+				cd.toJson());*/
 	}
 
 	@Test
@@ -78,8 +78,8 @@ public class ComponentDependancyBaseTest
 		                        "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  " + "\"javascriptReferences\" : [ {\n" + "    \"cordovaRequired\" : false,\n" +
 		                        "    \"name\" : " + "\"AjaxEnabler\",\n" + "    \"version\" : 1.0,\n" + "    \"reference\" : " + "\"javascript/jwebswing/ajax-enabler.js\"\n" +
 		                        "  } ],\n" + "  \"componentClass\" : \"com.jwebmp.core.base.ComponentDependancyBase\"\n" + "}";
-		//Assertions.assertEquals(shell.toString(), shellExpected);
-		//Assertions.assertEquals(shell2.toString(), shell2Expected);
+		//Assertions.assertEquals(shell.toJson(), shellExpected);
+		//Assertions.assertEquals(shell2.toJson(), shell2Expected);
 	}
 
 }
