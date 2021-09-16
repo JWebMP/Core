@@ -13,7 +13,7 @@ module com.jwebmp.core {
 
 	requires transitive jakarta.servlet;
 
-	requires com.google.guice.extensions.servlet;
+	requires transitive com.google.guice.extensions.servlet;
 	requires com.google.guice;
 
 	requires com.fasterxml.jackson.databind;
@@ -44,7 +44,7 @@ module com.jwebmp.core {
 
 	exports com.jwebmp.core.base.interfaces;
 
-	exports com.jwebmp.core.base.page to com.guicedee.guicedinjection;
+	exports com.jwebmp.core.base.page;
 
 	exports com.jwebmp.core.base.servlets;
 	exports com.jwebmp.core.base.servlets.enumarations;
@@ -239,7 +239,6 @@ module com.jwebmp.core {
 
 	provides com.jwebmp.core.services.IPageConfigurator with com.jwebmp.core.base.page.ScriptsDynamicPageConfigurator, com.jwebmp.core.base.page.CSSLinksInsertPageConfigurator, com.jwebmp.core.base.page.ScriptsInsertPageConfigurator, com.jwebmp.core.base.page.TopShelfScriptsInsertPageConfigurator, com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 
-
 	opens com.jwebmp.core.base.servlets to com.google.guice, com.fasterxml.jackson.databind;
 	
 	opens com.jwebmp.core.base.page to com.google.guice;
@@ -247,8 +246,8 @@ module com.jwebmp.core {
 	opens com.jwebmp.core.base.html to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.htmlbuilder.javascript to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.base to com.fasterxml.jackson.databind;
+	
 	opens com.jwebmp.core to com.google.guice, com.fasterxml.jackson.databind;
-
 	opens com.jwebmp.core.implementations to com.google.guice, com.fasterxml.jackson.databind,com.jwebmp.core.angularjs;
 //	opens com.jwebmp.core.services.scopes to com.google.guice, com.fasterxml.jackson.databind;
 
