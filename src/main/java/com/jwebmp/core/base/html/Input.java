@@ -31,6 +31,8 @@ import com.guicedee.guicedinjection.json.StaticStrings;
 
 import jakarta.validation.constraints.NotNull;
 
+import java.util.Objects;
+
 /**
  * Please note I have left out all the input type attributes that are not cross-browser - rather use the features available.<p>
  * <p>
@@ -308,16 +310,30 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
 		addAttribute("ng-pattern", angularPatternName);
 		return (J) this;
 	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-
+	
 	@Override
 	public boolean equals(Object o)
 	{
-		return super.equals(o);
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof Input))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+		Input<?, ?> input = (Input<?, ?>) o;
+		return getInputType() == input.getInputType();
 	}
+	
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), getInputType());
+	}
+	
 }

@@ -92,6 +92,16 @@ public class AjaxCall<J extends AjaxCall<J>>
 	 * The parameters associated with the call
 	 */
 	private Map<String, String> parameters;
+	
+	/**
+	 * The parameters associated with the call
+	 */
+	private Map<String, String> sessionStorage;
+	/**
+	 * The parameters associated with the call
+	 */
+	private Map<String, String> localStorage;
+	
 	/**
 	 * The class to create
 	 */
@@ -496,5 +506,53 @@ public class AjaxCall<J extends AjaxCall<J>>
 		                                              .equals(dtoName));
 		call.getVariableData()
 		    .add(new JsonVariable(dtoName, newDto));
+	}
+	
+	/**
+	 * Returns the sent through state of the session storage
+	 * @return
+	 */
+	public Map<String, String> getSessionStorage()
+	{
+		if(sessionStorage == null)
+		{
+			sessionStorage = new HashMap<>();
+		}
+		return sessionStorage;
+	}
+	
+	/**
+	 * Sets the call list for session storage
+	 * @param sessionStorage
+	 * @return
+	 */
+	public J setSessionStorage(Map<String, String> sessionStorage)
+	{
+		this.sessionStorage = sessionStorage;
+		return (J) this;
+	}
+	
+	/**
+	 * Gets the local storage
+	 * @return
+	 */
+	public Map<String, String> getLocalStorage()
+	{
+		if (localStorage == null)
+		{
+			localStorage = new HashMap<>();
+		}
+		return localStorage;
+	}
+	
+	/**
+	 * Sets local storage
+	 * @param localStorage
+	 * @return
+	 */
+	public J setLocalStorage(Map<String, String> localStorage)
+	{
+		this.localStorage = localStorage;
+		return (J) this;
 	}
 }

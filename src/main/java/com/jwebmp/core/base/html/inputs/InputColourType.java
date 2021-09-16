@@ -22,14 +22,11 @@ import com.jwebmp.core.base.html.attributes.InputTypes;
 
 /**
  * @param <J>
- *
  * @author GedMarc
  */
 public class InputColourType<J extends InputColourType<J>>
 		extends Input<InputButtonTypeAttributes, J>
 {
-
-
 	/**
 	 * Constructs a new instance of a button type
 	 */
@@ -37,7 +34,7 @@ public class InputColourType<J extends InputColourType<J>>
 	{
 		this(null);
 	}
-
+	
 	/**
 	 * Constructs a new button with the given text
 	 *
@@ -48,5 +45,5 @@ public class InputColourType<J extends InputColourType<J>>
 		super(InputTypes.Color);
 		addAttribute(InputButtonTypeAttributes.Value, text);
 	}
-
+	
 }
