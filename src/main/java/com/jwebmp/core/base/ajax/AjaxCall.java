@@ -261,6 +261,8 @@ public class AjaxCall<J extends AjaxCall<J>>
 		setVariableData(incoming.getVariableData());
 		setClassName(incoming.getClassName());
 		setParameters(incoming.getParameters());
+		setLocalStorage(incoming.getLocalStorage());
+		setSessionStorage(incoming.getSessionStorage());
 		setHashBang(incoming.getHashBang());
 		setValue(incoming.getValue());
 		setVariableData(incoming.getVariableData());
