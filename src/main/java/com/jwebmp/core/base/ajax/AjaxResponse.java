@@ -242,8 +242,8 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 		for (Iterator<IComponentHierarchyBase<?, ?>> iterator = getComponents().iterator(); iterator.hasNext(); )
 		{
 			IComponentHierarchyBase<?, ?> iComponentHierarchyBase = iterator.next();
-			if (iComponentHierarchyBase.getID()
-			                           .equals(component.getID()))
+			if (iComponentHierarchyBase.asBase().getID()
+			                           .equals(component.asBase().getID()))
 			{
 				iterator.remove();
 				break;
