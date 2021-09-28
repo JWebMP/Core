@@ -239,6 +239,16 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 */
 	public AjaxComponentUpdates<?> addComponent(IComponentHierarchyBase<?, ?> component)
 	{
+		for (Iterator<IComponentHierarchyBase<?, ?>> iterator = getComponents().iterator(); iterator.hasNext(); )
+		{
+			IComponentHierarchyBase<?, ?> iComponentHierarchyBase = iterator.next();
+			if (iComponentHierarchyBase.getID()
+			                           .equals(component.getID()))
+			{
+				iterator.remove();
+				break;
+			}
+		}
 		getComponents().add(component);
 		AjaxComponentUpdates<?> newComponent = new AjaxComponentUpdates<>(component);
 		getComponentUpdates().add(newComponent);
