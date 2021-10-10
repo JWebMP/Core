@@ -19,3 +19,4 @@ Thumbs.db
 **/flatter.pom
 flatter.pom**/*.classpath
 /.idea/
+/dependency-reduced-pom.xml

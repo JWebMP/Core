@@ -16,23 +16,16 @@
  */
 package com.jwebmp.core.base.ajax;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.inject.servlet.RequestScoped;
-import com.guicedee.guicedservlets.services.scopes.CallScope;
-import com.jwebmp.core.Event;
-import com.jwebmp.core.Feature;
-import com.jwebmp.core.base.interfaces.IComponentDependencyBase;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
-import com.jwebmp.core.base.interfaces.IComponentStyleBase;
-import com.jwebmp.core.base.references.CSSReference;
-import com.jwebmp.core.base.references.JavascriptReference;
-import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
-import jakarta.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.*;
+import com.guicedee.guicedservlets.services.scopes.*;
+import com.jwebmp.core.*;
+import com.jwebmp.core.base.interfaces.*;
+import com.jwebmp.core.base.references.*;
+import com.jwebmp.core.htmlbuilder.javascript.*;
+import jakarta.validation.constraints.*;
 
 import java.util.*;
-import java.util.Map.Entry;
+import java.util.Map.*;
 
 /**
  * A response sent back to the client
@@ -109,6 +102,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	
 	/**
 	 * Sets the properties for this response
+	 *
 	 * @param properties
 	 * @return
 	 */
@@ -130,11 +124,11 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	{
 		Set<String> list = new LinkedHashSet<>();
 		getFeatures().forEach(feature ->
-		                      {
-			                      feature.preConfigure();
-			                      list.add(feature.renderJavascript()
-			                                      .toString());
-		                      });
+		{
+			feature.preConfigure();
+			list.add(feature.renderJavascript()
+			                .toString());
+		});
 		return list;
 	}
 	
@@ -239,16 +233,14 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 */
 	public AjaxComponentUpdates<?> addComponent(IComponentHierarchyBase<?, ?> component)
 	{
-		for (Iterator<IComponentHierarchyBase<?, ?>> iterator = getComponents().iterator(); iterator.hasNext(); )
-		{
-			IComponentHierarchyBase<?, ?> iComponentHierarchyBase = iterator.next();
-			if (iComponentHierarchyBase.asBase().getID()
-			                           .equals(component.asBase().getID()))
-			{
-				iterator.remove();
-				break;
-			}
-		}
+		getComponentUpdates().removeIf(a -> a.getId()
+		                                     .equals(component.asBase()
+		                                                      .getID()));
+		getComponents().removeIf(a -> a.asBase()
+		                               .getID()
+		                               .equals(component.asBase()
+		                                                .getID()));
+		
 		getComponents().add(component);
 		AjaxComponentUpdates<?> newComponent = new AjaxComponentUpdates<>(component);
 		getComponentUpdates().add(newComponent);
@@ -457,23 +449,23 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	{
 		Set<String> output = new LinkedHashSet<>();
 		getComponents().forEach(next ->
-		                        {
-			                        getJsRenders(next).forEach(rendered ->
-			                                                   {
-				                                                   if (!rendered.isEmpty())
-				                                                   {
-					                                                   if (!rendered.endsWith(next.asBase()
-					                                                                              .getNewLine()))
-					                                                   {
-						                                                   rendered = rendered + next.asBase()
-						                                                                             .getNewLine();
-					                                                   }
-					                                                   output.add(rendered);
-				                                                   }
-			                                                   });
-			                        //Load on demand scripts
-			                        buildEventQueries(next, output);
-		                        });
+		{
+			getJsRenders(next).forEach(rendered ->
+			{
+				if (!rendered.isEmpty())
+				{
+					if (!rendered.endsWith(next.asBase()
+					                           .getNewLine()))
+					{
+						rendered = rendered + next.asBase()
+						                          .getNewLine();
+					}
+					output.add(rendered);
+				}
+			});
+			//Load on demand scripts
+			buildEventQueries(next, output);
+		});
 		return output;
 	}
 	
