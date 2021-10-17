@@ -16,27 +16,23 @@
  */
 package com.jwebmp.core.implementations;
 
-import com.google.inject.TypeLiteral;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.guicedservlets.services.GuiceSiteInjectorModule;
-import com.guicedee.guicedservlets.services.IGuiceSiteBinder;
-import com.guicedee.guicedservlets.services.scopes.CallScope;
-import com.guicedee.logger.LogFactory;
-import com.jwebmp.core.Page;
-import com.jwebmp.core.annotations.PageConfiguration;
-import com.jwebmp.core.base.ComponentBase;
-import com.jwebmp.core.base.ComponentHierarchyBase;
-import com.jwebmp.core.base.ajax.AjaxCall;
-import com.jwebmp.core.base.ajax.AjaxResponse;
+import com.google.inject.*;
+import com.guicedee.guicedinjection.*;
+import com.guicedee.guicedservlets.services.*;
+import com.guicedee.guicedservlets.services.scopes.*;
+import com.guicedee.logger.*;
+import com.jwebmp.core.*;
+import com.jwebmp.core.annotations.*;
+import com.jwebmp.core.base.*;
+import com.jwebmp.core.base.ajax.*;
 import com.jwebmp.core.base.servlets.*;
-import com.jwebmp.core.services.IPage;
-import com.jwebmp.core.utilities.StaticStrings;
-import net.sf.uadetector.ReadableUserAgent;
-import net.sf.uadetector.UserAgentStringParser;
-import net.sf.uadetector.service.UADetectorServiceFactory;
+import com.jwebmp.core.services.*;
+import com.jwebmp.core.utilities.*;
+import net.sf.uadetector.*;
+import net.sf.uadetector.service.*;
 
 import java.util.*;
-import java.util.logging.Level;
+import java.util.logging.*;
 
 import static com.guicedee.guicedinjection.json.StaticStrings.*;
 
@@ -186,13 +182,12 @@ public class JWebMPSiteBinder
 		JWebMPSiteBinder.log.fine("Bound Page.class");
 		
 		@SuppressWarnings("rawtypes")
-		Set<IPage> notInjectedPages = GuiceContext.instance()
-		                                          .getLoader(IPage.class, true, ServiceLoader.load(IPage.class));
+		Set<IPage> notInjectedPages = getPages();
 		
-		for (IPage<?> page : notInjectedPages)
+		for (Map.Entry<PageConfiguration, IPage<?>> entry : getPageConfigurations().entrySet())
 		{
-			PageConfiguration pc = page.getClass()
-			                           .getAnnotation(PageConfiguration.class);
+			PageConfiguration pc = entry.getKey();
+			IPage<?> page = entry.getValue();
 			if (pc == null)
 			{
 				JWebMPSiteBinder.log.log(Level.SEVERE, "Couldn't Find Page Configuration on IPage Object {0}", new Object[]{page.getClass().getCanonicalName()});
@@ -203,17 +198,85 @@ public class JWebMPSiteBinder
 				url.insert(0, "(")
 				   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
 				   .append(")");
+				
+				
 				module.serveRegex$(url.toString())
 				      .with(JWebMPServlet.class);
 				PageProvider.getUrlToClass()
 				            .put(pc.url(), (Class<? extends IPage<?>>) page.getClass());
 				JWebMPSiteBinder.log.log(Level.CONFIG, "Serving Page URL [{0}] with [{1}]", new Object[]{pc.url(), page.getClass().getCanonicalName()});
+				
+				
+				url = new StringBuilder(pc.url()
+				                          .substring(0, pc.url()
+				                                          .length() - 1) + StaticStrings.JAVASCRIPT_LOCATION);
+				
+				url.insert(0, "(")
+				   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
+				   .append(")");
+				
+				module.serveRegex$(url.toString())
+				      .with(JavaScriptServlet.class);
+				JWebMPSiteBinder.log.log(Level.FINE, "Serving JavaScripts at {0}", url);
+				
+				
+				url = new StringBuilder(pc.url()
+				                          .substring(0, pc.url()
+				                                          .length() - 1) + StaticStrings.AJAX_SCRIPT_LOCATION);
+				
+				url.insert(0, "(")
+				   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
+				   .append(")");
+				
+				module.serveRegex$(url.toString())
+				      .with(AjaxReceiverServlet.class);
+				JWebMPSiteBinder.log.log(Level.FINE, "Serving Ajax at {0}", url);
+				
+				
+				url = new StringBuilder(pc.url()
+				                          .substring(0, pc.url()
+				                                          .length() - 1) + StaticStrings.CSS_LOCATION);
+				
+				url.insert(0, "(")
+				   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
+				   .append(")");
+				
+				module.serveRegex$(url.toString())
+				      .with(CSSServlet.class);
+				JWebMPSiteBinder.log.log(Level.FINE, "Serving CSS at {0}", url);
+				
+				
+				url = new StringBuilder(pc.url()
+				                          .substring(0, pc.url()
+				                                          .length() - 1) + StaticStrings.DATA_LOCATION);
+				
+				url.insert(0, "(")
+				   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
+				   .append(")");
+				
+				module.serveRegex$(url.toString())
+				      .with(DataServlet.class);
+				JWebMPSiteBinder.log.log(Level.FINE, "Serving Data at {0}", url);
+				
+				url = new StringBuilder(pc.url()
+				                          .substring(0, pc.url()
+				                                          .length() - 1) + StaticStrings.JW_SCRIPT_LOCATION);
+				
+				url.insert(0, "(")
+				   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
+				   .append(")");
+				
+				module.serveRegex$(url.toString())
+				      .with(JWScriptServlet.class);
+				JWebMPSiteBinder.log.log(Level.FINE, "Serving Default Script at {0}", url);
 			}
 		}
+		
 		
 		module.serveRegex$("(" + StaticStrings.JAVASCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(JavaScriptServlet.class);
 		JWebMPSiteBinder.log.log(Level.FINE, "Serving JavaScripts at {0}", StaticStrings.JAVASCRIPT_LOCATION);
+		
 		
 		module.serveRegex$("(" + StaticStrings.AJAX_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(AjaxReceiverServlet.class);
@@ -230,8 +293,37 @@ public class JWebMPSiteBinder
 		module.serveRegex$("(" + StaticStrings.JW_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(JWScriptServlet.class);
 		
-		JWebMPSiteBinder.log.log(Level.FINE, "Serving JW Default Script at {0}", StaticStrings.JW_SCRIPT_LOCATION);
+		JWebMPSiteBinder.log.log(Level.FINE, "Serving Default Script at {0}", StaticStrings.JW_SCRIPT_LOCATION);
 	}
 	
+	public static Set<IPage> getPages()
+	{
+		return GuiceContext.instance()
+		                   .getLoader(IPage.class, true, ServiceLoader.load(IPage.class));
+	}
+	
+	public static Map<PageConfiguration, IPage<?>> getPageConfigurations()
+	{
+		Map<PageConfiguration, IPage<?>> pagesMap = new HashMap<>();
+		
+		@SuppressWarnings("rawtypes")
+		Set<IPage> pages = GuiceContext.instance()
+		                               .getLoader(IPage.class, true, ServiceLoader.load(IPage.class));
+		for (IPage<?> page : pages)
+		{
+			PageConfiguration pc = page.getClass()
+			                           .getAnnotation(PageConfiguration.class);
+			if (pc == null)
+			{
+				JWebMPSiteBinder.log.log(Level.SEVERE, "Couldn't Find Page Configuration on IPage Object {0}", new Object[]{page.getClass().getCanonicalName()});
+			}
+			else if (!pc.ignore())
+			{
+				pagesMap.put(pc, page);
+			}
+		}
+		
+		return pagesMap;
+	}
 	
 }

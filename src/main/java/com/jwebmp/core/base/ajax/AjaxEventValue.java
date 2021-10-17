@@ -16,12 +16,12 @@
  */
 package com.jwebmp.core.base.ajax;
 
-import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
-import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
+import com.fasterxml.jackson.annotation.*;
+import com.jwebmp.core.htmlbuilder.javascript.*;
+import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.*;
+import jakarta.validation.constraints.*;
 
-import jakarta.validation.constraints.NotNull;
-
-import java.util.Map;
+import java.util.*;
 
 /**
  * An angular event that is returned
@@ -104,7 +104,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	 * The event type
 	 */
 	private EventTypes type;
-
+	
 	/**
 	 * The JSON data
 	 */
@@ -118,8 +118,11 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	 */
 	private String which;
 	
-	private Map<String,Object> attributes;
-
+	private Map<String, Object> attributes;
+	
+	
+	private Map<String, Object> unknownFields = new HashMap<>();
+	
 	/**
 	 * Blank Constructor
 	 */
@@ -127,7 +130,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		//Just a dto
 	}
-
+	
 	/**
 	 * If the alt key was pressed
 	 *
@@ -137,7 +140,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return altKey;
 	}
-
+	
 	/**
 	 * If the alt key was pressed
 	 *
@@ -150,7 +153,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.altKey = altKey;
 		return (J) this;
 	}
-
+	
 	/**
 	 * If the cntrl key was pressed
 	 *
@@ -160,7 +163,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return ctrlKey;
 	}
-
+	
 	/**
 	 * If the cntrl key was pressed
 	 *
@@ -173,7 +176,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.ctrlKey = ctrlKey;
 		return (J) this;
 	}
-
+	
 	/**
 	 * If the event bubbles down
 	 *
@@ -183,7 +186,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return bubbles;
 	}
-
+	
 	/**
 	 * If the event bubbles down
 	 *
@@ -196,7 +199,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.bubbles = bubbles;
 		return (J) this;
 	}
-
+	
 	/**
 	 * If the event is cancellable
 	 *
@@ -206,7 +209,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return cancelable;
 	}
-
+	
 	/**
 	 * If the event is cancellable
 	 *
@@ -219,7 +222,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.cancelable = cancelable;
 		return (J) this;
 	}
-
+	
 	/**
 	 * The mouse position for the client
 	 *
@@ -229,7 +232,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return clientX;
 	}
-
+	
 	/**
 	 * The mouse position for the client
 	 *
@@ -242,7 +245,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.clientX = clientX;
 		return (J) this;
 	}
-
+	
 	/**
 	 * The mouse position for the client
 	 *
@@ -252,7 +255,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return clientY;
 	}
-
+	
 	/**
 	 * The mouse position for the client
 	 *
@@ -265,7 +268,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.clientY = clientY;
 		return (J) this;
 	}
-
+	
 	/**
 	 * *
 	 * The component ID of the event cause
@@ -276,7 +279,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return componentID;
 	}
-
+	
 	/**
 	 * The component ID of the event cause
 	 *
@@ -289,7 +292,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.componentID = componentID;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns a detail number
 	 *
@@ -299,7 +302,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return detail;
 	}
-
+	
 	/**
 	 * Sets a detail number
 	 *
@@ -312,7 +315,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.detail = detail;
 		return (J) this;
 	}
-
+	
 	/**
 	 * The event phase
 	 *
@@ -322,7 +325,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return eventPhase;
 	}
-
+	
 	/**
 	 * Sets the event phase
 	 *
@@ -335,7 +338,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.eventPhase = eventPhase;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Indicates if the meta key was pressed
 	 *
@@ -345,7 +348,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return metaKey;
 	}
-
+	
 	/**
 	 * Sets if the meta key was pressed
 	 *
@@ -358,7 +361,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.metaKey = metaKey;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns the offset x from the parent
 	 *
@@ -368,7 +371,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return offsetX;
 	}
-
+	
 	/**
 	 * *
 	 * The offset position for the client
@@ -382,7 +385,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.offsetX = offsetX;
 		return (J) this;
 	}
-
+	
 	/**
 	 * The offset position for Y
 	 *
@@ -392,7 +395,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return offsetY;
 	}
-
+	
 	/**
 	 * The offset position for Y
 	 *
@@ -405,7 +408,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.offsetY = offsetY;
 		return (J) this;
 	}
-
+	
 	/**
 	 * *
 	 * The page location X
@@ -416,7 +419,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return pageX;
 	}
-
+	
 	/**
 	 * The page location X
 	 *
@@ -429,7 +432,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.pageX = pageX;
 		return (J) this;
 	}
-
+	
 	/*
 	 * The page location Y
 	 */
@@ -437,7 +440,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return pageY;
 	}
-
+	
 	/**
 	 * The page location Y
 	 *
@@ -450,7 +453,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.pageY = pageY;
 		return (J) this;
 	}
-
+	
 	/**
 	 * The Screen position X
 	 *
@@ -460,7 +463,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return screenX;
 	}
-
+	
 	/**
 	 * The screen position X
 	 *
@@ -473,7 +476,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.screenX = screenX;
 		return (J) this;
 	}
-
+	
 	/**
 	 * The screen position Y
 	 *
@@ -483,7 +486,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return screenY;
 	}
-
+	
 	/**
 	 * The screen position Y
 	 *
@@ -496,7 +499,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.screenY = screenY;
 		return (J) this;
 	}
-
+	
 	/**
 	 * If the shift key was pressed
 	 *
@@ -506,7 +509,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return shiftKey;
 	}
-
+	
 	/**
 	 * If the shift key was pressed
 	 *
@@ -519,7 +522,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.shiftKey = shiftKey;
 		return (J) this;
 	}
-
+	
 	/**
 	 * The type of event
 	 *
@@ -529,7 +532,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return type;
 	}
-
+	
 	/**
 	 * The type of event
 	 *
@@ -542,7 +545,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.type = type;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Any data attached to the object
 	 *
@@ -552,7 +555,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return data;
 	}
-
+	
 	/**
 	 * Any data attached to the object
 	 *
@@ -565,7 +568,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.data = data;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Gets the target component ID
 	 *
@@ -575,7 +578,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return target;
 	}
-
+	
 	/**
 	 * Sets the target component ID
 	 *
@@ -588,7 +591,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		this.target = target;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Which button was pushed
 	 *
@@ -598,7 +601,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		return which;
 	}
-
+	
 	/**
 	 * Which button was pushed
 	 *
@@ -622,5 +625,17 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	{
 		this.attributes = attributes;
 		return (J) this;
+	}
+	
+	@JsonAnyGetter
+	public Map<String, Object> getUnknownFields()
+	{
+		return unknownFields;
+	}
+	
+	@JsonAnySetter
+	public void setOtherField(String name, Object value)
+	{
+		unknownFields.put(name, value);
 	}
 }

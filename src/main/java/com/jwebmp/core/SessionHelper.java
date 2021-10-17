@@ -39,7 +39,12 @@ public class SessionHelper
 	 * The given address
 	 */
 	private static String address = null;
-
+	
+	/**
+	 * The given address
+	 */
+	private static String rootAddress = null;
+	
 	private static boolean cacheAddress = false;
 
 	private static String addressToBeUsedWhenNull = "";
@@ -74,8 +79,42 @@ public class SessionHelper
 			}
 			String address = buff.substring(0, buff.lastIndexOf(STRING_FORWARD_SLASH) + 1);
 			address = address.replace("[0:0:0:0:0:0:0:1]", "localhost");
+			address = address.replace("127.0.0.1", "localhost");
 			SessionHelper.address = address;
 
+			return address;
+		}
+		catch (Exception e)
+		{
+			SessionHelper.log.log(Level.FINER, "Unable to get server path", e);
+			return SessionHelper.addressToBeUsedWhenNull;
+		}
+	}
+	
+	/**
+	 * Returns the full server address, without the final section
+	 *
+	 * @return
+	 */
+	public static String getServerRootPath()
+	{
+		if (SessionHelper.isCacheAddress() && SessionHelper.getRootAddress() != null)
+		{
+			return SessionHelper.getRootAddress();
+		}
+		try
+		{
+			HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
+			StringBuffer buff = request.getRequestURL();
+			if (request.getHeader(StaticStrings.REQUEST_SITE_HEADER_NAME) != null
+			    && !request.getHeader(StaticStrings.REQUEST_SITE_HEADER_NAME).isEmpty())
+			{
+				buff = new StringBuffer(request.getHeader(StaticStrings.REQUEST_SITE_HEADER_NAME));
+			}
+			String address = buff.toString().replace(request.getRequestURI(),"");// buff.substring(0, buff.lastIndexOf(STRING_FORWARD_SLASH) + 1);
+			address = address.replace("[0:0:0:0:0:0:0:1]", "localhost");
+			SessionHelper.rootAddress = address;
+			
 			return address;
 		}
 		catch (Exception e)
@@ -116,7 +155,18 @@ public class SessionHelper
 	{
 		SessionHelper.address = address;
 	}
-
+	
+	
+	public static String getRootAddress()
+	{
+		return rootAddress;
+	}
+	
+	public static void setRootAddress(String rootAddress)
+	{
+		SessionHelper.rootAddress = rootAddress;
+	}
+	
 	/**
 	 * If the address must be cached on first reponse, and used for future calls
 	 *

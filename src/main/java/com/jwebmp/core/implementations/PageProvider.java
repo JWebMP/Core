@@ -1,24 +1,17 @@
 package com.jwebmp.core.implementations;
 
-import com.google.inject.Provider;
-import com.guicedee.guicedservlets.GuicedServletKeys;
-import com.jwebmp.core.Page;
-import com.jwebmp.core.SessionHelper;
-import com.jwebmp.core.annotations.PageConfiguration;
-import com.jwebmp.core.services.IPage;
-import com.guicedee.guicedinjection.json.StaticStrings;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.logger.LogFactory;
-import net.sf.uadetector.ReadableUserAgent;
-import net.sf.uadetector.UserAgentStringParser;
+import com.google.common.base.*;
+import com.google.inject.*;
+import com.guicedee.guicedinjection.*;
+import com.guicedee.guicedinjection.json.*;
+import com.guicedee.guicedservlets.*;
+import com.guicedee.logger.*;
+import com.jwebmp.core.*;
+import com.jwebmp.core.base.ajax.*;
+import com.jwebmp.core.services.*;
+import jakarta.servlet.http.*;
 
-import jakarta.servlet.http.HttpServletRequest;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ServiceLoader;
-import java.util.Set;
-import java.util.logging.Level;
+import java.util.*;
 
 @SuppressWarnings("rawtypes")
 public class PageProvider
@@ -29,8 +22,28 @@ public class PageProvider
 	private static final Map<String, Class<? extends IPage<?>>> urlToClass = new HashMap<>();
 	
 	@Override
-	 public Page<?> get()
+	public Page<?> get()
 	{
+		try
+		{
+			AjaxCall<?> call = GuiceContext.get(AjaxCall.class);
+			if (call.getVariable("jw.pageClass") != null && !Strings.isNullOrEmpty(call.getVariable("jw.pageClass")
+			                                                                           .getVariableText()))
+			{
+				String className = call.getVariable("jw.pageClass")
+				                       .getVariableText()
+				                       .replaceAll("\"", "");
+				Class pageClass = GuiceContext.instance()
+				                              .getScanResult()
+				                              .loadClass(className, true);
+				return (Page<?>) GuiceContext.get(pageClass);
+			}
+		}
+		catch (ProvisionException | OutOfScopeException e)
+		{
+		
+		}
+		
 		HttpServletRequest request = GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
 		String pathInfo = request.getRequestURI();
 		if (pathInfo == null)
@@ -38,18 +51,20 @@ public class PageProvider
 			pathInfo = StaticStrings.STRING_FORWARD_SLASH;
 		}
 		pathInfo = pathInfo.toLowerCase();
-		if(urlToClass.containsKey(pathInfo))
+		if (urlToClass.containsKey(pathInfo))
 		{
 			return (Page) GuiceContext.get(urlToClass.get(pathInfo));
 		}
 		pathInfo = pathInfo.substring(0, pathInfo.lastIndexOf('/') + 1);
-		if(urlToClass.containsKey(pathInfo))
+		if (urlToClass.containsKey(pathInfo))
 		{
 			return (Page) GuiceContext.get(urlToClass.get(pathInfo));
 		}
+		
+		
 		return new Page<>();
 	}
-
+	
 	/**
 	 * Method getPages returns the pages of this PageProvider object.
 	 *
@@ -63,7 +78,7 @@ public class PageProvider
 		                        .getLoader(IPage.class, ServiceLoader.load(IPage.class));
 		return pages;
 	}
-
+	
 	public static Map<String, Class<? extends IPage<?>>> getUrlToClass()
 	{
 		return urlToClass;

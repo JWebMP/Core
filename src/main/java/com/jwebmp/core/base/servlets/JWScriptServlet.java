@@ -16,15 +16,14 @@
  */
 package com.jwebmp.core.base.servlets;
 
-import com.google.inject.Singleton;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.guicedinjection.json.StaticStrings;
-import com.guicedee.guicedservlets.GuicedServletKeys;
-import com.jwebmp.core.FileTemplates;
-import com.jwebmp.core.SessionHelper;
-import jakarta.servlet.http.HttpServletRequest;
+import com.google.inject.*;
+import com.guicedee.guicedinjection.*;
+import com.guicedee.guicedinjection.json.*;
+import com.guicedee.guicedservlets.*;
+import com.jwebmp.core.*;
+import jakarta.servlet.http.*;
 
-import static com.guicedee.guicedinjection.GuiceContext.get;
+import static com.guicedee.guicedinjection.GuiceContext.*;
 
 /**
  * @author GedMarc
@@ -37,6 +36,7 @@ public class JWScriptServlet
 	 * Field FILE_TEMPLATE_NAME
 	 */
 	public static final String FILE_TEMPLATE_NAME = "jwscript";
+	
 	/**
 	 * When to perform any commands
 	 */
@@ -47,22 +47,38 @@ public class JWScriptServlet
 		FileTemplates.getFileTemplate(JWScriptServlet.class, JWScriptServlet.FILE_TEMPLATE_NAME, "siteloader");
 		FileTemplates.getTemplateVariables()
 		             .put("SITEADDRESSINSERT", new StringBuilder(SessionHelper.getServerPath()));
+		FileTemplates.getTemplateVariables()
+		             .put("ROOTADDRESSINSERT", new StringBuilder(SessionHelper.getServerRootPath()));
+		try
+		{
+			FileTemplates.getTemplateVariables()
+			             .put("PAGECLASS", new StringBuilder(GuiceContext.get(Page.class)
+			                                                             .getClass()
+			                                                             .getCanonicalName()));
+			
+		}
+		catch (ProvisionException | OutOfScopeException e)
+		{
+			FileTemplates.getTemplateVariables()
+			             .put("PAGECLASS", new StringBuilder());
+		}
+		
 		try
 		{
 			HttpServletRequest hsr = get(HttpServletRequest.class);
 			FileTemplates.getTemplateVariables()
-					.put("%USERAGENT%", new StringBuilder(hsr.getHeader("user-agent")));
+			             .put("%USERAGENT%", new StringBuilder(hsr.getHeader("user-agent")));
 			FileTemplates.getTemplateVariables()
-					.put("%MYIP%", new StringBuilder(hsr.getRemoteAddr()));
+			             .put("%MYIP%", new StringBuilder(hsr.getRemoteAddr()));
 			FileTemplates.getTemplateVariables()
-					.put("%REFERER%", new StringBuilder(hsr.getHeader("referer")));
+			             .put("%REFERER%", new StringBuilder(hsr.getHeader("referer")));
 		}
 		catch (Throwable T)
 		{
-
+		
 		}
 		StringBuilder output = FileTemplates.renderTemplateScripts(JWScriptServlet.FILE_TEMPLATE_NAME);
 		writeOutput(output, StaticStrings.HTML_HEADER_JAVASCRIPT, StaticStrings.UTF_CHARSET);
 	}
-
+	
 }

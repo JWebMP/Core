@@ -50,6 +50,21 @@ function DeltaTimer(render, interval) {
 var jw = {isLoading: false, pageLoading: true};
 window.jw = jw;
 jw.siteAddress = 'SITEADDRESSINSERT';
+var domain;
+//find & remove protocol (http, ftp, etc.) and get domain
+if (jw.siteAddress.indexOf('://') > -1) {
+    domain = jw.siteAddress.split('/')[2];
+} if (jw.siteAddress.indexOf('//') === 0) {
+    domain = jw.siteAddress.split('/')[2];
+} else {
+    domain = jw.siteAddress.split('/')[0];
+}
+
+//find & remove port number
+domain = domain.split(':')[0];
+jw.rootAddress = 'ROOTADDRESSINSERT';
+jw.pageClass = 'PAGECLASS';
+
 jw.useragent = '%USERAGENT%';
 jw.myIP = '%MYIP%';
 jw.referer = '%REFERER%';

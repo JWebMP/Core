@@ -1,6 +1,8 @@
 package com.jwebmp.core.implementations;
 
 import com.google.common.base.Strings;
+import com.google.inject.*;
+import com.guicedee.guicedinjection.*;
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.SessionHelper;
@@ -74,6 +76,23 @@ public class JWebMPDynamicScriptRenderer
 		FileTemplates.getFileTemplate(JWScriptServlet.class, JWScriptServlet.FILE_TEMPLATE_NAME, "siteloader");
 		FileTemplates.getTemplateVariables()
 		             .put("SITEADDRESSINSERT", new StringBuilder(SessionHelper.getServerPath()));
+		FileTemplates.getTemplateVariables()
+		             .put("ROOTADDRESSINSERT", new StringBuilder(SessionHelper.getServerRootPath()));
+		
+		try
+		{
+			FileTemplates.getTemplateVariables()
+			             .put("PAGECLASS", new StringBuilder(GuiceContext.get(Page.class)
+			                                                             .getClass()
+			                                                             .getCanonicalName()));
+			
+		}
+		catch (ProvisionException | OutOfScopeException e)
+		{
+			FileTemplates.getTemplateVariables()
+			             .put("PAGECLASS", new StringBuilder());
+		}
+		
 		try
 		{
 			HttpServletRequest hsr = get(HttpServletRequest.class);
