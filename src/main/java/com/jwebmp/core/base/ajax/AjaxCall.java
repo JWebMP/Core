@@ -317,6 +317,10 @@ public class AjaxCall<J extends AjaxCall<J>>
 	@Override
 	public AjaxEventValue<?> getValue()
 	{
+		if(value == null)
+		{
+			value = new AjaxEventValue<>();
+		}
 		return value;
 	}
 	

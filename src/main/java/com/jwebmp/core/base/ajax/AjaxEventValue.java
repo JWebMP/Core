@@ -617,6 +617,10 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 	
 	public Map<String, Object> getAttributes()
 	{
+		if(attributes == null)
+		{
+			attributes = new HashMap<>();
+		}
 		return attributes;
 	}
 	
