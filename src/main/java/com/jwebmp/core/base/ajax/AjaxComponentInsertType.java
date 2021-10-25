@@ -26,6 +26,7 @@ public enum AjaxComponentInsertType
 	Append,
 	Prepend,
 	Insert,
+	Remove,
 	Insert_Last("InsertLast");
 	/**
 	 * Any sub data

@@ -331,6 +331,10 @@ jw.actions.processHtml = function (result, $scope, $compile, $rootScope) {
                 $('#' + item.id).prepend(jqHtmlString);
             } else if (item.insertType === 'Insert_Last') {
                 $('#' + item.id).append(jqHtmlString);
+            } else if (item.insertType === 'InsertLast') {
+                $('#' + item.id).append(jqHtmlString);
+            }  else if (item.insertType === 'Remove') {
+                $('#' + item.id).remove();
             }
             var myNewSelf = $('#' + item.id);
             try {
