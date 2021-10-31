@@ -29,10 +29,7 @@ import com.guicedee.guicedinjection.GuiceContext;
 
 import jakarta.validation.constraints.NotNull;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ServiceLoader;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Enables Angular
@@ -159,7 +156,7 @@ public class ComponentDataBindingBase<A extends Enum<?> & AttributeDefinitions,
 	{
 		if (jsonObjects == null)
 		{
-			jsonObjects = new HashMap<>();
+			jsonObjects = new LinkedHashMap<>();
 		}
 		return jsonObjects;
 	}
