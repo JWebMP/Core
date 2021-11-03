@@ -22,13 +22,16 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.Strings;
+import com.google.inject.*;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.guicedinjection.interfaces.ObjectBinderKeys;
+import com.guicedee.guicedservlets.*;
 import com.guicedee.guicedservlets.services.scopes.CallScope;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.databind.ClientVariableWatcher;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
+import jakarta.servlet.http.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.websocket.Session;
 
@@ -150,6 +153,27 @@ public class AjaxCall<J extends AjaxCall<J>>
 		this.value = value;
 		this.eventType = EventTypes.valueOf(eventType);
 		this.eventTypeFrom = EventTypes.valueOf(eventTypeFrom);
+	}
+	
+	@Inject
+	void configure()
+	{
+		try
+		{
+			HttpServletRequest request = GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
+			for (Map.Entry<String, String[]> entry : request.getParameterMap()
+			                                                .entrySet())
+			{
+				String key = entry.getKey();
+				String[] value = entry.getValue();
+				getParameters()
+						.put(key, value[0]);
+			}
+		}
+		catch (OutOfScopeException | ProvisionException e)
+		{
+			//ignore
+		}
 	}
 	
 	public String getAttribute(String attribute)
@@ -317,7 +341,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 	@Override
 	public AjaxEventValue<?> getValue()
 	{
-		if(value == null)
+		if (value == null)
 		{
 			value = new AjaxEventValue<>();
 		}
@@ -486,6 +510,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 	
 	/**
 	 * If the call originates as a live page call, or a supporting servlet call
+	 *
 	 * @return
 	 */
 	public boolean isPageCall()
@@ -495,6 +520,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 	
 	/**
 	 * If the call originates as a live page call, or a supporting servlet call
+	 *
 	 * @param pageCall
 	 * @return
 	 */
@@ -516,11 +542,12 @@ public class AjaxCall<J extends AjaxCall<J>>
 	
 	/**
 	 * Returns the sent through state of the session storage
+	 *
 	 * @return
 	 */
 	public Map<String, String> getSessionStorage()
 	{
-		if(sessionStorage == null)
+		if (sessionStorage == null)
 		{
 			sessionStorage = new HashMap<>();
 		}
@@ -529,6 +556,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 	
 	/**
 	 * Sets the call list for session storage
+	 *
 	 * @param sessionStorage
 	 * @return
 	 */
@@ -540,6 +568,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 	
 	/**
 	 * Gets the local storage
+	 *
 	 * @return
 	 */
 	public Map<String, String> getLocalStorage()
@@ -553,6 +582,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 	
 	/**
 	 * Sets local storage
+	 *
 	 * @param localStorage
 	 * @return
 	 */
