@@ -8,6 +8,7 @@
         <version>0.0.0_0-SNAPSHOT</version>
         <relativePath>../../../../../</relativePath>
     </parent>
+
     <groupId>com.jwebmp.core</groupId>
     <artifactId>jwebmp-core</artifactId>
     <packaging>jar</packaging>
