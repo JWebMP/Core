@@ -117,7 +117,7 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
 	 * Occurs when the event is called
 	 */
 	@SuppressWarnings("unchecked")
-	private void onCreate()
+	protected void onCreate()
 	{
 		Set<IOnClickService> services = GuiceContext.instance()
 		                                            .getLoader(IOnClickService.class, ServiceLoader.load(IOnClickService.class));
