@@ -317,7 +317,7 @@ jw.actions.processCssReferences = function (result) {
  * @returns {undefined}
  */
 jw.actions.processHtml = function (result, $scope, $compile, $rootScope) {
-    if (result.components)
+    if (result.components) {
         $.each(result.components, function (i, item) {
             var htmlString;
             var jqHtmlString = $(item.html);
@@ -333,18 +333,22 @@ jw.actions.processHtml = function (result, $scope, $compile, $rootScope) {
                 $('#' + item.id).append(jqHtmlString);
             } else if (item.insertType === 'InsertLast') {
                 $('#' + item.id).append(jqHtmlString);
-            }  else if (item.insertType === 'Remove') {
+            } else if (item.insertType === 'Remove') {
                 $('#' + item.id).remove();
             }
             var myNewSelf = $('#' + item.id);
             try {
                 $compile(myNewSelf)($scope);
-                $scope.$apply();
             } catch (e) {
                 $compile(myNewSelf)($rootScope);
-                $rootScope.$apply();
             }
         });
+        try {
+            $scope.$apply();
+        } catch (e) {
+            $rootScope.$apply();
+        }
+    }
 };
 /**
  * Goes through each reaction performing each task
