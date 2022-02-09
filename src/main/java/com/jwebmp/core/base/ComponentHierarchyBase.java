@@ -17,27 +17,28 @@
 package com.jwebmp.core.base;
 
 import com.fasterxml.jackson.annotation.*;
-import com.google.common.base.Strings;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.guicedinjection.json.StaticStrings;
-import com.guicedee.logger.LogFactory;
+import com.google.common.base.*;
+import com.guicedee.guicedinjection.*;
+import com.guicedee.guicedinjection.json.*;
+import com.guicedee.logger.*;
 import com.jwebmp.core.*;
 import com.jwebmp.core.base.html.interfaces.*;
-import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.html.interfaces.events.*;
 import com.jwebmp.core.base.interfaces.*;
-import com.jwebmp.core.base.references.CSSReference;
-import com.jwebmp.core.base.references.JavascriptReference;
-import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.jwebmp.core.htmlbuilder.css.themes.Theme;
-import com.jwebmp.core.htmlbuilder.javascript.events.interfaces.IEvent;
-import com.jwebmp.core.implementations.JWebMPSiteBinder;
-import jakarta.validation.constraints.NotNull;
+import com.jwebmp.core.base.references.*;
+import com.jwebmp.core.base.servlets.enumarations.*;
+import com.jwebmp.core.databind.*;
+import com.jwebmp.core.htmlbuilder.css.themes.*;
+import com.jwebmp.core.htmlbuilder.javascript.events.interfaces.*;
+import com.jwebmp.core.implementations.*;
+import jakarta.validation.constraints.*;
 
+import java.util.Objects;
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArraySet;
-import java.util.function.Consumer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.logging.*;
+import java.util.stream.*;
 
 import static java.util.Comparator.*;
 
@@ -1275,4 +1276,27 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 		return null;
 	}
 	
+	private Set<IConfiguration> configurations = new HashSet<>();
+	
+	protected Set<IConfiguration> getConfigurations()
+	{
+		if (configurations == null)
+		{
+			configurations = new HashSet<>();
+		}
+		return configurations;
+	}
+	
+	public J addConfiguration(IConfiguration configuration)
+	{
+		getConfigurations().add(configuration);
+		return (J) this;
+	}
+	
+	public Set<IConfiguration> getConfigurations(Class<?> configurationType)
+	{
+		return getConfigurations().stream()
+		                          .filter(a -> configurationType.isAssignableFrom(a.getClass()))
+		                          .collect(Collectors.toSet());
+	}
 }

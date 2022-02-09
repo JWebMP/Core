@@ -16,19 +16,16 @@
  */
 package com.jwebmp.core.base.interfaces;
 
-import com.jwebmp.core.base.ComponentBase;
-import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import jakarta.validation.constraints.NotNull;
+import com.jwebmp.core.base.servlets.enumarations.*;
+import jakarta.validation.constraints.*;
 
-import java.io.Serializable;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 /**
  * Neater way of accessing the component methods
  *
- * @param <J>
- * 		Always this component
- *
+ * @param <J> Always this component
  * @author GedMarc
  * @since 2016/09/26
  */
@@ -42,7 +39,7 @@ public interface IComponentBase<J extends IComponentBase<J>>
 	 * @return The cloned component
 	 */
 	J cloneComponent();
-
+	
 	/**
 	 * Gets the ID of this component
 	 * <p>
@@ -50,19 +47,17 @@ public interface IComponentBase<J extends IComponentBase<J>>
 	 * @return The ID of this component
 	 */
 	String getID();
-
+	
 	/**
 	 * Returns the ID with the # in the front of it
 	 * <p>
 	 *
-	 * @param jQueryHolder
-	 * 		Anything
-	 * 		<p>
-	 *
+	 * @param jQueryHolder Anything
+	 *                     <p>
 	 * @return An ID starting with #
 	 */
 	String getID(boolean jQueryHolder);
-
+	
 	/**
 	 * Returns the component rendering for JQuery string Requires the rendering for component is set
 	 * <p>
@@ -70,7 +65,7 @@ public interface IComponentBase<J extends IComponentBase<J>>
 	 * @return $(' # x ').
 	 */
 	String getJQueryID();
-
+	
 	/**
 	 * Returns the new line character according to Running Environment
 	 * <p>
@@ -78,32 +73,30 @@ public interface IComponentBase<J extends IComponentBase<J>>
 	 * @return A new line if is in development mode
 	 */
 	String getNewLine();
-
+	
 	/**
 	 * Returns a map of user defined properties for this component
 	 *
 	 * @return
 	 */
 	Map<String, Object> getProperties();
-
+	
 	/**
 	 * returns a new StringSuilder of the raw text with the specific tab counts
 	 * <p>
 	 *
-	 * @param tabCounts
-	 * 		<p>
-	 *
+	 * @param tabCounts <p>
 	 * @return
 	 */
 	StringBuilder getText(int tabCounts);
-
+	
 	/**
 	 * If this component is already configured
 	 *
 	 * @return
 	 */
 	boolean isConfigured();
-
+	
 	/**
 	 * Specifies whether or not to render this component in a Production/QA fashion
 	 * <p>
@@ -111,43 +104,40 @@ public interface IComponentBase<J extends IComponentBase<J>>
 	 * @return If this component will render in production mode
 	 */
 	boolean isTiny();
-
+	
 	/**
 	 * Run-Once on creation Executes a piece of code before running any rendering. Marks the component as configured
 	 */
 	void preConfigure();
-
+	
 	/**
 	 * If this component is already configured
 	 *
 	 * @param configured
-	 *
 	 * @return
 	 */
 	J setConfigured(boolean configured);
-
+	
 	/**
 	 * Sets the ID of this component
 	 * <p>
 	 *
-	 * @param id
-	 * 		The ID
-	 *
+	 * @param id The ID
 	 * @return
 	 */
 	J setID(String id);
-
+	
 	/**
 	 * Sets this components user defined properties
 	 *
 	 * @param properties
-	 *
 	 * @return
 	 */
 	J setProperties(Map<String, Object> properties);
 	
 	/**
 	 * Appends the text to the raw text
+	 *
 	 * @param text
 	 * @return
 	 */
@@ -155,42 +145,36 @@ public interface IComponentBase<J extends IComponentBase<J>>
 	default J appendText(String text)
 	{
 		setText(getText(0) + text);
-		return (J)this;
+		return (J) this;
 	}
 	
 	/**
 	 * Sets this components Raw Text
 	 * <p>
 	 *
-	 * @param text
-	 * 		The text to display as Raw Text
-	 *
+	 * @param text The text to display as Raw Text
 	 * @return
 	 */
 	J setText(String text);
-
+	
 	/**
 	 * Sets this components Raw Text
 	 * <p>
 	 *
-	 * @param text
-	 * 		The text to display as Raw Text
-	 *
+	 * @param text The text to display as Raw Text
 	 * @return
 	 */
 	J setText(StringBuilder text);
-
+	
 	/**
 	 * If this component will render as tiny HTML. Global override value
 	 * <p>
 	 *
-	 * @param tiny
-	 * 		Set if this component must render as tiny HTML. Does not affect CSS or JavaScript rendering
-	 *
+	 * @param tiny Set if this component must render as tiny HTML. Does not affect CSS or JavaScript rendering
 	 * @return
 	 */
 	J setTiny(boolean tiny);
-
+	
 	/**
 	 * Returns if this component is needing refresh on next Ajax call
 	 * <p>
@@ -198,14 +182,12 @@ public interface IComponentBase<J extends IComponentBase<J>>
 	 * @return true if going to be touched
 	 */
 	boolean isTouched();
-
+	
 	/**
 	 * Mark this component as needing refresh to the Ajax Controller
 	 * <p>
 	 *
-	 * @param touched
-	 * 		Whether or not to update on next ajax call
-	 *
+	 * @param touched Whether or not to update on next ajax call
 	 * @return
 	 */
 	J setTouched(boolean touched);

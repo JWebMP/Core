@@ -18,16 +18,15 @@ package com.jwebmp.core.base;
 
 import com.fasterxml.jackson.annotation.*;
 import com.guicedee.guicedinjection.json.StaticStrings;
-import com.guicedee.logger.LogFactory;
-import com.jwebmp.core.base.interfaces.IComponentBase;
-import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
-import com.jwebmp.core.utilities.GUIDGenerator;
-import jakarta.validation.constraints.NotNull;
+import com.guicedee.logger.*;
+import com.jwebmp.core.base.interfaces.*;
+import com.jwebmp.core.base.servlets.enumarations.*;
+import com.jwebmp.core.htmlbuilder.javascript.*;
+import com.jwebmp.core.utilities.*;
+import jakarta.validation.constraints.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
+import java.util.*;
+import java.util.logging.*;
 
 /**
  * Defines the raw necessities for a component to exist
@@ -79,7 +78,8 @@ public class ComponentBase<J extends ComponentBase<J>>
 	/**
 	 * Sets if this component should be sent on the next call back
 	 */
-	private boolean touched = false;
+	private boolean touched;
+	
 	/**
 	 * A set of properties for this component
 	 */
