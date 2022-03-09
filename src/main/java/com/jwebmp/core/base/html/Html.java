@@ -16,21 +16,14 @@
  */
 package com.jwebmp.core.base.html;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jwebmp.core.Component;
-import com.jwebmp.core.Page;
-import com.jwebmp.core.base.client.Browsers;
-import com.jwebmp.core.base.client.HTMLVersions;
-import com.jwebmp.core.base.html.attributes.NoAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
-import com.jwebmp.core.base.html.interfaces.HTMLFeatures;
-import com.jwebmp.core.base.html.interfaces.NoClassAttribute;
-import com.jwebmp.core.base.html.interfaces.NoIDTag;
-import com.jwebmp.core.base.html.interfaces.events.NoEvents;
-import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.jwebmp.core.base.servlets.enumarations.DevelopmentEnvironments;
-import jakarta.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.*;
+import com.jwebmp.core.*;
+import com.jwebmp.core.base.client.*;
+import com.jwebmp.core.base.html.attributes.*;
+import com.jwebmp.core.base.html.interfaces.*;
+import com.jwebmp.core.base.html.interfaces.events.*;
+import com.jwebmp.core.base.servlets.enumarations.*;
+import jakarta.validation.constraints.*;
 
 /**
  * The base HTML Component.<p>
@@ -63,7 +56,6 @@ import jakarta.validation.constraints.NotNull;
  * <p>
  *
  * @param <J>
- *
  * @author GedMarc
  * @since right from the start, 2007 with radio on live
  */
@@ -74,13 +66,13 @@ public abstract class Html<C extends GlobalChildren, J extends Html<C, J>>
 	/**
 	 * The head object
 	 */
-	private final Head<?> head;
+	private Head<?> head;
 	@JsonProperty("RunningEnvironment")
 	private DevelopmentEnvironments runningEnvironment = DevelopmentEnvironments.Development;
 	/**
 	 * The body object
 	 */
-	private Body<?,?> body;
+	private Body<?, ?> body;
 	/**
 	 * The HTML Version the page
 	 */
@@ -91,7 +83,7 @@ public abstract class Html<C extends GlobalChildren, J extends Html<C, J>>
 	 */
 	@JsonIgnore
 	private Browsers browser;
-
+	
 	/**
 	 * Constructs a new HTML Tag with I.E. 10 support
 	 */
@@ -99,14 +91,13 @@ public abstract class Html<C extends GlobalChildren, J extends Html<C, J>>
 	{
 		this(Browsers.Edge);
 	}
-
+	
 	/**
 	 * Constructs a new HTML Tag with a HTML Version. This supplies the most wanted HTML Version, and CSS Support. When measured the HTML
 	 * Version
 	 * <p>
 	 *
-	 * @param browser
-	 * 		The minimum browser to support. Please don't choose IE5.5, or even 7 for that matter, You're making life difficult.
+	 * @param browser The minimum browser to support. Please don't choose IE5.5, or even 7 for that matter, You're making life difficult.
 	 */
 	public Html(Browsers browser)
 	{
@@ -114,7 +105,7 @@ public abstract class Html<C extends GlobalChildren, J extends Html<C, J>>
 		htmlVersion = browser.getHtmlVersion();
 		head = new Head<>();
 	}
-
+	
 	/**
 	 * Renders the DocType for the HTML
 	 * <p>
@@ -130,7 +121,7 @@ public abstract class Html<C extends GlobalChildren, J extends Html<C, J>>
 		  .append(getNewLine());
 		return sb;
 	}
-
+	
 	/**
 	 * Returns the current browser or FireFox
 	 *
@@ -144,7 +135,7 @@ public abstract class Html<C extends GlobalChildren, J extends Html<C, J>>
 		}
 		return browser;
 	}
-
+	
 	/**
 	 * Returns the current browser or FireFox
 	 *
@@ -154,19 +145,19 @@ public abstract class Html<C extends GlobalChildren, J extends Html<C, J>>
 	{
 		this.browser = browser;
 	}
-
+	
 	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
 	}
-
+	
 	@Override
 	public boolean equals(Object o)
 	{
 		return super.equals(o);
 	}
-
+	
 	/**
 	 * Returns a valid HTML Version
 	 * <p>
@@ -177,7 +168,7 @@ public abstract class Html<C extends GlobalChildren, J extends Html<C, J>>
 	{
 		return htmlVersion;
 	}
-
+	
 	/**
 	 * Returns the currently set running environment
 	 * <p>
@@ -188,13 +179,12 @@ public abstract class Html<C extends GlobalChildren, J extends Html<C, J>>
 	{
 		return runningEnvironment;
 	}
-
+	
 	/**
 	 * Sets the global running environment value
 	 * <p>
 	 *
-	 * @param runningEnvironmentSetting
-	 * 		The running environment value
+	 * @param runningEnvironmentSetting The running environment value
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
@@ -203,7 +193,7 @@ public abstract class Html<C extends GlobalChildren, J extends Html<C, J>>
 		runningEnvironment = runningEnvironmentSetting;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns the head object on the HTML Tag
 	 *
@@ -213,7 +203,7 @@ public abstract class Html<C extends GlobalChildren, J extends Html<C, J>>
 	{
 		return head;
 	}
-
+	
 	/*
 	 * Returns the body object on the HTML Tag
 	 */
@@ -225,16 +215,31 @@ public abstract class Html<C extends GlobalChildren, J extends Html<C, J>>
 		}
 		return body;
 	}
-
+	
 	/**
 	 * Sets the body for this class
 	 *
 	 * @param body
 	 */
 	@SuppressWarnings("unchecked")
-	public J setBody(Body<?,?> body)
+	public J setBody(Body<?, ?> body)
 	{
 		this.body = body;
 		return (J) this;
 	}
+	
+	/**
+	 * Sets the header object for this html page
+	 *
+	 * @param head
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public J setHead(Head<?> head)
+	{
+		this.head = head;
+		return (J) this;
+	}
+	
+	
 }

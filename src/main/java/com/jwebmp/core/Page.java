@@ -16,37 +16,29 @@
  */
 package com.jwebmp.core;
 
-import com.google.inject.Inject;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.logger.LogFactory;
-import com.jwebmp.core.annotations.PageConfiguration;
-import com.jwebmp.core.base.ComponentDependencyBase;
-import com.jwebmp.core.base.ContentSecurityPolicy;
-import com.jwebmp.core.base.ajax.AjaxCall;
-import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.client.InternetExplorerCompatibilityMode;
+import com.google.inject.*;
+import com.guicedee.guicedinjection.*;
+import com.guicedee.logger.*;
+import com.jwebmp.core.annotations.*;
+import com.jwebmp.core.base.*;
+import com.jwebmp.core.base.ajax.*;
+import com.jwebmp.core.base.client.*;
 import com.jwebmp.core.base.html.*;
-import com.jwebmp.core.base.html.attributes.ScriptAttributes;
-import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
-import com.jwebmp.core.base.html.interfaces.children.HtmlChildren;
-import com.jwebmp.core.base.interfaces.IComponentFeatureBase;
-import com.jwebmp.core.base.references.CSSReference;
-import com.jwebmp.core.base.references.JavascriptReference;
-import com.jwebmp.core.services.IPage;
-import com.jwebmp.core.services.IPageConfigurator;
-import com.jwebmp.core.utilities.StaticStrings;
-import jakarta.validation.constraints.NotNull;
-import net.sf.uadetector.ReadableDeviceCategory;
-import net.sf.uadetector.ReadableUserAgent;
+import com.jwebmp.core.base.html.attributes.*;
+import com.jwebmp.core.base.html.interfaces.children.*;
+import com.jwebmp.core.base.interfaces.*;
+import com.jwebmp.core.base.references.*;
+import com.jwebmp.core.services.*;
+import com.jwebmp.core.utilities.*;
+import jakarta.validation.constraints.*;
+import net.sf.uadetector.*;
 
-import java.util.EnumSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.*;
+import java.util.logging.*;
 
-import static com.guicedee.guicedinjection.json.StaticStrings.STRING_SEMICOLON;
-import static com.jwebmp.core.services.JWebMPServicesBindings.IPageConfiguratorsKey;
+import static com.guicedee.guicedinjection.json.StaticStrings.*;
+import static com.jwebmp.core.implementations.ReadableUserAgentProvider.*;
+import static com.jwebmp.core.services.JWebMPServicesBindings.*;
 
 /**
  * Top level of any HTML page.
@@ -57,8 +49,8 @@ import static com.jwebmp.core.services.JWebMPServicesBindings.IPageConfigurators
  *
  * @author GedMarc
  * @version 2.0
- * 		<p>
- * 		Replacement of the old page object
+ * <p>
+ * Replacement of the old page object
  * @since 24 Apr 2016
  */
 @SuppressWarnings({"unused"})
@@ -73,65 +65,59 @@ public class Page<J extends Page<J>>
 	 * The options available
 	 */
 	private PageOptions<?> options;
-
-	@Inject
+	
 	private ContentSecurityPolicy contentSecurityPolicy;
-
-	@Inject
+	
 	private ReadableUserAgent readableUserAgent;
-
+	
 	/**
 	 * If this page has already gone through initialization
 	 */
 	private boolean pageInitialized;
-
+	
 	/**
-	 * @param title
-	 * 		Sets the title of the page
-	 * @param compatibilityMode
-	 * 		Sets the Internet explorer mode to work on
+	 * @param title             Sets the title of the page
+	 * @param compatibilityMode Sets the Internet explorer mode to work on
 	 */
 	public Page(Title<?> title, InternetExplorerCompatibilityMode compatibilityMode)
 	{
 		this(title, compatibilityMode, null);
 	}
-
+	
 	/**
 	 * Populates all my components. Excludes this page
 	 *
-	 * @param title
-	 * 		Sets the title of the page
-	 * @param compatibilityMode
-	 * 		Sets the Internet explorer mode to work on
-	 * @param base
-	 * 		Sets the base tag for the page. Convenience Parameter
+	 * @param title             Sets the title of the page
+	 * @param compatibilityMode Sets the Internet explorer mode to work on
+	 * @param base              Sets the base tag for the page. Convenience Parameter
 	 */
 	public Page(Title<?> title, InternetExplorerCompatibilityMode compatibilityMode, Base<?> base)
 	{
-		this.getOptions().setTitle(title);
-		this.getOptions().setCompatibilityMode(compatibilityMode);
-		this.getOptions().setBase(base);
+		this.getOptions()
+		    .setTitle(title);
+		this.getOptions()
+		    .setCompatibilityMode(compatibilityMode);
+		this.getOptions()
+		    .setBase(base);
 		setID("jwPage");
 	}
-
+	
 	/**
-	 * @param title
-	 * 		Sets the title of the page
+	 * @param title Sets the title of the page
 	 */
 	public Page(Title<?> title)
 	{
 		this(title, null, null);
 	}
-
+	
 	/**
-	 * @param title
-	 * 		Sets the title of the page
+	 * @param title Sets the title of the page
 	 */
 	public Page(String title)
 	{
 		this(new Title<>(title), null, null);
 	}
-
+	
 	/**
 	 * Constructs an empty page object
 	 */
@@ -139,15 +125,12 @@ public class Page<J extends Page<J>>
 	{
 		this(null, null, null);
 	}
-
+	
 	/**
 	 * Adds the text as a given paragraph
 	 *
-	 * @param addText
-	 * 		The text to add to the body
-	 *
+	 * @param addText The text to add to the body
 	 * @return This
-	 *
 	 * @see Component#add(String)
 	 */
 	@Override
@@ -158,7 +141,7 @@ public class Page<J extends Page<J>>
 		getBody().add(addText);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Initializes the page
 	 */
@@ -166,17 +149,14 @@ public class Page<J extends Page<J>>
 	{
 		//Interception Marker
 	}
-
+	
 	/**
 	 * Gets called when the client makes a valid request.
 	 * <p>
 	 * Local Storage, Modernizr and Session Storage are available at the time of this call
 	 *
-	 * @param call
-	 * 		The retrieved ajax call request scoped
-	 * @param response
-	 * 		The response ajax call request scoped
-	 *
+	 * @param call     The retrieved ajax call request scoped
+	 * @param response The response ajax call request scoped
 	 * @return Not null
 	 */
 	@SuppressWarnings("unused")
@@ -186,15 +166,12 @@ public class Page<J extends Page<J>>
 	{
 		return response;
 	}
-
+	
 	/**
 	 * Adds a css reference to the body
 	 *
-	 * @param cssReference
-	 * 		the reference to add
-	 *
+	 * @param cssReference the reference to add
 	 * @return Always this
-	 *
 	 * @see ComponentDependencyBase#addCssReference(CSSReference)
 	 */
 	@Override
@@ -205,15 +182,12 @@ public class Page<J extends Page<J>>
 		getBody().addCssReference(cssReference);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Adds a java script reference to the body
 	 *
-	 * @param jsReference
-	 * 		Adds a javascript reference to the body
-	 *
+	 * @param jsReference Adds a javascript reference to the body
 	 * @return This page
-	 *
 	 * @see ComponentDependencyBase#addJavaScriptReference(JavascriptReference)
 	 */
 	@Override
@@ -224,12 +198,11 @@ public class Page<J extends Page<J>>
 		getBody().addJavaScriptReference(jsReference);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns the CSS references from the bdoy
 	 *
 	 * @return A set of references
-	 *
 	 * @see ComponentDependencyBase#getCssReferences()
 	 */
 	@Override
@@ -237,12 +210,11 @@ public class Page<J extends Page<J>>
 	{
 		return getBody().getCssReferences();
 	}
-
+	
 	/**
 	 * Gets the java script references from the body object
 	 *
 	 * @return A set of javascript references
-	 *
 	 * @see ComponentDependencyBase#getJavascriptReferences()
 	 */
 	@Override
@@ -250,23 +222,22 @@ public class Page<J extends Page<J>>
 	{
 		return getBody().getJavascriptReferences();
 	}
-
+	
 	/**
 	 * Adds a feature to the collection
 	 *
 	 * @param feature
-	 *
 	 * @return
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J addFeature(@NotNull IComponentFeatureBase<?,?> feature)
+	public J addFeature(@NotNull IComponentFeatureBase<?, ?> feature)
 	{
 		getBody().addFeature(feature);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Adds a variable to the collection
 	 *
@@ -280,12 +251,11 @@ public class Page<J extends Page<J>>
 		getBody().addVariable(variable);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns all the dynamic options for a page
 	 *
 	 * @return The options with the page
-	 *
 	 * @see com.jwebmp.core.base.ComponentFeatureBase#getOptions()
 	 */
 	@Override
@@ -298,12 +268,11 @@ public class Page<J extends Page<J>>
 		}
 		return options;
 	}
-
+	
 	/**
 	 * Returns the JavaScript render for the body
 	 *
 	 * @return A single string builder containing all the java scripts applicable
-	 *
 	 * @see com.jwebmp.core.base.ComponentFeatureBase#renderJavascript()
 	 */
 	@NotNull
@@ -312,7 +281,7 @@ public class Page<J extends Page<J>>
 	{
 		return getBody().renderJavascriptAll();
 	}
-
+	
 	/**
 	 * Returns the queries
 	 *
@@ -324,7 +293,7 @@ public class Page<J extends Page<J>>
 	{
 		return getBody().getQueries();
 	}
-
+	
 	/**
 	 * Method destroy ...
 	 */
@@ -342,7 +311,7 @@ public class Page<J extends Page<J>>
 		options = null;
 		super.destroy();
 	}
-
+	
 	/**
 	 * Returns the component with only it's methods
 	 *
@@ -352,7 +321,7 @@ public class Page<J extends Page<J>>
 	{
 		return this;
 	}
-
+	
 	/**
 	 * Whether or not the page is initialized
 	 *
@@ -362,18 +331,17 @@ public class Page<J extends Page<J>>
 	{
 		return pageInitialized;
 	}
-
+	
 	/**
 	 * Sets if the page is initialized
 	 *
-	 * @param pageInitialized
-	 * 		If this page is initialized
+	 * @param pageInitialized If this page is initialized
 	 */
 	public void setPageInitialized(boolean pageInitialized)
 	{
 		this.pageInitialized = pageInitialized;
 	}
-
+	
 	/**
 	 * Method hashCode ...
 	 *
@@ -384,13 +352,11 @@ public class Page<J extends Page<J>>
 	{
 		return super.hashCode();
 	}
-
+	
 	/**
 	 * Method equals ...
 	 *
-	 * @param o
-	 * 		of type Object
-	 *
+	 * @param o of type Object
 	 * @return boolean
 	 */
 	@Override
@@ -398,7 +364,7 @@ public class Page<J extends Page<J>>
 	{
 		return super.equals(o);
 	}
-
+	
 	/**
 	 * Returns the document type that will be rendered with this HTML page real-time
 	 * <p>
@@ -411,25 +377,24 @@ public class Page<J extends Page<J>>
 	{
 		return new DocumentType<>(getBrowser().getHtmlVersion());
 	}
-
-
+	
+	
 	/**
 	 * Returns if the user agent string registered the device as mobile
 	 *
 	 * @return If the header agent reads as smartphone smart tv or tablet
-	 *
 	 * @see com.jwebmp.core.services.IPage#isMobileOrSmartTablet()
 	 */
 	@Override
 	public boolean isMobileOrSmartTablet()
 	{
 		Set<ReadableDeviceCategory.Category> mobiles = EnumSet.of(ReadableDeviceCategory.Category.SMARTPHONE,
-		                                                          ReadableDeviceCategory.Category.SMART_TV,
-		                                                          ReadableDeviceCategory.Category.TABLET);
+				ReadableDeviceCategory.Category.SMART_TV,
+				ReadableDeviceCategory.Category.TABLET);
 		return mobiles.contains(getUserAgent().getDeviceCategory()
 		                                      .getCategory());
 	}
-
+	
 	/**
 	 * Returns a readable user agent, or null if just a basic render
 	 *
@@ -438,17 +403,25 @@ public class Page<J extends Page<J>>
 	@NotNull
 	public ReadableUserAgent getUserAgent()
 	{
+		try
+		{
+			readableUserAgent = GuiceContext.get(ReadableUserAgent.class);
+		}
+		catch (ProvisionException | OutOfScopeException e)
+		{
+			if (readableUserAgent == null)
+			{
+				readableUserAgent = defaultAgent();
+			}
+		}
 		return readableUserAgent;
 	}
-
+	
 	/**
 	 * Sets all component in the head and body to tiny
 	 *
-	 * @param tiny
-	 * 		Sets this object, the head, and the body to tiny
-	 *
+	 * @param tiny Sets this object, the head, and the body to tiny
 	 * @return Always this
-	 *
 	 * @see com.jwebmp.core.base.ComponentHierarchyBase#setTiny(boolean)
 	 */
 	@Override
@@ -461,13 +434,11 @@ public class Page<J extends Page<J>>
 		getBody().setTiny(tiny);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Method adds to the body
 	 *
-	 * @param child
-	 * 		of type IComponentHierarchyBase
-	 *
+	 * @param child of type IComponentHierarchyBase
 	 * @return J
 	 */
 	@SuppressWarnings("unchecked")
@@ -476,12 +447,11 @@ public class Page<J extends Page<J>>
 		getBody().add(child);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Overidden method to return this, beware circular joins
 	 *
 	 * @return Hard override to this page
-	 *
 	 * @see com.jwebmp.core.base.ComponentHierarchyBase#getPage()
 	 */
 	@Override
@@ -490,8 +460,8 @@ public class Page<J extends Page<J>>
 	{
 		return this;
 	}
-
-
+	
+	
 	/**
 	 * Initialize all children
 	 */
@@ -502,14 +472,16 @@ public class Page<J extends Page<J>>
 		{
 			configurePageHeader();
 			addVariablesScriptToPage();
-
-			if(!getHead().getChildren().isEmpty())
+			
+			if (!getHead().getChildren()
+			              .isEmpty())
 			{
 				add(getHead());
 				getHead().init();
 			}
 			getBody().init();
-			if(!getBody().getChildren().isEmpty())
+			if (!getBody().getChildren()
+			              .isEmpty())
 			{
 				add(getBody());
 			}
@@ -518,7 +490,7 @@ public class Page<J extends Page<J>>
 		}
 		super.init();
 	}
-
+	
 	/**
 	 * Returns all the feature queries associated to this component and all its children
 	 *
@@ -530,7 +502,7 @@ public class Page<J extends Page<J>>
 	{
 		return getBody().getQueriesAll();
 	}
-
+	
 	/**
 	 * Returns if the body object is empty
 	 *
@@ -541,7 +513,7 @@ public class Page<J extends Page<J>>
 		return getBody().getChildren()
 		                .isEmpty();
 	}
-
+	
 	/**
 	 * Returns if the head object is empty
 	 *
@@ -552,7 +524,7 @@ public class Page<J extends Page<J>>
 		return getHead().getChildren()
 		                .isEmpty();
 	}
-
+	
 	/**
 	 * Method configurePage ...
 	 */
@@ -569,58 +541,90 @@ public class Page<J extends Page<J>>
 			sortedConfigurator.configure(this);
 		}
 	}
-
+	
 	/**
 	 * Builds up the Header Tag
 	 */
 	private void configurePageHeader()
 	{
-		if (this.getOptions().getTitle() != null)
+		if (this.getOptions()
+		        .getTitle() != null)
 		{
-			getHead().add(this.getOptions().getTitle());
+			getHead().add(this.getOptions()
+			                  .getTitle());
 		}
-		if (this.getOptions().getBase() != null)
+		if (this.getOptions()
+		        .getBase() != null)
 		{
-			getHead().add(this.getOptions().getBase());
+			getHead().add(this.getOptions()
+			                  .getBase());
 		}
-		if (this.getOptions().getHttpEquivMeta() != null)
+		if (this.getOptions()
+		        .getHttpEquivMeta() != null)
 		{
-			getHead().add(this.getOptions().getHttpEquivMeta());
+			getHead().add(this.getOptions()
+			                  .getHttpEquivMeta());
 		}
-		if (this.getOptions().getCacheControl() != null)
+		if (this.getOptions()
+		        .getCacheControl() != null)
 		{
-			getHead().add(this.getOptions().getCacheControl());
+			getHead().add(this.getOptions()
+			                  .getCacheControl());
 		}
-		if (this.getOptions().getAuthor() != null)
+		if (this.getOptions()
+		        .getAuthor() != null)
 		{
-			getHead().add(this.getOptions().getAuthor());
+			getHead().add(this.getOptions()
+			                  .getAuthor());
 		}
-		if (this.getOptions().getApplicationName() != null)
+		if (this.getOptions()
+		        .getApplicationName() != null)
 		{
-			getHead().add(this.getOptions().getApplicationName());
+			getHead().add(this.getOptions()
+			                  .getApplicationName());
 		}
-		if (this.getOptions().getGenerator() != null)
+		if (this.getOptions()
+		        .getGenerator() != null)
 		{
-			getHead().add(this.getOptions().getGenerator());
+			getHead().add(this.getOptions()
+			                  .getGenerator());
 		}
-		if (this.getOptions().getDescription() != null)
+		if (this.getOptions()
+		        .getDescription() != null)
 		{
-			getHead().add(this.getOptions().getDescription());
+			getHead().add(this.getOptions()
+			                  .getDescription());
 		}
-		if (this.getOptions().getKeywords() != null)
+		if (this.getOptions()
+		        .getKeywords() != null)
 		{
-			getHead().add(this.getOptions().getKeywords());
+			getHead().add(this.getOptions()
+			                  .getKeywords());
 		}
-		if (this.getOptions().getFavIconLink() != null)
+		if (this.getOptions()
+		        .getFavIconLink() != null)
 		{
-			getHead().add(this.getOptions().getFavIconLink());
+			getHead().add(this.getOptions()
+			                  .getFavIconLink());
 		}
 	}
-
-	public ContentSecurityPolicy getContentSecurityPolicy() {
+	
+	public ContentSecurityPolicy getContentSecurityPolicy()
+	{
+		try
+		{
+			contentSecurityPolicy = GuiceContext.get(ContentSecurityPolicy.class);
+		}
+		catch (ProvisionException | OutOfScopeException e)
+		{
+			if (contentSecurityPolicy == null)
+			{
+				contentSecurityPolicy = new ContentSecurityPolicy();
+			}
+		}
 		return contentSecurityPolicy;
 	}
-
+	
 	/**
 	 * Adds the variables in the application to the collection
 	 */
@@ -636,7 +640,7 @@ public class Page<J extends Page<J>>
 		}
 		if (variablesScriptBuilder.length() > 0)
 		{
-			Script<?,?> variablesScript = new Script<>();
+			Script<?, ?> variablesScript = new Script<>();
 			variablesScript.setID("variables");
 			variablesScript.setNewLineForRawText(true);
 			variablesScript.addAttribute(ScriptAttributes.Type, StaticStrings.HTML_HEADER_JAVASCRIPT);
@@ -647,5 +651,17 @@ public class Page<J extends Page<J>>
 				getHead().add(variablesScript);
 			}
 		}
+	}
+	
+	public J setOptions(PageOptions<?> options)
+	{
+		this.options = options;
+		return (J) this;
+	}
+	
+	public J setContentSecurityPolicy(ContentSecurityPolicy contentSecurityPolicy)
+	{
+		this.contentSecurityPolicy = contentSecurityPolicy;
+		return (J) this;
 	}
 }

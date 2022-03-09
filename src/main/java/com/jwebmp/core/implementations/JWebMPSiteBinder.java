@@ -75,6 +75,8 @@ public class JWebMPSiteBinder
 	 */
 	public static Class<? extends ComponentHierarchyBase<?, ?, ?, ?, ?>> loadingPartClass;
 	
+	public static boolean bindSites = true;
+	
 	/**
 	 * Constructs a new instance, mostly for injection
 	 */
@@ -181,119 +183,120 @@ public class JWebMPSiteBinder
 		
 		JWebMPSiteBinder.log.fine("Bound Page.class");
 		
-		@SuppressWarnings("rawtypes")
-		Set<IPage> notInjectedPages = getPages();
-		
-		for (Map.Entry<PageConfiguration, IPage<?>> entry : getPageConfigurations().entrySet())
+		if (bindSites)
 		{
-			PageConfiguration pc = entry.getKey();
-			IPage<?> page = entry.getValue();
-			if (pc == null)
+			@SuppressWarnings("rawtypes")
+			Set<IPage> notInjectedPages = getPages();
+			for (Map.Entry<PageConfiguration, IPage<?>> entry : getPageConfigurations().entrySet())
 			{
-				JWebMPSiteBinder.log.log(Level.SEVERE, "Couldn't Find Page Configuration on IPage Object {0}", new Object[]{page.getClass().getCanonicalName()});
+				PageConfiguration pc = entry.getKey();
+				IPage<?> page = entry.getValue();
+				if (pc == null)
+				{
+					JWebMPSiteBinder.log.log(Level.SEVERE, "Couldn't Find Page Configuration on IPage Object {0}", new Object[]{page.getClass().getCanonicalName()});
+				}
+				else if (!pc.ignore())
+				{
+					StringBuilder url = new StringBuilder(pc.url());
+					url.insert(0, "(")
+					   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
+					   .append(")");
+					
+					
+					module.serveRegex$(url.toString())
+					      .with(JWebMPServlet.class);
+					PageProvider.getUrlToClass()
+					            .put(pc.url(), (Class<? extends IPage<?>>) page.getClass());
+					JWebMPSiteBinder.log.log(Level.CONFIG, "Serving Page URL [{0}] with [{1}]", new Object[]{pc.url(), page.getClass().getCanonicalName()});
+					
+					
+					url = new StringBuilder(pc.url()
+					                          .substring(0, pc.url()
+					                                          .length() - 1) + StaticStrings.JAVASCRIPT_LOCATION);
+					
+					url.insert(0, "(")
+					   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
+					   .append(")");
+					
+					module.serveRegex$(url.toString())
+					      .with(JavaScriptServlet.class);
+					JWebMPSiteBinder.log.log(Level.FINE, "Serving JavaScripts at {0}", url);
+					
+					
+					url = new StringBuilder(pc.url()
+					                          .substring(0, pc.url()
+					                                          .length() - 1) + StaticStrings.AJAX_SCRIPT_LOCATION);
+					
+					url.insert(0, "(")
+					   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
+					   .append(")");
+					
+					module.serveRegex$(url.toString())
+					      .with(AjaxReceiverServlet.class);
+					JWebMPSiteBinder.log.log(Level.FINE, "Serving Ajax at {0}", url);
+					
+					
+					url = new StringBuilder(pc.url()
+					                          .substring(0, pc.url()
+					                                          .length() - 1) + StaticStrings.CSS_LOCATION);
+					
+					url.insert(0, "(")
+					   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
+					   .append(")");
+					
+					module.serveRegex$(url.toString())
+					      .with(CSSServlet.class);
+					JWebMPSiteBinder.log.log(Level.FINE, "Serving CSS at {0}", url);
+					
+					
+					url = new StringBuilder(pc.url()
+					                          .substring(0, pc.url()
+					                                          .length() - 1) + StaticStrings.DATA_LOCATION);
+					
+					url.insert(0, "(")
+					   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
+					   .append(")");
+					
+					module.serveRegex$(url.toString())
+					      .with(DataServlet.class);
+					JWebMPSiteBinder.log.log(Level.FINE, "Serving Data at {0}", url);
+					
+					url = new StringBuilder(pc.url()
+					                          .substring(0, pc.url()
+					                                          .length() - 1) + StaticStrings.JW_SCRIPT_LOCATION);
+					
+					url.insert(0, "(")
+					   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
+					   .append(")");
+					
+					module.serveRegex$(url.toString())
+					      .with(JWScriptServlet.class);
+					JWebMPSiteBinder.log.log(Level.FINE, "Serving Default Script at {0}", url);
+				}
 			}
-			else if (!pc.ignore())
-			{
-				StringBuilder url = new StringBuilder(pc.url());
-				url.insert(0, "(")
-				   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
-				   .append(")");
-				
-				
-				module.serveRegex$(url.toString())
-				      .with(JWebMPServlet.class);
-				PageProvider.getUrlToClass()
-				            .put(pc.url(), (Class<? extends IPage<?>>) page.getClass());
-				JWebMPSiteBinder.log.log(Level.CONFIG, "Serving Page URL [{0}] with [{1}]", new Object[]{pc.url(), page.getClass().getCanonicalName()});
-				
-				
-				url = new StringBuilder(pc.url()
-				                          .substring(0, pc.url()
-				                                          .length() - 1) + StaticStrings.JAVASCRIPT_LOCATION);
-				
-				url.insert(0, "(")
-				   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
-				   .append(")");
-				
-				module.serveRegex$(url.toString())
-				      .with(JavaScriptServlet.class);
-				JWebMPSiteBinder.log.log(Level.FINE, "Serving JavaScripts at {0}", url);
-				
-				
-				url = new StringBuilder(pc.url()
-				                          .substring(0, pc.url()
-				                                          .length() - 1) + StaticStrings.AJAX_SCRIPT_LOCATION);
-				
-				url.insert(0, "(")
-				   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
-				   .append(")");
-				
-				module.serveRegex$(url.toString())
-				      .with(AjaxReceiverServlet.class);
-				JWebMPSiteBinder.log.log(Level.FINE, "Serving Ajax at {0}", url);
-				
-				
-				url = new StringBuilder(pc.url()
-				                          .substring(0, pc.url()
-				                                          .length() - 1) + StaticStrings.CSS_LOCATION);
-				
-				url.insert(0, "(")
-				   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
-				   .append(")");
-				
-				module.serveRegex$(url.toString())
-				      .with(CSSServlet.class);
-				JWebMPSiteBinder.log.log(Level.FINE, "Serving CSS at {0}", url);
-				
-				
-				url = new StringBuilder(pc.url()
-				                          .substring(0, pc.url()
-				                                          .length() - 1) + StaticStrings.DATA_LOCATION);
-				
-				url.insert(0, "(")
-				   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
-				   .append(")");
-				
-				module.serveRegex$(url.toString())
-				      .with(DataServlet.class);
-				JWebMPSiteBinder.log.log(Level.FINE, "Serving Data at {0}", url);
-				
-				url = new StringBuilder(pc.url()
-				                          .substring(0, pc.url()
-				                                          .length() - 1) + StaticStrings.JW_SCRIPT_LOCATION);
-				
-				url.insert(0, "(")
-				   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
-				   .append(")");
-				
-				module.serveRegex$(url.toString())
-				      .with(JWScriptServlet.class);
-				JWebMPSiteBinder.log.log(Level.FINE, "Serving Default Script at {0}", url);
-			}
+			
+			module.serveRegex$("(" + StaticStrings.JAVASCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
+			      .with(JavaScriptServlet.class);
+			JWebMPSiteBinder.log.log(Level.FINE, "Serving JavaScripts at {0}", StaticStrings.JAVASCRIPT_LOCATION);
+			
+			
+			module.serveRegex$("(" + StaticStrings.AJAX_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
+			      .with(AjaxReceiverServlet.class);
+			JWebMPSiteBinder.log.log(Level.FINE, "Serving Ajax at {0}", StaticStrings.AJAX_SCRIPT_LOCATION);
+			
+			module.serveRegex$("(" + StaticStrings.CSS_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
+			      .with(CSSServlet.class);
+			JWebMPSiteBinder.log.log(Level.FINE, "Serving CSS at {0}", StaticStrings.CSS_LOCATION);
+			
+			module.serveRegex$("(" + StaticStrings.DATA_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
+			      .with(DataServlet.class);
+			JWebMPSiteBinder.log.log(Level.FINE, "Serving Data at {0}", StaticStrings.DATA_LOCATION);
+			
+			module.serveRegex$("(" + StaticStrings.JW_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
+			      .with(JWScriptServlet.class);
+			
+			JWebMPSiteBinder.log.log(Level.FINE, "Serving Default Script at {0}", StaticStrings.JW_SCRIPT_LOCATION);
 		}
-		
-		
-		module.serveRegex$("(" + StaticStrings.JAVASCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
-		      .with(JavaScriptServlet.class);
-		JWebMPSiteBinder.log.log(Level.FINE, "Serving JavaScripts at {0}", StaticStrings.JAVASCRIPT_LOCATION);
-		
-		
-		module.serveRegex$("(" + StaticStrings.AJAX_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
-		      .with(AjaxReceiverServlet.class);
-		JWebMPSiteBinder.log.log(Level.FINE, "Serving Ajax at {0}", StaticStrings.AJAX_SCRIPT_LOCATION);
-		
-		module.serveRegex$("(" + StaticStrings.CSS_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
-		      .with(CSSServlet.class);
-		JWebMPSiteBinder.log.log(Level.FINE, "Serving CSS at {0}", StaticStrings.CSS_LOCATION);
-		
-		module.serveRegex$("(" + StaticStrings.DATA_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
-		      .with(DataServlet.class);
-		JWebMPSiteBinder.log.log(Level.FINE, "Serving Data at {0}", StaticStrings.DATA_LOCATION);
-		
-		module.serveRegex$("(" + StaticStrings.JW_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
-		      .with(JWScriptServlet.class);
-		
-		JWebMPSiteBinder.log.log(Level.FINE, "Serving Default Script at {0}", StaticStrings.JW_SCRIPT_LOCATION);
 	}
 	
 	public static Set<IPage> getPages()

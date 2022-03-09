@@ -19,6 +19,7 @@ package com.jwebmp.core.base;
 import com.fasterxml.jackson.annotation.*;
 import com.google.common.base.*;
 import com.guicedee.guicedinjection.*;
+import com.guicedee.guicedinjection.interfaces.*;
 import com.guicedee.guicedinjection.json.*;
 import com.guicedee.logger.*;
 import com.jwebmp.core.*;
@@ -92,6 +93,12 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 	 */
 	@JsonIgnore
 	private Page<?> page;
+	
+	/**
+	 * if children should be rendered
+	 */
+	private boolean renderChildren = true;
+	
 	
 	/**
 	 * Constructs a new component that can be part of a tree
@@ -381,7 +388,16 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 		        .setTiny(isTiny());
 		newChild.asHierarchyBase()
 		        .setPage(getPage());
-		getChildren().add(newChild);
+		boolean added = getChildren().add(newChild);
+		if (added)
+		{
+			Set<IOnComponentAdded> components = IDefaultService.loaderToSet(ServiceLoader.load(IOnComponentAdded.class));
+			for (IOnComponentAdded component : components)
+			{
+				component.onComponentAdded(this, (ComponentHierarchyBase<?, ?, ?, ?, ?>) newChild);
+			}
+		}
+		
 		return (J) this;
 	}
 	
@@ -852,6 +868,30 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 		return null;
 	}
 	
+	@Override
+	protected StringBuilder renderHTML(int tabCount)
+	{
+		boolean renderChildren = true;
+		Set<IOnComponentHtmlRender> htmlRenderTriggers = IDefaultService.loaderToSet(ServiceLoader.load(IOnComponentHtmlRender.class));
+		for (IOnComponentHtmlRender htmlRenderTrigger : htmlRenderTriggers)
+		{
+			try
+			{
+				boolean result = htmlRenderTrigger.onHtmlRender((ComponentHierarchyBase<?, ?, ?, ?, ?>) this);
+				if (!result)
+				{
+					renderChildren = result;
+				}
+			}
+			catch (Throwable T)
+			{
+				log.log(Level.WARNING, "Error in processing html render interceptor", T);
+			}
+		}
+		setRenderChildren(renderChildren);
+		return super.renderHTML(tabCount);
+	}
+	
 	/**
 	 * Returns if this object has children or not
 	 * <p>
@@ -1197,6 +1237,10 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 	protected StringBuilder renderChildren()
 	{
 		StringBuilder sb = new StringBuilder();
+		if (!renderChildren)
+		{
+			return sb;
+		}
 		if (renderBeforeChildren() != null)
 		{
 			sb.append(renderBeforeChildren());
@@ -1295,8 +1339,39 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 	
 	public Set<IConfiguration> getConfigurations(Class<?> configurationType)
 	{
-		return getConfigurations().stream()
-		                          .filter(a -> configurationType.isAssignableFrom(a.getClass()))
-		                          .collect(Collectors.toSet());
+		Set<IConfiguration> out = new LinkedHashSet<>();
+		for (IComponentHierarchyBase<?, ?> iComponentHierarchyBase : getChildrenHierarchy(true))
+		{
+			ComponentHierarchyBase chb = (ComponentHierarchyBase) iComponentHierarchyBase;
+			out.addAll((Set<IConfiguration>) chb.getConfigurations()
+			                                    .stream()
+			                                    .filter(b -> configurationType.isAssignableFrom(b.getClass()))
+			                                    .collect(Collectors.toSet()));
+		}
+		return out;
 	}
+	
+	/**
+	 * if children should be rendered
+	 *
+	 * @return
+	 */
+	public boolean isRenderChildren()
+	{
+		return renderChildren;
+	}
+	
+	/**
+	 * if children should be rendered
+	 *
+	 * @param renderChildren
+	 * @return
+	 */
+	public J setRenderChildren(boolean renderChildren)
+	{
+		this.renderChildren = renderChildren;
+		return (J) this;
+	}
+	
+	
 }

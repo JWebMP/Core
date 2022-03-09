@@ -16,24 +16,22 @@
  */
 package com.jwebmp.core.base.ajax;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.google.common.base.Strings;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.core.type.*;
+import com.google.common.base.*;
 import com.google.inject.*;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.guicedinjection.interfaces.ObjectBinderKeys;
+import com.guicedee.guicedinjection.*;
+import com.guicedee.guicedinjection.interfaces.*;
 import com.guicedee.guicedservlets.*;
-import com.guicedee.guicedservlets.services.scopes.CallScope;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
-import com.jwebmp.core.databind.ClientVariableWatcher;
-import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
-import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
+import com.guicedee.guicedservlets.services.scopes.*;
+import com.jwebmp.core.base.interfaces.*;
+import com.jwebmp.core.databind.*;
+import com.jwebmp.core.htmlbuilder.javascript.*;
+import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.*;
 import jakarta.servlet.http.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.websocket.Session;
+import jakarta.validation.constraints.*;
+import jakarta.websocket.*;
 
 import java.util.*;
 
@@ -66,31 +64,15 @@ public class AjaxCall<J extends AjaxCall<J>>
 	 * The event type
 	 */
 	private EventTypes eventType;
-	/**
-	 * A secondary event type from option
-	 */
-	private EventTypes eventTypeFrom;
-	/**
-	 * The angular event variable
-	 */
-	private AjaxEventValue<?> value;
+	
+	private HeadersDTO headers;
+	
+	private Map<String, Object> attributes;
 	/**
 	 * The component object that this call is linked to
 	 */
 	@JsonIgnore
 	private IComponentHierarchyBase<?, ?> component;
-	/**
-	 * Is an incoming string of angular data
-	 */
-	private Set<JsonVariable> variableData;
-	/**
-	 * Is an incoming string of angular data
-	 */
-	private Set<ClientVariableWatcher> variableWatchers;
-	/**
-	 * The event ID
-	 */
-	private String eventId;
 	/**
 	 * The parameters associated with the call
 	 */
@@ -108,11 +90,15 @@ public class AjaxCall<J extends AjaxCall<J>>
 	/**
 	 * The class to create
 	 */
+	@JsonAlias({"classname","eventClass"})
 	private String className;
 	/**
 	 * The given hash bang
 	 */
+	@JsonAlias("hashbang")
 	private String hashBang;
+	
+	private String route;
 	/**
 	 * If this call originates through a web socket (so there is no request or session scope),
 	 * or if it is a direct page call
@@ -129,6 +115,9 @@ public class AjaxCall<J extends AjaxCall<J>>
 	 */
 	private boolean pageCall;
 	
+	
+	private Map<String, Object> unknownFields = new HashMap<>();
+	
 	/**
 	 * JSon Jackson Constructor
 	 */
@@ -144,15 +133,12 @@ public class AjaxCall<J extends AjaxCall<J>>
 	 * @param datetime      The Date Time
 	 * @param eventType     The ComponentEventBase Type
 	 * @param eventTypeFrom The ComponentEventBase Type From
-	 * @param value         The Value
 	 */
-	public AjaxCall(String componentId, Date datetime, String eventType, String eventTypeFrom, AjaxEventValue<?> value)
+	public AjaxCall(String componentId, Date datetime, String eventType, String eventTypeFrom)
 	{
 		this.componentId = componentId;
 		this.datetime = datetime;
-		this.value = value;
 		this.eventType = EventTypes.valueOf(eventType);
-		this.eventTypeFrom = EventTypes.valueOf(eventTypeFrom);
 	}
 	
 	@Inject
@@ -178,12 +164,12 @@ public class AjaxCall<J extends AjaxCall<J>>
 	
 	public String getAttribute(String attribute)
 	{
-		if (getValue() != null && getValue().getAttributes() != null && getValue().getAttributes()
-		                                                                          .get(attribute) != null)
+		if (getAttributes() != null && getAttributes()
+				                                                     .get(attribute) != null)
 		{
-			return getValue().getAttributes()
-			                 .get(attribute)
-			                 .toString();
+			return getAttributes()
+					.get(attribute)
+					.toString();
 		}
 		return null;
 	}
@@ -214,36 +200,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 		}
 		
 	}
-	
-	/**
-	 * Returns a list of variable angular watchers to apply on the ajax call.
-	 * Good for on binding changes
-	 *
-	 * @return
-	 */
-	public Set<ClientVariableWatcher> getVariableWatchers()
-	{
-		if (variableWatchers == null)
-		{
-			variableWatchers = new LinkedHashSet<>();
-		}
-		return variableWatchers;
-	}
-	
-	/**
-	 * Sets the variable watchers list to a new list
-	 *
-	 * @param variableWatchers
-	 * @return
-	 */
-	@NotNull
-	@SuppressWarnings("unchecked")
-	public J setVariableWatchers(Set<ClientVariableWatcher> variableWatchers)
-	{
-		this.variableWatchers = variableWatchers;
-		return (J) this;
-	}
-	
+
 	/**
 	 * The given hash bang
 	 *
@@ -277,20 +234,13 @@ public class AjaxCall<J extends AjaxCall<J>>
 		setComponent(incoming.getComponent());
 		setComponentId(incoming.getComponentId());
 		setDatetime(incoming.getDatetime());
-		setEventId(incoming.getEventId());
 		setEventType(incoming.getEventType());
-		setEventTypeFrom(incoming.getEventTypeFrom());
 		setReferenceId(incoming.getReferenceId());
-		setValue(incoming.getValue());
-		setVariableData(incoming.getVariableData());
 		setClassName(incoming.getClassName());
 		setParameters(incoming.getParameters());
 		setLocalStorage(incoming.getLocalStorage());
 		setSessionStorage(incoming.getSessionStorage());
 		setHashBang(incoming.getHashBang());
-		setValue(incoming.getValue());
-		setVariableData(incoming.getVariableData());
-		setVariableWatchers(incoming.getVariableWatchers());
 		setWebsocketSession(incoming.getWebsocketSession());
 		setWebSocketCall(incoming.isWebSocketCall());
 		return (J) this;
@@ -323,13 +273,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 		this.componentId = componentId;
 		return (J) this;
 	}
-	
-	@Override
-	public EventTypes getEventTypeFrom()
-	{
-		return eventTypeFrom;
-	}
-	
+
 	@Override
 	@SuppressWarnings("unchecked")
 	public J setDatetime(Date datetime)
@@ -337,25 +281,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 		this.datetime = datetime;
 		return (J) this;
 	}
-	
-	@Override
-	public AjaxEventValue<?> getValue()
-	{
-		if (value == null)
-		{
-			value = new AjaxEventValue<>();
-		}
-		return value;
-	}
-	
-	@Override
-	@SuppressWarnings("unchecked")
-	public J setEventId(String eventId)
-	{
-		this.eventId = eventId;
-		return (J) this;
-	}
-	
+
 	@Override
 	public IComponentHierarchyBase<?, ?> getComponent()
 	{
@@ -367,62 +293,6 @@ public class AjaxCall<J extends AjaxCall<J>>
 	public J setEventType(EventTypes eventType)
 	{
 		this.eventType = eventType;
-		return (J) this;
-	}
-	
-	@Override
-	@NotNull
-	public Set<JsonVariable> getVariableData()
-	{
-		if (variableData == null)
-		{
-			variableData = new HashSet<>();
-		}
-		return variableData;
-	}
-	
-	@Override
-	@SuppressWarnings("unchecked")
-	public J setEventTypeFrom(EventTypes eventTypeFrom)
-	{
-		this.eventTypeFrom = eventTypeFrom;
-		return (J) this;
-	}
-	
-	@Override
-	public JsonVariable getVariable(String name)
-	{
-		for (JsonVariable next : getVariableData())
-		{
-			if (next.getVariableName()
-			        .equals(name))
-			{
-				return next;
-			}
-		}
-		return null;
-	}
-	
-	@Override
-	public String getEventId()
-	{
-		return eventId;
-	}
-	
-	@Override
-	@SuppressWarnings("unchecked")
-	public J setValue(AjaxEventValue<?> value)
-	{
-		this.value = value;
-		return (J) this;
-	}
-	
-	@Override
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J setVariableData(Set<JsonVariable> variableData)
-	{
-		this.variableData = variableData;
 		return (J) this;
 	}
 	
@@ -530,16 +400,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 		this.pageCall = pageCall;
 		return (J) this;
 	}
-	
-	protected void updateVariable(AjaxCall<?> call, String dtoName, Object newDto)
-	{
-		call.getVariableData()
-		    .removeIf(variableDatum -> (variableDatum).getVariableName()
-		                                              .equals(dtoName));
-		call.getVariableData()
-		    .add(new JsonVariable(dtoName, newDto));
-	}
-	
+
 	/**
 	 * Returns the sent through state of the session storage
 	 *
@@ -590,5 +451,57 @@ public class AjaxCall<J extends AjaxCall<J>>
 	{
 		this.localStorage = localStorage;
 		return (J) this;
+	}
+	
+	
+	@JsonAnyGetter
+	public Map<String, Object> getUnknownFields()
+	{
+		return unknownFields;
+	}
+	
+	@JsonAnySetter
+	public void setOtherField(String name, Object value)
+	{
+		unknownFields.put(name, value);
+	}
+	
+	
+	public Map<String, Object> getAttributes()
+	{
+		if (attributes == null)
+		{
+			attributes = new HashMap<>();
+		}
+		return attributes;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public J setAttributes(Map<String, Object> attributes)
+	{
+		this.attributes = attributes;
+		return (J) this;
+	}
+	
+	public HeadersDTO getHeaders()
+	{
+		return headers;
+	}
+	
+	public AjaxCall<J> setHeaders(HeadersDTO headers)
+	{
+		this.headers = headers;
+		return this;
+	}
+	
+	public String getRoute()
+	{
+		return route;
+	}
+	
+	public AjaxCall<J> setRoute(String route)
+	{
+		this.route = route;
+		return this;
 	}
 }

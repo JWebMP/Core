@@ -16,27 +16,19 @@
  */
 package com.jwebmp.core.base;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.guicedee.guicedinjection.json.StringToBoolean;
-import com.guicedee.guicedinjection.json.StringToIntegerRelaxed;
-import com.jwebmp.core.base.html.attributes.GlobalAttributes;
-import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
-import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
-import com.jwebmp.core.base.html.interfaces.NoClassAttribute;
-import com.jwebmp.core.base.html.interfaces.NoIDTag;
-import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
-import com.jwebmp.core.base.interfaces.IComponentHTMLAttributeBase;
-import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.guicedee.guicedinjection.json.StaticStrings;
-import com.guicedee.logger.LogFactory;
+import com.fasterxml.jackson.annotation.*;
+import com.guicedee.guicedinjection.json.*;
+import com.guicedee.logger.*;
+import com.jwebmp.core.base.html.attributes.*;
+import com.jwebmp.core.base.html.interfaces.*;
+import com.jwebmp.core.base.html.interfaces.events.*;
+import com.jwebmp.core.base.interfaces.*;
+import com.jwebmp.core.base.servlets.enumarations.*;
+import jakarta.validation.constraints.*;
 
-import jakarta.validation.constraints.NotNull;
-
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-import java.util.logging.Level;
+import java.util.*;
+import java.util.Map.*;
+import java.util.logging.*;
 
 /**
  * Denotes a component that has a tag. By default these can add events, features, variables etc
@@ -139,14 +131,14 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 			{
 				if (isInvertColonRender())
 				{
-					sb.append(key.toLowerCase())
+					sb.append(key)
 					  .append(StaticStrings.STRING_EQUALS_SINGLE_QUOTES)
 					  .append(value)
 					  .append(StaticStrings.STRING_SINGLE_QUOTES_SPACE);
 				}
 				else
 				{
-					sb.append(key.toLowerCase())
+					sb.append(key)
 					  .append(StaticStrings.STRING_EQUALS_DOUBLE_QUOTES)
 					  .append(value)
 					  .append(StaticStrings.STRING_DOUBLE_QUOTES_SPACE);
@@ -154,7 +146,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 			}
 			else
 			{
-				sb.append(key.toLowerCase())
+				sb.append(key)
 				  .append(StaticStrings.STRING_SPACE);
 			}
 		}
@@ -634,7 +626,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 	@NotNull
 	public J cloneComponent()
 	{
-		ComponentHTMLAttributeBase<?,?,?,?> cloned = super.cloneComponent();
+		ComponentHTMLAttributeBase<?, ?, ?, ?> cloned = super.cloneComponent();
 		cloned.attributes = new TreeMap<>();
 		cloned.attributes.putAll(getAttributes());
 		//noinspection CastCanBeRemovedNarrowingVariableType

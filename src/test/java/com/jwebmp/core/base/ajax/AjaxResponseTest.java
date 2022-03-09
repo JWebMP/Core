@@ -42,13 +42,13 @@ public class AjaxResponseTest
 		ar.setSuccess(false);
 		ar.addReaction(new AjaxResponseReaction<>("Title", "Data", ReactionType.DialogDisplay, AjaxResponseType.Warning));
 
-		ar.addComponent(new DivSimple<>().setID("id"));
+		//ar.addComponent(new DivSimple<>().setID("id"));
 		ar.getLocalStorage()
 		  .put("local", "storage");
 		ar.getSessionStorage()
 		  .put("session", "storage");
 
-		ar.addDto("Dto", new AjaxResponse<>());
+	//	ar.addDto("Dto", new AjaxResponse<>());
 		//	ar.
 
 		System.out.println(ar);

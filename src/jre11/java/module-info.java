@@ -227,7 +227,9 @@ module com.jwebmp.core {
 	uses com.jwebmp.core.events.mousedown.IOnMouseDownService;
 	uses com.jwebmp.core.events.resizestart.IOnResizeStartService;
 	uses com.jwebmp.core.events.IEventConfigurator;
-
+	uses com.jwebmp.core.databind.IOnComponentHtmlRender;
+	uses com.jwebmp.core.databind.IOnComponentAdded;
+	
 	provides com.guicedee.guicedservlets.services.IGuiceSiteBinder with com.jwebmp.core.implementations.JWebMPSiteBinder;
 	provides com.guicedee.guicedinjection.interfaces.IGuiceDefaultBinder with com.jwebmp.core.services.JWebMPServicesBindings,
 			com.jwebmp.interception.JWebMPInterceptionBinder;

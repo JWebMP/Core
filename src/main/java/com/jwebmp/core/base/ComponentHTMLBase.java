@@ -16,30 +16,22 @@
  */
 package com.jwebmp.core.base;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.jwebmp.core.base.html.Comment;
-import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
-import com.jwebmp.core.base.html.interfaces.NoClosingTag;
-import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
-import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
-import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
-import com.jwebmp.core.base.interfaces.IComponentHTMLBase;
-import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
+import com.fasterxml.jackson.annotation.*;
 import com.guicedee.guicedinjection.json.StaticStrings;
-import com.jwebmp.core.utilities.TextUtilities;
-
-import jakarta.validation.constraints.NotNull;
+import com.jwebmp.core.base.html.*;
+import com.jwebmp.core.base.html.interfaces.*;
+import com.jwebmp.core.base.html.interfaces.events.*;
+import com.jwebmp.core.base.interfaces.*;
+import com.jwebmp.core.base.servlets.enumarations.*;
+import com.jwebmp.core.utilities.*;
+import jakarta.validation.constraints.*;
 
 /**
  * Denotes a component that has a tag. By default these can add events, features, variables etc
  *
- * @param <F>
- * 		The allowed feature JavaScripts
- * @param <E>
- * 		The allowed associated Events
- * @param <J>
- * 		Component output for cloning. Returned on CloneComponent
- *
+ * @param <F> The allowed feature JavaScripts
+ * @param <E> The allowed associated Events
+ * @param <J> Component output for cloning. Returned on CloneComponent
  * @author GedMarc
  * @since 23 Apr 2016
  */
@@ -48,7 +40,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		extends ComponentEventBase<F, E, J>
 		implements IComponentHTMLBase<J>
 {
-
+	
 	/**
 	 * The actual tag string of this component
 	 */
@@ -78,19 +70,23 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	 * Renders the text of this component before children
 	 */
 	private boolean renderTextBeforeChildren = true;
-
+	
+	/**
+	 * if children should be rendered
+	 */
+	private boolean renderTag = true;
+	
 	/**
 	 * Construct a new component that will render a tag
 	 *
-	 * @param componentType
-	 * 		The type of component
+	 * @param componentType The type of component
 	 */
 	public ComponentHTMLBase(ComponentTypes componentType)
 	{
 		super(componentType);
 		setTag(componentType.getComponentTag());
 	}
-
+	
 	/**
 	 * Returns a HTML Base interface of this component
 	 *
@@ -102,19 +98,17 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	{
 		return this;
 	}
-
+	
 	/**
 	 * Method for the attribute handling, Empty in the HTML base
 	 *
-	 * @param sb
-	 * 		The string builder to append attributes to
-	 *
+	 * @param sb The string builder to append attributes to
 	 * @return A complete string for the attribute
 	 */
 	@NotNull
 	@SuppressWarnings({"unused", "UnusedReturnValue"})
 	protected abstract StringBuilder renderAttributes(StringBuilder sb);
-
+	
 	/**
 	 * Gets the physical inline closing tag value
 	 *
@@ -125,14 +119,12 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	{
 		return inlineClosingTag;
 	}
-
+	
 	/**
 	 * Sets Whether or not to close this tag as /
 	 * <p>
 	 *
-	 * @param inlineClosingTag
-	 * 		Sets whether to close this tag and disable the usage of children for this tag
-	 *
+	 * @param inlineClosingTag Sets whether to close this tag and disable the usage of children for this tag
 	 * @return Always this object
 	 */
 	@NotNull
@@ -142,13 +134,11 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		this.inlineClosingTag = inlineClosingTag;
 		return (J) this;
 	}
-
+	
 	/**
 	 * The actual logic of the before tag rendering
 	 *
-	 * @param tempStringBuilder
-	 * 		The StringBuilder to be manipulated
-	 *
+	 * @param tempStringBuilder The StringBuilder to be manipulated
 	 * @return The render before with the given tag
 	 */
 	@SuppressWarnings({"unused", "UnusedReturnValue"})
@@ -162,13 +152,11 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		}
 		return tempStringBuilder;
 	}
-
+	
 	/**
 	 * The actual logic of the render text before children
 	 *
-	 * @param tempStringBuilder
-	 * 		The current string builder
-	 *
+	 * @param tempStringBuilder The current string builder
 	 * @return The modified StringBuilder with the text rendered before the children
 	 */
 	@SuppressWarnings("UnusedReturnValue")
@@ -182,7 +170,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		}
 		return tempStringBuilder;
 	}
-
+	
 	/**
 	 * Renders the text of this component before children
 	 *
@@ -192,13 +180,11 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	{
 		return renderTextBeforeChildren;
 	}
-
+	
 	/**
 	 * Renders the text of this component before children or after. Default true
 	 *
-	 * @param renderTextBeforeChildren
-	 * 		If text should render before or after children are drawn
-	 *
+	 * @param renderTextBeforeChildren If text should render before or after children are drawn
 	 * @return Always this object
 	 */
 	@SuppressWarnings("unchecked")
@@ -207,13 +193,11 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		this.renderTextBeforeChildren = renderTextBeforeChildren;
 		return (J) this;
 	}
-
+	
 	/**
 	 * The actual logic of the render text after children
 	 *
-	 * @param tempStringBuilder
-	 * 		The current StringBuilder
-	 *
+	 * @param tempStringBuilder The current StringBuilder
 	 * @return The StringBuilder with the raw text appended
 	 */
 	@SuppressWarnings("UnusedReturnValue")
@@ -227,13 +211,11 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		}
 		return tempStringBuilder;
 	}
-
+	
 	/**
 	 * The actual logic of the render before children
 	 *
-	 * @param tempStringBuilder
-	 * 		The current string builder
-	 *
+	 * @param tempStringBuilder The current string builder
 	 * @return The modified string builder with everything rendered before the children
 	 */
 	@NotNull
@@ -246,18 +228,18 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		}
 		return tempStringBuilder;
 	}
-
+	
 	/**
 	 * Renders the string before the children
 	 *
 	 * @return Custom HTML String to be inserted directly before this components tag
 	 */
-
+	
 	protected StringBuilder renderBeforeChildren()
 	{
 		return null;
 	}
-
+	
 	/**
 	 * Builds up the HTML for this component and all it's children - Does not perform Pre Configure or Pre Render Use GetHTML() to
 	 * perform a
@@ -278,20 +260,18 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	 * (5)postRenderHTML
 	 * <p>
 	 *
-	 * @param tabCount
-	 * 		Indentation depth
-	 * 		<p>
-	 *
+	 * @param tabCount Indentation depth
+	 *                 <p>
 	 * @return The HTML
 	 */
 	@NotNull
 	protected StringBuilder renderHTML(int tabCount)
 	{
-		if (this instanceof Comment && isTiny())
+		if ((this instanceof Comment && isTiny()) || !renderTag)
 		{
 			return new StringBuilder();
 		}
-
+		
 		setCurrentTabIndents(tabCount);
 		StringBuilder tempStringBuilder = new StringBuilder();
 		renderBeforeTag(tempStringBuilder);
@@ -300,7 +280,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		{
 			return new StringBuilder(tempStringBuilder);
 		}
-
+		
 		renderTextBeforeChildren(tempStringBuilder);
 		renderBeforeChildren(tempStringBuilder);
 		renderChildren(tempStringBuilder);
@@ -310,13 +290,11 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		renderAfterTag(tempStringBuilder);
 		return tempStringBuilder;
 	}
-
+	
 	/**
 	 * The actual logic of the children rendering
 	 *
-	 * @param tempStringBuilder
-	 * 		The current string builder
-	 *
+	 * @param tempStringBuilder The current string builder
 	 * @return The newly modified string builder
 	 */
 	@NotNull
@@ -329,7 +307,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		}
 		return tempStringBuilder;
 	}
-
+	
 	/**
 	 * Returns this tag
 	 * <p>
@@ -342,7 +320,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	{
 		return tag;
 	}
-
+	
 	/**
 	 * Whether or not this component should render a closing tag
 	 *
@@ -358,7 +336,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		}
 		return closingTag;
 	}
-
+	
 	/**
 	 * If a new line for the closing tag is required.
 	 *
@@ -372,16 +350,14 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		{
 			return false;
 		}
-
+		
 		return !(this instanceof NoNewLineBeforeClosingTag);
 	}
-
+	
 	/**
 	 * If a new line for the closing tag is required.
 	 *
-	 * @param newLineForClosingTag
-	 * 		A new line is required for this objects closing tag
-	 *
+	 * @param newLineForClosingTag A new line is required for this objects closing tag
 	 * @return Always this object
 	 */
 	@Override
@@ -392,7 +368,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		this.newLineForClosingTag = newLineForClosingTag;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Sets if there must be a new line before the raw text starts
 	 *
@@ -403,15 +379,13 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	public Boolean isNewLineForRawText()
 	{
 		return (this instanceof NoNewLineForRawText) || newLineForRawText;
-
+		
 	}
-
+	
 	/**
 	 * Whether or not this component should render a closing tag
 	 *
-	 * @param noCloseTag
-	 * 		Whether or not to render the closing tag
-	 *
+	 * @param noCloseTag Whether or not to render the closing tag
 	 * @return Always this object
 	 */
 	@Override
@@ -422,7 +396,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		closingTag = noCloseTag;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Renders as an inline tiny html tag
 	 *
@@ -434,14 +408,12 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	{
 		return setTiny(true).toString(0);
 	}
-
+	
 	/**
 	 * Overrides this tag name
 	 * <p>
 	 *
-	 * @param tag
-	 * 		The tag to use instead of the default
-	 *
+	 * @param tag The tag to use instead of the default
 	 * @return This Class
 	 */
 	@Override
@@ -452,14 +424,12 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		this.tag = tag;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Overrides this tag name
 	 * <p>
 	 *
-	 * @param tag
-	 * 		The tag to use instead of the default
-	 *
+	 * @param tag The tag to use instead of the default
 	 * @return This Class
 	 */
 	@Override
@@ -470,15 +440,13 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		this.tag = tag.getComponentTag();
 		return (J) this;
 	}
-
-
+	
+	
 	/**
 	 * Returns the HTML for the given object
 	 * <p>
 	 *
-	 * @param outputHtml
-	 * 		Dummy holder for specifying HTML output
-	 *
+	 * @param outputHtml Dummy holder for specifying HTML output
 	 * @return The class and the associated ID and children count
 	 */
 	@Override
@@ -487,13 +455,11 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	{
 		return toString(0);
 	}
-
+	
 	/**
 	 * Returns this components HTML after configuration and pre-rendering
 	 *
-	 * @param tabCount
-	 * 		The number of tabs to indent by
-	 *
+	 * @param tabCount The number of tabs to indent by
 	 * @return The sting with the given tab counts
 	 */
 	@Override
@@ -506,25 +472,23 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		}
 		return String.valueOf(renderHTML(tabCount));
 	}
-
+	
 	/**
 	 * Placeholder for children rendering.
 	 * The component tag base object will never render any children, it only renders this tag
 	 *
 	 * @return Something new to render at this phase in the generation
 	 */
-
+	
 	protected StringBuilder renderChildren()
 	{
 		return null;
 	}
-
+	
 	/**
 	 * The actual logic and the rendering after children
 	 *
-	 * @param tempStringBuilder
-	 * 		The current temp String Builder
-	 *
+	 * @param tempStringBuilder The current temp String Builder
 	 * @return The modified or final temp string builder
 	 */
 	@NotNull
@@ -537,7 +501,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		}
 		return tempStringBuilder;
 	}
-
+	
 	/**
 	 * Gets the number of tabs to apply for this component currently
 	 *
@@ -547,13 +511,11 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	{
 		return currentTabIndents;
 	}
-
+	
 	/**
 	 * Sets the number of tab indents for this component
 	 *
-	 * @param currentTabIndents
-	 * 		the tab indentation count
-	 *
+	 * @param currentTabIndents the tab indentation count
 	 * @return Always this object
 	 */
 	@Override
@@ -564,13 +526,11 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		this.currentTabIndents = currentTabIndents;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Sets if this component must place a new line before the raw text
 	 *
-	 * @param newLineForRawText
-	 * 		If there should be a new line for raw text
-	 *
+	 * @param newLineForRawText If there should be a new line for raw text
 	 * @return Always this object
 	 */
 	@Override
@@ -581,24 +541,22 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		this.newLineForRawText = newLineForRawText;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Renders the given string after the children
 	 *
 	 * @return Custom HTML String to be inserted directly before this components tag
 	 */
-
+	
 	protected StringBuilder renderAfterChildren()
 	{
 		return null;
 	}
-
+	
 	/**
 	 * The actual rendering of the after tag
 	 *
-	 * @param tempStringBuilder
-	 * 		The current temp string builder
-	 *
+	 * @param tempStringBuilder The current temp string builder
 	 * @return The modified string for the tag
 	 */
 	@NotNull
@@ -611,7 +569,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		}
 		return tempStringBuilder;
 	}
-
+	
 	/**
 	 * Generates the opening tag with indentation.
 	 * <p>
@@ -639,7 +597,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		sb.append(StaticStrings.STRING_SHARP_BRACE_CLOSED);
 		return sb;
 	}
-
+	
 	/**
 	 * Generates the opening tag with indentation
 	 * <p>
@@ -655,19 +613,19 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		{
 			return sb;
 		}
-
+		
 		if (!isTiny() && isNewLineForClosingTag())
 		{
 			sb.append(getNewLine());
 			sb.append(getCurrentTabIndentString());
 		}
-
+		
 		sb.append(StaticStrings.STRING_SHARP_BRACE_SLASH_OPEN);
 		sb.append(getTag());
 		sb.append(StaticStrings.STRING_SHARP_BRACE_CLOSED);
 		return sb;
 	}
-
+	
 	/**
 	 * Returns the current tab indentation for this object
 	 * <p>
@@ -679,39 +637,36 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	{
 		return TextUtilities.getTabString(getCurrentTabIndents());
 	}
-
+	
 	/**
 	 * Renders String content before this tag is rendered
 	 * <p>
 	 *
 	 * @return Custom HTML String to be inserted directly before this components tag
 	 */
-
+	
 	protected StringBuilder renderBeforeTag()
 	{
 		return null;
 	}
-
+	
 	/**
 	 * Renders String content after this tag is rendered
 	 * <p>
 	 *
 	 * @return Custom HTML String to be inserted directly after this components tag
 	 */
-
+	
 	protected StringBuilder renderAfterTag()
 	{
 		return null;
 	}
-
+	
 	/**
 	 * Only returns in-line text if the tag is not closed in line
 	 *
-	 * @param sb
-	 * 		The current string builder
-	 *
+	 * @param sb The current string builder
 	 * @return The input text if the tag is closing in line, or the actual inline text if the tag does stuff
-	 *
 	 * @see ComponentBase#getText(StringBuilder)
 	 */
 	@Override
@@ -724,7 +679,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		}
 		return super.getText(sb);
 	}
-
+	
 	/**
 	 * Whether or not to close this tag as /. Also sets whether to display the closing tag as separate
 	 * <p>
@@ -740,7 +695,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		}
 		return inlineClosingTag;
 	}
-
+	
 	/**
 	 * Run all Assign Function To Components and Pre Configures for all Events
 	 */
@@ -753,7 +708,29 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		}
 		super.preConfigure();
 	}
-
+	
+	/**
+	 * if the tag should render at all
+	 *
+	 * @return
+	 */
+	public boolean isRenderTag()
+	{
+		return renderTag;
+	}
+	
+	/**
+	 * If the tag should render at all
+	 *
+	 * @param renderTag
+	 * @return
+	 */
+	public J setRenderTag(boolean renderTag)
+	{
+		this.renderTag = renderTag;
+		return (J) this;
+	}
+	
 	/**
 	 * @see ComponentEventBase#hashCode()
 	 */
@@ -762,7 +739,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	{
 		return super.hashCode();
 	}
-
+	
 	/**
 	 * @see ComponentEventBase#equals(Object)
 	 */

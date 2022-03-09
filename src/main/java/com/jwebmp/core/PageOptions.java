@@ -308,7 +308,7 @@ public class PageOptions<J extends PageOptions<J>>
 		}
 		else if (httpEquiv != null)
 		{
-			httpEquivMeta = new Meta(Meta.MetadataFields.http_equiv, httpEquiv.getValue());
+			httpEquivMeta = new Meta(Meta.MetadataFields.XUACompatible, httpEquiv.getValue());
 		}
 		else
 		{

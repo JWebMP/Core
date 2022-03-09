@@ -45,6 +45,10 @@ public enum ReactionType
 	 */
 	RefreshPage,
 	/**
+	 * Signals an event listener on a data component to trigger a data refresh
+	 */
+	SignalDataTrigger,
+	/**
 	 * Send the user back home
 	 */
 	RedirectHome,

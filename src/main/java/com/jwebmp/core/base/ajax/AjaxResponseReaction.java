@@ -32,11 +32,6 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 		extends JavaScriptPart<J>
 
 {
-
-	/**
-	 * Field serialVersionUID
-	 */
-
 	/**
 	 * The title of the reaction
 	 */

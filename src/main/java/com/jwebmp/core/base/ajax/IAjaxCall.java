@@ -74,35 +74,13 @@ public interface IAjaxCall<J extends AjaxCall<J>> extends IJsonRepresentation<J>
 	J setComponentId(String componentId);
 
 	/**
-	 * Returns this calls event type from
-	 *
-	 * @return
-	 */
-	EventTypes getEventTypeFrom();
-
-	/**
 	 * Sets the date time of this call
 	 *
 	 * @param datetime
 	 */
 	
 	J setDatetime(Date datetime);
-
-	/**
-	 * Returns this calls value
-	 *
-	 * @return
-	 */
-	AjaxEventValue<?> getValue();
-
-	/**
-	 * The Event ID
-	 *
-	 * @param eventId
-	 */
 	
-	J setEventId(String eventId);
-
 	/**
 	 * Returns this calls component
 	 *
@@ -117,57 +95,7 @@ public interface IAjaxCall<J extends AjaxCall<J>> extends IJsonRepresentation<J>
 	 */
 	
 	J setEventType(EventTypes eventType);
-
-	/**
-	 * Returns JSON strings of inbound variables
-	 *
-	 * @return
-	 */
-	@NotNull
-	Set<JsonVariable> getVariableData();
-
-	/**
-	 * Sets this calls event type from
-	 *
-	 * @param eventTypeFrom
-	 */
 	
-	J setEventTypeFrom(EventTypes eventTypeFrom);
-
-	/**
-	 * Returns the variable with the given name in the array or null
-	 *
-	 * @param name
-	 * 		The name of the variable as designated
-	 *
-	 * @return
-	 */
-	JsonVariable getVariable(String name);
-
-	/**
-	 * The event ID
-	 *
-	 * @return
-	 */
-	String getEventId();
-
-	/**
-	 * Sets this calls value
-	 *
-	 * @param value
-	 */
-	
-	J setValue(AjaxEventValue<?> value);
-
-	/**
-	 * Sets the array list of bound objects?
-	 *
-	 * @param variableData
-	 */
-	
-	@NotNull
-	J setVariableData(Set<JsonVariable> variableData);
-
 	/**
 	 * Returns a list of parameters
 	 *

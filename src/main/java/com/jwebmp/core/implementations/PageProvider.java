@@ -27,12 +27,12 @@ public class PageProvider
 		try
 		{
 			AjaxCall<?> call = GuiceContext.get(AjaxCall.class);
-			if (call.getVariable("jw.pageClass") != null && !Strings.isNullOrEmpty(call.getVariable("jw.pageClass")
-			                                                                           .getVariableText()))
+			if (call.getHeaders()
+			        .getAppClassName() != null && !Strings.isNullOrEmpty(call.getHeaders()
+			                                                                 .getAppClassName()))
 			{
-				String className = call.getVariable("jw.pageClass")
-				                       .getVariableText()
-				                       .replaceAll("\"", "");
+				String className = call.getHeaders()
+				                       .getAppClassName();
 				Class pageClass = GuiceContext.instance()
 				                              .getScanResult()
 				                              .loadClass(className, true);

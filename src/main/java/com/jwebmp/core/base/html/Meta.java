@@ -16,18 +16,16 @@
  */
 package com.jwebmp.core.base.html;
 
-import com.guicedee.logger.LogFactory;
-import com.jwebmp.core.base.ComponentHierarchyBase;
-import com.jwebmp.core.base.html.attributes.MetaAttributes;
+import com.guicedee.logger.*;
+import com.jwebmp.core.base.*;
+import com.jwebmp.core.base.html.attributes.*;
 import com.jwebmp.core.base.html.interfaces.*;
-import com.jwebmp.core.base.html.interfaces.children.HeadChildren;
-import com.jwebmp.core.base.html.interfaces.children.NoChildren;
-import com.jwebmp.core.base.html.interfaces.events.NoEvents;
-import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import jakarta.validation.constraints.NotNull;
+import com.jwebmp.core.base.html.interfaces.children.*;
+import com.jwebmp.core.base.html.interfaces.events.*;
+import com.jwebmp.core.base.servlets.enumarations.*;
+import jakarta.validation.constraints.*;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
 
 /**
  * The Meta Component.
@@ -61,7 +59,7 @@ public class Meta
 {
 	private static final Logger log = LogFactory.getInstance()
 	                                            .getLogger("<META>");
-
+	
 	/**
 	 * Constructs an empty Meta tag
 	 */
@@ -69,7 +67,7 @@ public class Meta
 	{
 		super(ComponentTypes.Metadata);
 	}
-
+	
 	/**
 	 * Creates a Meta tag of HTTP Equiv with the custom name
 	 *
@@ -80,14 +78,12 @@ public class Meta
 		super(ComponentTypes.Metadata);
 		addAttribute(MetaAttributes.Http_Equiv, httpEquivName);
 	}
-
+	
 	/**
 	 * Constructs a Meta tag
 	 *
-	 * @param field
-	 * 		The MetaData tag to generate
-	 * @param value
-	 * 		doh
+	 * @param field The MetaData tag to generate
+	 * @param value doh
 	 */
 	public Meta(MetadataFields field, String value)
 	{
@@ -95,7 +91,13 @@ public class Meta
 		//noinspection EnhancedSwitchMigration
 		switch (field)
 		{
+			case Charset:
+			{
+				addAttribute(MetaAttributes.Charset, value);
+				break;
+			}
 			case http_equiv:
+			case XUACompatible:
 			{
 				addAttribute(MetaAttributes.Http_Equiv, MetadataFields.http_equiv.getDataNameField());
 				addAttribute(MetaAttributes.Http_Equiv, value);
@@ -103,21 +105,21 @@ public class Meta
 			}
 			case Author:
 			{
-
+				
 				addAttribute(MetaAttributes.Content, value);
 				addAttribute(MetaAttributes.Name, MetadataFields.Author.getDataNameField());
 				break;
 			}
 			case Description:
 			{
-
+				
 				addAttribute(MetaAttributes.Content, value);
 				addAttribute(MetaAttributes.Name, MetadataFields.Description.getDataNameField());
 				break;
 			}
 			case ViewPort:
 			{
-
+				
 				addAttribute(MetaAttributes.Content, value);
 				addAttribute(MetaAttributes.Name, MetadataFields.ViewPort.getDataNameField());
 				break;
@@ -137,20 +139,23 @@ public class Meta
 		{
 			addAttribute(MetaAttributes.Http_Equiv, field.getDataNameField());
 		}
-		else
+		else if (field != MetadataFields.Charset)
 		{
 			addAttribute(MetaAttributes.Name, field.getDataNameField());
 		}
-		addAttribute(MetaAttributes.Content, value);
+		if (field != MetadataFields.Charset)
+		{
+			addAttribute(MetaAttributes.Content, value);
+		}
 		setTiny(true);
 	}
-
+	
 	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
 	}
-
+	
 	@Override
 	public boolean equals(Object o)
 	{
@@ -163,7 +168,7 @@ public class Meta
 		}
 		return false;
 	}
-
+	
 	/**
 	 * Differences Between HTML and XHTML
 	 * <p>
@@ -188,24 +193,26 @@ public class Meta
 			Meta.log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
 		}
 	}
-
+	
 	/**
 	 * A set list of fields available to the Meta tag
 	 */
 	public enum MetadataFields
 	{
-
+		
 		Application_Name("application-name"),
 		Generator("generator"),
+		Charset("charset"),
 		Author("author"),
 		Keywords("keywords"),
 		Description("description"),
 		ViewPort("viewport"),
-		http_equiv("X-UA-Compatible"),
+		http_equiv("http-equiv"),
+		XUACompatible("X-UA-Compatible"),
 		Name("name");
-
+		
 		private String dataNameField;
-
+		
 		/**
 		 * Doh
 		 *
@@ -215,7 +222,7 @@ public class Meta
 		{
 			this.dataNameField = dataNameField;
 		}
-
+		
 		/**
 		 * Returns this tags data name field
 		 *
@@ -225,35 +232,36 @@ public class Meta
 		{
 			return dataNameField;
 		}
-
+		
 		/**
 		 * Sets this fields dataset name Useful.
 		 *
-		 * @param dataNameField
-		 * 		The name to set the field
+		 * @param dataNameField The name to set the field
 		 */
 		public void setDataNameField(String dataNameField)
 		{
 			this.dataNameField = dataNameField;
 		}
 	}
-
+	
 	@Override
 	public @NotNull Integer getSortOrder()
 	{
-		if(getAttributes().containsKey("charset"))
+		if (getAttributes().containsKey("charset"))
+		{
 			return 0;
-
-		if(getAttributes().containsValue("viewport"))
+		}
+		
+		if (getAttributes().containsValue("viewport"))
 		{
 			return 3;
 		}
-
-		if(getAttributes().containsValue("Content-Security-Policy"))
+		
+		if (getAttributes().containsValue("Content-Security-Policy"))
 		{
 			return Integer.MAX_VALUE - 2;
 		}
-
+		
 		return super.getSortOrder();
 	}
 }
