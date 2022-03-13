@@ -21,7 +21,6 @@ import com.jwebmp.BaseTestClass;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.client.Browsers;
 import com.jwebmp.core.base.html.attributes.BaseAttributes;
-import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import com.jwebmp.testing.IBaseTest;
 import org.junit.jupiter.api.*;
 
@@ -69,7 +68,6 @@ public class BaseTest
 	@Test
 	public void testBaseOutputTiny()
 	{
-		JQueryPageConfigurator.setRequired(false);
 		Page<?> page = getInstance();
 		Base instance = new Base();
 		page.getOptions()
@@ -86,7 +84,6 @@ public class BaseTest
 	@Test
 	public void testBaseOutputOldBrowsers()
 	{
-		JQueryPageConfigurator.setRequired(false);
 		Page<?> page = getInstance();
 		Base instance = new Base();
 		page.getOptions()
@@ -106,7 +103,6 @@ public class BaseTest
 	@Test
 	public void testBaseOutputOldBrowsersTiny()
 	{
-		JQueryPageConfigurator.setRequired(false);
 		Page<?> page = getInstance();
 		Base instance = new Base();
 		page.getOptions()
@@ -126,7 +122,6 @@ public class BaseTest
 	@Test
 	public void testBaseOutput()
 	{
-		JQueryPageConfigurator.setRequired(false);
 		Page<?> page = getInstance();
 		Base instance = new Base();
 		page.getOptions()
@@ -142,7 +137,6 @@ public class BaseTest
 	@Test
 	public void testBaseTiny()
 	{
-		JQueryPageConfigurator.setRequired(false);
 		Page<?> page = getInstance();
 		Base instance = new Base();
 		page.getOptions()
@@ -162,7 +156,6 @@ public class BaseTest
 	@Test
 	public void testBaseTinyPage()
 	{
-		JQueryPageConfigurator.setRequired(false);
 		Page<?> page = getInstance();
 		Base instance = new Base();
 		page.getOptions()

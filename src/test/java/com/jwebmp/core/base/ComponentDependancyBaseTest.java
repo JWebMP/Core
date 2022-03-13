@@ -18,7 +18,6 @@ package com.jwebmp.core.base;
 
 import com.jwebmp.BaseTestClass;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.jwebmp.core.plugins.jquery.JQueryReferencePool;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -48,7 +47,6 @@ public class ComponentDependancyBaseTest
 				cd.addCssReference(null);
 			}
 		});
-	cd.addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
 		System.out.println(cd);
 /*		Assertions.assertEquals(
 				"{\n" + "  \"id\" : \"ID\",\n" + "  \"componentType\" : \"abbreviation\",\n" + "  \"tiny\" : false,\n" + "  " + "\"configured\"" + " : true,\n" + "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  " + "\"javascriptReferences\" : [ {\n" + "    \"cordovaRequired\" : false,\n" + "    \"name\" : \"AjaxEnabler\",\n" + "    \"version\" : 1.0,\n" + "    " + "\"reference\" : \"javascript/jwebswing/ajax-enabler.js\"\n" + "  } ],\n" + "  \"componentClass\" : \"com.jwebmp.core.base.ComponentDependancyBase\"\n" + "}",
@@ -60,7 +58,6 @@ public class ComponentDependancyBaseTest
 	{
 		ComponentDependencyBase shell = new ComponentDependencyBase(ComponentTypes.Abbreviation);
 		shell.setID("shell");
-		shell.addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
 		ComponentBase shell2 = shell.cloneComponent();
 		shell2.setID("shell2");
 		System.out.println(shell);

@@ -97,7 +97,9 @@ public class AjaxCall<J extends AjaxCall<J>>
 	 */
 	@JsonAlias("hashbang")
 	private String hashBang;
-	
+	/**
+	 * The given path route for the application
+	 */
 	private String route;
 	/**
 	 * If this call originates through a web socket (so there is no request or session scope),
@@ -114,7 +116,6 @@ public class AjaxCall<J extends AjaxCall<J>>
 	 * If this is a page or a supporting servlet call
 	 */
 	private boolean pageCall;
-	
 	
 	private Map<String, Object> unknownFields = new HashMap<>();
 	

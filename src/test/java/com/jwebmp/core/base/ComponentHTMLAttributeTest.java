@@ -22,7 +22,6 @@ import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.Div;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.events.click.ClickAdapter;
-import com.jwebmp.core.plugins.jquery.JQueryReferencePool;
 import org.junit.jupiter.api.Test;
 
 /**

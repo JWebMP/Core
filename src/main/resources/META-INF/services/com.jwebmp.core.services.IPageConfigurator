@@ -2,4 +2,3 @@ com.jwebmp.core.base.page.ScriptsDynamicPageConfigurator
 com.jwebmp.core.base.page.CSSLinksInsertPageConfigurator
 com.jwebmp.core.base.page.ScriptsInsertPageConfigurator
 com.jwebmp.core.base.page.TopShelfScriptsInsertPageConfigurator
-com.jwebmp.core.plugins.jquery.JQueryPageConfigurator

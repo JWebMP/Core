@@ -19,7 +19,6 @@ package com.jwebmp.core.base.html;
 import com.jwebmp.BaseTestClass;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.generics.WebReference;
-import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -59,8 +58,6 @@ public class BodyTest
 	{
 		p = getInstance();
 		resetBody();
-		JQueryPageConfigurator.setRequired(true);
-		JQueryPageConfigurator.setEnabled(true);
 		b.add(new Comment("meh"));
 		WebReference.setIsLocal(true);
 		System.out.println(p.toString(true));
@@ -81,8 +78,6 @@ public class BodyTest
 	public void testSetGenerateJQueryRemote()
 	{
 		resetBody();
-		JQueryPageConfigurator.setRequired(true);
-		JQueryPageConfigurator.setEnabled(true);
 		b.add(new Comment("meh"));
 		WebReference.setIsLocal(false);
 		System.out.println(p.toString(true));

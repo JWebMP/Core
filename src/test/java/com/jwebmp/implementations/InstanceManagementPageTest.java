@@ -2,7 +2,6 @@ package com.jwebmp.implementations;
 
 import com.guicedee.guicedinjection.GuiceContext;
 import com.jwebmp.BaseTestClass;
-import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import com.jwebmp.testing.BaseTest;
 import com.jwebmp.testing.services.ITestInstanceDestroyService;
 import com.jwebmp.testing.services.ITestInstanceInitializerService;
@@ -21,8 +20,6 @@ public class InstanceManagementPageTest<J extends InstanceManagementPageTest<J>>
 	@Override
 	public void destroy(BaseTest testInstance)
 	{
-		JQueryPageConfigurator.setEnabled(false);
-		JQueryPageConfigurator.setRequired(false);
 		if (BaseTestClass.class.isAssignableFrom(testInstance.getClass()))
 		{
 			BaseTestClass.class.cast(testInstance)
@@ -35,8 +32,6 @@ public class InstanceManagementPageTest<J extends InstanceManagementPageTest<J>>
 	@Override
 	public void initialize(BaseTest testInstance)
 	{
-		JQueryPageConfigurator.setEnabled(false);
-		JQueryPageConfigurator.setRequired(false);
 		GuiceContext.inject();
 	}
 

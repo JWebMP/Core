@@ -28,7 +28,6 @@ import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.events.IEventConfigurator;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
@@ -275,16 +274,6 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	public boolean equals(Object obj)
 	{
 		return super.equals(obj);
-	}
-
-	/**
-	 * Runs the assign function to components then executes the parents configuration
-	 */
-	@Override
-	public void preConfigure()
-	{
-		JQueryPageConfigurator.setRequired(true);
-		super.preConfigure();
 	}
 
 	/**

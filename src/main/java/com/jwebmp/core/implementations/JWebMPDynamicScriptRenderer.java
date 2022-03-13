@@ -8,12 +8,9 @@ import com.jwebmp.core.Page;
 import com.jwebmp.core.SessionHelper;
 import com.jwebmp.core.base.html.Script;
 import com.jwebmp.core.base.servlets.JWScriptServlet;
-import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import com.jwebmp.core.services.IDynamicRenderingServlet;
 import com.guicedee.guicedinjection.json.StaticStrings;
 import jakarta.servlet.http.HttpServletRequest;
-
-import java.time.LocalDateTime;
 
 import static com.guicedee.guicedinjection.GuiceContext.*;
 
@@ -144,6 +141,6 @@ public class JWebMPDynamicScriptRenderer
 	@Override
 	public boolean enabled()
 	{
-		return JQueryPageConfigurator.isRequired() && JQueryPageConfigurator.isEnabled();
+		return false;
 	}
 }

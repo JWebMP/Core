@@ -24,7 +24,6 @@ import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.Div;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.events.click.ClickAdapter;
-import com.jwebmp.core.plugins.jquery.JQueryReferencePool;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -129,7 +128,6 @@ public class ComponentEventBaseTest
 	{
 		ComponentEventBase shell = new ComponentEventBase(ComponentTypes.Abbreviation);
 		shell.setID("shell");
-		shell.addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
 		Event e;
 		Div d;
 		shell.addEvent(e = new ClickAdapter(d = new Div())
@@ -156,7 +154,6 @@ public class ComponentEventBaseTest
 	{
 		ComponentEventBase shell = new ComponentEventBase(ComponentTypes.Abbreviation);
 		shell.setID("shell");
-		shell.addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
 		Event e;
 		Div d;
 		shell.addEvent(e = new ClickAdapter(d = new Div())
