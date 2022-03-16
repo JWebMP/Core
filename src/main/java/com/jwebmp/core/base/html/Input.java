@@ -276,6 +276,11 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
 		return (J) this;
 	}
 
+	public String getValue()
+	{
+		return getAttribute("value");
+	}
+	
 	/**
 	 * Sets the raw pattern for this input object if required
 	 *
