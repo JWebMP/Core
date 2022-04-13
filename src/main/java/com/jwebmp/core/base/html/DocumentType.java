@@ -94,7 +94,13 @@ public class DocumentType<J extends DocumentType<J>>
 	{
 		return new StringBuilder();
 	}
-
+	
+	@Override
+	protected StringBuilder renderOptions(StringBuilder sb)
+	{
+		return sb;
+	}
+	
 	/**
 	 * Renders the DTD Clause
 	 *

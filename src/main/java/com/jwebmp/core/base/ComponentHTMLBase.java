@@ -109,6 +109,8 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	@SuppressWarnings({"unused", "UnusedReturnValue"})
 	protected abstract StringBuilder renderAttributes(StringBuilder sb);
 	
+	protected abstract StringBuilder renderOptions(StringBuilder sb);
+	
 	/**
 	 * Gets the physical inline closing tag value
 	 *
@@ -590,6 +592,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		sb.append(StaticStrings.STRING_SHARP_BRACE_OPEN);
 		sb.append(getTag());
 		renderAttributes(sb);
+		renderOptions(sb);
 		if (isInlineClosingTag())
 		{
 			sb.append(StaticStrings.STRING_FORWARD_SLASH);

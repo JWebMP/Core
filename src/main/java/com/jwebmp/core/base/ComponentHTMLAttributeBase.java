@@ -44,7 +44,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 		F extends GlobalFeatures,
 		E extends GlobalEvents,
 		J extends ComponentHTMLAttributeBase<A, F, E, J>>
-		extends ComponentHTMLBase<F, E, J>
+		extends ComponentHTMLOptionsBase<F, E, J>
 		implements IComponentHTMLAttributeBase<A, J>
 {
 	/**
@@ -154,6 +154,8 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 		{
 			sb.deleteCharAt(sb.lastIndexOf(StaticStrings.STRING_SPACE));
 		}
+		sb = new StringBuilder(sb.toString()
+		                         .toLowerCase());
 		return sb;
 	}
 	
