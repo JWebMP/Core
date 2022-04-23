@@ -41,7 +41,7 @@ import java.util.logging.*;
 public class ComponentHTMLOptionsBase<
 		F extends GlobalFeatures,
 		E extends GlobalEvents,
-		J extends ComponentHTMLOptionsBase< F, E, J>>
+		J extends ComponentHTMLOptionsBase<F, E, J>>
 		extends ComponentHTMLBase<F, E, J>
 		implements IComponentHTMLOptionsBase<J>
 {
@@ -56,7 +56,7 @@ public class ComponentHTMLOptionsBase<
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Map<String, String> options;
-
+	
 	/**
 	 * Construct a new component that will render a tag
 	 *
@@ -187,7 +187,7 @@ public class ComponentHTMLOptionsBase<
 		}
 		return new StringToBoolean().convert(s);
 	}
-
+	
 	/**
 	 * Removes an option
 	 *
@@ -217,7 +217,13 @@ public class ComponentHTMLOptionsBase<
 	public J addOption(String attribute, String value)
 	{
 		getOption().put(attribute, value);
-		return (J)this;
+		return (J) this;
+	}
+	
+	public J addOption(String attribute, Object value)
+	{
+		getOption().put(attribute, value.toString());
+		return (J) this;
 	}
 	
 	/**

@@ -3,17 +3,15 @@ module com.jwebmp.core {
     requires transitive com.guicedee.logmaster;
     requires transitive com.guicedee.guicedinjection;
     requires transitive com.guicedee.guicedservlets;
-
+    requires transitive jakarta.validation;
+    requires transitive jakarta.servlet;
+    requires transitive com.google.guice.extensions.servlet;
+    
     requires net.sf.uadetector.core;
     requires net.sf.uadetector.resources;
 
-    requires jakarta.validation;
-
     requires aopalliance;
 
-    requires transitive jakarta.servlet;
-
-    requires transitive com.google.guice.extensions.servlet;
     requires com.google.guice;
 
     requires com.fasterxml.jackson.databind;

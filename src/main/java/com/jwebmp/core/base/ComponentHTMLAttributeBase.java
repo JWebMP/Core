@@ -179,18 +179,6 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 		super.preConfigure();
 	}
 	
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-	
-	@Override
-	public boolean equals(Object o)
-	{
-		return super.equals(o);
-	}
-	
 	/**
 	 * Returns if this component should render for the ID attribute
 	 * <p>
@@ -251,7 +239,35 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 		{
 			getAttributes().put(attribute.toString(), getAttributes().get(attribute.toString()) + StaticStrings.STRING_EMPTY + value);
 		}
-		getAttributes().put(attribute.toString(), value);
+		else
+		{
+			getAttributes().put(attribute.toString(), value);
+		}
+		return (J) this;
+	}
+	
+	
+	/**
+	 * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
+	 * <p>
+	 *
+	 * @param attribute The GlobalAttribute to set the attribute to
+	 * @param value     The value of the attribute
+	 * @return This object
+	 */
+	@Override
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public final J addAttribute(@NotNull GlobalAttributes attribute, @NotNull Object value)
+	{
+		if (attribute == GlobalAttributes.Style)
+		{
+			getAttributes().put(attribute.toString(), getAttributes().get(attribute.toString()) + StaticStrings.STRING_EMPTY + value);
+		}
+		else
+		{
+			getAttributes().put(attribute.toString(), value + "");
+		}
 		
 		return (J) this;
 	}

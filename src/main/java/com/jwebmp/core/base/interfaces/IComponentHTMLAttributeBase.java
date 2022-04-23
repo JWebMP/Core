@@ -18,6 +18,7 @@ package com.jwebmp.core.base.interfaces;
 
 import com.jwebmp.core.base.html.attributes.GlobalAttributes;
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
+import jakarta.validation.constraints.*;
 
 /**
  * @param <A>
@@ -40,7 +41,10 @@ public interface IComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefini
 	 * @return
 	 */
 	J addAttribute(GlobalAttributes attribute, String value);
-
+	
+	@SuppressWarnings("unchecked")
+	J addAttribute(@NotNull GlobalAttributes attribute, @NotNull Object value);
+	
 	/**
 	 * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
 	 * <p>
