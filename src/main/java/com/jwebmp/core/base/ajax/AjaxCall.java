@@ -244,6 +244,8 @@ public class AjaxCall<J extends AjaxCall<J>>
 		setHashBang(incoming.getHashBang());
 		setWebsocketSession(incoming.getWebsocketSession());
 		setWebSocketCall(incoming.isWebSocketCall());
+		unknownFields = Map.copyOf(incoming.unknownFields);
+		
 		return (J) this;
 	}
 	
