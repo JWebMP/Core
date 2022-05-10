@@ -77,5 +77,10 @@ public enum TableColumnAttributes
 	{
 		return false;
 	}
-
+	
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
+	}
 }

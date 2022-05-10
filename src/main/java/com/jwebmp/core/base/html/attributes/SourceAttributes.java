@@ -45,4 +45,10 @@ public enum SourceAttributes
 	{
 		return false;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
+	}
 }

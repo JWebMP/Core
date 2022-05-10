@@ -41,4 +41,10 @@ public enum BiDirectionalDirection
 	{
 		return false;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
+	}
 }

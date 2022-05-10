@@ -78,4 +78,10 @@ public enum FormAttributes
 	{
 		return false;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
+	}
 }

@@ -44,4 +44,10 @@ public enum LabelAttributes
 	{
 		return false;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
+	}
 }

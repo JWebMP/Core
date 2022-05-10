@@ -73,14 +73,18 @@ public enum InputRadioTypeAttributes
 	 * HTML 5 Only
 	 */
 	Required,
-	/**
-	 *
-	 */
+	
 	;
 
 	@Override
 	public boolean isKeyword()
 	{
 		return false;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
 	}
 }

@@ -47,4 +47,10 @@ public enum ParagraphAttributes
 	{
 		return false;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
+	}
 }

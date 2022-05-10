@@ -61,4 +61,10 @@ public enum ObjectAttributes
 	{
 		return false;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
+	}
 }

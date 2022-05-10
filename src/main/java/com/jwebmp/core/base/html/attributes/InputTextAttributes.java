@@ -94,5 +94,11 @@ public enum InputTextAttributes
 	{
 		return false;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
+	}
 
 }

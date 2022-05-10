@@ -85,15 +85,18 @@ public enum InputSearchTypeAttributes
 	 * Returns which type of form element the search field is
 	 */
 	Value,
-	/**
-	 * Sets or returns the value of the value attribute of a search field
-	 */
 	;
 
 	@Override
 	public boolean isKeyword()
 	{
 		return false;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
 	}
 
 }

@@ -79,14 +79,17 @@ public enum InputCheckBoxTypeAttributes
 	 */
 	Required,
 	;
-
-	/**
-	 *
-	 */
+	
 
 	@Override
 	public boolean isKeyword()
 	{
 		return false;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
 	}
 }

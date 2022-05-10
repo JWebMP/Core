@@ -79,4 +79,10 @@ public enum InputPasswordTypeAttributes
 	{
 		return false;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
+	}
 }

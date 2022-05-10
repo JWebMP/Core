@@ -88,14 +88,15 @@ public enum InputFileTypeAttributes
 	 */
 	Multiple,
 	;
-
-	/**
-	 *
-	 */
-
 	@Override
 	public boolean isKeyword()
 	{
 		return false;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
 	}
 }
