@@ -147,7 +147,7 @@ public class Form<J extends Form<J>>
 	@Override
 	public J setID(String id)
 	{
-		addAttribute("name", id);
+		setName(id);
 		return super.setID(id);
 	}
 
@@ -166,26 +166,4 @@ public class Form<J extends Form<J>>
 		return super.setName(name);
 	}
 
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object o)
-	{
-		return super.equals(o);
-	}
-	
-	
-	/**
-	 * Returns the id of the form to use for components
-	 *
-	 * @return the owning form id
-	 */
-	public String getFormID()
-	{
-		return getID();
-	}
 }

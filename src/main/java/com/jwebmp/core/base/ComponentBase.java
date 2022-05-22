@@ -93,8 +93,8 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 */
 	public ComponentBase(@NotNull ComponentTypes componentType)
 	{
-		id = GUIDGenerator.generateGuid();
 		this.componentType = componentType;
+		setID(GUIDGenerator.generateGuid());
 	}
 	
 	/**
@@ -145,7 +145,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	{
 		if (id == null)
 		{
-			id = GUIDGenerator.generateGuid();
+			setID(GUIDGenerator.generateGuid());
 		}
 		return id;
 	}

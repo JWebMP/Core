@@ -163,10 +163,18 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
 	@NotNull
 	public J setID(String id)
 	{
-		addAttribute(GlobalAttributes.Name, id);
+		setName(id);
 		return super.setID(id);
 	}
-
+	
+	@Override
+	public J setName(String name)
+	{
+		addAttribute(GlobalAttributes.Name, name);
+		addAttribute("#" + name,"ngModel");
+		return super.setName(name);
+	}
+	
 	@NotNull
 	@Override
 	public String getName()
