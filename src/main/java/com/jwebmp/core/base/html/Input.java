@@ -320,7 +320,7 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
 	@SuppressWarnings("unchecked")
 	public J setPattern(String angularPatternName)
 	{
-		addAttribute("ng-pattern", angularPatternName);
+		addAttribute("pattern", angularPatternName);
 		return (J) this;
 	}
 	

@@ -21,6 +21,7 @@ import com.jwebmp.core.PageOptions;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.DocumentType;
+import com.jwebmp.core.base.servlets.enumarations.*;
 import jakarta.validation.constraints.NotNull;
 import net.sf.uadetector.ReadableUserAgent;
 
@@ -33,6 +34,8 @@ import net.sf.uadetector.ReadableUserAgent;
 public interface IPage<J extends IPage<J>>
 	extends IDefaultService<J>
 {
+	
+	DevelopmentEnvironments getRunningEnvironment();
 	/**
 	 * Returns the document type that will be rendered with this HTML page real-time
 	 * <p>

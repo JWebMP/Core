@@ -68,6 +68,11 @@ public class AjaxCall<J extends AjaxCall<J>>
 	private HeadersDTO headers;
 	
 	private Map<String, Object> attributes;
+	
+	/**
+	 * The current history state
+	 */
+	private Map<String, Object> state;
 	/**
 	 * The component object that this call is linked to
 	 */
@@ -505,6 +510,17 @@ public class AjaxCall<J extends AjaxCall<J>>
 	public AjaxCall<J> setRoute(String route)
 	{
 		this.route = route;
+		return this;
+	}
+	
+	public Map<String, Object> getState()
+	{
+		return state;
+	}
+	
+	public AjaxCall<J> setState(Map<String, Object> state)
+	{
+		this.state = state;
 		return this;
 	}
 }

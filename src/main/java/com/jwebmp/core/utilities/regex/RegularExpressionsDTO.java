@@ -46,12 +46,11 @@ public class RegularExpressionsDTO
 {
 	private static final Logger log = LogFactory.getLog("RegularExpressionDTO");
 
-
 	/**
 	 * Default regular expressions
 	 */
 	@JsonValue
-	private Map<String, Object> regularExpressions;
+	private static final Map<String, Object> regularExpressions = new HashMap<>();
 
 	/**
 	 * Constructs a new instance of the regular expression dto
@@ -107,21 +106,7 @@ public class RegularExpressionsDTO
 	 */
 	public Map<String, Object> getRegularExpressions()
 	{
-		if (regularExpressions == null)
-		{
-			setRegularExpressions(new HashMap<>());
-		}
 		return regularExpressions;
-	}
-
-	/**
-	 * Reset the variable expressions
-	 *
-	 * @param regularExpressions
-	 */
-	public void setRegularExpressions(Map<String, Object> regularExpressions)
-	{
-		this.regularExpressions = regularExpressions;
 	}
 
 	@SuppressWarnings("ResultOfMethodCallIgnored")

@@ -17,6 +17,7 @@
 package com.jwebmp.core.base;
 
 import com.fasterxml.jackson.annotation.*;
+import com.google.common.base.*;
 import com.guicedee.guicedinjection.json.*;
 import com.guicedee.logger.*;
 import com.jwebmp.core.base.html.attributes.*;
@@ -342,6 +343,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 	@NotNull
 	public final J addAttribute(String attribute, String value)
 	{
+		if(!Strings.isNullOrEmpty(attribute))
 		getAttributes().put(attribute, value);
 		return (J) this;
 	}
@@ -432,7 +434,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 	public final String getAttribute(@NotNull GlobalAttributes attribute)
 	{
 		getAttributes().putIfAbsent(attribute.toString(), StaticStrings.STRING_EMPTY);
-		return getAttributes().get(attribute.toString());
+		return Strings.nullToEmpty(getAttributes().get(attribute.toString()));
 	}
 	
 	/**
@@ -448,7 +450,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 	public String getAttribute(@NotNull A attributeValue)
 	{
 		String s = getAttributes().get(attributeValue.toString());
-		if (s == null)
+		if (Strings.isNullOrEmpty(s))
 		{
 			s = StaticStrings.STRING_EMPTY;
 		}
@@ -464,7 +466,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 	public String getAttribute(String attributeValue)
 	{
 		String s = getAttributes().get(attributeValue);
-		if (s == null)
+		if (Strings.isNullOrEmpty(s))
 		{
 			s = StaticStrings.STRING_EMPTY;
 		}
@@ -481,7 +483,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 	public Integer getAttribute(String attributeValue, Integer uselessInt)
 	{
 		String s = getAttributes().get(attributeValue);
-		if (s == null)
+		if (Strings.isNullOrEmpty(s))
 		{
 			s = StaticStrings.STRING_EMPTY;
 		}
@@ -498,7 +500,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 	public Boolean getAttribute(String attributeValue, Boolean uselessInt)
 	{
 		String s = getAttributes().get(attributeValue);
-		if (s == null)
+		if (Strings.isNullOrEmpty(s))
 		{
 			s = StaticStrings.STRING_EMPTY;
 		}
@@ -519,7 +521,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 	public Integer getAttribute(@NotNull A attributeValue, @NotNull Integer uselessInt)
 	{
 		String s = getAttributes().get(attributeValue.toString());
-		if (s == null)
+		if (Strings.isNullOrEmpty(s))
 		{
 			s = "0";
 		}
@@ -540,7 +542,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 	public Boolean getAttribute(@NotNull A attributeValue, @NotNull Boolean uselessInt)
 	{
 		String s = getAttributes().get(attributeValue.toString());
-		if (s == null)
+		if (Strings.isNullOrEmpty(s))
 		{
 			s = Boolean.toString(false);
 		}
@@ -661,6 +663,10 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 	@Override
 	public J addStyle(String property, String value)
 	{
+		if (Strings.isNullOrEmpty(property) || Strings.isNullOrEmpty(value))
+		{
+			return (J)this;
+		}
 		addStyle(property + StaticStrings.STRING_DOUBLE_COLON + value);
 		return (J) this;
 	}
@@ -676,6 +682,10 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 	@Override
 	public J addStyle(String style)
 	{
+		if (Strings.isNullOrEmpty(style))
+		{
+			return(J)this;
+		}
 		if (!style.endsWith(StaticStrings.STRING_SEMICOLON))
 		{
 			style += StaticStrings.STRING_SEMICOLON;
@@ -686,7 +696,11 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 		}
 		else
 		{
-			addAttribute(GlobalAttributes.Style, getAttributes().get(GlobalAttributes.Style.toString()) + style);
+			addAttribute(GlobalAttributes.Style, Strings.nullToEmpty(getAttributes().get(GlobalAttributes.Style.toString())) + style);
+		}
+		if(getAttribute(GlobalAttributes.Style).contains("null"))
+		{
+			addAttribute(GlobalAttributes.Style, getAttribute(GlobalAttributes.Style).replace("null", ""));
 		}
 		return (J) this;
 	}
