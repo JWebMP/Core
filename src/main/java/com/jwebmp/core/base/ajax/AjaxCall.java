@@ -123,6 +123,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 	private boolean pageCall;
 	
 	private Map<String, Object> unknownFields = new HashMap<>();
+	private Map<String, Object> history = new HashMap<>();
 	
 	/**
 	 * JSon Jackson Constructor
@@ -521,6 +522,17 @@ public class AjaxCall<J extends AjaxCall<J>>
 	public AjaxCall<J> setState(Map<String, Object> state)
 	{
 		this.state = state;
+		return this;
+	}
+	
+	public Map<String, Object> getHistory()
+	{
+		return history;
+	}
+	
+	public AjaxCall<J> setHistory(Map<String, Object> history)
+	{
+		this.history = history;
 		return this;
 	}
 }

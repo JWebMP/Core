@@ -17,6 +17,7 @@
 package com.jwebmp.core.base.ajax;
 
 import com.fasterxml.jackson.annotation.*;
+import com.guicedee.guicedinjection.*;
 import com.guicedee.guicedinjection.representations.IJsonRepresentation;
 import com.guicedee.guicedservlets.services.scopes.*;
 import com.jwebmp.core.*;
@@ -27,6 +28,8 @@ import jakarta.validation.constraints.*;
 
 import java.util.*;
 import java.util.Map.*;
+
+import static com.guicedee.guicedinjection.interfaces.ObjectBinderKeys.*;
 
 /**
  * A response sent back to the client
@@ -80,8 +83,17 @@ public class AjaxResponse<J extends AjaxResponse<J>>
         dataReturns.put(listener, json.toJson());
         return (J) this;
     }
-
-
+    
+    public J addDataResponse(String listener, Map json) throws Exception {
+        dataReturns.put(listener, GuiceContext.get(DefaultObjectMapper).writeValueAsString(json));
+        return (J) this;
+    }
+    
+    public J addDataResponse(String listener, String result){
+        dataReturns.put(listener, result);
+        return (J) this;
+    }
+    
     /**
      * Sets the properties for this response
      *

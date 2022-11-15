@@ -73,6 +73,7 @@ public class Form<J extends Form<J>>
 		implements ListItemChildren
 {
 
+	
 
 	/**
 	 * The label of this form
@@ -85,6 +86,7 @@ public class Form<J extends Form<J>>
 	public Form()
 	{
 		super(ComponentTypes.Form);
+		setRenderIDAttribute(true);
 	}
 
 	@Override

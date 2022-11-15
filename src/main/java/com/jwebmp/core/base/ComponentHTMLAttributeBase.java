@@ -31,6 +31,8 @@ import java.util.*;
 import java.util.Map.*;
 import java.util.logging.*;
 
+import static com.jwebmp.core.base.html.attributes.GlobalAttributes.*;
+
 /**
  * Denotes a component that has a tag. By default these can add events, features, variables etc
  *
@@ -41,12 +43,7 @@ import java.util.logging.*;
  * @author GedMarc
  * @since 23 Apr 2016
  */
-public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions,
-		F extends GlobalFeatures,
-		E extends GlobalEvents,
-		J extends ComponentHTMLAttributeBase<A, F, E, J>>
-		extends ComponentHTMLOptionsBase<F, E, J>
-		implements IComponentHTMLAttributeBase<A, J>
+public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHTMLAttributeBase<A, F, E, J>> extends ComponentHTMLOptionsBase<F, E, J> implements IComponentHTMLAttributeBase<A, J>
 {
 	/**
 	 * Logger for the Component
@@ -60,10 +57,16 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Map<String, String> attributes;
 	
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	private Map<String, String> styles;
+	
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	private Map<String, String> overrideAttributes;
+	
 	/**
 	 * Specifies if this component should render an ID attribute
 	 */
-	private boolean renderIDAttibute = true;
+	private boolean renderIDAttibute;
 	
 	/**
 	 * Renders the attributes with a single colon instead of a double colon, and replaces single colon values with double colons
@@ -102,15 +105,34 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 	@NotNull
 	protected StringBuilder renderAttributes(@NotNull StringBuilder sb)
 	{
+		//classes attributes
 		StringBuilder sbClasses = renderClasses();
 		if (sbClasses.length() > 0 && !(this instanceof NoClassAttribute))
 		{
 			addAttribute(GlobalAttributes.Class, sbClasses.toString());
 		}
+		//styles attribute
+		StringBuilder stylesString = new StringBuilder();
+		for (Entry<String, String> e : getStyles().entrySet())
+		{
+			String property = e.getKey();
+			String v = e.getValue();
+			stylesString.append(property)
+			            .append(StaticStrings.STRING_DOUBLE_COLON)
+			            .append(v)
+			            .append(StaticStrings.STRING_SEMICOLON);
+		}
+		
+		if (!getStyles().isEmpty())
+		{
+			addAttribute(Style, stylesString.toString());
+		}
+		
 		if (!getAttributes().isEmpty())
 		{
 			sb.append(StaticStrings.STRING_SPACE);
 		}
+		
 		for (Entry<String, String> entry : getAttributes().entrySet())
 		{
 			String key = entry.getKey();
@@ -236,14 +258,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 	@SuppressWarnings("unchecked")
 	public final J addAttribute(@NotNull GlobalAttributes attribute, @NotNull String value)
 	{
-		if (attribute == GlobalAttributes.Style)
-		{
-			getAttributes().put(attribute.toString(), getAttributes().get(attribute.toString()) + StaticStrings.STRING_EMPTY + value);
-		}
-		else
-		{
-			getAttributes().put(attribute.toString(), value);
-		}
+		getAttributes().put(attribute.toString(), value);
 		return (J) this;
 	}
 	
@@ -261,15 +276,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 	@SuppressWarnings("unchecked")
 	public final J addAttribute(@NotNull GlobalAttributes attribute, @NotNull Object value)
 	{
-		if (attribute == GlobalAttributes.Style)
-		{
-			getAttributes().put(attribute.toString(), getAttributes().get(attribute.toString()) + StaticStrings.STRING_EMPTY + value);
-		}
-		else
-		{
-			getAttributes().put(attribute.toString(), value + "");
-		}
-		
+		getAttributes().put(attribute.toString(), value + "");
 		return (J) this;
 	}
 	
@@ -286,6 +293,21 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 			attributes = new TreeMap<>();
 		}
 		return attributes;
+	}
+	
+	/**
+	 * Returns the current raw attribute map
+	 *
+	 * @return A Tree Map of Attributes
+	 */
+	@NotNull
+	public Map<String, String> getStyles()
+	{
+		if (styles == null)
+		{
+			styles = new TreeMap<>();
+		}
+		return styles;
 	}
 	
 	/**
@@ -343,8 +365,10 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 	@NotNull
 	public final J addAttribute(String attribute, String value)
 	{
-		if(!Strings.isNullOrEmpty(attribute))
-		getAttributes().put(attribute, value);
+		if (!Strings.isNullOrEmpty(attribute))
+		{
+			getAttributes().put(attribute, value);
+		}
 		return (J) this;
 	}
 	
@@ -593,7 +617,16 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 	@NotNull
 	public J setID(String id)
 	{
-		addAttribute(GlobalAttributes.ID, id);
+		if (Strings.isNullOrEmpty(id))
+		{
+			removeAttribute(GlobalAttributes.ID);
+			setRenderIDAttribute(false);
+		}
+		else
+		{
+			addAttribute(GlobalAttributes.ID, id);
+			setRenderIDAttribute(true);
+		}
 		return super.setID(id);
 	}
 	
@@ -665,7 +698,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 	{
 		if (Strings.isNullOrEmpty(property) || Strings.isNullOrEmpty(value))
 		{
-			return (J)this;
+			return (J) this;
 		}
 		addStyle(property + StaticStrings.STRING_DOUBLE_COLON + value);
 		return (J) this;
@@ -684,24 +717,56 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 	{
 		if (Strings.isNullOrEmpty(style))
 		{
-			return(J)this;
+			return (J) this;
 		}
 		if (!style.endsWith(StaticStrings.STRING_SEMICOLON))
 		{
 			style += StaticStrings.STRING_SEMICOLON;
 		}
-		if (getAttributes().get(GlobalAttributes.Style.toString()) == null)
+		String[] styles = style.split(";");
+		for (String eachStyle : styles)
 		{
-			addAttribute(GlobalAttributes.Style, style);
+			String[] propAndValue = eachStyle.split(":");
+			if (!Strings.isNullOrEmpty(propAndValue[0]) && !Strings.isNullOrEmpty(propAndValue[1]))
+			{
+				getStyles().put(propAndValue[0], propAndValue[1]);
+			}
+		}
+		return (J) this;
+	}
+	
+	public Map<String, String> getOverrideAttributes()
+	{
+		if (overrideAttributes == null)
+		{
+			overrideAttributes = new HashMap<>();
+		}
+		return overrideAttributes;
+	}
+	
+	public ComponentHTMLAttributeBase<A, F, E, J> setOverrideAttributes(Map<String, String> overrideAttributes)
+	{
+		this.overrideAttributes = overrideAttributes;
+		return this;
+	}
+	
+	public J addOverrideAttribute(String key, String value)
+	{
+		getOverrideAttributes().put(key, value);
+		return (J) this;
+	}
+	
+	@Override
+	public J setName(String name)
+	{
+		if (!Strings.isNullOrEmpty(name))
+		{
+			addAttribute("name", name);
 		}
 		else
 		{
-			addAttribute(GlobalAttributes.Style, Strings.nullToEmpty(getAttributes().get(GlobalAttributes.Style.toString())) + style);
+			removeAttribute("name");
 		}
-		if(getAttribute(GlobalAttributes.Style).contains("null"))
-		{
-			addAttribute(GlobalAttributes.Style, getAttribute(GlobalAttributes.Style).replace("null", ""));
-		}
-		return (J) this;
+		return super.setName(name);
 	}
 }

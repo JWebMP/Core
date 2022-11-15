@@ -165,6 +165,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 	{
 		getChildren().stream()
 		             .filter(a -> a != null)
+		             .parallel()
 		             .forEach(child -> child.asBase()
 		                                    .setTiny(tiny));
 		return super.setTiny(tiny);
@@ -388,6 +389,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 		        .setTiny(isTiny());
 		newChild.asHierarchyBase()
 		        .setPage(getPage());
+		IComponentHierarchyBase c = (IComponentHierarchyBase) newChild;
+		c.setTiny(isTiny());
 		boolean added = getChildren().add(newChild);
 		if (added)
 		{

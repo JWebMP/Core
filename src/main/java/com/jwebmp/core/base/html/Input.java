@@ -102,6 +102,7 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
 	public Input(InputTypes inputType)
 	{
 		super(ComponentTypes.Input);
+		setRenderIDAttribute(true);
 		if (inputType != null)
 		{
 			this.inputType = inputType;
@@ -224,7 +225,23 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
 		addAttribute("min", Integer.toString(minimum));
 		return (J) this;
 	}
-
+	
+	/**
+	 * Sets the minimum length of this input
+	 *
+	 * @param minimum
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public J setMinimum(double minimum)
+	{
+		addAttribute("data-min", Double.toString(minimum));
+		addAttribute("min", Double.toString(minimum));
+		return (J) this;
+	}
+	
+	
 	/**
 	 * Sets the minimum length of this input
 	 *
@@ -255,7 +272,23 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
 		addAttribute("max", Integer.toString(max));
 		return (J) this;
 	}
-
+	
+	
+	/**
+	 * Sets the minimum length of this input
+	 *
+	 * @param max
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public J setMaximum(double max)
+	{
+		addAttribute("data-max", Double.toString(max));
+		addAttribute("max", Double.toString(max));
+		return (J) this;
+	}
+	
 	/**
 	 * Sets the place holder for this input
 	 *

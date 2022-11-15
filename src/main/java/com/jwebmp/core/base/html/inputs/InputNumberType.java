@@ -48,5 +48,10 @@ public class InputNumberType<J extends InputNumberType<J>>
 		super(InputTypes.Number);
 		addAttribute(InputButtonTypeAttributes.Value, text);
 	}
-
+	
+	@Override
+	public J setMinimum(int minimum)
+	{
+		return super.setMinimum(minimum);
+	}
 }

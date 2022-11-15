@@ -25,6 +25,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.htmlbuilder.css.colours.ColourNames;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Fail.*;
+
 /**
  * @author ged_m
  */
@@ -78,5 +80,20 @@ public class ComponentStyleBaseTest
 				                    + "		<!-- asdf -->\n"
 				                    + "	</body>\n"
 				                    + "</html>", p.toString(true));*/
+	}
+	
+	@Test
+	public void testAddStyle()
+	{
+		Page<?> p = new Page();
+		p.addStyle("height","100%");
+		String output = p.toString(0);
+		if(output.contains("nullheight"))
+		{
+			fail("Null rendered in style addition");
+		}
+		p.addStyle("height","100%");
+		output = p.toString(0);
+		System.out.println(p.toString(0));
 	}
 }

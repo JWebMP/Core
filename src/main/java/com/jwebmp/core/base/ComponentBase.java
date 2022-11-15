@@ -94,7 +94,8 @@ public class ComponentBase<J extends ComponentBase<J>>
 	public ComponentBase(@NotNull ComponentTypes componentType)
 	{
 		this.componentType = componentType;
-		setID(GUIDGenerator.generateGuid());
+		//direct access, don't enable id tag generation
+		this.id = GUIDGenerator.generateGuid();
 	}
 	
 	/**
@@ -143,11 +144,18 @@ public class ComponentBase<J extends ComponentBase<J>>
 	@NotNull
 	public String getID()
 	{
-		if (id == null)
-		{
-			setID(GUIDGenerator.generateGuid());
-		}
 		return id;
+	}
+	
+	/**
+	 * Generates and places a new ID on this component
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public J generateID()
+	{
+		id = GUIDGenerator.generateGuid();
+		return (J)this;
 	}
 	
 	/**
