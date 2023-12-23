@@ -77,15 +77,15 @@ public class AjaxResponse<J extends AjaxResponse<J>>
     }
 
     @JsonProperty("data")
-    private Map<String, String> dataReturns = new HashMap<>();
+    private Map<String, Object> dataReturns = new HashMap<>();
 
     public J addDataResponse(String listener, IJsonRepresentation<?> json) {
-        dataReturns.put(listener, json.toJson());
+        dataReturns.put(listener, json);
         return (J) this;
     }
     
     public J addDataResponse(String listener, Map json) throws Exception {
-        dataReturns.put(listener, GuiceContext.get(DefaultObjectMapper).writeValueAsString(json));
+        dataReturns.put(listener, json);
         return (J) this;
     }
     
