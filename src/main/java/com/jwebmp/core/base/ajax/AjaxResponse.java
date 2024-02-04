@@ -16,20 +16,16 @@
  */
 package com.jwebmp.core.base.ajax;
 
-import com.fasterxml.jackson.annotation.*;
-import com.guicedee.guicedinjection.*;
-import com.guicedee.guicedinjection.representations.IJsonRepresentation;
-import com.guicedee.guicedservlets.services.scopes.*;
-import com.jwebmp.core.*;
-import com.jwebmp.core.base.interfaces.*;
-import com.jwebmp.core.base.references.*;
-import com.jwebmp.core.htmlbuilder.javascript.*;
-import jakarta.validation.constraints.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.guicedee.guicedservlets.servlets.services.scopes.CallScope;
+import com.guicedee.services.jsonrepresentation.IJsonRepresentation;
+import com.jwebmp.core.Feature;
+import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.*;
-import java.util.Map.*;
-
-import static com.guicedee.guicedinjection.interfaces.ObjectBinderKeys.*;
 
 /**
  * A response sent back to the client

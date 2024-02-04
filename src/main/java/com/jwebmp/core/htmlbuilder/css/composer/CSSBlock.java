@@ -18,7 +18,7 @@
 package com.jwebmp.core.htmlbuilder.css.composer;
 
 import com.jwebmp.core.htmlbuilder.css.enumarations.CSSTypes;
-import com.guicedee.guicedinjection.json.StaticStrings;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import com.jwebmp.core.utilities.TextUtilities;
 
 import java.util.ArrayList;

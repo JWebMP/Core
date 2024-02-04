@@ -25,7 +25,7 @@ import com.jwebmp.core.base.html.interfaces.children.ObjectTagChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.guicedee.logger.LogFactory;
+import lombok.extern.java.Log;
 
 import java.util.logging.Level;
 
@@ -55,16 +55,12 @@ import java.util.logging.Level;
  * 		<p>
  * @since Mar 1, 2015
  */
+@Log
 public class Parameter<J extends Parameter<J>>
 		extends Component<IComponentHierarchyBase<?,?>, ParameterAttributes, GlobalFeatures, GlobalEvents, J>
 		implements ObjectTagChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
-
-	/**
-	 * Logger for the Component
-	 */
-	private static final java.util.logging.Logger log = LogFactory.getInstance()
-	                                                              .getLogger("Parameter");
+	
 	/**
 	 *
 	 */

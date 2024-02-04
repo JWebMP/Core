@@ -16,8 +16,8 @@
  */
 package com.jwebmp.core.events.click;
 
+import com.guicedee.guicedinjection.GuiceContext;
 import com.jwebmp.core.Event;
-import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
@@ -27,8 +27,7 @@ import com.jwebmp.core.base.html.interfaces.events.ParagraphEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.logger.LogFactory;
+import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
 import java.util.Set;
@@ -41,20 +40,13 @@ import java.util.logging.Level;
  */
 @ComponentInformation(name = "Click Event",
 		description = "Server Side Event for Click.")
+@Log
 public abstract class ClickAdapter<J extends ClickAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements ParagraphEvents<GlobalFeatures, J>,
 		           BodyEvents<GlobalFeatures, J>,
 		           GlobalEvents<J>
 {
-	/**
-	 * Logger for the Component
-	 */
-	
-	private static final java.util.logging.Logger log = LogFactory.getInstance()
-	                                                              .getLogger("ClickEvent");
-	
-	
 	protected ClickAdapter()
 	{
 		super("ClickAdapter", EventTypes.click);

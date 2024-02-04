@@ -1,20 +1,19 @@
 package com.jwebmp.core.htmlbuilder.css.composer;
 
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.ComponentStyleBase;
 import com.jwebmp.core.htmlbuilder.css.CSSImpl;
 import com.jwebmp.core.htmlbuilder.css.CSSPropertiesFactory;
 import com.jwebmp.core.htmlbuilder.css.enumarations.CSSTypes;
-import com.guicedee.guicedinjection.json.StaticStrings;
-import com.guicedee.logger.LogFactory;
-
 import jakarta.validation.constraints.NotNull;
+import lombok.extern.java.Log;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * This class specifically build CSS according to a JWebSwing component
@@ -23,11 +22,9 @@ import java.util.logging.Logger;
  * @version 1.0
  * @since 07 Apr 2012
  */
+@Log
 public class CSSComposer
 {
-
-	protected static Logger log = LogFactory.getInstance()
-	                                        .getLogger("CSSComposer");
 	/**
 	 * The block master instance
 	 */

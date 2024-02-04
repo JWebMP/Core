@@ -16,7 +16,10 @@
  */
 package com.jwebmp.core.htmlbuilder.javascript;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
@@ -24,22 +27,17 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.common.base.CaseFormat;
 import com.google.inject.Key;
 import com.google.inject.name.Names;
-import com.guicedee.guicedinjection.representations.IJsonRepresentation;
-import com.jwebmp.core.FileTemplates;
-import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.logger.LogFactory;
-import org.apache.commons.io.IOUtils;
+import com.guicedee.services.jsonrepresentation.IJsonRepresentation;
+import lombok.extern.java.Log;
 
-import java.io.*;
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.net.URL;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import static com.jwebmp.core.FileTemplates.*;
 import static com.guicedee.guicedinjection.interfaces.ObjectBinderKeys.*;
 
 /**
@@ -52,15 +50,10 @@ import static com.guicedee.guicedinjection.interfaces.ObjectBinderKeys.*;
 @SuppressWarnings({"MissingClassJavaDoc", "unused", "unchecked"})
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Log
 public class JavaScriptPart<J extends JavaScriptPart<J>>
 		implements Serializable, IJsonRepresentation<J>
 {
-
-	/**
-	 * The logger
-	 */
-	private static final Logger log = LogFactory.getInstance()
-	                                            .getLogger("JavaScriptPart");
 	/**
 	 * A reference id that can be returned with a given variable
 	 */

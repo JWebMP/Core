@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.guicedee.guicedinjection.json.StaticStrings.CHAR_DOT;
+import static com.guicedee.services.jsonrepresentation.json.StaticStrings.CHAR_DOT;
 
 /**
  * Convenience methods for escaping special characters related to HTML, XML, and regular expressions.

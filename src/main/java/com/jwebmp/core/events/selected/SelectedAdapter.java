@@ -16,6 +16,7 @@
  */
 package com.jwebmp.core.events.selected;
 
+import com.guicedee.guicedinjection.GuiceContext;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -23,8 +24,7 @@ import com.jwebmp.core.base.html.Option;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.logger.LogFactory;
+import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
 import java.util.Set;
@@ -37,17 +37,11 @@ import java.util.logging.Level;
  *
  * @author GedMarc
  */
+@Log
 public abstract class SelectedAdapter<J extends SelectedAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents<J>
 {
-
-	/**
-	 * Logger for the Component
-	 */
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
-	                                                              .getLogger("SelectedEvent");
-
 	/**
 	 * Performs a click
 	 *
@@ -69,7 +63,7 @@ public abstract class SelectedAdapter<J extends SelectedAdapter<J>>
 		}
 		catch (Exception e)
 		{
-			SelectedAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			SelectedAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 

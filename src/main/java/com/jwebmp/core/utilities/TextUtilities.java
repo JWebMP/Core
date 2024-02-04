@@ -16,16 +16,16 @@
  */
 package com.jwebmp.core.utilities;
 
-import com.guicedee.logger.LogFactory;
+
+import lombok.extern.java.Log;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import static com.guicedee.guicedinjection.json.StaticStrings.*;
+import static com.guicedee.services.jsonrepresentation.json.StaticStrings.*;
 
 /**
  * Provides default text functions
@@ -34,9 +34,9 @@ import static com.guicedee.guicedinjection.json.StaticStrings.*;
  * @version 1.0
  * @since 08 May 2013
  */
+@Log
 public class TextUtilities
 {
-	private static final Logger log = LogFactory.getLog("TextUtilities");
 
 	/**
 	 * No construction

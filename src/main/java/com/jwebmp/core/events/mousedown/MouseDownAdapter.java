@@ -16,15 +16,14 @@
  */
 package com.jwebmp.core.events.mousedown;
 
-import com.jwebmp.core.Component;
+import com.guicedee.guicedinjection.GuiceContext;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.logger.LogFactory;
+import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
 import java.util.Set;
@@ -35,18 +34,12 @@ import java.util.logging.Level;
  *
  * @author GedMarc
  */
+@Log
 public abstract class MouseDownAdapter<J extends MouseDownAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents<J>
 {
-
-	/**
-	 * Logger for the Component
-	 */
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
-	                                                              .getLogger("MouseDownEvent");
-
-
+	
 	/**
 	 * Performs a click
 	 *
@@ -69,7 +62,7 @@ public abstract class MouseDownAdapter<J extends MouseDownAdapter<J>>
 		}
 		catch (Exception e)
 		{
-			MouseDownAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			MouseDownAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 

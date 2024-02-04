@@ -18,18 +18,16 @@ package com.jwebmp.core.generics;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.guicedee.logger.LogFactory;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import com.jwebmp.core.SessionHelper;
 import com.jwebmp.core.base.html.interfaces.NamedPair;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
-import com.guicedee.guicedinjection.json.StaticStrings;
-
 import jakarta.validation.constraints.NotNull;
+import lombok.extern.java.Log;
 
 import java.io.Serializable;
 import java.util.*;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Denotes a specific Web Reference, either remotely or locally
@@ -42,11 +40,11 @@ import java.util.logging.Logger;
  * @since Forever
  */
 @SuppressWarnings("unused")
+@Log
 public class WebReference<J extends WebReference<J>>
 		implements NamedPair<String, String>, Serializable, Comparator<J>, Comparable<J>
 {
-	private static final Logger LOG = LogFactory.getInstance()
-	                                            .getLogger("Web Reference");
+	
 	/**
 	 * If the reference is local
 	 */
@@ -381,7 +379,7 @@ public class WebReference<J extends WebReference<J>>
 			}
 			catch (NoClassDefFoundError | Exception e)
 			{
-				LOG.log(Level.WARNING, "Error in getting url to append to the web reference", e);
+				log.log(Level.WARNING, "Error in getting url to append to the web reference", e);
 			}
 		}
 		else
@@ -473,7 +471,7 @@ public class WebReference<J extends WebReference<J>>
 		}
 		catch (Exception e)
 		{
-			LOG.log(Level.WARNING, "Error in getting url reference", e);
+			log.log(Level.WARNING, "Error in getting url reference", e);
 		}
 		return sb;
 	}

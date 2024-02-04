@@ -16,16 +16,18 @@
  */
 package com.jwebmp.core.base.html;
 
-import com.guicedee.logger.*;
-import com.jwebmp.core.base.*;
-import com.jwebmp.core.base.html.attributes.*;
-import com.jwebmp.core.base.html.interfaces.*;
-import com.jwebmp.core.base.html.interfaces.children.*;
-import com.jwebmp.core.base.html.interfaces.events.*;
-import com.jwebmp.core.base.servlets.enumarations.*;
-import jakarta.validation.constraints.*;
 
-import java.util.logging.*;
+import com.jwebmp.core.base.ComponentHierarchyBase;
+import com.jwebmp.core.base.html.attributes.MetaAttributes;
+import com.jwebmp.core.base.html.interfaces.*;
+import com.jwebmp.core.base.html.interfaces.children.HeadChildren;
+import com.jwebmp.core.base.html.interfaces.children.NoChildren;
+import com.jwebmp.core.base.html.interfaces.events.NoEvents;
+import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
+import jakarta.validation.constraints.NotNull;
+import lombok.extern.java.Log;
+
+import java.util.logging.Level;
 
 /**
  * The Meta Component.
@@ -53,12 +55,11 @@ import java.util.logging.*;
  * @version 1.0
  * @since 2013/11/12
  */
+@Log
 public class Meta
 		extends ComponentHierarchyBase<NoChildren, MetaAttributes, NoFeatures, NoEvents, Meta>
 		implements NoIDTag, NoClosingTag, HeadChildren, NoClassAttribute, NoNewLineBeforeClosingTag
 {
-	private static final Logger log = LogFactory.getInstance()
-	                                            .getLogger("<META>");
 	
 	/**
 	 * Constructs an empty Meta tag

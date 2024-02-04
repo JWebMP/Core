@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.annotations;
 
-import com.guicedee.guicedinjection.json.StaticStrings;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 
 import java.lang.annotation.*;
 

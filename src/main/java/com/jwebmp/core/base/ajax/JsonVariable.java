@@ -16,20 +16,23 @@
  */
 package com.jwebmp.core.base.ajax;
 
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.core.*;
-import com.fasterxml.jackson.core.type.*;
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.annotation.*;
-import com.guicedee.guicedinjection.*;
-import com.guicedee.guicedinjection.interfaces.*;
-import com.guicedee.guicedinjection.representations.*;
-import com.guicedee.logger.*;
-import com.jwebmp.core.htmlbuilder.javascript.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.interfaces.ObjectBinderKeys;
+import com.guicedee.services.jsonrepresentation.IJsonRepresentation;
+import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
+import lombok.extern.java.Log;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
-import java.util.logging.*;
+import java.util.logging.Level;
 
 /**
  * DTO for angular variable transfers forward and back
@@ -38,10 +41,10 @@ import java.util.logging.*;
  * @since 08 May 2016
  */
 @SuppressWarnings({"JavaDoc", "unused"})
+@Log
 public class JsonVariable
 		extends JavaScriptPart<JsonVariable>
 {
-	private static final Logger log = LogFactory.getLog("JsonVariable");
 	
 	/**
 	 * The variable name to use

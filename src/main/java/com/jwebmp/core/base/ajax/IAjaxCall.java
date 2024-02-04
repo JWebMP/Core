@@ -17,14 +17,13 @@
 
 package com.jwebmp.core.base.ajax;
 
-import com.guicedee.guicedinjection.representations.IJsonRepresentation;
+import com.guicedee.services.jsonrepresentation.IJsonRepresentation;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 import java.util.Map;
-import java.util.Set;
 
 public interface IAjaxCall<J extends AjaxCall<J>> extends IJsonRepresentation<J>
 {

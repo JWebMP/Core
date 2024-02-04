@@ -17,7 +17,7 @@
 package com.jwebmp.core.base;
 
 import com.fasterxml.jackson.annotation.*;
-import com.guicedee.guicedinjection.json.StaticStrings;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import com.jwebmp.core.base.html.*;
 import com.jwebmp.core.base.html.interfaces.*;
 import com.jwebmp.core.base.html.interfaces.events.*;
@@ -26,7 +26,7 @@ import com.jwebmp.core.base.servlets.enumarations.*;
 import com.jwebmp.core.utilities.*;
 import jakarta.validation.constraints.*;
 
-import static com.guicedee.guicedinjection.json.StaticStrings.*;
+import static com.guicedee.services.jsonrepresentation.json.StaticStrings.*;
 
 /**
  * Denotes a component that has a tag. By default these can add events, features, variables etc

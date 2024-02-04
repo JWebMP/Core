@@ -16,8 +16,8 @@
  */
 package com.jwebmp.core.utilities;
 
-import com.guicedee.guicedinjection.json.StaticStrings;
-import static com.guicedee.guicedinjection.json.StaticStrings.STRING_COMMNA;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
+import static com.guicedee.services.jsonrepresentation.json.StaticStrings.STRING_COMMNA;
 
 /**
  * Provides basics for Colours

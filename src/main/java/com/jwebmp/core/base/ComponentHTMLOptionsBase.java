@@ -16,18 +16,20 @@
  */
 package com.jwebmp.core.base;
 
-import com.fasterxml.jackson.annotation.*;
-import com.guicedee.guicedinjection.json.*;
-import com.guicedee.logger.*;
-import com.jwebmp.core.base.html.interfaces.*;
-import com.jwebmp.core.base.html.interfaces.events.*;
-import com.jwebmp.core.base.interfaces.*;
-import com.jwebmp.core.base.servlets.enumarations.*;
-import jakarta.validation.constraints.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
+import com.guicedee.services.jsonrepresentation.json.StringToBoolean;
+import com.guicedee.services.jsonrepresentation.json.StringToIntegerRelaxed;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
+import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHTMLOptionsBase;
+import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
+import jakarta.validation.constraints.NotNull;
+import lombok.extern.java.Log;
 
-import java.util.*;
-import java.util.Map.*;
-import java.util.logging.*;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 /**
  * Denotes a component that has a tag. By default these can add events, features, variables etc
@@ -38,6 +40,7 @@ import java.util.logging.*;
  * @author GedMarc
  * @since 23 Apr 2016
  */
+@Log
 public class ComponentHTMLOptionsBase<
 		F extends GlobalFeatures,
 		E extends GlobalEvents,
@@ -45,12 +48,7 @@ public class ComponentHTMLOptionsBase<
 		extends ComponentHTMLBase<F, E, J>
 		implements IComponentHTMLOptionsBase<J>
 {
-	/**
-	 * Logger for the Component
-	 */
-	@JsonIgnore
-	private static final Logger LOG = LogFactory.getLog("ComponentOptions");
-	
+
 	/**
 	 * The current stored option lists
 	 */

@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.base.html;
 
-import com.guicedee.logger.LogFactory;
+
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.LinkAttributes;
 import com.jwebmp.core.base.html.interfaces.GlobalChildren;
@@ -30,6 +30,7 @@ import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import jakarta.validation.constraints.NotNull;
+import lombok.extern.java.Log;
 
 /**
  * Browser Support<p>
@@ -64,16 +65,13 @@ import jakarta.validation.constraints.NotNull;
  *
  * @author GedMarc
  */
+@Log
 public class Link<J extends Link<J>>
 		extends Component<GlobalChildren, LinkAttributes, GlobalFeatures, GlobalEvents, J>
 		implements BodyChildren, NoNewLineForRawText,
 		           ListItemChildren,
 		           ListChildren, FormChildren
 {
-
-	private static final java.util.logging.Logger log = LogFactory.getInstance()
-	                                                              .getLogger("ALink");
-
 	/**
 	 * The address directing to
 	 */

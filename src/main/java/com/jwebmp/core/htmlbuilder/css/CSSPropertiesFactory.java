@@ -18,6 +18,7 @@ package com.jwebmp.core.htmlbuilder.css;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import com.jwebmp.core.htmlbuilder.css.annotations.CSSAnnotationType;
 import com.jwebmp.core.htmlbuilder.css.annotations.CSSImplementationClass;
 import com.jwebmp.core.htmlbuilder.css.colours.ColourCSSImpl;
@@ -30,10 +31,9 @@ import com.jwebmp.core.htmlbuilder.css.interfaces.CSSShortHand;
 import com.jwebmp.core.htmlbuilder.css.measurement.MeasurementCSS;
 import com.jwebmp.core.htmlbuilder.css.measurement.MeasurementCSSImpl;
 import com.jwebmp.core.htmlbuilder.css.measurement.MeasurementTypes;
-import com.guicedee.guicedinjection.json.StaticStrings;
-import com.guicedee.logger.LogFactory;
-
 import jakarta.validation.constraints.NotNull;
+import lombok.extern.java.Log;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.math.BigDecimal;
@@ -49,18 +49,13 @@ import java.util.logging.Logger;
  * @author GedMarc
  * @since 17 Jan 2016
  */
+@Log
 public class CSSPropertiesFactory<A extends Annotation>
 
 {
 	public static final int DefaultIntValue = Integer.MIN_VALUE;
 	public static final double DefaultDoubleValue = Integer.MIN_VALUE;
 
-	/**
-	 * The default logger
-	 */
-	@JsonIgnore
-	private static final java.util.logging.Logger log = LogFactory.getInstance()
-	                                                              .getLogger("CSS Factory");
 	/**
 	 * List of methods to always ignore
 	 */

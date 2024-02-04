@@ -4,7 +4,7 @@ import com.google.common.base.Strings;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.html.Script;
 import com.jwebmp.core.services.IDynamicRenderingServlet;
-import com.guicedee.guicedinjection.json.StaticStrings;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import jakarta.servlet.http.HttpServletRequest;
 
 import static com.guicedee.guicedinjection.GuiceContext.*;

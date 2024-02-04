@@ -16,32 +16,42 @@
  */
 package com.jwebmp.core.base;
 
-import com.fasterxml.jackson.annotation.*;
-import com.google.common.base.*;
-import com.guicedee.guicedinjection.*;
-import com.guicedee.guicedinjection.interfaces.*;
-import com.guicedee.guicedinjection.json.*;
-import com.guicedee.logger.*;
-import com.jwebmp.core.*;
-import com.jwebmp.core.base.html.interfaces.*;
-import com.jwebmp.core.base.html.interfaces.events.*;
-import com.jwebmp.core.base.interfaces.*;
-import com.jwebmp.core.base.references.*;
-import com.jwebmp.core.base.servlets.enumarations.*;
-import com.jwebmp.core.databind.*;
-import com.jwebmp.core.htmlbuilder.css.themes.*;
-import com.jwebmp.core.htmlbuilder.javascript.events.interfaces.*;
-import com.jwebmp.core.implementations.*;
-import jakarta.validation.constraints.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Strings;
+import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
+import com.jwebmp.core.CSSComponent;
+import com.jwebmp.core.Event;
+import com.jwebmp.core.Feature;
+import com.jwebmp.core.Page;
+import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
+import com.jwebmp.core.base.html.interfaces.GlobalChildren;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
+import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentFeatureBase;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
+import com.jwebmp.core.base.interfaces.ICssClassName;
+import com.jwebmp.core.base.references.CSSReference;
+import com.jwebmp.core.base.references.JavascriptReference;
+import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
+import com.jwebmp.core.databind.IConfiguration;
+import com.jwebmp.core.databind.IOnComponentAdded;
+import com.jwebmp.core.databind.IOnComponentHtmlRender;
+import com.jwebmp.core.htmlbuilder.css.themes.Theme;
+import com.jwebmp.core.htmlbuilder.javascript.events.interfaces.IEvent;
+import com.jwebmp.core.implementations.JWebMPSiteBinder;
+import jakarta.validation.constraints.NotNull;
+import lombok.extern.java.Log;
 
-import java.util.Objects;
 import java.util.*;
-import java.util.concurrent.*;
-import java.util.function.*;
-import java.util.logging.*;
-import java.util.stream.*;
+import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.stream.Collectors;
 
-import static java.util.Comparator.*;
+import static java.util.Comparator.comparing;
 
 /**
  * Provides the Hierarchy for any component. Manages children and parent relationships
@@ -54,6 +64,7 @@ import static java.util.Comparator.*;
  * @author GedMarc
  * @since 24 Apr 2016
  */
+@Log
 @SuppressWarnings({"unchecked", "MissingClassJavaDoc"})
 public class ComponentHierarchyBase<C extends GlobalChildren,
 		A extends Enum<?> & AttributeDefinitions,
@@ -64,11 +75,6 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 		implements IComponentHierarchyBase<C, J>,
 		           GlobalChildren
 {
-	/**
-	 * Field log
-	 */
-	private static final Logger log = LogFactory.getInstance()
-	                                            .getLogger("ComponentHierarchyBase");
 	
 	/**
 	 * The list of children of this component
@@ -394,7 +400,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 		boolean added = getChildren().add(newChild);
 		if (added)
 		{
-			Set<IOnComponentAdded> components = IDefaultService.loaderToSet(ServiceLoader.load(IOnComponentAdded.class));
+			Set<IOnComponentAdded> components = GuiceContext.instance().loaderToSet(ServiceLoader.load(IOnComponentAdded.class));
 			for (IOnComponentAdded component : components)
 			{
 				component.onComponentAdded(this, (ComponentHierarchyBase<?, ?, ?, ?, ?>) newChild);
@@ -875,7 +881,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren,
 	protected StringBuilder renderHTML(int tabCount)
 	{
 		boolean renderChildren = true;
-		Set<IOnComponentHtmlRender> htmlRenderTriggers = IDefaultService.loaderToSet(ServiceLoader.load(IOnComponentHtmlRender.class));
+		Set<IOnComponentHtmlRender> htmlRenderTriggers = GuiceContext.instance().loaderToSet(ServiceLoader.load(IOnComponentHtmlRender.class));
 		for (IOnComponentHtmlRender htmlRenderTrigger : htmlRenderTriggers)
 		{
 			try

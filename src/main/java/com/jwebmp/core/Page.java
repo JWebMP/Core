@@ -16,29 +16,38 @@
  */
 package com.jwebmp.core;
 
-import com.google.inject.*;
-import com.guicedee.guicedinjection.*;
-import com.guicedee.logger.*;
-import com.jwebmp.core.annotations.*;
-import com.jwebmp.core.base.*;
-import com.jwebmp.core.base.ajax.*;
-import com.jwebmp.core.base.client.*;
+import com.google.inject.OutOfScopeException;
+import com.google.inject.ProvisionException;
+import com.guicedee.guicedinjection.GuiceContext;
+import com.jwebmp.core.annotations.PageConfiguration;
+import com.jwebmp.core.base.ComponentDependencyBase;
+import com.jwebmp.core.base.ContentSecurityPolicy;
+import com.jwebmp.core.base.ajax.AjaxCall;
+import com.jwebmp.core.base.ajax.AjaxResponse;
+import com.jwebmp.core.base.client.InternetExplorerCompatibilityMode;
 import com.jwebmp.core.base.html.*;
-import com.jwebmp.core.base.html.attributes.*;
-import com.jwebmp.core.base.html.interfaces.children.*;
-import com.jwebmp.core.base.interfaces.*;
-import com.jwebmp.core.base.references.*;
-import com.jwebmp.core.services.*;
-import com.jwebmp.core.utilities.*;
-import jakarta.validation.constraints.*;
-import net.sf.uadetector.*;
+import com.jwebmp.core.base.html.attributes.ScriptAttributes;
+import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
+import com.jwebmp.core.base.html.interfaces.children.HtmlChildren;
+import com.jwebmp.core.base.interfaces.IComponentFeatureBase;
+import com.jwebmp.core.base.references.CSSReference;
+import com.jwebmp.core.base.references.JavascriptReference;
+import com.jwebmp.core.services.IPage;
+import com.jwebmp.core.services.IPageConfigurator;
+import com.jwebmp.core.utilities.StaticStrings;
+import jakarta.validation.constraints.NotNull;
+import lombok.extern.java.Log;
+import net.sf.uadetector.ReadableDeviceCategory;
+import net.sf.uadetector.ReadableUserAgent;
 
-import java.util.*;
-import java.util.logging.*;
+import java.util.EnumSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.logging.Level;
 
-import static com.guicedee.guicedinjection.json.StaticStrings.*;
-import static com.jwebmp.core.implementations.ReadableUserAgentProvider.*;
-import static com.jwebmp.core.services.JWebMPServicesBindings.*;
+import static com.guicedee.services.jsonrepresentation.json.StaticStrings.STRING_SEMICOLON;
+import static com.jwebmp.core.implementations.ReadableUserAgentProvider.defaultAgent;
+import static com.jwebmp.core.services.JWebMPServicesBindings.IPageConfiguratorsKey;
 
 /**
  * Top level of any HTML page.
@@ -55,12 +64,11 @@ import static com.jwebmp.core.services.JWebMPServicesBindings.*;
  */
 @SuppressWarnings({"unused"})
 @PageConfiguration
+@Log
 public class Page<J extends Page<J>>
 		extends Html<HtmlChildren, J>
 		implements IPage<J>
 {
-	private static final Logger log = LogFactory.getInstance()
-	                                            .getLogger("Page");
 	/**
 	 * The options available
 	 */

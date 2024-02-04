@@ -16,23 +16,25 @@
  */
 package com.jwebmp.core.base.servlets;
 
-import com.google.inject.*;
-import com.guicedee.guicedinjection.representations.*;
-import com.guicedee.guicedservlets.*;
-import com.guicedee.logger.*;
-import com.jwebmp.core.*;
+import com.google.inject.Singleton;
+import com.guicedee.guicedservlets.GuicedServletKeys;
+import com.guicedee.services.jsonrepresentation.IJsonRepresentation;
+import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.*;
-import com.jwebmp.core.exceptions.*;
-import com.jwebmp.core.utilities.*;
-import com.jwebmp.interception.services.*;
-import jakarta.servlet.http.*;
+import com.jwebmp.core.exceptions.InvalidRequestException;
+import com.jwebmp.core.exceptions.MissingComponentException;
+import com.jwebmp.core.utilities.TextUtilities;
+import com.jwebmp.interception.services.AjaxCallIntercepter;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.java.Log;
 
-import java.util.logging.*;
+import java.util.logging.Level;
 
-import static com.guicedee.guicedinjection.GuiceContext.*;
-import static com.guicedee.guicedinjection.json.StaticStrings.*;
-import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
-import static java.nio.charset.StandardCharsets.*;
+import static com.guicedee.guicedinjection.GuiceContext.get;
+import static com.guicedee.services.jsonrepresentation.json.StaticStrings.CHAR_DOT;
+import static com.guicedee.services.jsonrepresentation.json.StaticStrings.CHAR_UNDERSCORE;
+import static com.jwebmp.interception.JWebMPInterceptionBinder.AjaxCallInterceptorKey;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Handles all AJAX Requests performed by a client connection. Session codes are used in order to identify
@@ -41,12 +43,10 @@ import static java.nio.charset.StandardCharsets.*;
  * @author GedMarc
  */
 @Singleton
+@Log
 public class AjaxReceiverServlet
 		extends JWDefaultServlet
 {
-	private static final Logger log = LogFactory.getInstance()
-	                                            .getLogger("AJAXServlet");
-	
 	public AjaxReceiverServlet()
 	{
 		//Quick construction

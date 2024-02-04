@@ -14,7 +14,7 @@ import com.jwebmp.core.services.IDynamicRenderingServlet;
 import com.jwebmp.core.services.IPageConfigurator;
 import com.jwebmp.core.services.RenderAfterDynamicScripts;
 import com.jwebmp.core.services.RenderBeforeDynamicScripts;
-import com.guicedee.guicedinjection.json.StaticStrings;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
 
 import jakarta.validation.constraints.NotNull;

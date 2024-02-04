@@ -17,13 +17,15 @@
 package com.jwebmp.core.events.rightclick;
 
 import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
-import com.jwebmp.core.base.html.interfaces.events.*;
+import com.jwebmp.core.base.html.interfaces.events.BodyEvents;
+import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.html.interfaces.events.ParagraphEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
+import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
 import java.util.Set;
@@ -34,16 +36,11 @@ import java.util.logging.Level;
  *
  * @author GedMarc
  */
+@Log
 public abstract class RightClickAdapter<J extends RightClickAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements ParagraphEvents<GlobalFeatures, J>, BodyEvents<GlobalFeatures, J>, GlobalEvents<J>
 {
-	/**
-	 * Logger for the Component
-	 */
-	private static final java.util.logging.Logger log = LogFactory.getInstance()
-	                                                              .getLogger("RightClickEvent");
-	
 	/**
 	 * Performs a click
 	 *

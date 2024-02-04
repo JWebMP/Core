@@ -20,7 +20,7 @@ import com.jwebmp.core.base.html.Input;
 import com.jwebmp.core.base.html.attributes.InputCheckBoxTypeAttributes;
 import com.jwebmp.core.base.html.attributes.InputTypes;
 import com.jwebmp.core.base.html.interfaces.InputChoiceType;
-import com.guicedee.guicedinjection.json.StaticStrings;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 
 import jakarta.validation.constraints.NotNull;
 

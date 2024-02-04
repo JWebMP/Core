@@ -17,14 +17,13 @@
 package com.jwebmp.core.base.servlets;
 
 import com.google.inject.Singleton;
-import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.guicedservlets.GuicedServletKeys;
-import com.guicedee.logger.LogFactory;
-
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.java.Log;
+
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The base Servlet for the JWebSwing environment. Constructs each page on call
@@ -34,15 +33,10 @@ import java.util.logging.Logger;
  * @since 2012/10/09
  */
 @Singleton
+@Log
 public class JWebMPServlet
 		extends JWDefaultServlet
 {
-
-	/**
-	 * The logger for the swing Servlet
-	 */
-	private static final Logger log = LogFactory.getInstance()
-	                                            .getLogger("JWebSwingServlet");
 
 	/**
 	 * Constructs a new JWebSwing Servlet that is not session aware

@@ -21,16 +21,16 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.core.services.IRegularExpressions;
+import lombok.extern.java.Log;
 
 import java.util.*;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.*;
-import static com.fasterxml.jackson.annotation.JsonInclude.Include.*;
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.PUBLIC_ONLY;
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
 /**
  * @author GedMarc
@@ -41,10 +41,10 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.*;
 		setterVisibility = NONE)
 @JsonInclude(NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Log
 public class RegularExpressionsDTO
 		extends JavaScriptPart<RegularExpressionsDTO>
 {
-	private static final Logger log = LogFactory.getLog("RegularExpressionDTO");
 
 	/**
 	 * Default regular expressions

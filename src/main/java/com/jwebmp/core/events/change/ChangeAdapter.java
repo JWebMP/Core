@@ -17,7 +17,6 @@
 package com.jwebmp.core.events.change;
 
 import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -26,6 +25,7 @@ import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
+import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
 import java.util.Set;
@@ -38,16 +38,11 @@ import java.util.logging.Level;
  */
 @ComponentInformation(name = "Change Event",
 		description = "Server Side Event for Change.")
+@Log
 public abstract class ChangeAdapter<J extends ChangeAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents<J>
 {
-	/**
-	 * Logger for the Component
-	 */
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
-	                                                              .getLogger("ChangeEvent");
-
 	/**
 	 * Performs on a change
 	 *
@@ -70,7 +65,7 @@ public abstract class ChangeAdapter<J extends ChangeAdapter<J>>
 		}
 		catch (Exception e)
 		{
-			ChangeAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			ChangeAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 

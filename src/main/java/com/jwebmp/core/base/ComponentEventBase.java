@@ -16,17 +16,21 @@
  */
 package com.jwebmp.core.base;
 
-import com.fasterxml.jackson.annotation.*;
-import com.guicedee.logger.LogFactory;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
-import com.jwebmp.core.base.interfaces.*;
+import com.jwebmp.core.base.interfaces.IComponentEventBase;
+import com.jwebmp.core.base.interfaces.IComponentFeatureBase;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import jakarta.validation.constraints.NotNull;
+import lombok.extern.java.Log;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -42,18 +46,12 @@ import java.util.logging.Level;
  * @version 2.0
  * @since 23 Apr 2013
  */
+@Log
 public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents,
 		J extends ComponentEventBase<F, E, J>>
 		extends ComponentFeatureBase<F, J>
 		implements IComponentEventBase<E, J>,GlobalEvents<J>
 {
-	
-	/**
-	 * Logger for the Component
-	 */
-	@JsonIgnore
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
-	                                                              .getLogger("ComponentEventBase");
 	/**
 	 * The event of this component
 	 */
@@ -127,7 +125,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 			                                .getComponentType()
 			                                .equals(ComponentTypes.Event))
 			{
-				ComponentEventBase.LOG.log(Level.WARNING, "Tried to add a non event to the event collection");
+				ComponentEventBase.log.log(Level.WARNING, "Tried to add a non event to the event collection");
 			}
 			else
 			{

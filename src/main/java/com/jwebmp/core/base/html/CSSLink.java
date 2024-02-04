@@ -29,7 +29,8 @@ import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.guicedee.logger.LogFactory;
+import lombok.extern.java.Log;
+
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,13 +68,13 @@ import java.util.logging.Logger;
  * @version 1.0
  * @since 2013/11/12
  */
+@Log
 public class CSSLink<J extends CSSLink<J>>
 		extends Component<NoChildren, CSSLinkAttributes, NoFeatures, NoEvents, J>
 		implements NoClosingTag, HeadChildren
 {
 
-	private static final Logger LOG = LogFactory.getInstance()
-	                                            .getLogger("HeadCSSLink");
+	
 
 
 	/**
@@ -170,7 +171,7 @@ public class CSSLink<J extends CSSLink<J>>
 		}
 		catch (Exception e)
 		{
-			CSSLink.LOG.log(Level.WARNING, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
+			log.log(Level.WARNING, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
 		}
 	}
 

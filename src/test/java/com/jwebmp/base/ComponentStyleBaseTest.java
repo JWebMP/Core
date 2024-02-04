@@ -25,7 +25,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.htmlbuilder.css.colours.ColourNames;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Fail.*;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * @author ged_m

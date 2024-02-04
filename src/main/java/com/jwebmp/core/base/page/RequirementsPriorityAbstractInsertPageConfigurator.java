@@ -35,7 +35,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.guicedee.guicedinjection.json.StaticStrings.STRING_EMPTY;
+import static com.guicedee.services.jsonrepresentation.json.StaticStrings.STRING_EMPTY;
 import static com.jwebmp.core.utilities.StaticStrings.*;
 
 abstract class RequirementsPriorityAbstractInsertPageConfigurator<J extends RequirementsPriorityAbstractInsertPageConfigurator<J>>

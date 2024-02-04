@@ -18,7 +18,7 @@ package com.jwebmp.core.base.servlets;
 
 import com.google.inject.Singleton;
 import com.jwebmp.core.Page;
-import com.guicedee.guicedinjection.json.StaticStrings;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.jwebmp.core.services.IPage;

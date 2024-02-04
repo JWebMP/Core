@@ -16,15 +16,14 @@
  */
 package com.jwebmp.core.events.resizestop;
 
-import com.jwebmp.core.Component;
+import com.guicedee.guicedinjection.GuiceContext;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.logger.LogFactory;
+import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
 import java.util.Set;
@@ -35,17 +34,11 @@ import java.util.logging.Level;
  *
  * @author GedMarc
  */
+@Log
 public abstract class ResizeStopAdapter<J extends ResizeStopAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents<J>
 {
-
-	/**
-	 * Logger for the Component
-	 */
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
-	                                                              .getLogger("ResizeStopEvent");
-
 	/**
 	 * Performs a click
 	 *
@@ -68,7 +61,7 @@ public abstract class ResizeStopAdapter<J extends ResizeStopAdapter<J>>
 		}
 		catch (Exception e)
 		{
-			ResizeStopAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			ResizeStopAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 

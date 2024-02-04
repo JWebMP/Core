@@ -17,9 +17,11 @@
 package com.jwebmp.core.base.html.attributes;
 
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
+import com.jwebmp.core.utilities.StaticStrings;
 
-import static com.guicedee.guicedinjection.json.StaticStrings.CHAR_DASH;
-import static com.guicedee.guicedinjection.json.StaticStrings.CHAR_UNDERSCORE;
+//import static com.guicedee.services.jsonrepresentation.json.StaticStrings.CHAR_DASH;
+//import static com.guicedee.services.jsonrepresentation.json.StaticStrings.CHAR_UNDERSCORE;
+import static com.guicedee.services.jsonrepresentation.json.StaticStrings.*;
 import static com.jwebmp.core.utilities.StaticStrings.*;
 
 /**

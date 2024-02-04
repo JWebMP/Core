@@ -27,9 +27,8 @@ import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
 import com.jwebmp.core.base.html.interfaces.children.HtmlChildren;
 import com.jwebmp.core.base.html.interfaces.children.NoChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.guicedee.logger.LogFactory;
+import lombok.extern.java.Log;
 
 import java.io.Serializable;
 import java.util.logging.Level;
@@ -60,15 +59,11 @@ import java.util.logging.Level;
  * @version 1.0
  * @since 2014 09 22
  */
+@Log
 public class Acronym<J extends Acronym<J>>
 		extends Component<NoChildren, NoAttributes, NoFeatures, GlobalEvents, J>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, HtmlChildren, BodyChildren, Serializable, NoIDTag
 {
-	/**
-	 * Logger for the Component
-	 */
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
-	                                                              .getLogger("Acronym");
 
 	/**
 	 * Constructs an Acronym
@@ -110,7 +105,7 @@ public class Acronym<J extends Acronym<J>>
 		}
 		catch (Exception e)
 		{
-			Acronym.LOG.log(Level.FINE, "Unable to determine whether HTML or HTML5. Document type not set?", e);
+			Acronym.log.log(Level.FINE, "Unable to determine whether HTML or HTML5. Document type not set?", e);
 		}
 	}
 }

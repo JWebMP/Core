@@ -1,0 +1,3 @@
+com.jwebmp.core.services.JWebMPServicesBindings
+com.jwebmp.interception.JWebMPInterceptionBinder
+com.jwebmp.core.implementations.JWebMPSiteBinder

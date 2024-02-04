@@ -7,7 +7,7 @@ import com.jwebmp.core.base.ajax.*;
 import jakarta.servlet.http.*;
 import net.sf.uadetector.*;
 
-import static com.guicedee.guicedinjection.json.StaticStrings.*;
+import static com.guicedee.services.jsonrepresentation.json.StaticStrings.*;
 
 public class ReadableUserAgentProvider implements Provider<ReadableUserAgent>
 {

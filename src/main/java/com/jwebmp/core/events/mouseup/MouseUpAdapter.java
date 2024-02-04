@@ -16,15 +16,14 @@
  */
 package com.jwebmp.core.events.mouseup;
 
-import com.jwebmp.core.Component;
+import com.guicedee.guicedinjection.GuiceContext;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.logger.LogFactory;
+import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
 import java.util.Set;
@@ -35,18 +34,11 @@ import java.util.logging.Level;
  *
  * @author GedMarc
  */
+@Log
 public abstract class MouseUpAdapter<J extends MouseUpAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents<J>
 {
-
-	/**
-	 * Logger for the Component
-	 */
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
-	                                                              .getLogger("MouseUpEvent");
-
-
 	/**
 	 * Performs a click
 	 *
@@ -69,7 +61,7 @@ public abstract class MouseUpAdapter<J extends MouseUpAdapter<J>>
 		}
 		catch (Exception e)
 		{
-			MouseUpAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			MouseUpAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 

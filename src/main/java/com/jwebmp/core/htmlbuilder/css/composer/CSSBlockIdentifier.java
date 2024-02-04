@@ -18,7 +18,7 @@
 package com.jwebmp.core.htmlbuilder.css.composer;
 
 import com.jwebmp.core.htmlbuilder.css.enumarations.CSSTypePosition;
-import com.guicedee.guicedinjection.json.StaticStrings;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 
 /**
  * Type of CSS Block Identifier, e.g. class, ID, In-Line, or inherited

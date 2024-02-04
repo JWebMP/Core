@@ -2,7 +2,8 @@ package com.jwebmp.core.base;
 
 import com.google.common.base.Strings;
 import com.google.inject.servlet.RequestScoped;
-import com.guicedee.guicedservlets.services.scopes.CallScope;
+//import com.guicedee.guicedservlets.servlets.services.scopes.CallScope;
+import com.guicedee.guicedservlets.servlets.services.scopes.CallScope;
 import com.jwebmp.core.base.html.DivSimple;
 import com.jwebmp.core.base.interfaces.IContentSecurityPolicy;
 
@@ -12,7 +13,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static com.guicedee.guicedinjection.json.StaticStrings.STRING_SPACE;
+import static com.guicedee.services.jsonrepresentation.json.StaticStrings.STRING_SPACE;
 import static com.jwebmp.core.base.html.attributes.MetaAttributes.*;
 import static com.jwebmp.core.base.servlets.enumarations.ComponentTypes.*;
 

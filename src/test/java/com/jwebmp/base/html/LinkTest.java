@@ -22,7 +22,7 @@
 package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.base.html.attributes.GlobalAttributes;
-import com.guicedee.guicedinjection.json.StaticStrings;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

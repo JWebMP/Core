@@ -23,10 +23,9 @@ import com.jwebmp.core.base.html.interfaces.children.TableColumnGroupChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.guicedee.logger.LogFactory;
+import lombok.extern.java.Log;
 
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Definition and Usage<p>
@@ -51,15 +50,11 @@ import java.util.logging.Logger;
  * @author GedMarc
  * @since 2014/12/20
  */
+@Log
 public class TableColumn<J extends TableColumn<J>>
 		extends Component<IComponentHierarchyBase<?,?>, TableColumnAttributes, GlobalFeatures, GlobalEvents, J>
 		implements TableColumnGroupChildren
 {
-
-	private static final Logger log = LogFactory.getInstance()
-	                                            .getLogger("TableColumn");
-
-
 	/**
 	 * Constructs a new table column
 	 */

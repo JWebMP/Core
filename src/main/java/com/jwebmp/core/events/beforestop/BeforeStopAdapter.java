@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.events.beforestop;
 
-import com.jwebmp.core.Component;
+import com.guicedee.guicedinjection.GuiceContext;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -24,8 +24,7 @@ import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.logger.LogFactory;
+import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
 import java.util.Set;
@@ -38,17 +37,11 @@ import java.util.logging.Level;
  */
 @ComponentInformation(name = "Before Stop Event",
 		description = "Server Side Event for Before Stop Event.")
+@Log
 public abstract class BeforeStopAdapter<J extends BeforeStopAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents<J>
 {
-
-	/**
-	 * Logger for the Component
-	 */
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
-	                                                              .getLogger("BeforeStopEvent");
-
 	/**
 	 * Performs a click
 	 *
@@ -71,7 +64,7 @@ public abstract class BeforeStopAdapter<J extends BeforeStopAdapter<J>>
 		}
 		catch (Exception e)
 		{
-			BeforeStopAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			BeforeStopAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 

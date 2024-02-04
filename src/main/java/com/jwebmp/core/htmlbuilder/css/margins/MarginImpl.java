@@ -23,7 +23,7 @@ import com.jwebmp.core.htmlbuilder.css.annotations.CSSImplementationClass;
 import com.jwebmp.core.htmlbuilder.css.enumarations.MarginSetting;
 import com.jwebmp.core.htmlbuilder.css.interfaces.CSSShortHand;
 import com.jwebmp.core.htmlbuilder.css.measurement.MeasurementCSSImpl;
-import com.guicedee.guicedinjection.json.StaticStrings;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 
 /**
  * To shorten the code, it is possible to specify all the margin properties in one property.

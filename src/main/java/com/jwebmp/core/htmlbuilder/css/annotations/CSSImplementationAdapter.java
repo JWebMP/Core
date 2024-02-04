@@ -22,7 +22,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.jwebmp.core.htmlbuilder.css.CSSPropertiesFactory;
 import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.logger.LogFactory;
+import lombok.extern.java.Log;
+
 
 import java.lang.annotation.Annotation;
 import java.util.Map;
@@ -44,16 +45,10 @@ import static com.fasterxml.jackson.databind.SerializationFeature.*;
 		getterVisibility = JsonAutoDetect.Visibility.NONE,
 		setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Log
 public class CSSImplementationAdapter<A extends Annotation, T extends CSSImplementationClass<A,T>>
 		implements CSSImplementationClass<A, T>
 {
-
-
-	/**
-	 * The default adapter
-	 */
-	private static final java.util.logging.Logger log = LogFactory.getInstance()
-	                                                              .getLogger("CSSImpAdapter");
 	/**
 	 * The properties factory
 	 */

@@ -16,24 +16,19 @@
  */
 package com.jwebmp.core.base.servlets;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Singleton;
+import com.guicedee.guicedservlets.GuicedServletKeys;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.servlets.interfaces.IDataComponent;
-import com.guicedee.guicedinjection.json.StaticStrings;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.DataCallIntercepter;
-import com.guicedee.logger.LogFactory;
-
 import jakarta.servlet.http.HttpServletRequest;
-import java.util.logging.Logger;
+import lombok.extern.java.Log;
 
-import static com.guicedee.guicedinjection.GuiceContext.*;
-import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
+import static com.guicedee.guicedinjection.GuiceContext.get;
+import static com.jwebmp.interception.JWebMPInterceptionBinder.DataCallInterceptorKey;
 
 /**
  * Provides the data for a specific component
@@ -43,16 +38,11 @@ import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
  * @since Nov 15, 2016
  */
 @Singleton
+@Log
 public class DataServlet
 		extends JWDefaultServlet
 {
-
-	/**
-	 * The Servlet base logger
-	 */
-	@SuppressWarnings("unused")
-	private static final Logger log = LogFactory.getInstance()
-	                                            .getLogger("DataServlet");
+	
 	/**
 	 * A data server
 	 */

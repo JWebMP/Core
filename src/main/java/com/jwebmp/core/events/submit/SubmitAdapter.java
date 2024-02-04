@@ -16,6 +16,7 @@
  */
 package com.jwebmp.core.events.submit;
 
+import com.guicedee.guicedinjection.GuiceContext;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -26,8 +27,7 @@ import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.html.interfaces.events.ParagraphEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.logger.LogFactory;
+import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
 import java.util.Set;
@@ -41,17 +41,12 @@ import java.util.logging.Level;
 @SuppressWarnings("unused")
 @ComponentInformation(name = "Submit Event",
 		description = "Server Side Event for Submit.")
+@Log
 public abstract class SubmitAdapter<J extends SubmitAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements ParagraphEvents<GlobalFeatures, J>,
 		           BodyEvents<GlobalFeatures, J>, GlobalEvents<J>
 {
-	/**
-	 * Logger for the Component
-	 */
-	private static final java.util.logging.Logger log = LogFactory.getInstance()
-	                                                              .getLogger("SubmitAdapter");
-	
 	protected SubmitAdapter()
 	{
 		super("Submit", EventTypes.submit);

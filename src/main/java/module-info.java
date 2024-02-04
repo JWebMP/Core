@@ -1,11 +1,19 @@
+import com.guicedee.guicedinjection.interfaces.IGuiceModule;
+import com.jwebmp.core.implementations.JWebMPSiteBinder;
+import com.jwebmp.core.services.JWebMPServicesBindings;
+import com.jwebmp.interception.JWebMPInterceptionBinder;
+
 module com.jwebmp.core {
 
-    requires transitive com.guicedee.logmaster;
+    requires static lombok;
+    
     requires transitive com.guicedee.guicedinjection;
     requires transitive com.guicedee.guicedservlets;
     requires transitive jakarta.validation;
     requires transitive jakarta.servlet;
     requires transitive com.google.guice.extensions.servlet;
+    
+    requires transitive com.guicedee.client;
     
     requires net.sf.uadetector.core;
     requires net.sf.uadetector.resources;
@@ -13,11 +21,14 @@ module com.jwebmp.core {
     requires aopalliance;
 
     requires com.google.guice;
+    
+    requires com.guicedee.jsonrepresentation;
 
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.core;
-
-    requires jakarta.websocket.api;
+    
+    requires jakarta.websocket;
+    requires jakarta.websocket.client;
 
     requires com.google.common;
     requires org.apache.commons.io;
@@ -227,9 +238,9 @@ module com.jwebmp.core {
     uses com.jwebmp.core.databind.IOnComponentHtmlRender;
     uses com.jwebmp.core.databind.IOnComponentAdded;
 
-    provides com.guicedee.guicedservlets.services.IGuiceSiteBinder with com.jwebmp.core.implementations.JWebMPSiteBinder;
-    provides com.guicedee.guicedinjection.interfaces.IGuiceDefaultBinder with com.jwebmp.core.services.JWebMPServicesBindings,
-            com.jwebmp.interception.JWebMPInterceptionBinder;
+    
+    provides IGuiceModule with JWebMPServicesBindings, JWebMPInterceptionBinder, JWebMPSiteBinder;
+    
     provides com.guicedee.guicedinjection.interfaces.IGuiceScanModuleInclusions with com.jwebmp.core.implementations.JWebMPModuleInclusions;
 
     provides com.jwebmp.core.services.IDynamicRenderingServlet with com.jwebmp.core.implementations.JWebMPDynamicScriptRenderer, com.jwebmp.core.implementations.JWebMPJavaScriptDynamicScriptRenderer;

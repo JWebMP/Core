@@ -26,7 +26,7 @@ import com.jwebmp.core.htmlbuilder.css.enumarations.Repeats;
 import com.jwebmp.core.htmlbuilder.css.image.ImageCSSImpl;
 import com.jwebmp.core.htmlbuilder.css.interfaces.CSSShortHand;
 import com.jwebmp.core.htmlbuilder.css.measurement.MeasurementCSSImpl;
-import com.guicedee.guicedinjection.json.StaticStrings;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 
 import java.util.Arrays;
 

@@ -16,17 +16,20 @@
  */
 package com.jwebmp.core.base;
 
-import com.fasterxml.jackson.annotation.*;
-import com.guicedee.guicedinjection.json.StaticStrings;
-import com.guicedee.logger.*;
-import com.jwebmp.core.base.interfaces.*;
-import com.jwebmp.core.base.servlets.enumarations.*;
-import com.jwebmp.core.htmlbuilder.javascript.*;
-import com.jwebmp.core.utilities.*;
-import jakarta.validation.constraints.*;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
+import com.jwebmp.core.base.interfaces.IComponentBase;
+import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
+import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
+import com.jwebmp.core.utilities.GUIDGenerator;
+import jakarta.validation.constraints.NotNull;
+import lombok.extern.java.Log;
 
-import java.util.*;
-import java.util.logging.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
 
 /**
  * Defines the raw necessities for a component to exist
@@ -40,15 +43,11 @@ import java.util.logging.*;
                 getterVisibility = JsonAutoDetect.Visibility.NONE,
                 setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Log
 public class ComponentBase<J extends ComponentBase<J>>
 		implements IComponentBase<J>
 {
 	
-	/**
-	 * Logger for the Component
-	 */
-	@JsonIgnore
-	protected static final java.util.logging.Logger log = LogFactory.getLog("ComponentBase");
 	/**
 	 * The ID of the component rendering for
 	 */

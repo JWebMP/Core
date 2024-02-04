@@ -17,24 +17,21 @@
 package com.jwebmp.core;
 
 import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.utilities.StaticStrings;
-
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.java.Log;
 
-import java.net.InetAddress;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import static com.guicedee.guicedinjection.json.StaticStrings.STRING_FORWARD_SLASH;
+import static com.guicedee.services.jsonrepresentation.json.StaticStrings.STRING_FORWARD_SLASH;
 
 /**
  * @author GedMarc
  * @since 05 Apr 2017
  */
+@Log
 public class SessionHelper
 {
-	private static final Logger log = LogFactory.getLog("SessionHelper");
 	/**
 	 * The given address
 	 */

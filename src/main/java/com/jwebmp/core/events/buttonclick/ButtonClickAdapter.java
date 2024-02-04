@@ -23,6 +23,7 @@ import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
+import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
 import java.util.Set;
@@ -34,6 +35,7 @@ import java.util.Set;
  */
 @ComponentInformation(name = "Button Event",
 		description = "Server Side Event for Button Click Event.")
+@Log
 public abstract class ButtonClickAdapter<J extends ButtonClickAdapter<J>>
 		extends Event<GlobalFeatures, J>
 

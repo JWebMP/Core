@@ -16,22 +16,29 @@
  */
 package com.jwebmp.core.base;
 
-import com.fasterxml.jackson.annotation.*;
-import com.google.common.base.*;
-import com.guicedee.guicedinjection.json.*;
-import com.guicedee.logger.*;
-import com.jwebmp.core.base.html.attributes.*;
-import com.jwebmp.core.base.html.interfaces.*;
-import com.jwebmp.core.base.html.interfaces.events.*;
-import com.jwebmp.core.base.interfaces.*;
-import com.jwebmp.core.base.servlets.enumarations.*;
-import jakarta.validation.constraints.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.google.common.base.Strings;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
+import com.guicedee.services.jsonrepresentation.json.StringToBoolean;
+import com.guicedee.services.jsonrepresentation.json.StringToIntegerRelaxed;
+import com.jwebmp.core.base.html.attributes.GlobalAttributes;
+import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
+import com.jwebmp.core.base.html.interfaces.NoClassAttribute;
+import com.jwebmp.core.base.html.interfaces.NoIDTag;
+import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHTMLAttributeBase;
+import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
+import jakarta.validation.constraints.NotNull;
+import lombok.extern.java.Log;
 
-import java.util.*;
-import java.util.Map.*;
-import java.util.logging.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
+import java.util.logging.Level;
 
-import static com.jwebmp.core.base.html.attributes.GlobalAttributes.*;
+import static com.jwebmp.core.base.html.attributes.GlobalAttributes.Style;
 
 /**
  * Denotes a component that has a tag. By default these can add events, features, variables etc
@@ -43,14 +50,9 @@ import static com.jwebmp.core.base.html.attributes.GlobalAttributes.*;
  * @author GedMarc
  * @since 23 Apr 2016
  */
+@Log
 public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHTMLAttributeBase<A, F, E, J>> extends ComponentHTMLOptionsBase<F, E, J> implements IComponentHTMLAttributeBase<A, J>
 {
-	/**
-	 * Logger for the Component
-	 */
-	@JsonIgnore
-	private static final java.util.logging.Logger LOG = LogFactory.getLog("ComponentAttributes");
-	
 	/**
 	 * The current stored attribute lists
 	 */
@@ -441,7 +443,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
 		}
 		catch (NumberFormatException | NullPointerException nfe)
 		{
-			ComponentHTMLAttributeBase.LOG.log(Level.FINE, "Invalid Global Attribute Reference [" + getClass().getSimpleName() + "] - [" + attribute + "]. Ignoring.", nfe);
+			ComponentHTMLAttributeBase.log.log(Level.FINE, "Invalid Global Attribute Reference [" + getClass().getSimpleName() + "] - [" + attribute + "]. Ignoring.", nfe);
 			return bop;
 		}
 	}

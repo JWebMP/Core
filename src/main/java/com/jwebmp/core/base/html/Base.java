@@ -22,9 +22,8 @@ import com.jwebmp.core.base.html.interfaces.*;
 import com.jwebmp.core.base.html.interfaces.children.HeadChildren;
 import com.jwebmp.core.base.html.interfaces.children.NoChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.guicedee.logger.LogFactory;
+import lombok.extern.java.Log;
 
 import java.util.logging.Level;
 
@@ -60,16 +59,12 @@ import java.util.logging.Level;
  * @version 1.0
  * @since 2013/11/12
  */
+@Log
 public class Base<J extends Base<J>>
 		extends Component<NoChildren, BaseAttributes, NoFeatures, NoEvents, J>
 		implements NoIDTag, NoClosingTag, HeadChildren, NoClosingBracket, NoClassAttribute
 {
-
-	/**
-	 * Logger for the Component
-	 */
-	private static final java.util.logging.Logger log = LogFactory.getInstance()
-	                                                              .getLogger("Base");
+	
 	/**
 	 * Serial Version for all Components and their compatibility
 	 */

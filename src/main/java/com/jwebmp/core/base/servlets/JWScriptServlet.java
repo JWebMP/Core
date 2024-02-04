@@ -18,7 +18,7 @@ package com.jwebmp.core.base.servlets;
 
 import com.google.inject.*;
 import com.guicedee.guicedinjection.*;
-import com.guicedee.guicedinjection.json.*;
+import com.guicedee.services.jsonrepresentation.json.*;
 import com.guicedee.guicedservlets.*;
 import com.jwebmp.core.*;
 import jakarta.servlet.http.*;

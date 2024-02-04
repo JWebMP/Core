@@ -16,25 +16,34 @@
  */
 package com.jwebmp.core.implementations;
 
-import com.google.inject.*;
-import com.guicedee.guicedinjection.*;
-import com.guicedee.guicedservlets.services.*;
-import com.guicedee.guicedservlets.services.scopes.*;
-import com.guicedee.logger.*;
-import com.jwebmp.core.*;
-import com.jwebmp.core.annotations.*;
-import com.jwebmp.core.base.*;
-import com.jwebmp.core.base.ajax.*;
+import com.google.inject.TypeLiteral;
+import com.google.inject.servlet.ServletModule;
+import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.interfaces.IGuiceModule;
+import com.guicedee.guicedservlets.services.GuiceSiteInjectorModule;
+import com.guicedee.guicedservlets.servlets.services.scopes.CallScope;
+import com.jwebmp.core.Page;
+import com.jwebmp.core.annotations.PageConfiguration;
+import com.jwebmp.core.base.ComponentBase;
+import com.jwebmp.core.base.ComponentHierarchyBase;
+import com.jwebmp.core.base.ajax.AjaxCall;
+import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.servlets.*;
-import com.jwebmp.core.services.*;
-import com.jwebmp.core.utilities.*;
-import net.sf.uadetector.*;
-import net.sf.uadetector.service.*;
+import com.jwebmp.core.services.IPage;
+import com.jwebmp.core.utilities.StaticStrings;
+import lombok.extern.java.Log;
+import net.sf.uadetector.ReadableUserAgent;
+import net.sf.uadetector.UserAgentStringParser;
+import net.sf.uadetector.service.UADetectorServiceFactory;
 
-import java.util.*;
-import java.util.logging.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ServiceLoader;
+import java.util.Set;
+import java.util.logging.Level;
 
-import static com.guicedee.guicedinjection.json.StaticStrings.*;
+import static com.guicedee.services.jsonrepresentation.json.StaticStrings.STRING_EMPTY;
+import static com.guicedee.services.jsonrepresentation.json.StaticStrings.STRING_FORWARD_SLASH;
 
 /**
  * @author GedMarc
@@ -42,13 +51,11 @@ import static com.guicedee.guicedinjection.json.StaticStrings.*;
  * @since 20 Dec 2016
  */
 @SuppressWarnings("unused")
+@Log
 public class JWebMPSiteBinder
-		implements IGuiceSiteBinder<GuiceSiteInjectorModule>
+	extends ServletModule
+		implements IGuiceModule<GuiceSiteInjectorModule>
 {
-	/**
-	 * Field log
-	 */
-	private static final java.util.logging.Logger log = LogFactory.getLog("JWebMPCoreBinder");
 	/**
 	 * The User Agent Parser
 	 */
@@ -150,34 +157,31 @@ public class JWebMPSiteBinder
 	/**
 	 * Method onBind ...
 	 *
-	 * @param module of type GuiceSiteInjectorModule
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void onBind(GuiceSiteInjectorModule module)
+	public void configureServlets()
 	{
-		
-		
 		JWebMPSiteBinder.log.fine("Bound UserAgentStringParser.class");
-		module.bind(UserAgentStringParser.class)
+		bind(UserAgentStringParser.class)
 		      .toInstance(JWebMPSiteBinder.userAgentParser);
 		JWebMPSiteBinder.log.fine("Bound ReadableUserAgent.class");
 		
-		module.bind(ReadableUserAgent.class)
+		bind(ReadableUserAgent.class)
 		      .toProvider(new ReadableUserAgentProvider())
 		      .in(CallScope.class);
 		
 		JWebMPSiteBinder.log.fine("Bound AjaxResponse.class");
-		module.bind(AjaxResponse.class)
+		bind(AjaxResponse.class)
 		      .in(CallScope.class);
 		
 		JWebMPSiteBinder.log.fine("Bound AjaxCall.class");
-		module.bind(AjaxCall.class)
+		bind(AjaxCall.class)
 		      .in(CallScope.class);
 		
-		module.bind(IPage.class)
+		bind(IPage.class)
 		      .to(Page.class);
-		module.bind(Page.class)
+		bind(Page.class)
 		      .toProvider(new PageProvider())
 		      .in(CallScope.class);
 		
@@ -203,7 +207,7 @@ public class JWebMPSiteBinder
 					   .append(")");
 					
 					
-					module.serveRegex$(url.toString())
+					serveRegex(url.toString())
 					      .with(JWebMPServlet.class);
 					PageProvider.getUrlToClass()
 					            .put(pc.url(), (Class<? extends IPage<?>>) page.getClass());
@@ -218,7 +222,7 @@ public class JWebMPSiteBinder
 					   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
 					   .append(")");
 					
-					module.serveRegex$(url.toString())
+					serveRegex(url.toString())
 					      .with(JavaScriptServlet.class);
 					JWebMPSiteBinder.log.log(Level.FINE, "Serving JavaScripts at {0}", url);
 					
@@ -231,7 +235,7 @@ public class JWebMPSiteBinder
 					   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
 					   .append(")");
 					
-					module.serveRegex$(url.toString())
+					serveRegex(url.toString())
 					      .with(AjaxReceiverServlet.class);
 					JWebMPSiteBinder.log.log(Level.FINE, "Serving Ajax at {0}", url);
 					
@@ -244,7 +248,7 @@ public class JWebMPSiteBinder
 					   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
 					   .append(")");
 					
-					module.serveRegex$(url.toString())
+					serveRegex(url.toString())
 					      .with(CSSServlet.class);
 					JWebMPSiteBinder.log.log(Level.FINE, "Serving CSS at {0}", url);
 					
@@ -257,7 +261,7 @@ public class JWebMPSiteBinder
 					   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
 					   .append(")");
 					
-					module.serveRegex$(url.toString())
+					serveRegex(url.toString())
 					      .with(DataServlet.class);
 					JWebMPSiteBinder.log.log(Level.FINE, "Serving Data at {0}", url);
 					
@@ -269,30 +273,30 @@ public class JWebMPSiteBinder
 					   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
 					   .append(")");
 					
-					module.serveRegex$(url.toString())
+					serveRegex(url.toString())
 					      .with(JWScriptServlet.class);
 					JWebMPSiteBinder.log.log(Level.FINE, "Serving Default Script at {0}", url);
 				}
 			}
 			
-			module.serveRegex$("(" + StaticStrings.JAVASCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
+			serveRegex("(" + StaticStrings.JAVASCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 			      .with(JavaScriptServlet.class);
 			JWebMPSiteBinder.log.log(Level.FINE, "Serving JavaScripts at {0}", StaticStrings.JAVASCRIPT_LOCATION);
 			
 			
-			module.serveRegex$("(" + StaticStrings.AJAX_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
+			serveRegex("(" + StaticStrings.AJAX_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 			      .with(AjaxReceiverServlet.class);
 			JWebMPSiteBinder.log.log(Level.FINE, "Serving Ajax at {0}", StaticStrings.AJAX_SCRIPT_LOCATION);
 			
-			module.serveRegex$("(" + StaticStrings.CSS_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
+			serveRegex("(" + StaticStrings.CSS_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 			      .with(CSSServlet.class);
 			JWebMPSiteBinder.log.log(Level.FINE, "Serving CSS at {0}", StaticStrings.CSS_LOCATION);
 			
-			module.serveRegex$("(" + StaticStrings.DATA_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
+			serveRegex("(" + StaticStrings.DATA_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 			      .with(DataServlet.class);
 			JWebMPSiteBinder.log.log(Level.FINE, "Serving Data at {0}", StaticStrings.DATA_LOCATION);
 			
-			module.serveRegex$("(" + StaticStrings.JW_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
+			serveRegex("(" + StaticStrings.JW_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 			      .with(JWScriptServlet.class);
 			
 			JWebMPSiteBinder.log.log(Level.FINE, "Serving Default Script at {0}", StaticStrings.JW_SCRIPT_LOCATION);

@@ -28,10 +28,9 @@ import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.guicedee.logger.LogFactory;
+import lombok.extern.java.Log;
 
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The Base Component<p>
@@ -79,13 +78,11 @@ import java.util.logging.Logger;
  * @version 1.0
  * @since 2013/11/12
  */
+@Log
 public class Script<C extends IComponentHierarchyBase<?,?>, J extends Script<C, J>>
 		extends ComponentHierarchyBase<C, ScriptAttributes, NoFeatures, NoEvents, J>
 		implements NoIDTag, HeadChildren, NoClassAttribute, BodyChildren, FormChildren
 {
-
-	private static final Logger logger = LogFactory.getInstance()
-	                                               .getLogger("<SCRIPT>");
 
 	private JavascriptReference reference;
 
@@ -250,7 +247,7 @@ public class Script<C extends IComponentHierarchyBase<?,?>, J extends Script<C, 
 			}
 			catch (Exception e)
 			{
-				Script.logger.log(Level.FINE, "Unable to determine whether XHTML or HTML. Skipping CDATA Implementation", e);
+				log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Skipping CDATA Implementation", e);
 			}
 		}
 	}

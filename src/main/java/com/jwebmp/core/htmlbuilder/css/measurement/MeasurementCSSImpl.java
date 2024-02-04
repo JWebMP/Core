@@ -2,11 +2,12 @@ package com.jwebmp.core.htmlbuilder.css.measurement;
 
 import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import com.jwebmp.core.htmlbuilder.css.CSSDetail;
 import com.jwebmp.core.htmlbuilder.css.annotations.CSSImplementationAdapter;
 import com.jwebmp.core.htmlbuilder.css.annotations.CSSImplementationClass;
 import com.jwebmp.core.htmlbuilder.css.annotations.CSSImplementationValue;
-import com.guicedee.guicedinjection.json.StaticStrings;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 
 /**
  * Any basic measurement

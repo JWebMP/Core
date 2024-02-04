@@ -1,18 +1,19 @@
 package com.jwebmp.core.services;
 
+import com.google.inject.AbstractModule;
 import com.google.inject.Key;
 import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.guicedinjection.abstractions.GuiceInjectorModule;
-import com.guicedee.guicedinjection.interfaces.IGuiceDefaultBinder;
+import com.guicedee.guicedinjection.interfaces.IGuiceModule;
 
 import java.util.ServiceLoader;
 import java.util.Set;
 
 @SuppressWarnings({"Convert2Diamond", "MissingFieldJavaDoc"})
 public class JWebMPServicesBindings
-		implements IGuiceDefaultBinder<JWebMPServicesBindings, GuiceInjectorModule>
+	extends AbstractModule
+		implements IGuiceModule<JWebMPServicesBindings>
 {
 	public static final Key<Set<IPageConfigurator>> IPageConfiguratorsKey = Key.get(new TypeLiteral<Set<IPageConfigurator>>() {});
 	public static final Key<Set<RenderAfterScripts>> RenderAfterScriptsKey = Key.get(new TypeLiteral<Set<RenderAfterScripts>>() {});
@@ -23,34 +24,34 @@ public class JWebMPServicesBindings
 	public static final Key<Set<RenderAfterLinks>> RenderAfterLinksKey = Key.get(new TypeLiteral<Set<RenderAfterLinks>>() {});
 
 	@Override
-	public void onBind(GuiceInjectorModule module)
+	public void configure()
 	{
 		//noinspection unchecked
-		module.bind(JWebMPServicesBindings.IPageConfiguratorsKey)
+		bind(JWebMPServicesBindings.IPageConfiguratorsKey)
 		      .toProvider(() -> GuiceContext.instance()
 		                                    .getLoader(IPageConfigurator.class, ServiceLoader.load(IPageConfigurator.class)))
 		      .in(Singleton.class);
-		module.bind(JWebMPServicesBindings.RenderAfterScriptsKey)
+		bind(JWebMPServicesBindings.RenderAfterScriptsKey)
 		      .toProvider(() -> GuiceContext.instance()
 		                                    .getLoader(RenderAfterScripts.class, ServiceLoader.load(RenderAfterScripts.class)))
 		      .in(Singleton.class);
-		module.bind(JWebMPServicesBindings.RenderAfterDynamicScriptsKey)
+		bind(JWebMPServicesBindings.RenderAfterDynamicScriptsKey)
 		      .toProvider(() -> GuiceContext.instance()
 		                                    .getLoader(RenderAfterDynamicScripts.class, ServiceLoader.load(RenderAfterDynamicScripts.class)))
 		      .in(Singleton.class);
-		module.bind(JWebMPServicesBindings.RenderBeforeScriptsKey)
+		bind(JWebMPServicesBindings.RenderBeforeScriptsKey)
 		      .toProvider(() -> GuiceContext.instance()
 		                                    .getLoader(RenderBeforeScripts.class, ServiceLoader.load(RenderBeforeScripts.class)))
 		      .in(Singleton.class);
-		module.bind(JWebMPServicesBindings.RenderBeforeDynamicScriptsKey)
+		bind(JWebMPServicesBindings.RenderBeforeDynamicScriptsKey)
 		      .toProvider(() -> GuiceContext.instance()
 		                                    .getLoader(RenderBeforeDynamicScripts.class, ServiceLoader.load(RenderBeforeDynamicScripts.class)))
 		      .in(Singleton.class);
-		module.bind(JWebMPServicesBindings.RenderBeforeLinksKey)
+		bind(JWebMPServicesBindings.RenderBeforeLinksKey)
 		      .toProvider(() -> GuiceContext.instance()
 		                                    .getLoader(RenderBeforeLinks.class, ServiceLoader.load(RenderBeforeLinks.class)))
 		      .in(Singleton.class);
-		module.bind(JWebMPServicesBindings.RenderAfterLinksKey)
+		bind(JWebMPServicesBindings.RenderAfterLinksKey)
 		      .toProvider(() -> GuiceContext.instance()
 		                                    .getLoader(RenderAfterLinks.class, ServiceLoader.load(RenderAfterLinks.class)))
 		      .in(Singleton.class);

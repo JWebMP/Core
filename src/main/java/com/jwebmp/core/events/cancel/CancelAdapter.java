@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.events.cancel;
 
-import com.jwebmp.core.Component;
+import com.guicedee.guicedinjection.GuiceContext;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -24,8 +24,7 @@ import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.logger.LogFactory;
+import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
 import java.util.Set;
@@ -38,17 +37,12 @@ import java.util.logging.Level;
  */
 @ComponentInformation(name = "Cancel Event",
 		description = "Server Side Event for Cancel Click Event.")
+@Log
 public abstract class CancelAdapter<J extends CancelAdapter<J>>
 		extends Event<GlobalFeatures, J>
 		implements GlobalEvents<J>
 {
-
-	/**
-	 * Logger for the Component
-	 */
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
-	                                                              .getLogger("CancelEvent");
-
+	
 	/**
 	 * Performs a click
 	 *
@@ -70,7 +64,7 @@ public abstract class CancelAdapter<J extends CancelAdapter<J>>
 		}
 		catch (Exception e)
 		{
-			CancelAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			CancelAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 

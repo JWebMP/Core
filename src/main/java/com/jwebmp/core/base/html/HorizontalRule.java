@@ -24,7 +24,7 @@ import com.jwebmp.core.base.html.interfaces.NoIDTag;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.guicedee.logger.LogFactory;
+import lombok.extern.java.Log;
 
 import java.util.logging.Level;
 
@@ -57,13 +57,11 @@ import java.util.logging.Level;
  *
  * @author GedMarc
  */
+@Log
 public class HorizontalRule<J extends HorizontalRule<J>>
 		extends Component<IComponentHierarchyBase<?,?>, NoAttributes, NoFeatures, NoEvents, J>
 		implements NoIDTag, NoClassAttribute
 {
-
-	private static final java.util.logging.Logger log = LogFactory.getInstance()
-	                                                              .getLogger("HR");
 	private static final HorizontalRule hr = new HorizontalRule();
 
 

@@ -17,8 +17,9 @@
 package com.jwebmp.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.guicedee.guicedinjection.json.StaticStrings;
-import com.guicedee.logger.LogFactory;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
+
+import lombok.extern.java.Log;
 import org.apache.commons.io.IOUtils;
 
 import java.io.FileNotFoundException;
@@ -36,9 +37,9 @@ import static java.lang.String.*;
  * @author GedMarc
  * @since A long time ago in a galaxy far away
  */
+@Log
 public class FileTemplates
 {
-	private static final java.util.logging.Logger LOG = LogFactory.getLog("FileTemplates");
 	/**
 	 * All registered templates
 	 */
@@ -119,11 +120,11 @@ public class FileTemplates
 			}
 			catch (NullPointerException iae)
 			{
-				LOG.log(Level.FINER, "[Error]-[Unable to find specified template];[Script]-[" + templateVariable + "]", iae);
+				log.log(Level.FINER, "[Error]-[Unable to find specified template];[Script]-[" + templateVariable + "]", iae);
 			}
 			catch (IllegalArgumentException iae)
 			{
-				LOG.log(Level.WARNING, format("[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[{0}];[Script]-[{1}]", templateVariable, templateScript),
+				log.log(Level.WARNING, format("[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[{0}];[Script]-[{1}]", templateVariable, templateScript),
 				        iae);
 			}
 		}
@@ -253,20 +254,20 @@ public class FileTemplates
 			}
 			catch (FileNotFoundException ex)
 			{
-				LOG.log(Level.SEVERE, "[Error]-[unable to find template file];[TemplateFile]-[" + templateName + "];[TemplatePath]-[" + referenceClass.getResource(templateName)
+				log.log(Level.SEVERE, "[Error]-[unable to find template file];[TemplateFile]-[" + templateName + "];[TemplatePath]-[" + referenceClass.getResource(templateName)
 				                                                                                                                                      .getPath() + "]", ex);
 			}
 			catch (IOException ex)
 			{
-				LOG.log(Level.SEVERE, "Unable to read file contents jwangular template File", ex);
+				log.log(Level.SEVERE, "Unable to read file contents jwangular template File", ex);
 			}
 			catch (NullPointerException npe)
 			{
-				LOG.log(Level.SEVERE, "template file [" + templateFileName + "] not found.", npe);
+				log.log(Level.SEVERE, "template file [" + templateFileName + "] not found.", npe);
 			}
 			catch (Exception npe)
 			{
-				LOG.log(Level.SEVERE, "Exception Rendering Template", npe);
+				log.log(Level.SEVERE, "Exception Rendering Template", npe);
 			}
 		}
 		return TemplateScripts.get(templateName);

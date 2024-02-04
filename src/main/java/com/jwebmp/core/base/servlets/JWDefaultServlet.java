@@ -16,28 +16,36 @@
  */
 package com.jwebmp.core.base.servlets;
 
-import com.guicedee.guicedinjection.*;
-import com.guicedee.guicedinjection.json.StaticStrings;
-import com.guicedee.guicedservlets.*;
-import com.guicedee.logger.*;
-import com.jwebmp.core.*;
-import com.jwebmp.core.base.ajax.*;
-import com.jwebmp.core.base.html.*;
-import com.jwebmp.core.exceptions.*;
-import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.*;
-import com.jwebmp.core.services.*;
-import com.jwebmp.core.utilities.*;
-import com.jwebmp.interception.services.*;
-import jakarta.servlet.http.*;
-import jakarta.validation.constraints.*;
+import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.guicedservlets.GuicedServletKeys;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
+import com.jwebmp.core.Page;
+import com.jwebmp.core.base.ajax.AjaxCall;
+import com.jwebmp.core.base.ajax.AjaxResponse;
+import com.jwebmp.core.base.html.Body;
+import com.jwebmp.core.base.html.PreFormattedText;
+import com.jwebmp.core.exceptions.InvalidRequestException;
+import com.jwebmp.core.exceptions.MissingComponentException;
+import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
+import com.jwebmp.core.services.IErrorPage;
+import com.jwebmp.core.utilities.TextUtilities;
+import com.jwebmp.interception.services.SiteCallIntercepter;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.constraints.NotNull;
+import lombok.extern.java.Log;
 
-import java.io.*;
-import java.nio.charset.*;
-import java.util.*;
-import java.util.logging.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.util.Date;
+import java.util.ServiceLoader;
+import java.util.Set;
+import java.util.logging.Level;
 
-import static com.guicedee.guicedinjection.GuiceContext.*;
-import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
+import static com.guicedee.guicedinjection.GuiceContext.get;
+import static com.jwebmp.interception.JWebMPInterceptionBinder.SiteCallInterceptorKey;
 
 /**
  * Provides default methods for authentication authorization etc
@@ -46,15 +54,11 @@ import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
  * @version 1.0
  * @since Nov 14, 2016
  */
+@Log
 @SuppressWarnings("unused")
 public abstract class JWDefaultServlet
 		extends HttpServlet
 {
-	/**
-	 * The Servlet base logger
-	 */
-	private static final Logger log = LogFactory.getInstance()
-	                                            .getLogger("ServletBase");
 	/**
 	 * Field allowOrigin
 	 */

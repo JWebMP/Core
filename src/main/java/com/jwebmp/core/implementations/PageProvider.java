@@ -1,24 +1,26 @@
 package com.jwebmp.core.implementations;
 
-import com.google.common.base.*;
-import com.google.inject.*;
-import com.guicedee.guicedinjection.*;
-import com.guicedee.guicedinjection.json.*;
-import com.guicedee.guicedservlets.*;
-import com.guicedee.logger.*;
-import com.jwebmp.core.*;
-import com.jwebmp.core.base.ajax.*;
-import com.jwebmp.core.services.*;
-import jakarta.servlet.http.*;
+import com.google.common.base.Strings;
+import com.google.inject.OutOfScopeException;
+import com.google.inject.Provider;
+import com.google.inject.ProvisionException;
+import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.guicedservlets.GuicedServletKeys;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
+import com.jwebmp.core.Page;
+import com.jwebmp.core.base.ajax.AjaxCall;
+import com.jwebmp.core.services.IPage;
+import jakarta.servlet.http.HttpServletRequest;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ServiceLoader;
+import java.util.Set;
 
 @SuppressWarnings("rawtypes")
 public class PageProvider
 		implements Provider<Page>
 {
-	private static final java.util.logging.Logger log = LogFactory.getLog("PageProvider");
-	
 	private static final Map<String, Class<? extends IPage<?>>> urlToClass = new HashMap<>();
 	
 	@Override
