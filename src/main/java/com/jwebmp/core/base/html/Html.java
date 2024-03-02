@@ -16,17 +16,22 @@
  */
 package com.jwebmp.core.base.html;
 
-import com.fasterxml.jackson.annotation.*;
-import com.jwebmp.core.*;
-import com.jwebmp.core.base.client.*;
-import com.jwebmp.core.base.html.attributes.*;
-import com.jwebmp.core.base.html.interfaces.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jwebmp.core.Component;
+import com.jwebmp.core.base.client.Browsers;
+import com.jwebmp.core.base.client.HTMLVersions;
+import com.jwebmp.core.base.html.attributes.NoAttributes;
+import com.jwebmp.core.base.html.interfaces.HTMLFeatures;
+import com.jwebmp.core.base.html.interfaces.NoClassAttribute;
+import com.jwebmp.core.base.html.interfaces.NoIDTag;
+import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
 import com.jwebmp.core.base.html.interfaces.children.HtmlChildren;
-import com.jwebmp.core.base.html.interfaces.events.*;
-import com.jwebmp.core.base.interfaces.CastableComponent;
-import com.jwebmp.core.base.servlets.enumarations.*;
-import com.jwebmp.core.services.IPage;
-import jakarta.validation.constraints.*;
+import com.jwebmp.core.base.html.interfaces.events.NoEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
+import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
+import com.jwebmp.core.base.servlets.enumarations.DevelopmentEnvironments;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * The base HTML Component.<p>
@@ -126,6 +131,20 @@ public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
     }
 
     /**
+     * Returns the body object
+     *
+     * @return
+     */
+    public IComponentHierarchyBase<BodyChildren, ?> getBody()
+    {
+        if (body == null)
+        {
+            body = new Body<>();
+        }
+        return body;
+    }
+
+    /**
      * Returns the current browser or FireFox
      *
      * @return
@@ -211,14 +230,20 @@ public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
     /*
      * Returns the body object on the HTML Tag
      */
-    public Body<?, ?> getBody()
+    /*public Body<?, ?> getBody()
     {
         if (body == null)
         {
             body = new Body<>((IPage) this);
         }
         return body;
-    }
+    }*/
+
+/*    public Body<?, ?> getBody()
+    {
+        return body;
+    }*/
+
 
     /**
      * Sets the body for this class
