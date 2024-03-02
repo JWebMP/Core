@@ -17,7 +17,7 @@
 package com.jwebmp.core.events.deactivate;
 
 
-import com.guicedee.client.*;
+import com.guicedee.client.IGuiceContext;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -25,7 +25,6 @@ import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.events.services.IOnDeActivateService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.jwebmp.core.plugins.ComponentInformation;
 import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
@@ -37,82 +36,77 @@ import java.util.logging.Level;
  *
  * @author GedMarc
  */
-@ComponentInformation(name = "DeActivate Event",
-		description = "Server Side Event for DeActivate.")
 @Log
 public abstract class DeactivateAdapter<J extends DeactivateAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements GlobalEvents<J>
 {
-	
-	/**
-	 * Performs a click
-	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
-	 */
-	public DeactivateAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
-	{
-		super(EventTypes.deactivate, component);
 
-	}
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    public DeactivateAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.deactivate, component);
 
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onDeactivate(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			DeactivateAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+    }
 
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onDeactivate(AjaxCall<?> call, AjaxResponse<?> response);
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onDeactivate(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            DeactivateAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
 
-	/**
-	 * Method onCall ...
-	 */
-	private void onCall()
-	{
-		Set<IOnDeActivateService> services = IGuiceContext.instance()
+    /**
+     * Triggers on Click
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onDeactivate(AjaxCall<?> call, AjaxResponse<?> response);
+
+    /**
+     * Method onCall ...
+     */
+    private void onCall()
+    {
+        Set<IOnDeActivateService> services = IGuiceContext.instance()
                                                           .getLoader(IOnDeActivateService.class, ServiceLoader.load(IOnDeActivateService.class));
-		services.forEach(service -> service.onCall(this));
-	}
+        services.forEach(service -> service.onCall(this));
+    }
 
 
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
+    @Override
+    public void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	private void onCreate()
-	{
-		Set<IOnDeActivateService> services = IGuiceContext
-				                                     .instance()
-				                                     .getLoader(IOnDeActivateService.class, ServiceLoader.load(IOnDeActivateService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    private void onCreate()
+    {
+        Set<IOnDeActivateService> services = IGuiceContext
+                .instance()
+                .getLoader(IOnDeActivateService.class, ServiceLoader.load(IOnDeActivateService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 
 }

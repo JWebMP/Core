@@ -1,7 +1,7 @@
 import com.guicedee.guicedinjection.interfaces.IGuiceModule;
 import com.jwebmp.core.events.services.*;
-import com.jwebmp.core.implementations.JWebMPSiteBinder;
 import com.jwebmp.core.implementations.JWebMPServicesBindings;
+import com.jwebmp.core.implementations.JWebMPSiteBinder;
 import com.jwebmp.interception.JWebMPInterceptionBinder;
 
 module com.jwebmp.core {
@@ -151,7 +151,7 @@ module com.jwebmp.core {
     exports com.jwebmp.core.htmlbuilder.javascript.events.enumerations;
     //   exports com.jwebmp.core.htmlbuilder.javascript.events.interfaces;
 
-    exports com.jwebmp.core.plugins;
+//    exports com.jwebmp.core.plugins;
 
     exports com.jwebmp.core.utilities;
     exports com.jwebmp.core.utilities.dualquickpivot;

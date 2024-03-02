@@ -24,7 +24,6 @@ import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.events.services.IOnCancelService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.jwebmp.core.plugins.ComponentInformation;
 import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
@@ -36,80 +35,75 @@ import java.util.logging.Level;
  *
  * @author GedMarc
  */
-@ComponentInformation(name = "Cancel Event",
-		description = "Server Side Event for Cancel Click Event.")
 @Log
 public abstract class CancelAdapter<J extends CancelAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements GlobalEvents<J>
 {
-	
-	/**
-	 * Performs a click
-	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
-	 */
-	public CancelAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
-	{
-		super(EventTypes.cancel, component);
-	}
 
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onCancel(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			CancelAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    public CancelAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.cancel, component);
+    }
 
-	/**
-	 * Triggers on Cancel
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onCancel(AjaxCall<?> call, AjaxResponse<?> response);
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onCancel(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            CancelAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
 
-	/**
-	 * Method onCall ...
-	 */
-	private void onCall()
-	{
-		Set<IOnCancelService> services = com.guicedee.client.IGuiceContext.instance()
+    /**
+     * Triggers on Cancel
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onCancel(AjaxCall<?> call, AjaxResponse<?> response);
+
+    /**
+     * Method onCall ...
+     */
+    private void onCall()
+    {
+        Set<IOnCancelService> services = com.guicedee.client.IGuiceContext.instance()
                                                                           .getLoader(IOnCancelService.class, ServiceLoader.load(IOnCancelService.class));
-		services.forEach(service -> service.onCall(this));
-	}
+        services.forEach(service -> service.onCall(this));
+    }
 
 
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
+    @Override
+    public void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	private void onCreate()
-	{
-		Set<IOnCancelService> services = com.guicedee.client.IGuiceContext.instance()
-		            .getLoader(IOnCancelService.class, ServiceLoader.load(IOnCancelService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    private void onCreate()
+    {
+        Set<IOnCancelService> services = com.guicedee.client.IGuiceContext.instance()
+                                                                          .getLoader(IOnCancelService.class, ServiceLoader.load(IOnCancelService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 
 }

@@ -27,7 +27,6 @@ import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.html.interfaces.events.ParagraphEvents;
 import com.jwebmp.core.events.services.IOnSubmitService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.jwebmp.core.plugins.ComponentInformation;
 import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
@@ -40,86 +39,81 @@ import java.util.logging.Level;
  * @author GedMarc
  */
 @SuppressWarnings("unused")
-@ComponentInformation(name = "Submit Event",
-		description = "Server Side Event for Submit.")
 @Log
 public abstract class SubmitAdapter<J extends SubmitAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements ParagraphEvents<GlobalFeatures, J>,
-		           BodyEvents<GlobalFeatures, J>, GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements ParagraphEvents<GlobalFeatures, J>,
+                   BodyEvents<GlobalFeatures, J>, GlobalEvents<J>
 {
-	protected SubmitAdapter()
-	{
-		super("Submit", EventTypes.submit);
-	}
+    protected SubmitAdapter()
+    {
+        super("Submit", EventTypes.submit);
+    }
 
-	/**
-	 * Performs a click
-	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
-	 */
-	public SubmitAdapter(Form component)
-	{
-		super(EventTypes.submit, component);
-	}
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    public SubmitAdapter(Form component)
+    {
+        super(EventTypes.submit, component);
+    }
 
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onSubmit(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			SubmitAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onSubmit(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            SubmitAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
 
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onSubmit(AjaxCall<?> call, AjaxResponse<?> response);
+    /**
+     * Triggers on Click
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onSubmit(AjaxCall<?> call, AjaxResponse<?> response);
 
-	/**
-	 * Method onCall ...
-	 */
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	private void onCall()
-	{
-		Set<IOnSubmitService> services = com.guicedee.client.IGuiceContext.instance()
+    /**
+     * Method onCall ...
+     */
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    private void onCall()
+    {
+        Set<IOnSubmitService> services = com.guicedee.client.IGuiceContext.instance()
                                                                           .getLoader(IOnSubmitService.class, ServiceLoader.load(IOnSubmitService.class));
-		services.forEach(service -> service.onCall(this));
-	}
+        services.forEach(service -> service.onCall(this));
+    }
 
 
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
+    @Override
+    public void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	private void onCreate()
-	{
-		@SuppressWarnings({"rawtypes", "unchecked"})
-		Set<IOnSubmitService> services = com.guicedee.client.IGuiceContext.instance()
-		            .getLoader(IOnSubmitService.class, ServiceLoader.load(IOnSubmitService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    private void onCreate()
+    {
+        @SuppressWarnings({"rawtypes", "unchecked"})
+        Set<IOnSubmitService> services = com.guicedee.client.IGuiceContext.instance()
+                                                                          .getLoader(IOnSubmitService.class, ServiceLoader.load(IOnSubmitService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 }

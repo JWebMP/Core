@@ -17,7 +17,7 @@
 package com.jwebmp.core.events.close;
 
 
-import com.guicedee.client.*;
+import com.guicedee.client.IGuiceContext;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -25,7 +25,6 @@ import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.events.services.IOnCloseService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.jwebmp.core.plugins.ComponentInformation;
 import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
@@ -37,80 +36,75 @@ import java.util.logging.Level;
  *
  * @author GedMarc
  */
-@ComponentInformation(name = "Close Event",
-		description = "Server Side Event for Close.")
 @Log
 public abstract class CloseAdapter<J extends CloseAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements GlobalEvents<J>
 {
-	
-	/**
-	 * Performs a click
-	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
-	 */
-	public CloseAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
-	{
-		super(EventTypes.contextmenu, component);
-	}
 
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onClose(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			CloseAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    public CloseAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.contextmenu, component);
+    }
 
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onClose(AjaxCall<?> call, AjaxResponse<?> response);
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onClose(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            CloseAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
 
-	/**
-	 * Method onCall ...
-	 */
-	private void onCall()
-	{
-		Set<IOnCloseService> services = IGuiceContext.instance()
+    /**
+     * Triggers on Click
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onClose(AjaxCall<?> call, AjaxResponse<?> response);
+
+    /**
+     * Method onCall ...
+     */
+    private void onCall()
+    {
+        Set<IOnCloseService> services = IGuiceContext.instance()
                                                      .getLoader(IOnCloseService.class, ServiceLoader.load(IOnCloseService.class));
-		services.forEach(service -> service.onCall(this));
-	}
+        services.forEach(service -> service.onCall(this));
+    }
 
 
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
+    @Override
+    public void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	private void onCreate()
-	{
-		Set<IOnCloseService> services = IGuiceContext
-				                                .instance()
-				                                .getLoader(IOnCloseService.class, ServiceLoader.load(IOnCloseService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    private void onCreate()
+    {
+        Set<IOnCloseService> services = IGuiceContext
+                .instance()
+                .getLoader(IOnCloseService.class, ServiceLoader.load(IOnCloseService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 }

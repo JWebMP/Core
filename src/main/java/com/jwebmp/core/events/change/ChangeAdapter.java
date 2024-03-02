@@ -25,7 +25,6 @@ import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.events.services.IOnChangeService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.jwebmp.core.plugins.ComponentInformation;
 import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
@@ -37,81 +36,76 @@ import java.util.logging.Level;
  *
  * @author GedMarc
  */
-@ComponentInformation(name = "Change Event",
-		description = "Server Side Event for Change.")
 @Log
 public abstract class ChangeAdapter<J extends ChangeAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements GlobalEvents<J>
 {
-	/**
-	 * Performs on a change
-	 *
-	 * @param component
-	 * 		The component that will react will a change occurs
-	 */
-	public ChangeAdapter(IComponentHierarchyBase<?,?> component)
-	{
-		super(EventTypes.change, component);
+    /**
+     * Performs on a change
+     *
+     * @param component The component that will react will a change occurs
+     */
+    public ChangeAdapter(IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.change, component);
 
-	}
+    }
 
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onChange(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			ChangeAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onChange(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            ChangeAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
 
-	/**
-	 * Triggers on Change
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onChange(AjaxCall<?> call, AjaxResponse<?> response);
+    /**
+     * Triggers on Change
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onChange(AjaxCall<?> call, AjaxResponse<?> response);
 
-	/**
-	 * Method onCall ...
-	 */
-	@SuppressWarnings({"unchecked", "rawtypes"})
-	private void onCall()
-	{
-		Set<IOnChangeService> services = com.guicedee.client.IGuiceContext.instance()
+    /**
+     * Method onCall ...
+     */
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private void onCall()
+    {
+        Set<IOnChangeService> services = com.guicedee.client.IGuiceContext.instance()
                                                                           .getLoader(IOnChangeService.class, ServiceLoader.load(IOnChangeService.class));
-		services.forEach(service -> service.onCall(this));
-	}
+        services.forEach(service -> service.onCall(this));
+    }
 
 
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
+    @Override
+    public void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings({"unchecked", "rawtypes"})
-	private void onCreate()
-	{
-		Set<IOnChangeService> services = com.guicedee.client.IGuiceContext.instance()
-		            .getLoader(IOnChangeService.class, ServiceLoader.load(IOnChangeService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private void onCreate()
+    {
+        Set<IOnChangeService> services = com.guicedee.client.IGuiceContext.instance()
+                                                                          .getLoader(IOnChangeService.class, ServiceLoader.load(IOnChangeService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 
 }

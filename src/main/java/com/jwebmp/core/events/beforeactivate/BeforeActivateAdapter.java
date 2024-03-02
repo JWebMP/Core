@@ -17,7 +17,7 @@
 package com.jwebmp.core.events.beforeactivate;
 
 
-import com.guicedee.client.*;
+import com.guicedee.client.IGuiceContext;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -25,7 +25,6 @@ import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.events.services.IOnBeforeActivateService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.jwebmp.core.plugins.ComponentInformation;
 import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
@@ -37,79 +36,74 @@ import java.util.logging.Level;
  *
  * @author GedMarc
  */
-@ComponentInformation(name = "Before Activate Event",
-		description = "Server Side Event for Before Active Adapter.")
 @Log
 public abstract class BeforeActivateAdapter<J extends BeforeActivateAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements GlobalEvents<J>
 {
-	
-	/**
-	 * Performs a click
-	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
-	 */
-	public BeforeActivateAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
-	{
-		super(EventTypes.beforeActivate, component);
-	}
+
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    public BeforeActivateAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.beforeActivate, component);
+    }
 
 
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onBeforeActivate(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			BeforeActivateAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onBeforeActivate(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            BeforeActivateAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
 
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onBeforeActivate(AjaxCall<?> call, AjaxResponse<?> response);
+    /**
+     * Triggers on Click
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onBeforeActivate(AjaxCall<?> call, AjaxResponse<?> response);
 
-	private void onCall()
-	{
-		Set<IOnBeforeActivateService> services = IGuiceContext.instance()
+    private void onCall()
+    {
+        Set<IOnBeforeActivateService> services = IGuiceContext.instance()
                                                               .getLoader(IOnBeforeActivateService.class, ServiceLoader.load(IOnBeforeActivateService.class));
-		services.forEach(service -> service.onCall(this));
-	}
+        services.forEach(service -> service.onCall(this));
+    }
 
 
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
+    @Override
+    public void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	private void onCreate()
-	{
-		Set<IOnBeforeActivateService> services = IGuiceContext
-				                                         .instance()
-				                                         .getLoader(IOnBeforeActivateService.class, ServiceLoader.load(IOnBeforeActivateService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    private void onCreate()
+    {
+        Set<IOnBeforeActivateService> services = IGuiceContext
+                .instance()
+                .getLoader(IOnBeforeActivateService.class, ServiceLoader.load(IOnBeforeActivateService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 
 }

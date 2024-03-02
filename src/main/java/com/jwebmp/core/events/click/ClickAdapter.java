@@ -17,7 +17,7 @@
 package com.jwebmp.core.events.click;
 
 
-import com.guicedee.client.*;
+import com.guicedee.client.IGuiceContext;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -28,7 +28,6 @@ import com.jwebmp.core.base.html.interfaces.events.ParagraphEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.events.services.IOnClickService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.jwebmp.core.plugins.ComponentInformation;
 import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
@@ -40,82 +39,80 @@ import java.util.logging.Level;
  *
  * @author GedMarc
  */
-@ComponentInformation(name = "Click Event",
-		description = "Server Side Event for Click.")
 @Log
 public abstract class ClickAdapter<J extends ClickAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements ParagraphEvents<GlobalFeatures, J>,
-		           BodyEvents<GlobalFeatures, J>,
-		           GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements ParagraphEvents<GlobalFeatures, J>,
+                   BodyEvents<GlobalFeatures, J>,
+                   GlobalEvents<J>
 {
-	protected ClickAdapter()
-	{
-		super("ClickAdapter", EventTypes.click);
-	}
-	
-	/**
-	 * Performs a click
-	 *
-	 * @param component The component this click is going to be acting on
-	 */
-	public ClickAdapter(IComponentHierarchyBase<?,?> component)
-	{
-		super(EventTypes.click, component);
-	}
-	
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onClick(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			ClickAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
-	
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call     The physical AJAX call
-	 * @param response The physical Ajax Receiver
-	 */
-	public abstract void onClick(AjaxCall<?> call, AjaxResponse<?> response);
-	
-	/**
-	 * Method onCall ...
-	 */
-	private void onCall()
-	{
-		Set<IOnClickService> services = IGuiceContext.instance()
+    protected ClickAdapter()
+    {
+        super("ClickAdapter", EventTypes.click);
+    }
+
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    public ClickAdapter(IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.click, component);
+    }
+
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onClick(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            ClickAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
+
+    /**
+     * Triggers on Click
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onClick(AjaxCall<?> call, AjaxResponse<?> response);
+
+    /**
+     * Method onCall ...
+     */
+    private void onCall()
+    {
+        Set<IOnClickService> services = IGuiceContext.instance()
                                                      .getLoader(IOnClickService.class, ServiceLoader.load(IOnClickService.class));
-		services.forEach(service -> service.onCall(this));
-	}
-	
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
-	
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	protected void onCreate()
-	{
-		Set<IOnClickService> services = IGuiceContext
-				                                .instance()
-				                                .getLoader(IOnClickService.class, ServiceLoader.load(IOnClickService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+        services.forEach(service -> service.onCall(this));
+    }
+
+    @Override
+    public void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
+
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    protected void onCreate()
+    {
+        Set<IOnClickService> services = IGuiceContext
+                .instance()
+                .getLoader(IOnClickService.class, ServiceLoader.load(IOnClickService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 }
