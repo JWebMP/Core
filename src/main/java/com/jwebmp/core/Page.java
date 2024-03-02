@@ -18,19 +18,16 @@ package com.jwebmp.core;
 
 import com.google.inject.OutOfScopeException;
 import com.google.inject.ProvisionException;
-
-import com.guicedee.client.*;
+import com.guicedee.client.IGuiceContext;
 import com.jwebmp.core.annotations.PageConfiguration;
 import com.jwebmp.core.base.ComponentDependencyBase;
 import com.jwebmp.core.base.ContentSecurityPolicy;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.client.Browsers;
 import com.jwebmp.core.base.client.InternetExplorerCompatibilityMode;
 import com.jwebmp.core.base.html.*;
 import com.jwebmp.core.base.html.attributes.ScriptAttributes;
 import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
-import com.jwebmp.core.base.html.interfaces.children.HtmlChildren;
 import com.jwebmp.core.base.html.interfaces.children.PageChildren;
 import com.jwebmp.core.base.interfaces.IComponentFeatureBase;
 import com.jwebmp.core.base.references.CSSReference;
@@ -49,8 +46,8 @@ import java.util.Set;
 import java.util.logging.Level;
 
 import static com.guicedee.services.jsonrepresentation.json.StaticStrings.STRING_SEMICOLON;
-import static com.jwebmp.core.implementations.ReadableUserAgentProvider.defaultAgent;
 import static com.jwebmp.core.implementations.JWebMPServicesBindings.IPageConfiguratorsKey;
+import static com.jwebmp.core.implementations.ReadableUserAgentProvider.defaultAgent;
 
 /**
  * Top level of any HTML page.
@@ -159,6 +156,11 @@ public class Page<J extends Page<J>>
     public void initialize()
     {
         //Interception Marker
+    }
+
+    public Body<?, ?> getBody()
+    {
+        return (Body<?, ?>) super.getBody();
     }
 
     /**
