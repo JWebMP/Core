@@ -23,6 +23,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.events.services.IOnStartService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import lombok.extern.java.Log;
 
@@ -82,7 +83,7 @@ public abstract class StartAdapter<J extends StartAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnStartService> services = IGuiceContext.instance()
-		                                            .getLoader(IOnStartService.class, ServiceLoader.load(IOnStartService.class));
+                                                     .getLoader(IOnStartService.class, ServiceLoader.load(IOnStartService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

@@ -23,6 +23,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.events.services.IOnCloseService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
 import lombok.extern.java.Log;
@@ -86,7 +87,7 @@ public abstract class CloseAdapter<J extends CloseAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnCloseService> services = IGuiceContext.instance()
-		                                            .getLoader(IOnCloseService.class, ServiceLoader.load(IOnCloseService.class));
+                                                     .getLoader(IOnCloseService.class, ServiceLoader.load(IOnCloseService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

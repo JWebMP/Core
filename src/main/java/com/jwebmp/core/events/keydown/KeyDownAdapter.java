@@ -23,6 +23,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.events.services.IOnKeyDownService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import lombok.extern.java.Log;
 
@@ -83,7 +84,7 @@ public abstract class KeyDownAdapter<J extends KeyDownAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnKeyDownService> services = IGuiceContext.instance()
-		                                              .getLoader(IOnKeyDownService.class, ServiceLoader.load(IOnKeyDownService.class));
+                                                       .getLoader(IOnKeyDownService.class, ServiceLoader.load(IOnKeyDownService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

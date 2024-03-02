@@ -23,6 +23,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.events.services.IOnMouseUpService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import lombok.extern.java.Log;
 
@@ -84,7 +85,7 @@ public abstract class MouseUpAdapter<J extends MouseUpAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnMouseUpService> services = IGuiceContext.instance()
-		                                              .getLoader(IOnMouseUpService.class, ServiceLoader.load(IOnMouseUpService.class));
+                                                       .getLoader(IOnMouseUpService.class, ServiceLoader.load(IOnMouseUpService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

@@ -25,6 +25,7 @@ import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.BodyEvents;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.html.interfaces.events.ParagraphEvents;
+import com.jwebmp.core.events.services.IOnSubmitService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
 import lombok.extern.java.Log;
@@ -95,7 +96,7 @@ public abstract class SubmitAdapter<J extends SubmitAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnSubmitService> services = com.guicedee.client.IGuiceContext.instance()
-		            .getLoader(IOnSubmitService.class, ServiceLoader.load(IOnSubmitService.class));
+                                                                          .getLoader(IOnSubmitService.class, ServiceLoader.load(IOnSubmitService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

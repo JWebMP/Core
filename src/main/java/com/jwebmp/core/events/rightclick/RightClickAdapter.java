@@ -25,6 +25,7 @@ import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.BodyEvents;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.html.interfaces.events.ParagraphEvents;
+import com.jwebmp.core.events.services.IOnRightClickService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import lombok.extern.java.Log;
 
@@ -83,7 +84,7 @@ public abstract class RightClickAdapter<J extends RightClickAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnRightClickService> services = IGuiceContext.instance()
-		                                                 .getLoader(IOnRightClickService.class, ServiceLoader.load(IOnRightClickService.class));
+                                                          .getLoader(IOnRightClickService.class, ServiceLoader.load(IOnRightClickService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 	

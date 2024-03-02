@@ -23,6 +23,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.events.services.IOnActivateService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
 import lombok.extern.java.Log;
@@ -87,7 +88,7 @@ public abstract class ActivateAdapter<J extends ActivateAdapter<J>>
 	{
 		@SuppressWarnings("rawtypes")
 		Set<IOnActivateService> services = IGuiceContext.instance()
-		                                               .getLoader(IOnActivateService.class, ServiceLoader.load(IOnActivateService.class));
+                                                        .getLoader(IOnActivateService.class, ServiceLoader.load(IOnActivateService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 

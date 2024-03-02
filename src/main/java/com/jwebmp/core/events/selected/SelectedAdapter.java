@@ -24,6 +24,7 @@ import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.Option;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.events.services.IOnSelectedService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import lombok.extern.java.Log;
 
@@ -86,7 +87,7 @@ public abstract class SelectedAdapter<J extends SelectedAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnSelectedService> services = IGuiceContext.instance()
-		                                               .getLoader(IOnSelectedService.class, ServiceLoader.load(IOnSelectedService.class));
+                                                        .getLoader(IOnSelectedService.class, ServiceLoader.load(IOnSelectedService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

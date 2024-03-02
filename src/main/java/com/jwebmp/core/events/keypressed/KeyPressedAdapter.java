@@ -23,6 +23,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.events.services.IOnKeyPressedService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import lombok.extern.java.Log;
 
@@ -86,7 +87,7 @@ public abstract class KeyPressedAdapter<J extends KeyPressedAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnKeyPressedService> services = IGuiceContext.instance()
-		                                                 .getLoader(IOnKeyPressedService.class, ServiceLoader.load(IOnKeyPressedService.class));
+                                                          .getLoader(IOnKeyPressedService.class, ServiceLoader.load(IOnKeyPressedService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

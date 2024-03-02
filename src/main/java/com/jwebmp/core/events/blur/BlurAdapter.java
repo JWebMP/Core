@@ -23,6 +23,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.events.services.IOnBlurService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
 import lombok.extern.java.Log;
@@ -83,7 +84,7 @@ public abstract class BlurAdapter<J extends BlurAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnBlurService> services = IGuiceContext.instance()
-		                                           .getLoader(IOnBlurService.class, ServiceLoader.load(IOnBlurService.class));
+                                                    .getLoader(IOnBlurService.class, ServiceLoader.load(IOnBlurService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

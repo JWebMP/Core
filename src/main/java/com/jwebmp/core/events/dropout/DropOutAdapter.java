@@ -23,6 +23,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.events.services.IOnDropOutService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
 import lombok.extern.java.Log;
@@ -87,7 +88,7 @@ public abstract class DropOutAdapter<J extends DropOutAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnDropOutService> services = IGuiceContext.instance()
-		                                              .getLoader(IOnDropOutService.class, ServiceLoader.load(IOnDropOutService.class));
+                                                       .getLoader(IOnDropOutService.class, ServiceLoader.load(IOnDropOutService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

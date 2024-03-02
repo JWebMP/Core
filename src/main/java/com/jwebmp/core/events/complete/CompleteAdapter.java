@@ -23,6 +23,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.events.services.IOnCompleteService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
 import lombok.extern.java.Log;
@@ -87,7 +88,7 @@ public abstract class CompleteAdapter<J extends CompleteAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnCompleteService> services = IGuiceContext.instance()
-		                                               .getLoader(IOnCompleteService.class, ServiceLoader.load(IOnCompleteService.class));
+                                                        .getLoader(IOnCompleteService.class, ServiceLoader.load(IOnCompleteService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

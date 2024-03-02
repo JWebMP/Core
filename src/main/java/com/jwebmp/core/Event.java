@@ -29,6 +29,7 @@ import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.events.IEventConfigurator;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
+import com.jwebmp.core.htmlbuilder.javascript.events.interfaces.IEvent;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
@@ -41,279 +42,259 @@ import static com.guicedee.services.jsonrepresentation.json.StaticStrings.*;
 /**
  * Container Class for Events. Splits from the component hierarchy
  *
- * @param <J>
- * 		This class
- *
+ * @param <J> This class
  * @author GedMarc
  * @since 23 Apr 2016
  */
 @SuppressWarnings("unused")
 public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
-		extends ComponentEventBase<F, GlobalEvents, J>
-		implements GlobalEvents<J>
+        extends ComponentEventBase<F, GlobalEvents, J>
+        implements GlobalEvents<J>, IEvent<F, J>
 {
-	/**
-	 * A list of all queries to execute on ajax response
-	 */
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private List<Event<?,?>> runEvents;
-	/**
-	 * Any features that must be run
-	 */
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private List<Feature<?,?,?>> runFeatures;
+    /**
+     * A list of all queries to execute on ajax response
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<Event<?, ?>> runEvents;
+    /**
+     * Any features that must be run
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<Feature<?, ?, ?>> runFeatures;
 
-	/**
-	 * Constructs an event with the given name
-	 *
-	 * @param name
-	 * 		The name of the event
-	 */
-	public Event(String name)
-	{
-		this(name, EventTypes.undefined);
-	}
+    /**
+     * Constructs an event with the given name
+     *
+     * @param name The name of the event
+     */
+    public Event(String name)
+    {
+        this(name, EventTypes.undefined);
+    }
 
-	/**
-	 * Constructs an event with the given name
-	 *
-	 * @param name
-	 * 		The name of the event
-	 * @param eventType
-	 * 		The event type of this event
-	 */
-	public Event(String name, EventTypes eventType)
-	{
-		this(name, eventType, null);
-	}
+    /**
+     * Constructs an event with the given name
+     *
+     * @param name      The name of the event
+     * @param eventType The event type of this event
+     */
+    public Event(String name, EventTypes eventType)
+    {
+        this(name, eventType, null);
+    }
 
-	/**
-	 * Constructs an event with the given name
-	 *
-	 * @param name
-	 * 		The name of this event
-	 * @param eventType
-	 * 		The event type of this event
-	 * @param component
-	 * 		The component type of this event
-	 */
-	@SuppressWarnings("unchecked")
-	public Event(String name, EventTypes eventType, IComponentHierarchyBase<?,?> component)
-	{
-		super(ComponentTypes.Event);
-		setID(getClassCanonicalName());
-		setName(name);
-		setComponent(component);
-		setEventType(eventType);
+    /**
+     * Constructs an event with the given name
+     *
+     * @param name      The name of this event
+     * @param eventType The event type of this event
+     * @param component The component type of this event
+     */
+    @SuppressWarnings("unchecked")
+    public Event(String name, EventTypes eventType, IComponentHierarchyBase<?, ?> component)
+    {
+        super(ComponentTypes.Event);
+        setID(getClassCanonicalName());
+        setName(name);
+        setComponent(component);
+        setEventType(eventType);
 
-		@SuppressWarnings("rawtypes")
-		Set<IEventConfigurator> eventConfiguratorSet = IGuiceContext
-				                                               .instance()
-				                                               .getLoader(IEventConfigurator.class, ServiceLoader.load(IEventConfigurator.class));
-		
-		for (IEventConfigurator<?> iEventConfigurator : eventConfiguratorSet)
-		{
-			iEventConfigurator.configureEvent(this);
-		}
-	}
-	
-	/**
-	 * Adds a variable to return on the call
-	 *
-	 * @param returnVariable
-	 * 		The name of the variable to return
-	 *
-	 * @return This object
-	 */
-	@SuppressWarnings("unchecked")
-	public J returnVariable(String returnVariable)
-	{
-		getVariables().add(returnVariable);
-		return (J) this;
-	}
+        @SuppressWarnings("rawtypes")
+        Set<IEventConfigurator> eventConfiguratorSet = IGuiceContext
+                .instance()
+                .getLoader(IEventConfigurator.class, ServiceLoader.load(IEventConfigurator.class));
 
-	/**
-	 * Constructs an event with the given name
-	 *
-	 * @param name
-	 * 		The name of this event
-	 * @param component
-	 * 		The component type of this event
-	 */
-	public Event(String name, IComponentHierarchyBase<?,?> component)
-	{
-		this(name, EventTypes.undefined, component);
-	}
+        for (IEventConfigurator<?> iEventConfigurator : eventConfiguratorSet)
+        {
+            iEventConfigurator.configureEvent(this);
+        }
+    }
 
-	/**
-	 * Creates an event with the given component and type
-	 *
-	 * @param component The component to use bind to
-	 */
-	public Event(IComponentHierarchyBase<?,?> component)
-	{
-		this(EventTypes.undefined, component);
-	}
+    /**
+     * Adds a variable to return on the call
+     *
+     * @param returnVariable The name of the variable to return
+     * @return This object
+     */
+    @SuppressWarnings("unchecked")
+    public J returnVariable(String returnVariable)
+    {
+        getVariables().add(returnVariable);
+        return (J) this;
+    }
 
-	/**
-	 * Creates an event with the given component and type
-	 *
-	 * @param eventTypes This event type
-	 * @param component The component to bind to
-	 */
-	public Event(EventTypes eventTypes, IComponentHierarchyBase<?,?> component)
-	{
-		this(eventTypes.name(), eventTypes, component);
-	}
+    /**
+     * Constructs an event with the given name
+     *
+     * @param name      The name of this event
+     * @param component The component type of this event
+     */
+    public Event(String name, IComponentHierarchyBase<?, ?> component)
+    {
+        this(name, EventTypes.undefined, component);
+    }
 
-	/**
-	 * Render the variable return array
-	 *
-	 * @return The variables rendered string
-	 */
-	public StringBuilder renderVariables()
-	{
-		StringBuilder s = new StringBuilder(StaticStrings.STRING_SQUARE_BRACE_OPEN);
-		getVariables().forEach(event -> s.append(STRING_SINGLE_QUOTES)
-		                                 .append(event)
-		                                 .append(STRING_SINGLE_QUOTES)
-		                                 .append(StaticStrings.STRING_COMMNA));
-		StringBuilder s2;
-		if (s.indexOf(StaticStrings.STRING_COMMNA) > 0)
-		{
-			s2 = s.deleteCharAt(s.lastIndexOf(StaticStrings.STRING_COMMNA));
-		}
-		else
-		{
-			s2 = s;
-		}
-		s2.append(STRING_SQUARE_BRACE_CLOSED);
-		s2.append(STRING_COMMNA_SEMICOLON)
-		  .append(getID())
-		  .append(STRING_SINGLE_QUOTES);
-		s2.append(STRING_COMMNA_SEMICOLON)
-		  .append(getClassCanonicalName())
-		  .append(STRING_SINGLE_QUOTES);
+    /**
+     * Creates an event with the given component and type
+     *
+     * @param component The component to use bind to
+     */
+    public Event(IComponentHierarchyBase<?, ?> component)
+    {
+        this(EventTypes.undefined, component);
+    }
 
-		return s2;
-	}
+    /**
+     * Creates an event with the given component and type
+     *
+     * @param eventTypes This event type
+     * @param component  The component to bind to
+     */
+    public Event(EventTypes eventTypes, IComponentHierarchyBase<?, ?> component)
+    {
+        this(eventTypes.name(), eventTypes, component);
+    }
 
-	/**
-	 * The method that is fired on call
-	 *
-	 * @param call
-	 * 		The component that made the call
-	 * @param response
-	 * 		The Response Object Being Returned
-	 */
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
+    /**
+     * Render the variable return array
+     *
+     * @return The variables rendered string
+     */
+    public StringBuilder renderVariables()
+    {
+        StringBuilder s = new StringBuilder(StaticStrings.STRING_SQUARE_BRACE_OPEN);
+        getVariables().forEach(event -> s.append(STRING_SINGLE_QUOTES)
+                                         .append(event)
+                                         .append(STRING_SINGLE_QUOTES)
+                                         .append(StaticStrings.STRING_COMMNA));
+        StringBuilder s2;
+        if (s.indexOf(StaticStrings.STRING_COMMNA) > 0)
+        {
+            s2 = s.deleteCharAt(s.lastIndexOf(StaticStrings.STRING_COMMNA));
+        }
+        else
+        {
+            s2 = s;
+        }
+        s2.append(STRING_SQUARE_BRACE_CLOSED);
+        s2.append(STRING_COMMNA_SEMICOLON)
+          .append(getID())
+          .append(STRING_SINGLE_QUOTES);
+        s2.append(STRING_COMMNA_SEMICOLON)
+          .append(getClassCanonicalName())
+          .append(STRING_SINGLE_QUOTES);
 
-	}
+        return s2;
+    }
 
-	/**
-	 * Adds an on demand event to be performed after ajax response
-	 *
-	 * @param event An on demand event (client side only)
-	 *
-	 * @return  This object
-	 */
-	@SuppressWarnings("unchecked")
-	public J addOnDemandEvent(Event<?,?> event)
-	{
-		getRunEvents().add(event);
-		return (J) this;
-	}
+    /**
+     * The method that is fired on call
+     *
+     * @param call     The component that made the call
+     * @param response The Response Object Being Returned
+     */
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
 
-	/**
-	 * Return all the queries to execute on ajax response
-	 *
-	 * @return The list of events to run
-	 */
-	public List<Event<?,?>> getRunEvents()
-	{
-		if (runEvents == null)
-		{
-			runEvents = new ArrayList<>();
-		}
-		return runEvents;
-	}
+    }
 
-	/**
-	 * Returns all queries that are executed on ajax response
-	 *
-	 * @param onDemandQueries The list of on demand queries to execute
-	 *
-	 * @return  This object
-	 */
-	@SuppressWarnings("unchecked")
-	public J setOnDemandQueries(List<Event<?,?>> onDemandQueries)
-	{
-		runEvents = onDemandQueries;
-		return (J) this;
-	}
+    /**
+     * Adds an on demand event to be performed after ajax response
+     *
+     * @param event An on demand event (client side only)
+     * @return This object
+     */
+    @SuppressWarnings("unchecked")
+    public J addOnDemandEvent(Event<?, ?> event)
+    {
+        getRunEvents().add(event);
+        return (J) this;
+    }
 
-	/**
-	 * Method hashCode ...
-	 *
-	 * @return int
-	 */
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
+    /**
+     * Return all the queries to execute on ajax response
+     *
+     * @return The list of events to run
+     */
+    public List<Event<?, ?>> getRunEvents()
+    {
+        if (runEvents == null)
+        {
+            runEvents = new ArrayList<>();
+        }
+        return runEvents;
+    }
 
-	/**
-	 * Method equals ...
-	 *
-	 * @param obj
-	 * 		of type Object
-	 *
-	 * @return boolean
-	 */
-	@Override
-	public boolean equals(Object obj)
-	{
-		return super.equals(obj);
-	}
+    /**
+     * Returns all queries that are executed on ajax response
+     *
+     * @param onDemandQueries The list of on demand queries to execute
+     * @return This object
+     */
+    @SuppressWarnings("unchecked")
+    public J setOnDemandQueries(List<Event<?, ?>> onDemandQueries)
+    {
+        runEvents = onDemandQueries;
+        return (J) this;
+    }
 
-	/**
-	 * Sets the ID as whatever with dots as underscores
-	 *
-	 * @param id
-	 * 		The ID
-	 *
-	 * @return  This object
-	 */
-	@NotNull
-	@Override
-	public J setID(String id)
-	{
-		return super.setID(id.replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE));
-	}
+    /**
+     * Method hashCode ...
+     *
+     * @return int
+     */
+    @Override
+    public int hashCode()
+    {
+        return super.hashCode();
+    }
 
-	/**
-	 * Returns a list of runnable features that occur from an event
-	 *
-	 * @return The list of features to run that is associated with this event
-	 */
-	public List<Feature<?,?,?>> getRunFeatures()
-	{
-		if (runFeatures == null)
-		{
-			setRunFeatures(new ArrayList<>());
-		}
-		return runFeatures;
-	}
+    /**
+     * Method equals ...
+     *
+     * @param obj of type Object
+     * @return boolean
+     */
+    @Override
+    public boolean equals(Object obj)
+    {
+        return super.equals(obj);
+    }
 
-	/**
-	 * Sets the running feature base
-	 *
-	 * @param runFeatures The list of features to run that is associated with this event
-	 */
-	public void setRunFeatures(List<Feature<?,?,?>> runFeatures)
-	{
-		this.runFeatures = runFeatures;
-	}
+    /**
+     * Sets the ID as whatever with dots as underscores
+     *
+     * @param id The ID
+     * @return This object
+     */
+    @NotNull
+    @Override
+    public J setID(String id)
+    {
+        return super.setID(id.replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE));
+    }
+
+    /**
+     * Returns a list of runnable features that occur from an event
+     *
+     * @return The list of features to run that is associated with this event
+     */
+    public List<Feature<?, ?, ?>> getRunFeatures()
+    {
+        if (runFeatures == null)
+        {
+            setRunFeatures(new ArrayList<>());
+        }
+        return runFeatures;
+    }
+
+    /**
+     * Sets the running feature base
+     *
+     * @param runFeatures The list of features to run that is associated with this event
+     */
+    public void setRunFeatures(List<Feature<?, ?, ?>> runFeatures)
+    {
+        this.runFeatures = runFeatures;
+    }
 }

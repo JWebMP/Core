@@ -23,6 +23,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.events.services.IOnStopService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import lombok.extern.java.Log;
 
@@ -82,7 +83,7 @@ public abstract class StopAdapter<J extends StopAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnStopService> services = IGuiceContext.instance()
-		                                           .getLoader(IOnStopService.class, ServiceLoader.load(IOnStopService.class));
+                                                    .getLoader(IOnStopService.class, ServiceLoader.load(IOnStopService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

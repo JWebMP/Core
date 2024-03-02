@@ -23,6 +23,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.events.services.IOnDragService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
 import lombok.extern.java.Log;
@@ -86,7 +87,7 @@ public abstract class DragAdapter<J extends DragAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnDragService> services = IGuiceContext.instance()
-		                                           .getLoader(IOnDragService.class, ServiceLoader.load(IOnDragService.class));
+                                                    .getLoader(IOnDragService.class, ServiceLoader.load(IOnDragService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

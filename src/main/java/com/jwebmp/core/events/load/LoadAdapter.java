@@ -23,6 +23,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.events.services.IOnLoadService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import lombok.extern.java.Log;
 
@@ -83,7 +84,7 @@ public abstract class LoadAdapter<J extends LoadAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnLoadService> services = IGuiceContext.instance()
-		                                           .getLoader(IOnLoadService.class, ServiceLoader.load(IOnLoadService.class));
+                                                    .getLoader(IOnLoadService.class, ServiceLoader.load(IOnLoadService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

@@ -22,6 +22,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.events.services.IOnResizeService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import lombok.extern.java.Log;
 
@@ -83,7 +84,7 @@ public abstract class ResizeAdapter<J extends ResizeAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnResizeService> services = com.guicedee.client.IGuiceContext.instance()
-		            .getLoader(IOnResizeService.class, ServiceLoader.load(IOnResizeService.class));
+                                                                          .getLoader(IOnResizeService.class, ServiceLoader.load(IOnResizeService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

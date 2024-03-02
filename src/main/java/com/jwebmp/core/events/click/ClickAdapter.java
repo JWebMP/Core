@@ -26,6 +26,7 @@ import com.jwebmp.core.base.html.interfaces.events.BodyEvents;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.html.interfaces.events.ParagraphEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
+import com.jwebmp.core.events.services.IOnClickService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
 import lombok.extern.java.Log;
@@ -92,7 +93,7 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnClickService> services = IGuiceContext.instance()
-		                                            .getLoader(IOnClickService.class, ServiceLoader.load(IOnClickService.class));
+                                                     .getLoader(IOnClickService.class, ServiceLoader.load(IOnClickService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 	

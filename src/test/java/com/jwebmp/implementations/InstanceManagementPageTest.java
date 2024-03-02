@@ -23,9 +23,9 @@ public class InstanceManagementPageTest<J extends InstanceManagementPageTest<J>>
     {
         if (BaseTestClass.class.isAssignableFrom(testInstance.getClass()))
         {
-            BaseTestClass.class.cast(testInstance)
-                               .getInstance()
-                               .destroy();
+            ((BaseTestClass) testInstance)
+                    .getInstance()
+                    .destroy();
         }
         IGuiceContext.instance()
                      .destroy();

@@ -22,6 +22,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.events.services.IOnSelectingService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import lombok.extern.java.Log;
 
@@ -82,7 +83,7 @@ public abstract class SelectingAdapter<J extends SelectingAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnSelectingService> services = com.guicedee.client.IGuiceContext.instance()
-		            .getLoader(IOnSelectingService.class, ServiceLoader.load(IOnSelectingService.class));
+                                                                             .getLoader(IOnSelectingService.class, ServiceLoader.load(IOnSelectingService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

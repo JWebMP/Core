@@ -23,6 +23,7 @@ import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
+import com.jwebmp.core.events.services.IOnChangeService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
 import lombok.extern.java.Log;
@@ -87,7 +88,7 @@ public abstract class ChangeAdapter<J extends ChangeAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnChangeService> services = com.guicedee.client.IGuiceContext.instance()
-		            .getLoader(IOnChangeService.class, ServiceLoader.load(IOnChangeService.class));
+                                                                          .getLoader(IOnChangeService.class, ServiceLoader.load(IOnChangeService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

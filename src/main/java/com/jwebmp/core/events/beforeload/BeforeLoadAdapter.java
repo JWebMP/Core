@@ -23,6 +23,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.events.services.IOnBeforeLoadService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
 import lombok.extern.java.Log;
@@ -84,7 +85,7 @@ public abstract class BeforeLoadAdapter<J extends BeforeLoadAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnBeforeLoadService> services = IGuiceContext.instance()
-		                                                 .getLoader(IOnBeforeLoadService.class, ServiceLoader.load(IOnBeforeLoadService.class));
+                                                          .getLoader(IOnBeforeLoadService.class, ServiceLoader.load(IOnBeforeLoadService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

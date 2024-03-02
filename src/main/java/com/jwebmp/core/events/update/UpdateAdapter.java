@@ -22,6 +22,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.events.services.IOnUpdateService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import lombok.extern.java.Log;
 
@@ -82,7 +83,7 @@ public abstract class UpdateAdapter<J extends UpdateAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnUpdateService> services = com.guicedee.client.IGuiceContext.instance()
-		            .getLoader(IOnUpdateService.class, ServiceLoader.load(IOnUpdateService.class));
+                                                                          .getLoader(IOnUpdateService.class, ServiceLoader.load(IOnUpdateService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

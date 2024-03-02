@@ -23,6 +23,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.events.services.IOnResizeStopService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import lombok.extern.java.Log;
 
@@ -83,7 +84,7 @@ public abstract class ResizeStopAdapter<J extends ResizeStopAdapter<J>>
 	private void onCall()
 	{
 		Set<IOnResizeStopService> services = IGuiceContext.instance()
-		                                                 .getLoader(IOnResizeStopService.class, ServiceLoader.load(IOnResizeStopService.class));
+                                                          .getLoader(IOnResizeStopService.class, ServiceLoader.load(IOnResizeStopService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

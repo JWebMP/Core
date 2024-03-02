@@ -649,7 +649,7 @@ public class Page<J extends Page<J>>
                                   .append(var)
                                   .append(STRING_SEMICOLON);
         }
-        if (variablesScriptBuilder.length() > 0)
+        if (!variablesScriptBuilder.isEmpty())
         {
             Script<?, ?> variablesScript = new Script<>();
             variablesScript.setID("variables");
