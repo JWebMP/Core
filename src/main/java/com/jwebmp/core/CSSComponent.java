@@ -16,14 +16,13 @@
  */
 package com.jwebmp.core;
 
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
 import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.guicedee.services.jsonrepresentation.json.StaticStrings;
-
+import com.jwebmp.core.base.servlets.interfaces.ICSSComponent;
 import jakarta.validation.constraints.NotNull;
 
 /**
@@ -31,81 +30,77 @@ import jakarta.validation.constraints.NotNull;
  * <p>
  *
  * @param <J>
- *
  * @author GedMarc
  * @since 2015/04/24
  */
 public class CSSComponent<J extends CSSComponent<J>>
-		extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements GlobalChildren
+        extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements GlobalChildren, ICSSComponent
 {
-	/**
-	 * Constructs a new CSS Class with the given features and events associated
-	 * <p>
-	 *
-	 * @param className
-	 */
-	public CSSComponent(String className)
-	{
-		super(ComponentTypes.CSSClass);
-		setID(className);
-	}
+    /**
+     * Constructs a new CSS Class with the given features and events associated
+     * <p>
+     *
+     * @param className
+     */
+    public CSSComponent(String className)
+    {
+        super(ComponentTypes.CSSClass);
+        setID(className);
+    }
 
-	/**
-	 * CSS Components don't render any HTML
-	 *
-	 * @param tabCount
-	 *
-	 * @return
-	 */
-	@Override
-	@NotNull
-	protected StringBuilder renderHTML(int tabCount)
-	{
-		return new StringBuilder();
-	}
+    /**
+     * CSS Components don't render any HTML
+     *
+     * @param tabCount
+     * @return
+     */
+    @Override
+    @NotNull
+    protected StringBuilder renderHTML(int tabCount)
+    {
+        return new StringBuilder();
+    }
 
-	/**
-	 * Returns the component rendering for JQuery string Requires the rendering for component is set
-	 * <p>
-	 *
-	 * @return $(' # x ').
-	 */
-	@NotNull
-	@Override
-	public String getJQueryID()
-	{
-		return "$(\'" + getID(true) + "\').";
-	}
+    /**
+     * Returns the component rendering for JQuery string Requires the rendering for component is set
+     * <p>
+     *
+     * @return $(' # x ').
+     */
+    @NotNull
+    @Override
+    public String getJQueryID()
+    {
+        return "$(\'" + getID(true) + "\').";
+    }
 
-	/**
-	 * Returns the ID with the . in the front of it
-	 * <p>
-	 *
-	 * @param jQueryHolder
-	 * 		Anything
-	 * 		<p>
-	 *
-	 * @return An ID starting with .
-	 */
-	@NotNull
-	@Override
-	public String getID(boolean jQueryHolder)
-	{
-		return StaticStrings.STRING_DOT + getID();
-	}
+    /**
+     * Returns the ID with the . in the front of it
+     * <p>
+     *
+     * @param jQueryHolder Anything
+     *                     <p>
+     * @return An ID starting with .
+     */
+    @NotNull
+    @Override
+    public String getID(boolean jQueryHolder)
+    {
+        return StaticStrings.STRING_DOT + getID();
+    }
 
-	/**
-	 * Replaces the # with a .
-	 *
-	 * @return
-	 */
-	@NotNull
-	@Override
-	public String getID()
-	{
-		return super.getID()
-		            .replace(StaticStrings.CHAR_HASH, StaticStrings.CHAR_DOT);
-	}
+    /**
+     * Replaces the # with a .
+     *
+     * @return
+     */
+    @NotNull
+    @Override
+    public String getID()
+    {
+        return super.getID()
+                    .replace(StaticStrings.CHAR_HASH, StaticStrings.CHAR_DOT);
+    }
 
 }
