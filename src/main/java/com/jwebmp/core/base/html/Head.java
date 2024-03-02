@@ -24,6 +24,7 @@ import com.jwebmp.core.base.html.interfaces.NoFeatures;
 import com.jwebmp.core.base.html.interfaces.NoIDTag;
 import com.jwebmp.core.base.html.interfaces.children.HeadChildren;
 import com.jwebmp.core.base.html.interfaces.children.HtmlChildren;
+import com.jwebmp.core.base.html.interfaces.children.PageChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
@@ -68,22 +69,21 @@ import java.util.TreeSet;
  * <p>
  *
  * @param <J>
- *
  * @author MMagon
- * 		<p>
- * 		<p>
+ * <p>
+ * <p>
  * @version 1.0
  * @since 2013/11/12
  */
 public class Head<J extends Head<J>>
-		extends ComponentHierarchyBase<HeadChildren, NoAttributes, NoFeatures, NoEvents, J>
-		implements NoIDTag, HtmlChildren, NoClassAttribute
+        extends ComponentHierarchyBase<HeadChildren, NoAttributes, NoFeatures, NoEvents, J>
+        implements NoIDTag, HtmlChildren, NoClassAttribute, PageChildren
 {
-	/**
-	 * Constructs a new Head Tag
-	 */
-	public Head()
-	{
-		super(ComponentTypes.Head);
-	}
+    /**
+     * Constructs a new Head Tag
+     */
+    public Head()
+    {
+        super(ComponentTypes.Head);
+    }
 }

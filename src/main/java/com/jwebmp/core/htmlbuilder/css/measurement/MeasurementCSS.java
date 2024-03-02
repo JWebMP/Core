@@ -18,7 +18,7 @@
 package com.jwebmp.core.htmlbuilder.css.measurement;
 
 import com.jwebmp.core.htmlbuilder.css.CSSPropertiesFactory;
-import com.jwebmp.core.htmlbuilder.css.annotations.CSSAnnotationType;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSAnnotationType;
 
 import java.lang.annotation.*;
 

@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.utilities.StaticStrings;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.java.Log;
@@ -67,7 +68,7 @@ public class SessionHelper
 		}
 		try
 		{
-			HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
+			HttpServletRequest request = IGuiceContext.get(HttpServletRequest.class);
 			StringBuffer buff = request.getRequestURL();
 			if (request.getHeader(StaticStrings.REQUEST_SITE_HEADER_NAME) != null
 					&& !request.getHeader(StaticStrings.REQUEST_SITE_HEADER_NAME).isEmpty())
@@ -101,7 +102,7 @@ public class SessionHelper
 		}
 		try
 		{
-			HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
+			HttpServletRequest request = IGuiceContext.get(HttpServletRequest.class);
 			StringBuffer buff = request.getRequestURL();
 			if (request.getHeader(StaticStrings.REQUEST_SITE_HEADER_NAME) != null
 			    && !request.getHeader(StaticStrings.REQUEST_SITE_HEADER_NAME).isEmpty())
@@ -183,8 +184,9 @@ public class SessionHelper
 	{
 		try
 		{
-			HttpServletRequest request = GuiceContext.inject()
-			                                         .getInstance(HttpServletRequest.class);
+			HttpServletRequest request = IGuiceContext.getContext()
+					                             .inject()
+					                             .getInstance(HttpServletRequest.class);
 			String buff = request.getServletPath();
 			return buff.isEmpty() ? STRING_FORWARD_SLASH : buff;
 		}

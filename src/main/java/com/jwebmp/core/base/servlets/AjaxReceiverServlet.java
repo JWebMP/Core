@@ -30,7 +30,7 @@ import lombok.extern.java.Log;
 
 import java.util.logging.Level;
 
-import static com.guicedee.guicedinjection.GuiceContext.get;
+import static com.guicedee.client.IGuiceContext.get;
 import static com.guicedee.services.jsonrepresentation.json.StaticStrings.CHAR_DOT;
 import static com.guicedee.services.jsonrepresentation.json.StaticStrings.CHAR_UNDERSCORE;
 import static com.jwebmp.interception.JWebMPInterceptionBinder.AjaxCallInterceptorKey;

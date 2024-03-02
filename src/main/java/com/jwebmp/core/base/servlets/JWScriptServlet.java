@@ -17,13 +17,13 @@
 package com.jwebmp.core.base.servlets;
 
 import com.google.inject.*;
-import com.guicedee.guicedinjection.*;
+import com.guicedee.client.*;
 import com.guicedee.services.jsonrepresentation.json.*;
 import com.guicedee.guicedservlets.*;
 import com.jwebmp.core.*;
 import jakarta.servlet.http.*;
 
-import static com.guicedee.guicedinjection.GuiceContext.*;
+import static com.guicedee.client.IGuiceContext.*;
 
 /**
  * @author GedMarc
@@ -43,7 +43,7 @@ public class JWScriptServlet
 	@Override
 	public void perform()
 	{
-		HttpServletRequest request = GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
+		HttpServletRequest request = IGuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
 		FileTemplates.getFileTemplate(JWScriptServlet.class, JWScriptServlet.FILE_TEMPLATE_NAME, "siteloader");
 		FileTemplates.getTemplateVariables()
 		             .put("SITEADDRESSINSERT", new StringBuilder(SessionHelper.getServerPath()));
@@ -52,7 +52,7 @@ public class JWScriptServlet
 		try
 		{
 			FileTemplates.getTemplateVariables()
-			             .put("PAGECLASS", new StringBuilder(GuiceContext.get(Page.class)
+			             .put("PAGECLASS", new StringBuilder(IGuiceContext.get(Page.class)
 			                                                             .getClass()
 			                                                             .getCanonicalName()));
 			

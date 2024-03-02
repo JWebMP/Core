@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.mouseout;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -82,8 +83,9 @@ public abstract class MouseOutAdapter<J extends MouseOutAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnMouseOutService> services = GuiceContext.instance()
-		                                               .getLoader(IOnMouseOutService.class, ServiceLoader.load(IOnMouseOutService.class));
+		Set<IOnMouseOutService> services = IGuiceContext
+				                                   .instance()
+				                                   .getLoader(IOnMouseOutService.class, ServiceLoader.load(IOnMouseOutService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 
@@ -104,7 +106,7 @@ public abstract class MouseOutAdapter<J extends MouseOutAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnMouseOutService> services = GuiceContext.instance()
+		Set<IOnMouseOutService> services = IGuiceContext.instance()
 		                                               .getLoader(IOnMouseOutService.class, ServiceLoader.load(IOnMouseOutService.class));
 		services.forEach(service -> service.onCreate(this));
 	}

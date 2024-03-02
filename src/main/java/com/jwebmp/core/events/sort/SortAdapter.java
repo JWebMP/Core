@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.sort;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -89,7 +90,7 @@ public abstract class SortAdapter<J extends SortAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnSortService> services = GuiceContext.instance()
+		Set<IOnSortService> services = IGuiceContext.instance()
 		                                           .getLoader(IOnSortService.class, ServiceLoader.load(IOnSortService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
@@ -99,8 +100,9 @@ public abstract class SortAdapter<J extends SortAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnSortService> services = GuiceContext.instance()
-		                                           .getLoader(IOnSortService.class, ServiceLoader.load(IOnSortService.class));
+		Set<IOnSortService> services = IGuiceContext
+				                               .instance()
+				                               .getLoader(IOnSortService.class, ServiceLoader.load(IOnSortService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 

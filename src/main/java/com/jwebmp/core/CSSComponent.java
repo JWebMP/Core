@@ -36,7 +36,7 @@ import jakarta.validation.constraints.NotNull;
  * @since 2015/04/24
  */
 public class CSSComponent<J extends CSSComponent<J>>
-		extends Component<IComponentHierarchyBase<?,?>, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements GlobalChildren
 {
 	/**

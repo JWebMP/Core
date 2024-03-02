@@ -4,7 +4,8 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Key;
 import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.guicedee.guicedinjection.interfaces.IGuiceModule;
 import com.jwebmp.interception.services.AjaxCallIntercepter;
 import com.jwebmp.interception.services.DataCallIntercepter;
@@ -26,17 +27,18 @@ public class JWebMPInterceptionBinder
 	public void configure()
 	{
 		bind(JWebMPInterceptionBinder.AjaxCallInterceptorKey)
-		      .toProvider(() -> GuiceContext.instance()
-		                                    .getLoader(AjaxCallIntercepter.class, ServiceLoader.load(AjaxCallIntercepter.class)))
+		      .toProvider(() -> IGuiceContext
+				                        .instance()
+				                        .getLoader(AjaxCallIntercepter.class, ServiceLoader.load(AjaxCallIntercepter.class)))
 		      .in(Singleton.class);
 
 		bind(JWebMPInterceptionBinder.DataCallInterceptorKey)
-		      .toProvider(() -> GuiceContext.instance()
+		      .toProvider(() -> IGuiceContext.instance()
 		                                    .getLoader(DataCallIntercepter.class, ServiceLoader.load(DataCallIntercepter.class)))
 		      .in(Singleton.class);
 
 		bind(JWebMPInterceptionBinder.SiteCallInterceptorKey)
-		      .toProvider(() -> GuiceContext.instance()
+		      .toProvider(() -> IGuiceContext.instance()
 		                                    .getLoader(SiteCallIntercepter.class, ServiceLoader.load(SiteCallIntercepter.class)))
 		      .in(Singleton.class);
 	}

@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.events.mouseover;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -80,8 +80,8 @@ public abstract class MouseOverAdapter<J extends MouseOverAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnMouseOverService> services = GuiceContext.instance()
-		                                                .getLoader(IOnMouseOverService.class, ServiceLoader.load(IOnMouseOverService.class));
+		Set<IOnMouseOverService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnMouseOverService.class, ServiceLoader.load(IOnMouseOverService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 
@@ -101,8 +101,8 @@ public abstract class MouseOverAdapter<J extends MouseOverAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnMouseOverService> services = GuiceContext.instance()
-		                                                .getLoader(IOnMouseOverService.class, ServiceLoader.load(IOnMouseOverService.class));
+		Set<IOnMouseOverService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnMouseOverService.class, ServiceLoader.load(IOnMouseOverService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

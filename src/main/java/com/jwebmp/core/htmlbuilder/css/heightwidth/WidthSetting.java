@@ -17,7 +17,7 @@
 package com.jwebmp.core.htmlbuilder.css.heightwidth;
 
 import com.jwebmp.core.base.client.CSSVersions;
-import com.jwebmp.core.htmlbuilder.css.CSSEnumeration;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSEnumeration;
 
 /**
  * Available Width Settings

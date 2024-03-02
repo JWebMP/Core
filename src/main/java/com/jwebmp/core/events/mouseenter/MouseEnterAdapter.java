@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.mouseenter;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -82,7 +83,7 @@ public abstract class MouseEnterAdapter<J extends MouseEnterAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnMouseEnterService> services = GuiceContext.instance()
+		Set<IOnMouseEnterService> services = IGuiceContext.instance()
 		                                                 .getLoader(IOnMouseEnterService.class, ServiceLoader.load(IOnMouseEnterService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -104,8 +105,9 @@ public abstract class MouseEnterAdapter<J extends MouseEnterAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnMouseEnterService> services = GuiceContext.instance()
-		                                                 .getLoader(IOnMouseEnterService.class, ServiceLoader.load(IOnMouseEnterService.class));
+		Set<IOnMouseEnterService> services = IGuiceContext
+				                                     .instance()
+				                                     .getLoader(IOnMouseEnterService.class, ServiceLoader.load(IOnMouseEnterService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

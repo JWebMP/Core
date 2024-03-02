@@ -17,14 +17,14 @@
 
 package com.jwebmp.core.base.page;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.html.Paragraph;
 import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
-import com.jwebmp.core.services.RenderAfterScripts;
-import com.jwebmp.core.services.RenderBeforeScripts;
+import com.jwebmp.core.services.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
@@ -32,8 +32,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import static com.jwebmp.core.services.JWebMPServicesBindings.RenderAfterScriptsKey;
-import static com.jwebmp.core.services.JWebMPServicesBindings.RenderBeforeScriptsKey;
+import static com.jwebmp.core.implementations.JWebMPServicesBindings.RenderAfterScriptsKey;
+import static com.jwebmp.core.implementations.JWebMPServicesBindings.RenderBeforeScriptsKey;
 
 public class ScriptsInsertPageConfigurator
 		extends RequirementsPriorityAbstractInsertPageConfigurator<ScriptsInsertPageConfigurator>
@@ -45,8 +45,9 @@ public class ScriptsInsertPageConfigurator
 
 	@NotNull
 	@Override
-	public Page<?> configure(Page<?> page)
+	public Page<?> configure(IPage<?> pager)
 	{
+		Page page = (Page)pager;
 		if (!page.isConfigured() && enabled())
 		{
 			IComponentHierarchyBase<?,?> addable;
@@ -81,7 +82,7 @@ public class ScriptsInsertPageConfigurator
 	
 	private void renderBeforeScripts(IComponentHierarchyBase<GlobalChildren,?> scriptAddTo)
 	{
-		Set<RenderBeforeScripts> renderB = GuiceContext.get(RenderBeforeScriptsKey);
+		Set<RenderBeforeScripts> renderB = IGuiceContext.get(RenderBeforeScriptsKey);
 		Paragraph<?> before = new Paragraph<>().setTextOnly(true);
 		renderB.forEach(render -> before.setText(before.getText(0)
 		                                               .toString() + render.render(scriptAddTo.getPage())
@@ -121,7 +122,7 @@ public class ScriptsInsertPageConfigurator
 	
 	private void renderAfterScripts(IComponentHierarchyBase<GlobalChildren,?> scriptAddTo)
 	{
-		Set<RenderAfterScripts> renderA = GuiceContext.get(RenderAfterScriptsKey);
+		Set<RenderAfterScripts> renderA = IGuiceContext.get(RenderAfterScriptsKey);
 		Paragraph<?> after = new Paragraph<>().setTextOnly(true);
 		for (RenderAfterScripts render : renderA)
 		{

@@ -16,9 +16,10 @@
  */
 package com.jwebmp;
 
+import com.guicedee.client.IGuiceContext;
 import com.jwebmp.core.Feature;
 import com.jwebmp.core.Page;
-import com.guicedee.guicedinjection.GuiceContext;
+
 import com.jwebmp.testing.BaseTest;
 
 import static com.jwebmp.core.base.servlets.enumarations.DevelopmentEnvironments.*;
@@ -30,33 +31,34 @@ import static com.jwebmp.core.base.servlets.enumarations.DevelopmentEnvironments
  * @since 13 Jan 2016
  */
 public class BaseTestClass
-		extends BaseTest
+        extends BaseTest
 {
-	public BaseTestClass()
-	{
-	}
+    public BaseTestClass()
+    {
+    }
 
-	public Feature getFeature()
-	{
-		Feature f = new Feature("Test Feature")
-		{
-			@Override
-			public void assignFunctionsToComponent()
-			{
-				addQuery(new StringBuilder("Query Added"));
-			}
-		};
-		f.setID("featureTest");
-		return f;
-	}
+    public Feature getFeature()
+    {
+        Feature f = new Feature("Test Feature")
+        {
+            @Override
+            public void assignFunctionsToComponent()
+            {
+                addQuery(new StringBuilder("Query Added"));
+            }
+        };
+        f.setID("featureTest");
+        return f;
+    }
 
-	public Page<?> getInstance()
-	{
+    public Page<?> getInstance()
+    {
+        IGuiceContext.instance()
+                     .destroy();
+        IGuiceContext.instance()
+                     .inject();
 
-		GuiceContext.destroy();
-		GuiceContext.inject();
-
-		return new Page<>().setTiny(false)
-		                   .setRunningEnvironment(Development);
-	}
+        return new Page<>().setTiny(false)
+                           .setRunningEnvironment(Development);
+    }
 }

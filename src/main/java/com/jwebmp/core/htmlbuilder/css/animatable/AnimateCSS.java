@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.htmlbuilder.css.animatable;
 
-import com.jwebmp.core.htmlbuilder.css.annotations.CSSAnnotationType;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSAnnotationType;
 
 import java.lang.annotation.*;
 

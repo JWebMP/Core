@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.events.select;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -81,8 +81,8 @@ public abstract class SelectAdapter<J extends SelectAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnSelectService> services = GuiceContext.instance()
-		                                             .getLoader(IOnSelectService.class, ServiceLoader.load(IOnSelectService.class));
+		Set<IOnSelectService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnSelectService.class, ServiceLoader.load(IOnSelectService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 
@@ -103,8 +103,8 @@ public abstract class SelectAdapter<J extends SelectAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnSelectService> services = GuiceContext.instance()
-		                                             .getLoader(IOnSelectService.class, ServiceLoader.load(IOnSelectService.class));
+		Set<IOnSelectService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnSelectService.class, ServiceLoader.load(IOnSelectService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

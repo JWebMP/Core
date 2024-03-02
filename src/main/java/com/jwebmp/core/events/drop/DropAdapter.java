@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.drop;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -85,7 +86,7 @@ public abstract class DropAdapter<J extends DropAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnDropService> services = GuiceContext.instance()
+		Set<IOnDropService> services = IGuiceContext.instance()
 		                                           .getLoader(IOnDropService.class, ServiceLoader.load(IOnDropService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -106,8 +107,9 @@ public abstract class DropAdapter<J extends DropAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnDropService> services = GuiceContext.instance()
-		                                           .getLoader(IOnDropService.class, ServiceLoader.load(IOnDropService.class));
+		Set<IOnDropService> services = IGuiceContext
+				                               .instance()
+				                               .getLoader(IOnDropService.class, ServiceLoader.load(IOnDropService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 

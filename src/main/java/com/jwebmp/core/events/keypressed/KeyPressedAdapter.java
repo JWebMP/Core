@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.keypressed;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -84,7 +85,7 @@ public abstract class KeyPressedAdapter<J extends KeyPressedAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnKeyPressedService> services = GuiceContext.instance()
+		Set<IOnKeyPressedService> services = IGuiceContext.instance()
 		                                                 .getLoader(IOnKeyPressedService.class, ServiceLoader.load(IOnKeyPressedService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -106,8 +107,9 @@ public abstract class KeyPressedAdapter<J extends KeyPressedAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnKeyPressedService> services = GuiceContext.instance()
-		                                                 .getLoader(IOnKeyPressedService.class, ServiceLoader.load(IOnKeyPressedService.class));
+		Set<IOnKeyPressedService> services = IGuiceContext
+				                                     .instance()
+				                                     .getLoader(IOnKeyPressedService.class, ServiceLoader.load(IOnKeyPressedService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 

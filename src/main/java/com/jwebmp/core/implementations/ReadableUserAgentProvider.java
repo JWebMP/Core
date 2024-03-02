@@ -2,12 +2,12 @@ package com.jwebmp.core.implementations;
 
 import com.google.common.base.*;
 import com.google.inject.*;
-import com.guicedee.guicedinjection.*;
+import com.guicedee.client.*;
 import com.jwebmp.core.base.ajax.*;
 import jakarta.servlet.http.*;
 import net.sf.uadetector.*;
 
-import static com.guicedee.services.jsonrepresentation.json.StaticStrings.*;
+import static com.guicedee.services.jsonrepresentation.json.StaticStrings.STRING_EMPTY;
 
 public class ReadableUserAgentProvider implements Provider<ReadableUserAgent>
 {
@@ -20,7 +20,7 @@ public class ReadableUserAgentProvider implements Provider<ReadableUserAgent>
 	{
 		try
 		{
-			HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
+			HttpServletRequest request = IGuiceContext.get(HttpServletRequest.class);
 			String headerInformation = request.getHeader("User-Agent");
 			if (!Strings.isNullOrEmpty(headerInformation))
 			{
@@ -33,7 +33,7 @@ public class ReadableUserAgentProvider implements Provider<ReadableUserAgent>
 		{
 			try
 			{
-				AjaxCall<?> call = GuiceContext.get(AjaxCall.class);
+				AjaxCall<?> call = IGuiceContext.get(AjaxCall.class);
 				HeadersDTO headers = call.getHeaders();
 				if (!Strings.isNullOrEmpty(headers.useragent))
 				{

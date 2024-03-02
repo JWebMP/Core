@@ -18,7 +18,7 @@
 package com.jwebmp.core.htmlbuilder.css.interfaces;
 
 import com.jwebmp.core.htmlbuilder.css.CSS;
-import com.jwebmp.core.htmlbuilder.css.annotations.CSSAnnotationType;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSAnnotationType;
 
 /**
  * @author GedMarc

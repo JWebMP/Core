@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.complete;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -85,7 +86,7 @@ public abstract class CompleteAdapter<J extends CompleteAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnCompleteService> services = GuiceContext.instance()
+		Set<IOnCompleteService> services = IGuiceContext.instance()
 		                                               .getLoader(IOnCompleteService.class, ServiceLoader.load(IOnCompleteService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -107,8 +108,9 @@ public abstract class CompleteAdapter<J extends CompleteAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnCompleteService> services = GuiceContext.instance()
-		                                               .getLoader(IOnCompleteService.class, ServiceLoader.load(IOnCompleteService.class));
+		Set<IOnCompleteService> services = IGuiceContext
+				                                   .instance()
+				                                   .getLoader(IOnCompleteService.class, ServiceLoader.load(IOnCompleteService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

@@ -24,6 +24,7 @@ import com.jwebmp.core.base.html.interfaces.children.HeadChildren;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
 
+import com.jwebmp.core.services.*;
 import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -45,8 +46,9 @@ public class TopShelfScriptsInsertPageConfigurator
 
 	@NotNull
 	@Override
-	public Page<?> configure(Page<?> page)
+	public IPage<?> configure(IPage<?> pageIn)
 	{
+		Page page = (Page)pageIn;
 		if (!page.isConfigured() && enabled())
 		{
 			List<IComponentHierarchyBase<?, ?>> reqs = getPriorityRequirements(page, RequirementsPriority.Top_Shelf, new ArrayList<>(), true, true);

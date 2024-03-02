@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.slide;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -80,8 +81,9 @@ public abstract class SlideAdapter<J extends SlideAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnSlideService> services = GuiceContext.instance()
-		                                            .getLoader(IOnSlideService.class, ServiceLoader.load(IOnSlideService.class));
+		Set<IOnSlideService> services = IGuiceContext
+				                                .instance()
+				                                .getLoader(IOnSlideService.class, ServiceLoader.load(IOnSlideService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 
@@ -102,7 +104,7 @@ public abstract class SlideAdapter<J extends SlideAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnSlideService> services = GuiceContext.instance()
+		Set<IOnSlideService> services = IGuiceContext.instance()
 		                                            .getLoader(IOnSlideService.class, ServiceLoader.load(IOnSlideService.class));
 		services.forEach(service -> service.onCreate(this));
 	}

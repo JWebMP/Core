@@ -17,6 +17,7 @@
 
 package com.jwebmp.core.htmlbuilder.css;
 
+import com.jwebmp.core.base.interfaces.*;
 import com.jwebmp.core.htmlbuilder.css.animatable.AnimateCSSImpl;
 import com.jwebmp.core.htmlbuilder.css.annotations.CSSImplementationAdapter;
 import com.jwebmp.core.htmlbuilder.css.annotations.CSSImplementationClass;
@@ -45,7 +46,7 @@ import java.util.Map;
  */
 public class CSSImpl
 		extends CSSImplementationAdapter<CSS, CSSImpl>
-		implements CSSImplementationClass<CSS, CSSImpl>
+		implements CSSImplementationClass<CSS, CSSImpl>, ICSSImpl
 {
 
 

@@ -18,7 +18,7 @@
 package com.jwebmp.core.htmlbuilder.css.measurement;
 
 import com.jwebmp.core.base.client.CSSVersions;
-import com.jwebmp.core.htmlbuilder.css.CSSEnumeration;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSEnumeration;
 
 /**
  * @author GedMarc

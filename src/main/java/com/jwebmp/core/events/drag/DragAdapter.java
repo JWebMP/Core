@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.drag;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -84,7 +85,7 @@ public abstract class DragAdapter<J extends DragAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnDragService> services = GuiceContext.instance()
+		Set<IOnDragService> services = IGuiceContext.instance()
 		                                           .getLoader(IOnDragService.class, ServiceLoader.load(IOnDragService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -106,8 +107,9 @@ public abstract class DragAdapter<J extends DragAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnDragService> services = GuiceContext.instance()
-		                                           .getLoader(IOnDragService.class, ServiceLoader.load(IOnDragService.class));
+		Set<IOnDragService> services = IGuiceContext
+				                               .instance()
+				                               .getLoader(IOnDragService.class, ServiceLoader.load(IOnDragService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 

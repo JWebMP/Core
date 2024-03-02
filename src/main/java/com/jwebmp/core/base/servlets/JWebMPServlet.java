@@ -17,7 +17,8 @@
 package com.jwebmp.core.base.servlets;
 
 import com.google.inject.Singleton;
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import jakarta.servlet.http.HttpServletResponse;
@@ -53,7 +54,7 @@ public class JWebMPServlet
 	public void perform()
 	{
 		
-		HttpServletResponse response = GuiceContext.get(GuicedServletKeys.getHttpServletResponseKey());
+		HttpServletResponse response = IGuiceContext.get(GuicedServletKeys.getHttpServletResponseKey());
 		sendPage(response);
 	}
 
@@ -78,7 +79,7 @@ public class JWebMPServlet
 		try
 		{
 			JWebMPServlet.log.log(Level.INFO, "Destroying Servlet JWebMP Servlet and all Static Objects");
-			GuiceContext.destroy();
+			IGuiceContext.getContext().destroy();
 		}
 		catch (Exception t)
 		{

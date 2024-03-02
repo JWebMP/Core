@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.events.search;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -81,8 +81,8 @@ public abstract class SearchAdapter<J extends SearchAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnSearchService> services = GuiceContext.instance()
-		                                             .getLoader(IOnSearchService.class, ServiceLoader.load(IOnSearchService.class));
+		Set<IOnSearchService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnSearchService.class, ServiceLoader.load(IOnSearchService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 
@@ -103,8 +103,8 @@ public abstract class SearchAdapter<J extends SearchAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnSearchService> services = GuiceContext.instance()
-		                                             .getLoader(IOnSearchService.class, ServiceLoader.load(IOnSearchService.class));
+		Set<IOnSearchService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnSearchService.class, ServiceLoader.load(IOnSearchService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

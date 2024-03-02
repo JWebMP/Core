@@ -17,8 +17,8 @@
 
 package com.jwebmp.core.htmlbuilder.css.colours;
 
-import com.jwebmp.core.htmlbuilder.css.CSSEnumeration;
-import com.jwebmp.core.htmlbuilder.css.annotations.CSSAnnotationType;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSEnumeration;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSAnnotationType;
 
 /**
  * @author GedMarc

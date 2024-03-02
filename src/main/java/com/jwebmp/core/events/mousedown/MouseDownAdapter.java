@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.events.mousedown;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -82,8 +82,8 @@ public abstract class MouseDownAdapter<J extends MouseDownAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnMouseDownService> services = GuiceContext.instance()
-		                                                .getLoader(IOnMouseDownService.class, ServiceLoader.load(IOnMouseDownService.class));
+		Set<IOnMouseDownService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnMouseDownService.class, ServiceLoader.load(IOnMouseDownService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 
@@ -103,8 +103,8 @@ public abstract class MouseDownAdapter<J extends MouseDownAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnMouseDownService> services = GuiceContext.instance()
-		                                                .getLoader(IOnMouseDownService.class, ServiceLoader.load(IOnMouseDownService.class));
+		Set<IOnMouseDownService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnMouseDownService.class, ServiceLoader.load(IOnMouseDownService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

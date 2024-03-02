@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.htmlbuilder.css.borders;
 
-import com.jwebmp.core.htmlbuilder.css.annotations.CSSAnnotationType;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSAnnotationType;
 import com.jwebmp.core.htmlbuilder.css.colours.ColourCSS;
 import com.jwebmp.core.htmlbuilder.css.colours.ColourNames;
 import com.jwebmp.core.htmlbuilder.css.enumarations.BorderStyles;

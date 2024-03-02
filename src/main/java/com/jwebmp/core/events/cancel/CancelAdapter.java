@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.events.cancel;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -84,8 +84,8 @@ public abstract class CancelAdapter<J extends CancelAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnCancelService> services = GuiceContext.instance()
-		                                             .getLoader(IOnCancelService.class, ServiceLoader.load(IOnCancelService.class));
+		Set<IOnCancelService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnCancelService.class, ServiceLoader.load(IOnCancelService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 
@@ -106,8 +106,8 @@ public abstract class CancelAdapter<J extends CancelAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnCancelService> services = GuiceContext.instance()
-		                                             .getLoader(IOnCancelService.class, ServiceLoader.load(IOnCancelService.class));
+		Set<IOnCancelService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnCancelService.class, ServiceLoader.load(IOnCancelService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 

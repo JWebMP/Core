@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.blur;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -81,7 +82,7 @@ public abstract class BlurAdapter<J extends BlurAdapter<J>>
 
 	private void onCall()
 	{
-		Set<IOnBlurService> services = GuiceContext.instance()
+		Set<IOnBlurService> services = IGuiceContext.instance()
 		                                           .getLoader(IOnBlurService.class, ServiceLoader.load(IOnBlurService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -103,8 +104,9 @@ public abstract class BlurAdapter<J extends BlurAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnBlurService> services = GuiceContext.instance()
-		                                           .getLoader(IOnBlurService.class, ServiceLoader.load(IOnBlurService.class));
+		Set<IOnBlurService> services = IGuiceContext
+				                               .instance()
+				                               .getLoader(IOnBlurService.class, ServiceLoader.load(IOnBlurService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 

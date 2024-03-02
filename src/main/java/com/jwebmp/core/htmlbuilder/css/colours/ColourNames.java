@@ -18,7 +18,7 @@
 package com.jwebmp.core.htmlbuilder.css.colours;
 
 import com.jwebmp.core.base.client.CSSVersions;
-import com.jwebmp.core.htmlbuilder.css.CSSEnumeration;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSEnumeration;
 
 /**
  * Standard HTML Colours Based on the list referenced at http://www.w3schools.com/HTML/html_colornames.asp

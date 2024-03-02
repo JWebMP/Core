@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.dropout;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -85,7 +86,7 @@ public abstract class DropOutAdapter<J extends DropOutAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnDropOutService> services = GuiceContext.instance()
+		Set<IOnDropOutService> services = IGuiceContext.instance()
 		                                              .getLoader(IOnDropOutService.class, ServiceLoader.load(IOnDropOutService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -107,8 +108,9 @@ public abstract class DropOutAdapter<J extends DropOutAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnDropOutService> services = GuiceContext.instance()
-		                                              .getLoader(IOnDropOutService.class, ServiceLoader.load(IOnDropOutService.class));
+		Set<IOnDropOutService> services = IGuiceContext
+				                                  .instance()
+				                                  .getLoader(IOnDropOutService.class, ServiceLoader.load(IOnDropOutService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 

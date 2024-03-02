@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.keyup;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -81,7 +82,7 @@ public abstract class KeyUpAdapter<J extends KeyUpAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnKeyUpService> services = GuiceContext.instance()
+		Set<IOnKeyUpService> services = IGuiceContext.instance()
 		                                            .getLoader(IOnKeyUpService.class, ServiceLoader.load(IOnKeyUpService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -103,8 +104,9 @@ public abstract class KeyUpAdapter<J extends KeyUpAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnKeyUpService> services = GuiceContext.instance()
-		                                            .getLoader(IOnKeyUpService.class, ServiceLoader.load(IOnKeyUpService.class));
+		Set<IOnKeyUpService> services = IGuiceContext
+				                                .instance()
+				                                .getLoader(IOnKeyUpService.class, ServiceLoader.load(IOnKeyUpService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

@@ -27,7 +27,7 @@ import com.jwebmp.interception.services.DataCallIntercepter;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.java.Log;
 
-import static com.guicedee.guicedinjection.GuiceContext.get;
+import static com.guicedee.client.IGuiceContext.get;
 import static com.jwebmp.interception.JWebMPInterceptionBinder.DataCallInterceptorKey;
 
 /**

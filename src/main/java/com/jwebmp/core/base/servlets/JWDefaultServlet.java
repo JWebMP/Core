@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.base.servlets;
 
-import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.client.*;
+
 import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import com.jwebmp.core.Page;
@@ -44,7 +45,7 @@ import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.logging.Level;
 
-import static com.guicedee.guicedinjection.GuiceContext.get;
+import static com.guicedee.client.IGuiceContext.get;
 import static com.jwebmp.interception.JWebMPInterceptionBinder.SiteCallInterceptorKey;
 
 /**
@@ -158,7 +159,7 @@ public abstract class JWDefaultServlet
 			                                                                                                    .getId());
 			throw new InvalidRequestException("Invalid Date Time Value");
 		}
-		EventTypes eventType = ajaxCall.getEventType();
+		EventTypes eventType = (EventTypes) ajaxCall.getEventType();
 		if (eventType == null)
 		{
 			JWDefaultServlet.log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Event Type Incorrect]", request.getSession()
@@ -167,7 +168,7 @@ public abstract class JWDefaultServlet
 		}
 		for (SiteCallIntercepter<?> siteCallIntercepter : get(SiteCallInterceptorKey))
 		{
-			siteCallIntercepter.intercept(ajaxCall, GuiceContext.get(AjaxResponse.class));
+			siteCallIntercepter.intercept(ajaxCall, IGuiceContext.get(AjaxResponse.class));
 		}
 		
 		return true;
@@ -221,7 +222,7 @@ public abstract class JWDefaultServlet
 	protected Page<?> getErrorPageHtml(Throwable t)
 	{
 		JWDefaultServlet.log.log(Level.SEVERE, "Exception incoming", t);
-		Set<IErrorPage> errorPages = GuiceContext.instance()
+		Set<IErrorPage> errorPages = IGuiceContext.instance()
 		                                         .getLoader(IErrorPage.class, ServiceLoader.load(IErrorPage.class));
 		if (!errorPages.iterator()
 		               .hasNext())
@@ -246,7 +247,7 @@ public abstract class JWDefaultServlet
 			IErrorPage p = get(errorPages.iterator()
 			                             .next()
 			                             .getClass());
-			return p.renderPage(t);
+			return (Page) p.renderPage(t);
 		}
 	}
 	

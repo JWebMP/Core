@@ -20,8 +20,9 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.guicedee.client.*;
 import com.jwebmp.core.htmlbuilder.css.CSSPropertiesFactory;
-import com.guicedee.guicedinjection.GuiceContext;
+
 import lombok.extern.java.Log;
 
 
@@ -129,11 +130,12 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 	{
 		try
 		{
-			return GuiceContext.get(ObjectMapper.class)
-			                   .writer()
-			                   .withoutFeatures(SerializationFeature.INDENT_OUTPUT)
-			                   .withoutFeatures(WRITE_ENUMS_USING_TO_STRING)
-			                   .writeValueAsString(this);
+			return IGuiceContext
+					       .get(ObjectMapper.class)
+					       .writer()
+					       .withoutFeatures(SerializationFeature.INDENT_OUTPUT)
+					       .withoutFeatures(WRITE_ENUMS_USING_TO_STRING)
+					       .writeValueAsString(this);
 		}
 		catch (Exception e)
 		{

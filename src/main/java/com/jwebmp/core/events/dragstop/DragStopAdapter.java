@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.dragstop;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -85,7 +86,7 @@ public abstract class DragStopAdapter<J extends DragStopAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnDragStopService> services = GuiceContext.instance()
+		Set<IOnDragStopService> services = IGuiceContext.instance()
 		                                               .getLoader(IOnDragStopService.class, ServiceLoader.load(IOnDragStopService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -107,8 +108,9 @@ public abstract class DragStopAdapter<J extends DragStopAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnDragStopService> services = GuiceContext.instance()
-		                                               .getLoader(IOnDragStopService.class, ServiceLoader.load(IOnDragStopService.class));
+		Set<IOnDragStopService> services = IGuiceContext
+				                                   .instance()
+				                                   .getLoader(IOnDragStopService.class, ServiceLoader.load(IOnDragStopService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

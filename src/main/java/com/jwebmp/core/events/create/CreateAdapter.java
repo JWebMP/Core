@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.events.create;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -86,8 +86,8 @@ public abstract class CreateAdapter<J extends CreateAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnCreateService> services = GuiceContext.instance()
-		                                             .getLoader(IOnCreateService.class, ServiceLoader.load(IOnCreateService.class));
+		Set<IOnCreateService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnCreateService.class, ServiceLoader.load(IOnCreateService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 
@@ -108,8 +108,8 @@ public abstract class CreateAdapter<J extends CreateAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnCreateService> services = GuiceContext.instance()
-		                                             .getLoader(IOnCreateService.class, ServiceLoader.load(IOnCreateService.class));
+		Set<IOnCreateService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnCreateService.class, ServiceLoader.load(IOnCreateService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

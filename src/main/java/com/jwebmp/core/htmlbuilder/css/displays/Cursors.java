@@ -18,8 +18,8 @@
 package com.jwebmp.core.htmlbuilder.css.displays;
 
 import com.jwebmp.core.base.client.CSSVersions;
-import com.jwebmp.core.htmlbuilder.css.CSSEnumeration;
-import com.jwebmp.core.htmlbuilder.css.annotations.CSSAnnotationType;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSEnumeration;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSAnnotationType;
 
 /**
  * Specifies the type of cursor to be displayed

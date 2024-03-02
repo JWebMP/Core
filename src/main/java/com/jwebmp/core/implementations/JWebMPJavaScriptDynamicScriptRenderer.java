@@ -3,19 +3,20 @@ package com.jwebmp.core.implementations;
 import com.google.common.base.Strings;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.html.Script;
-import com.jwebmp.core.services.IDynamicRenderingServlet;
+import com.jwebmp.core.base.html.attributes.*;
+import com.jwebmp.core.services.*;
 import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import jakarta.servlet.http.HttpServletRequest;
 
-import static com.guicedee.guicedinjection.GuiceContext.*;
+import static com.guicedee.client.IGuiceContext.*;
 
-public class JWebMPJavaScriptDynamicScriptRenderer
-		implements IDynamicRenderingServlet<JWebMPJavaScriptDynamicScriptRenderer>
+
+public class JWebMPJavaScriptDynamicScriptRenderer implements IDynamicRenderingServlet<JWebMPJavaScriptDynamicScriptRenderer>
 {
 	public static boolean renderJavascript = true;
-
+	
 	@Override
-	public String getScriptLocation(Page<?> page)
+	public String getScriptLocation(IPage<?> page)
 	{
 		String queryParams = "";
 		try
@@ -27,25 +28,35 @@ public class JWebMPJavaScriptDynamicScriptRenderer
 		{
 		
 		}
-		return JWebMPSiteBinder.getJavaScriptLocation()
-		                       .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY) +  "?" +  Strings.nullToEmpty(queryParams);
+		return JWebMPSiteBinder
+				       .getJavaScriptLocation()
+				       .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY) + "?" + Strings.nullToEmpty(queryParams);
 	}
 	
 	@Override
-	public Script<?, ?> renderScript(Page<?> page)
+	public Script<?, ?> renderScript(IPage<?> page)
 	{
 		return getJavascriptScript(page);
 	}
 	
+	public Script<?, ?> newScript(String contents)
+	{
+		Script<?, ?> s = new Script<>();
+		s.addAttribute(ScriptAttributes.Type, StaticStrings.HTML_HEADER_JAVASCRIPT);
+		s.setText(contents);
+		return s;
+	}
 	
 	/**
 	 * Method getJavascriptScript ...
 	 *
 	 * @return Script
 	 */
-	private Script<?, ?> getJavascriptScript(Page<?> page)
+	private Script<?, ?> getJavascriptScript(IPage<?> pager)
 	{
-		if(renderJavascript) {
+		Page page = (Page)pager;
+		if (renderJavascript)
+		{
 			StringBuilder js = page.renderJavascript();
 			return newScript(page.getNewLine() + js);
 		}

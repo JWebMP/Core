@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.keydown;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -81,7 +82,7 @@ public abstract class KeyDownAdapter<J extends KeyDownAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnKeyDownService> services = GuiceContext.instance()
+		Set<IOnKeyDownService> services = IGuiceContext.instance()
 		                                              .getLoader(IOnKeyDownService.class, ServiceLoader.load(IOnKeyDownService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -103,8 +104,9 @@ public abstract class KeyDownAdapter<J extends KeyDownAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnKeyDownService> services = GuiceContext.instance()
-		                                              .getLoader(IOnKeyDownService.class, ServiceLoader.load(IOnKeyDownService.class));
+		Set<IOnKeyDownService> services = IGuiceContext
+				                                  .instance()
+				                                  .getLoader(IOnKeyDownService.class, ServiceLoader.load(IOnKeyDownService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

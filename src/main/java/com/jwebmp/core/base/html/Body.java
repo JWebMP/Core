@@ -29,6 +29,7 @@ import com.jwebmp.core.base.html.interfaces.children.PageChildren;
 import com.jwebmp.core.base.html.interfaces.events.BodyEvents;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
+import com.jwebmp.core.services.IPage;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Objects;
@@ -63,67 +64,60 @@ import java.util.Objects;
  * @since 2013/11/20
  */
 public class Body<F extends BodyFeatures, J extends Body<F, J>>
-		extends Component<BodyChildren, BodyAttributes, F, BodyEvents, J>
-		implements PageChildren, HtmlChildren, LayoutHandler, ContainerType
-{
-	
-	/**
-	 * If this body has rendered the scripts on itself
-	 */
-	private boolean renderedScripts;
-	
-	/**
-	 * Instantiates an empty body
-	 */
-	public Body()
-	{
-		this(null);
-	}
-	
-	/**
-	 * Constructs a new Body with the given Page input
-	 *
-	 * @param page
-	 */
-	public Body(Page<?> page)
-	{
-		super(ComponentTypes.Body);
-		if (page != null)
-		{
-			setPage(page);
-		}
-		setID("body");
-		
-	}
-	
-	@NotNull
-	@SuppressWarnings("unchecked")
-	public J setFullScreen()
-	{
-		addStyle("width:100%;height:100%;margin:0px;");
-		getPage().addStyle("width:100%;height:100%;margin:0px;");
-		return (J) this;
-	}
-	
-	/**
-	 * If the scripts have been rendered
-	 *
-	 * @return
-	 */
-	protected boolean isRenderedScripts()
-	{
-		return renderedScripts;
-	}
-	
-	/**
-	 * If the scripts have been rendered
-	 *
-	 * @param renderedScripts
-	 * @return
-	 */
-	protected Body<?,?> setRenderedScripts(boolean renderedScripts)
-	{
-		this.renderedScripts = renderedScripts;
-		return this;
-	}
+        extends Component<BodyChildren, BodyAttributes, F, BodyEvents, J>
+        implements PageChildren, HtmlChildren, LayoutHandler, ContainerType {
+
+    /**
+     * If this body has rendered the scripts on itself
+     */
+    private boolean renderedScripts;
+
+    /**
+     * Instantiates an empty body
+     */
+    public Body() {
+        this(null);
+    }
+
+    /**
+     * Constructs a new Body with the given Page input
+     *
+     * @param page
+     */
+    public Body(IPage<?> page) {
+        super(ComponentTypes.Body);
+        if (page != null) {
+            setPage(page);
+        }
+        setID("body");
+
+    }
+
+    @NotNull
+    @SuppressWarnings("unchecked")
+    public J setFullScreen() {
+        addStyle("width:100%;height:100%;margin:0px;");
+        getPage().addStyle("width:100%;height:100%;margin:0px;");
+        return (J) this;
+    }
+
+    /**
+     * If the scripts have been rendered
+     *
+     * @return
+     */
+    protected boolean isRenderedScripts() {
+        return renderedScripts;
+    }
+
+    /**
+     * If the scripts have been rendered
+     *
+     * @param renderedScripts
+     * @return
+     */
+    protected Body<?, ?> setRenderedScripts(boolean renderedScripts) {
+        this.renderedScripts = renderedScripts;
+        return this;
+    }
 }

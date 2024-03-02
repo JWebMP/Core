@@ -20,7 +20,8 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.core.services.IRegularExpressions;
 import lombok.extern.java.Log;
@@ -69,8 +70,9 @@ public class RegularExpressionsDTO
 	public RegularExpressionsDTO addDefaults()
 	{
 		Map<String, Pattern> patterns = new LinkedHashMap<>();
-		Set<IRegularExpressions> regess = GuiceContext.instance()
-		                                              .getLoader(IRegularExpressions.class, ServiceLoader.load(IRegularExpressions.class));
+		Set<IRegularExpressions> regess = IGuiceContext
+				                                  .instance()
+				                                  .getLoader(IRegularExpressions.class, ServiceLoader.load(IRegularExpressions.class));
 		regess.forEach(regexConfig ->
 		               {
 			               RegularExpressionsDTO.log.finer("Regex Config Found [" + regexConfig.getClass()

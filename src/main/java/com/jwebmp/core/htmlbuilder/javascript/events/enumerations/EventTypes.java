@@ -54,7 +54,7 @@ import com.jwebmp.core.htmlbuilder.javascript.events.commandevent.OnComponentLoa
  * @author GedMarc
  */
 public enum EventTypes
-		implements Comparable<EventTypes>
+		implements Comparable<EventTypes>, com.jwebmp.core.services.IEventTypes<EventTypes>
 {
 
 	/**
@@ -278,6 +278,7 @@ public enum EventTypes
 	 *
 	 * @return Get the class type that this AJAX event type is matched to
 	 */
+	@Override
 	public Class getClassType()
 	{
 		return classType;
@@ -288,11 +289,18 @@ public enum EventTypes
 	 *
 	 * @return Gets the Ajax Event Types that this event is linked to
 	 */
+	@Override
 	public Class getAjaxOptionsReturn()
 	{
 		return ajaxOptionsReturn;
 	}
-
+	
+	@Override
+	public Enum from(String s)
+	{
+		return valueOf(s);
+	}
+	
 	@Override
 	@JsonValue
 	public String toString()

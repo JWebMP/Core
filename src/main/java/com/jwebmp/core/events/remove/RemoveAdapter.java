@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.events.remove;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -82,8 +82,8 @@ public abstract class RemoveAdapter<J extends RemoveAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnRemoveService> services = GuiceContext.instance()
-		                                             .getLoader(IOnRemoveService.class, ServiceLoader.load(IOnRemoveService.class));
+		Set<IOnRemoveService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnRemoveService.class, ServiceLoader.load(IOnRemoveService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 
@@ -104,8 +104,8 @@ public abstract class RemoveAdapter<J extends RemoveAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnRemoveService> services = GuiceContext.instance()
-		                                             .getLoader(IOnRemoveService.class, ServiceLoader.load(IOnRemoveService.class));
+		Set<IOnRemoveService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnRemoveService.class, ServiceLoader.load(IOnRemoveService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

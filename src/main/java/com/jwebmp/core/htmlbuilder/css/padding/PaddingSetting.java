@@ -1,7 +1,7 @@
 package com.jwebmp.core.htmlbuilder.css.padding;
 
 import com.jwebmp.core.base.client.CSSVersions;
-import com.jwebmp.core.htmlbuilder.css.CSSEnumeration;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSEnumeration;
 
 /**
  * @author MMagon

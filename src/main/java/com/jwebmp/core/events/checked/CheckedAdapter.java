@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.checked;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -81,7 +82,7 @@ public abstract class CheckedAdapter<J extends CheckedAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnCheckedService> services = GuiceContext.instance()
+		Set<IOnCheckedService> services = IGuiceContext.instance()
 		                                              .getLoader(IOnCheckedService.class, ServiceLoader.load(IOnCheckedService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -103,8 +104,9 @@ public abstract class CheckedAdapter<J extends CheckedAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnCheckedService> services = GuiceContext.instance()
-		                                              .getLoader(IOnCheckedService.class, ServiceLoader.load(IOnCheckedService.class));
+		Set<IOnCheckedService> services = IGuiceContext
+				                                  .instance()
+				                                  .getLoader(IOnCheckedService.class, ServiceLoader.load(IOnCheckedService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

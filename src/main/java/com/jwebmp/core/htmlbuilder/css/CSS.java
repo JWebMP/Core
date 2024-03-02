@@ -1,7 +1,7 @@
 package com.jwebmp.core.htmlbuilder.css;
 
 import com.jwebmp.core.htmlbuilder.css.animatable.AnimateCSS;
-import com.jwebmp.core.htmlbuilder.css.annotations.CSSAnnotationType;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSAnnotationType;
 import com.jwebmp.core.htmlbuilder.css.backgrounds.BackgroundCSS;
 import com.jwebmp.core.htmlbuilder.css.borders.BorderCSS;
 import com.jwebmp.core.htmlbuilder.css.displays.DisplayCSS;

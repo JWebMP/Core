@@ -18,7 +18,8 @@ package com.jwebmp.core.implementations;
 
 import com.google.inject.TypeLiteral;
 import com.google.inject.servlet.ServletModule;
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.guicedee.guicedinjection.interfaces.IGuiceModule;
 import com.guicedee.guicedservlets.services.GuiceSiteInjectorModule;
 import com.guicedee.guicedservlets.servlets.services.scopes.CallScope;
@@ -305,7 +306,7 @@ public class JWebMPSiteBinder
 	
 	public static Set<IPage> getPages()
 	{
-		return GuiceContext.instance()
+		return IGuiceContext.instance()
 		                   .getLoader(IPage.class, true, ServiceLoader.load(IPage.class));
 	}
 	
@@ -314,8 +315,9 @@ public class JWebMPSiteBinder
 		Map<PageConfiguration, IPage<?>> pagesMap = new HashMap<>();
 		
 		@SuppressWarnings("rawtypes")
-		Set<IPage> pages = GuiceContext.instance()
-		                               .getLoader(IPage.class, true, ServiceLoader.load(IPage.class));
+		Set<IPage> pages = IGuiceContext
+				                   .instance()
+				                   .getLoader(IPage.class, true, ServiceLoader.load(IPage.class));
 		for (IPage<?> page : pages)
 		{
 			PageConfiguration pc = page.getClass()

@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.events.change;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -86,8 +86,8 @@ public abstract class ChangeAdapter<J extends ChangeAdapter<J>>
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	private void onCall()
 	{
-		Set<IOnChangeService> services = GuiceContext.instance()
-		                                             .getLoader(IOnChangeService.class, ServiceLoader.load(IOnChangeService.class));
+		Set<IOnChangeService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnChangeService.class, ServiceLoader.load(IOnChangeService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 
@@ -108,8 +108,8 @@ public abstract class ChangeAdapter<J extends ChangeAdapter<J>>
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	private void onCreate()
 	{
-		Set<IOnChangeService> services = GuiceContext.instance()
-		                                             .getLoader(IOnChangeService.class, ServiceLoader.load(IOnChangeService.class));
+		Set<IOnChangeService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnChangeService.class, ServiceLoader.load(IOnChangeService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 

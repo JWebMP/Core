@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.close;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -84,7 +85,7 @@ public abstract class CloseAdapter<J extends CloseAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnCloseService> services = GuiceContext.instance()
+		Set<IOnCloseService> services = IGuiceContext.instance()
 		                                            .getLoader(IOnCloseService.class, ServiceLoader.load(IOnCloseService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -106,8 +107,9 @@ public abstract class CloseAdapter<J extends CloseAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnCloseService> services = GuiceContext.instance()
-		                                            .getLoader(IOnCloseService.class, ServiceLoader.load(IOnCloseService.class));
+		Set<IOnCloseService> services = IGuiceContext
+				                                .instance()
+				                                .getLoader(IOnCloseService.class, ServiceLoader.load(IOnCloseService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

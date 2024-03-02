@@ -1,17 +1,17 @@
 package com.jwebmp.core.base.page;
 
+import com.guicedee.client.*;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.Paragraph;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
-import com.jwebmp.core.services.RenderAfterLinks;
-import com.jwebmp.core.services.RenderBeforeLinks;
-import com.guicedee.guicedinjection.GuiceContext;
+import com.jwebmp.core.services.*;
+
 
 import jakarta.validation.constraints.NotNull;
 import java.util.Set;
 
-import static com.jwebmp.core.services.JWebMPServicesBindings.*;
+import static com.jwebmp.core.implementations.JWebMPServicesBindings.*;
 
 /**
  * Inserts the CSS Links into the page
@@ -30,8 +30,9 @@ public class CSSLinksInsertPageConfigurator
 
 	@NotNull
 	@Override
-	public Page<?> configure(Page<?> page)
+	public Page<?> configure(IPage<?> pager)
 	{
+		Page page = (Page)pager;
 		if (!page.isConfigured() && enabled())
 		{
 			renderBeforeLinks(page);
@@ -54,7 +55,7 @@ public class CSSLinksInsertPageConfigurator
 
 	private void renderBeforeLinks(Page<?> page)
 	{
-		Set<RenderBeforeLinks> renderB = GuiceContext.get(RenderBeforeLinksKey);
+		Set<RenderBeforeLinks> renderB = IGuiceContext.get(RenderBeforeLinksKey);
 		Paragraph<?> before = new Paragraph<>().setTextOnly(true);
 		for (RenderBeforeLinks render : renderB)
 		{
@@ -74,7 +75,7 @@ public class CSSLinksInsertPageConfigurator
 
 	private void renderAfterLinks(Page<?> page)
 	{
-		Set<RenderAfterLinks> renderA = GuiceContext.get(RenderAfterLinksKey);
+		Set<RenderAfterLinks> renderA = IGuiceContext.get(RenderAfterLinksKey);
 		Paragraph<?> after = new Paragraph<>().setTextOnly(true);
 		for (RenderAfterLinks render : renderA)
 		{

@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.events.mousemove;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -83,8 +83,8 @@ public abstract class MouseMoveAdapter<J extends MouseMoveAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnMouseMoveService> services = GuiceContext.instance()
-		                                                .getLoader(IOnMouseMoveService.class, ServiceLoader.load(IOnMouseMoveService.class));
+		Set<IOnMouseMoveService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnMouseMoveService.class, ServiceLoader.load(IOnMouseMoveService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 
@@ -104,8 +104,8 @@ public abstract class MouseMoveAdapter<J extends MouseMoveAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnMouseMoveService> services = GuiceContext.instance()
-		                                                .getLoader(IOnMouseMoveService.class, ServiceLoader.load(IOnMouseMoveService.class));
+		Set<IOnMouseMoveService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnMouseMoveService.class, ServiceLoader.load(IOnMouseMoveService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.resizestart;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -82,7 +83,7 @@ public abstract class ResizeStartAdapter<J extends ResizeStartAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnResizeStartService> services = GuiceContext.instance()
+		Set<IOnResizeStartService> services = IGuiceContext.instance()
 		                                                  .getLoader(IOnResizeStartService.class, ServiceLoader.load(IOnResizeStartService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -103,8 +104,9 @@ public abstract class ResizeStartAdapter<J extends ResizeStartAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnResizeStartService> services = GuiceContext.instance()
-		                                                  .getLoader(IOnResizeStartService.class, ServiceLoader.load(IOnResizeStartService.class));
+		Set<IOnResizeStartService> services = IGuiceContext
+				                                      .instance()
+				                                      .getLoader(IOnResizeStartService.class, ServiceLoader.load(IOnResizeStartService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

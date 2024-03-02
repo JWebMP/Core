@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.rightclick;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -81,7 +82,7 @@ public abstract class RightClickAdapter<J extends RightClickAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnRightClickService> services = GuiceContext.instance()
+		Set<IOnRightClickService> services = IGuiceContext.instance()
 		                                                 .getLoader(IOnRightClickService.class, ServiceLoader.load(IOnRightClickService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -102,8 +103,9 @@ public abstract class RightClickAdapter<J extends RightClickAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnRightClickService> services = GuiceContext.instance()
-		                                                 .getLoader(IOnRightClickService.class, ServiceLoader.load(IOnRightClickService.class));
+		Set<IOnRightClickService> services = IGuiceContext
+				                                     .instance()
+				                                     .getLoader(IOnRightClickService.class, ServiceLoader.load(IOnRightClickService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

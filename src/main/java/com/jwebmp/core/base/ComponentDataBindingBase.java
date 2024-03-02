@@ -17,6 +17,7 @@
 package com.jwebmp.core.base;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.guicedee.client.*;
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
@@ -25,7 +26,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.databind.IOnDataBind;
 import com.jwebmp.core.databind.IOnDataBindCloak;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
-import com.guicedee.guicedinjection.GuiceContext;
+
 
 import jakarta.validation.constraints.NotNull;
 
@@ -114,8 +115,9 @@ public class ComponentDataBindingBase<A extends Enum<?> & AttributeDefinitions,
 	public J bind(@NotNull String variableName)
 	{
 		@SuppressWarnings("rawtypes")
-		Set<IOnDataBind> services = GuiceContext.instance()
-		                                        .getLoader(IOnDataBind.class, ServiceLoader.load(IOnDataBind.class));
+		Set<IOnDataBind> services = IGuiceContext
+				                            .instance()
+				                            .getLoader(IOnDataBind.class, ServiceLoader.load(IOnDataBind.class));
 		services.forEach(a -> a.onBind(this, variableName));
 		return (J) this;
 	}
@@ -186,8 +188,8 @@ public class ComponentDataBindingBase<A extends Enum<?> & AttributeDefinitions,
 	@SuppressWarnings("unchecked")
 	public J cloak()
 	{
-		Set<IOnDataBindCloak> services = GuiceContext.instance()
-		                                             .getLoader(IOnDataBindCloak.class, ServiceLoader.load(IOnDataBindCloak.class));
+		Set<IOnDataBindCloak> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnDataBindCloak.class, ServiceLoader.load(IOnDataBindCloak.class));
 		services.forEach(a -> a.onCloak(this));
 		return (J) this;
 	}

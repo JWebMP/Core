@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.load;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -81,7 +82,7 @@ public abstract class LoadAdapter<J extends LoadAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnLoadService> services = GuiceContext.instance()
+		Set<IOnLoadService> services = IGuiceContext.instance()
 		                                           .getLoader(IOnLoadService.class, ServiceLoader.load(IOnLoadService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -102,8 +103,9 @@ public abstract class LoadAdapter<J extends LoadAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnLoadService> services = GuiceContext.instance()
-		                                           .getLoader(IOnLoadService.class, ServiceLoader.load(IOnLoadService.class));
+		Set<IOnLoadService> services = IGuiceContext
+				                               .instance()
+				                               .getLoader(IOnLoadService.class, ServiceLoader.load(IOnLoadService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

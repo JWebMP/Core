@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.beforeclose;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -83,7 +84,7 @@ public abstract class BeforeCloseAdapter<J extends BeforeCloseAdapter<J>>
 
 	private void onCall()
 	{
-		Set<IOnBeforeCloseService> services = GuiceContext.instance()
+		Set<IOnBeforeCloseService> services = IGuiceContext.instance()
 		                                                  .getLoader(IOnBeforeCloseService.class, ServiceLoader.load(IOnBeforeCloseService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -105,8 +106,9 @@ public abstract class BeforeCloseAdapter<J extends BeforeCloseAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnBeforeCloseService> services = GuiceContext.instance()
-		                                                  .getLoader(IOnBeforeCloseService.class, ServiceLoader.load(IOnBeforeCloseService.class));
+		Set<IOnBeforeCloseService> services = IGuiceContext
+				                                      .instance()
+				                                      .getLoader(IOnBeforeCloseService.class, ServiceLoader.load(IOnBeforeCloseService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

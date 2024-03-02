@@ -17,7 +17,8 @@
 package com.jwebmp.core;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import com.jwebmp.core.base.ComponentEventBase;
 import com.jwebmp.core.base.ajax.AjaxCall;
@@ -106,8 +107,9 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 		setEventType(eventType);
 
 		@SuppressWarnings("rawtypes")
-		Set<IEventConfigurator> eventConfiguratorSet = GuiceContext.instance()
-		                                                           .getLoader(IEventConfigurator.class, ServiceLoader.load(IEventConfigurator.class));
+		Set<IEventConfigurator> eventConfiguratorSet = IGuiceContext
+				                                               .instance()
+				                                               .getLoader(IEventConfigurator.class, ServiceLoader.load(IEventConfigurator.class));
 		
 		for (IEventConfigurator<?> iEventConfigurator : eventConfiguratorSet)
 		{

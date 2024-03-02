@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.buttonclick;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -84,7 +85,7 @@ public abstract class ButtonClickAdapter<J extends ButtonClickAdapter<J>>
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	private void onCall()
 	{
-		Set<IOnButtonClickService> services = GuiceContext.instance()
+		Set<IOnButtonClickService> services = IGuiceContext.instance()
 		                                                  .getLoader(IOnButtonClickService.class, ServiceLoader.load(IOnButtonClickService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -107,8 +108,9 @@ public abstract class ButtonClickAdapter<J extends ButtonClickAdapter<J>>
 	private void onCreate()
 	{
 		@SuppressWarnings("rawtypes")
-		Set<IOnButtonClickService> services = GuiceContext.instance()
-		                                                  .getLoader(IOnButtonClickService.class, ServiceLoader.load(IOnButtonClickService.class));
+		Set<IOnButtonClickService> services = IGuiceContext
+				                                      .instance()
+				                                      .getLoader(IOnButtonClickService.class, ServiceLoader.load(IOnButtonClickService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

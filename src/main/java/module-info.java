@@ -1,20 +1,18 @@
 import com.guicedee.guicedinjection.interfaces.IGuiceModule;
 import com.jwebmp.core.implementations.JWebMPSiteBinder;
-import com.jwebmp.core.services.JWebMPServicesBindings;
+import com.jwebmp.core.implementations.JWebMPServicesBindings;
 import com.jwebmp.interception.JWebMPInterceptionBinder;
 
 module com.jwebmp.core {
 
     requires static lombok;
     
-    requires transitive com.guicedee.guicedinjection;
+    requires transitive com.guicedee.client;
     requires transitive com.guicedee.guicedservlets;
     requires transitive jakarta.validation;
     requires transitive jakarta.servlet;
     requires transitive com.google.guice.extensions.servlet;
-    
-    requires transitive com.guicedee.client;
-    
+  
     requires net.sf.uadetector.core;
     requires net.sf.uadetector.resources;
 
@@ -34,30 +32,31 @@ module com.jwebmp.core {
     requires org.apache.commons.io;
     requires org.apache.commons.lang3;
     requires org.apache.commons.text;
-
-    exports com.jwebmp.core;
+	requires com.jwebmp.client;
+	
+	exports com.jwebmp.core;
     exports com.jwebmp.core.base;
-    exports com.jwebmp.core.base.ajax;
+    //exports com.jwebmp.core.base.ajax;
 
-    exports com.jwebmp.core.base.client;
-    exports com.jwebmp.core.services;
+   // exports com.jwebmp.core.base.client;
+   // exports com.jwebmp.core.services;
 
     exports com.jwebmp.core.base.html;
-    exports com.jwebmp.core.base.html.attributes;
+   // exports com.jwebmp.core.base.html.attributes;
     exports com.jwebmp.core.base.html.inputs;
 
-    exports com.jwebmp.core.base.html.interfaces;
-    exports com.jwebmp.core.base.html.interfaces.children;
-    exports com.jwebmp.core.base.html.interfaces.children.generics;
-    exports com.jwebmp.core.base.html.interfaces.events;
+  //  exports com.jwebmp.core.base.html.interfaces;
+  //  exports com.jwebmp.core.base.html.interfaces.children;
+  //  exports com.jwebmp.core.base.html.interfaces.children.generics;
+  //  exports com.jwebmp.core.base.html.interfaces.events;
 
-    exports com.jwebmp.core.base.interfaces;
+  //  exports com.jwebmp.core.base.interfaces;
 
     exports com.jwebmp.core.base.page;
 
     exports com.jwebmp.core.base.servlets;
-    exports com.jwebmp.core.base.servlets.enumarations;
-    exports com.jwebmp.core.base.servlets.interfaces;
+ //   exports com.jwebmp.core.base.servlets.enumarations;
+  //  exports com.jwebmp.core.base.servlets.interfaces;
 
     exports com.jwebmp.core.base.servlets.options;
     exports com.jwebmp.core.databind;
@@ -117,7 +116,7 @@ module com.jwebmp.core {
 
     exports com.jwebmp.core.exceptions;
 
-    exports com.jwebmp.core.generics;
+ //   exports com.jwebmp.core.generics;
 
     exports com.jwebmp.core.annotations;
 
@@ -129,7 +128,7 @@ module com.jwebmp.core {
     exports com.jwebmp.core.htmlbuilder.css.colours;
     exports com.jwebmp.core.htmlbuilder.css.composer;
     exports com.jwebmp.core.htmlbuilder.css.displays;
-    exports com.jwebmp.core.htmlbuilder.css.enumarations;
+ //   exports com.jwebmp.core.htmlbuilder.css.enumarations;
     exports com.jwebmp.core.htmlbuilder.css.fonts;
     exports com.jwebmp.core.htmlbuilder.css.heightwidth;
     exports com.jwebmp.core.htmlbuilder.css.image;
@@ -141,15 +140,15 @@ module com.jwebmp.core {
     exports com.jwebmp.core.htmlbuilder.css.padding;
     exports com.jwebmp.core.htmlbuilder.css.tables;
     exports com.jwebmp.core.htmlbuilder.css.text;
-    exports com.jwebmp.core.htmlbuilder.css.themes;
+  //  exports com.jwebmp.core.htmlbuilder.css.themes;
 
     exports com.jwebmp.interception.services;
     exports com.jwebmp.interception;
 
-    exports com.jwebmp.core.htmlbuilder.javascript;
+  //  exports com.jwebmp.core.htmlbuilder.javascript;
     exports com.jwebmp.core.htmlbuilder.javascript.events.commandevent;
     exports com.jwebmp.core.htmlbuilder.javascript.events.enumerations;
-    exports com.jwebmp.core.htmlbuilder.javascript.events.interfaces;
+ //   exports com.jwebmp.core.htmlbuilder.javascript.events.interfaces;
 
     exports com.jwebmp.core.plugins;
 
@@ -159,7 +158,7 @@ module com.jwebmp.core {
 
 //	exports com.jwebmp.core.services.scopes;
 
-    exports com.jwebmp.core.base.references;
+  //  exports com.jwebmp.core.base.references;
 
     uses com.jwebmp.interception.services.AjaxCallIntercepter;
     uses com.jwebmp.interception.services.DataCallIntercepter;
@@ -252,9 +251,9 @@ module com.jwebmp.core {
     opens com.jwebmp.core.base.servlets to com.google.guice, com.fasterxml.jackson.databind;
 
     opens com.jwebmp.core.base.page to com.google.guice;
-    opens com.jwebmp.core.base.ajax to com.fasterxml.jackson.databind;
+  //  opens com.jwebmp.core.base.ajax to com.fasterxml.jackson.databind;
     opens com.jwebmp.core.base.html to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.javascript to com.fasterxml.jackson.databind;
+  //  opens com.jwebmp.core.htmlbuilder.javascript to com.fasterxml.jackson.databind;
     opens com.jwebmp.core.base to com.fasterxml.jackson.databind;
 
     opens com.jwebmp.core to com.google.guice, com.fasterxml.jackson.databind;
@@ -270,7 +269,7 @@ module com.jwebmp.core {
     opens com.jwebmp.core.htmlbuilder.css.colours to com.fasterxml.jackson.databind;
     opens com.jwebmp.core.htmlbuilder.css.composer to com.fasterxml.jackson.databind;
     opens com.jwebmp.core.htmlbuilder.css.displays to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.enumarations to com.fasterxml.jackson.databind;
+   // opens com.jwebmp.core.htmlbuilder.css.enumarations to com.fasterxml.jackson.databind;
     opens com.jwebmp.core.htmlbuilder.css.fonts to com.fasterxml.jackson.databind;
     opens com.jwebmp.core.htmlbuilder.css.heightwidth to com.fasterxml.jackson.databind;
     opens com.jwebmp.core.htmlbuilder.css.image to com.fasterxml.jackson.databind;
@@ -281,11 +280,11 @@ module com.jwebmp.core {
     opens com.jwebmp.core.htmlbuilder.css.padding to com.fasterxml.jackson.databind;
     opens com.jwebmp.core.htmlbuilder.css.tables to com.fasterxml.jackson.databind;
     opens com.jwebmp.core.htmlbuilder.css.text to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.themes to com.fasterxml.jackson.databind;
+  //  opens com.jwebmp.core.htmlbuilder.css.themes to com.fasterxml.jackson.databind;
 
-    opens com.jwebmp.core.base.client to com.fasterxml.jackson.databind;
+  //  opens com.jwebmp.core.base.client to com.fasterxml.jackson.databind;
 
-    opens com.jwebmp.core.base.servlets.interfaces to com.fasterxml.jackson.databind;
+  //  opens com.jwebmp.core.base.servlets.interfaces to com.fasterxml.jackson.databind;
     opens com.jwebmp.core.base.servlets.options to com.fasterxml.jackson.databind;
 
     opens com.jwebmp.core.utilities.regex to com.fasterxml.jackson.databind;

@@ -21,8 +21,7 @@ import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
 import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
-import com.jwebmp.core.base.interfaces.IComponentStyleBase;
+import com.jwebmp.core.base.interfaces.*;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.htmlbuilder.css.CSSImpl;
 import com.jwebmp.core.htmlbuilder.css.composer.CSSComposer;
@@ -46,233 +45,213 @@ import java.util.Map;
  */
 @SuppressWarnings("MissingClassJavaDoc")
 public abstract class ComponentStyleBase<C extends GlobalChildren,
-		A extends Enum<?> & AttributeDefinitions,
-		F extends GlobalFeatures,
-		E extends GlobalEvents,
-		J extends ComponentStyleBase<C, A, F, E, J>>
-		extends ComponentHierarchyBase<C, A, F, E, J>
-		implements IComponentStyleBase<J>
-{
-	/**
-	 * The CSS Object for all styling
-	 */
-	private CSSImpl css;
-	
-	/**
-	 * The CSS Class name if required
-	 */
-	private String cssName;
-	
-	/**
-	 * Container for all the CSS Types
-	 */
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private Map<CSSTypes, CSSImpl> cssTypeHashMap;
-	
-	/**
-	 * Constructs a tag with styling options enabled
-	 *
-	 * @param componentType The type of component this is
-	 */
-	public ComponentStyleBase(ComponentTypes componentType)
-	{
-		super(componentType);
-	}
-	
-	/**
-	 * Returns a ComponentStyleBase component of this
-	 *
-	 * @return This class with only the styling methods
-	 */
-	@SuppressWarnings("unused")
-	@NotNull
-	public IComponentStyleBase<?> asStyleBase()
-	{
-		return this;
-	}
-	
-	/**
-	 * Adds a CSS object to the component with the given type
-	 *
-	 * @param type    The CSS Type
-	 * @param cssItem Thee CSS Item to add
-	 * @return Always this object
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J addCSSEntry(CSSTypes type, CSSImpl cssItem)
-	{
-		getCssTypeHashMap().put(type, cssItem);
-		return (J) this;
-	}
-	
-	/**
-	 * Removes a CSS item for the component
-	 *
-	 * @param cssType The CSS Type Entry to remove
-	 * @return Always this object
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J removeCSSEntry(CSSTypes cssType)
-	{
-		getCssTypeHashMap().remove(cssType);
-		return (J) this;
-	}
-	
-	/**
-	 * Gets the CSS Object used for styling
-	 *
-	 * @return The CSS Implementation Object for default (CSSTypes.None)
-	 */
-	@Override
-	@NotNull
-	public CSSImpl getCss()
-	{
-		if (css == null)
-		{
-			css = new CSSImpl();
-			getCssTypeHashMap().put(CSSTypes.None, css);
-		}
-		return css;
-	}
-	
-	/**
-	 * Sets the CSS Object used for styling
-	 *
-	 * @param css The CSS Implementation object to add
-	 * @return Always this object
-	 */
-	@Override
-	@NotNull
-	@SuppressWarnings("unchecked")
-	public J setCss(CSSImpl css)
-	{
-		this.css = css;
-		return (J) this;
-	}
-	
-	/**
-	 * Returns the currently assigned CSS Name
-	 *
-	 * @return The currently assigned css Name for this objects style
-	 */
-	@Override
-	@NotNull
-	public String getCssName()
-	{
-		return cssName;
-	}
-	
-	/**
-	 * Sets the currently assigned CSS Name
-	 *
-	 * @param cssName Sets the CSS Name to a valid value
-	 * @return Always this object
-	 */
-	@Override
-	@NotNull
-	@SuppressWarnings("unchecked")
-	public J setCssName(@NotNull String cssName)
-	{
-		this.cssName = cssName;
-		return (J) this;
-	}
-	
-	/**
-	 * Returns the current HashMap of all CSS Entries for the component
-	 *
-	 * @return The CSS Types and Implementations for each type for this object
-	 */
-	@Override
-	@NotNull
-	public Map<CSSTypes, CSSImpl> getCssTypeHashMap()
-	{
-		if (cssTypeHashMap == null)
-		{
-			cssTypeHashMap = new EnumMap<>(CSSTypes.class);
-		}
-		return cssTypeHashMap;
-	}
-	
-	/**
-	 * Renders the component CSS at the specified tab count with the &lt;style&gt; tag
-	 * <p>
-	 *
-	 * @param tabCount Tab indentation for the SQL
-	 * @return The Component CSS
-	 */
-	@Override
-	@NotNull
-	public StringBuilder renderCss(int tabCount)
-	{
-		return renderCss(tabCount, true, false, false);
-	}
-	
-	/**
-	 * Renders the component CSS at the specified tab count with the &lt;style&gt; tag This includes everything from this classes CSS, to
-	 * the CSS for each field. It will also populate the lower level
-	 * child CSS for fields in this class
-	 * <p>
-	 *
-	 * @param tabCount           Tab indentation for the SQL
-	 * @param renderOpening      Whether or not to render the opening XML tag for a CSS style
-	 * @param renderInQuotations Sets whether to render the CSS Fields in Quotations
-	 * @param isAjaxCall         Sets whether the CSS is being called from an AJAX call
-	 *                           <p>
-	 * @return The Component CSS
-	 */
-	@Override
-	@NotNull
-	public StringBuilder renderCss(int tabCount, boolean renderOpening, boolean renderInQuotations, boolean isAjaxCall)
-	{
-		if (!isInitialized())
-		{
-			init();
-		}
-		if (!isConfigured())
-		{
-			preConfigure();
-		}
-		CSSComposer comp = new CSSComposer();
-		comp.addComponent(this, true);
-		return new StringBuilder(comp.toString());
-	}
-	
-	/**
-	 * @return hash-int
-	 */
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-	
-	/**
-	 * Method equals ...
-	 *
-	 * @param o of type Object
-	 * @return boolean
-	 */
-	@Override
-	public boolean equals(Object o)
-	{
-		return super.equals(o);
-	}
-	
-	/**
-	 * Method destroy ...
-	 */
-	@Override
-	public void destroy()
-	{
-		if (cssTypeHashMap != null)
-		{
-			cssTypeHashMap.clear();
-			cssTypeHashMap = null;
-		}
-		super.destroy();
-	}
+        A extends Enum<?> & AttributeDefinitions,
+        F extends GlobalFeatures,
+        E extends GlobalEvents,
+        J extends ComponentStyleBase<C, A, F, E, J>>
+        extends ComponentHierarchyBase<C, A, F, E, J>
+        implements IComponentStyleBase<J> {
+    /**
+     * The CSS Object for all styling
+     */
+    private CSSImpl css;
+
+    /**
+     * The CSS Class name if required
+     */
+    private String cssName;
+
+    /**
+     * Container for all the CSS Types
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private Map<CSSTypes, ICSSImpl> cssTypeHashMap;
+
+    /**
+     * Constructs a tag with styling options enabled
+     *
+     * @param componentType The type of component this is
+     */
+    public ComponentStyleBase(ComponentTypes componentType) {
+        super(componentType);
+    }
+
+    /**
+     * Returns a ComponentStyleBase component of this
+     *
+     * @return This class with only the styling methods
+     */
+    @SuppressWarnings("unused")
+    @NotNull
+    public IComponentStyleBase<?> asStyleBase() {
+        return this;
+    }
+
+    /**
+     * Adds a CSS object to the component with the given type
+     *
+     * @param type    The CSS Type
+     * @param cssItem Thee CSS Item to add
+     * @return Always this object
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    @NotNull
+    public J addCSSEntry(CSSTypes type, ICSSImpl cssItem) {
+        getCssTypeHashMap().put(type, cssItem);
+        return (J) this;
+    }
+
+    /**
+     * Removes a CSS item for the component
+     *
+     * @param cssType The CSS Type Entry to remove
+     * @return Always this object
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    @NotNull
+    public J removeCSSEntry(CSSTypes cssType) {
+        getCssTypeHashMap().remove(cssType);
+        return (J) this;
+    }
+
+    /**
+     * Gets the CSS Object used for styling
+     *
+     * @return The CSS Implementation Object for default (CSSTypes.None)
+     */
+    @Override
+    @NotNull
+    public CSSImpl getCss() {
+        if (css == null) {
+            css = new CSSImpl();
+            getCssTypeHashMap().put(CSSTypes.None, css);
+        }
+        return css;
+    }
+
+    /**
+     * Sets the CSS Object used for styling
+     *
+     * @param css The CSS Implementation object to add
+     * @return Always this object
+     */
+    @Override
+    @NotNull
+    @SuppressWarnings("unchecked")
+    public J setCss(ICSSImpl css) {
+        this.css = (CSSImpl) css;
+        return (J) this;
+    }
+
+    /**
+     * Returns the currently assigned CSS Name
+     *
+     * @return The currently assigned css Name for this objects style
+     */
+    @Override
+    @NotNull
+    public String getCssName() {
+        return cssName;
+    }
+
+    /**
+     * Sets the currently assigned CSS Name
+     *
+     * @param cssName Sets the CSS Name to a valid value
+     * @return Always this object
+     */
+    @Override
+    @NotNull
+    @SuppressWarnings("unchecked")
+    public J setCssName(@NotNull String cssName) {
+        this.cssName = cssName;
+        return (J) this;
+    }
+
+    /**
+     * Returns the current HashMap of all CSS Entries for the component
+     *
+     * @return The CSS Types and Implementations for each type for this object
+     */
+    @Override
+    @NotNull
+    public Map<CSSTypes, ICSSImpl> getCssTypeHashMap() {
+        if (cssTypeHashMap == null) {
+            cssTypeHashMap = new EnumMap<>(CSSTypes.class);
+        }
+        return cssTypeHashMap;
+    }
+
+    /**
+     * Renders the component CSS at the specified tab count with the &lt;style&gt; tag
+     * <p>
+     *
+     * @param tabCount Tab indentation for the SQL
+     * @return The Component CSS
+     */
+    @Override
+    @NotNull
+    public StringBuilder renderCss(int tabCount) {
+        return renderCss(tabCount, true, false, false);
+    }
+
+    /**
+     * Renders the component CSS at the specified tab count with the &lt;style&gt; tag This includes everything from this classes CSS, to
+     * the CSS for each field. It will also populate the lower level
+     * child CSS for fields in this class
+     * <p>
+     *
+     * @param tabCount           Tab indentation for the SQL
+     * @param renderOpening      Whether or not to render the opening XML tag for a CSS style
+     * @param renderInQuotations Sets whether to render the CSS Fields in Quotations
+     * @param isAjaxCall         Sets whether the CSS is being called from an AJAX call
+     *                           <p>
+     * @return The Component CSS
+     */
+    @Override
+    @NotNull
+    public StringBuilder renderCss(int tabCount, boolean renderOpening, boolean renderInQuotations, boolean isAjaxCall) {
+        if (!isInitialized()) {
+            init();
+        }
+        if (!isConfigured()) {
+            preConfigure();
+        }
+        CSSComposer comp = new CSSComposer();
+        comp.addComponent(this, true);
+        return new StringBuilder(comp.toString());
+    }
+
+    /**
+     * @return hash-int
+     */
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    /**
+     * Method equals ...
+     *
+     * @param o of type Object
+     * @return boolean
+     */
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
+
+    /**
+     * Method destroy ...
+     */
+    @Override
+    public void destroy() {
+        if (cssTypeHashMap != null) {
+            cssTypeHashMap.clear();
+            cssTypeHashMap = null;
+        }
+        super.destroy();
+    }
 }

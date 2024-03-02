@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.resizestop;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -81,7 +82,7 @@ public abstract class ResizeStopAdapter<J extends ResizeStopAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnResizeStopService> services = GuiceContext.instance()
+		Set<IOnResizeStopService> services = IGuiceContext.instance()
 		                                                 .getLoader(IOnResizeStopService.class, ServiceLoader.load(IOnResizeStopService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -102,8 +103,9 @@ public abstract class ResizeStopAdapter<J extends ResizeStopAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnResizeStopService> services = GuiceContext.instance()
-		                                                 .getLoader(IOnResizeStopService.class, ServiceLoader.load(IOnResizeStopService.class));
+		Set<IOnResizeStopService> services = IGuiceContext
+				                                     .instance()
+				                                     .getLoader(IOnResizeStopService.class, ServiceLoader.load(IOnResizeStopService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

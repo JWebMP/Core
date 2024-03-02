@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.stop;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -80,7 +81,7 @@ public abstract class StopAdapter<J extends StopAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnStopService> services = GuiceContext.instance()
+		Set<IOnStopService> services = IGuiceContext.instance()
 		                                           .getLoader(IOnStopService.class, ServiceLoader.load(IOnStopService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -101,8 +102,9 @@ public abstract class StopAdapter<J extends StopAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnStopService> services = GuiceContext.instance()
-		                                           .getLoader(IOnStopService.class, ServiceLoader.load(IOnStopService.class));
+		Set<IOnStopService> services = IGuiceContext
+				                               .instance()
+				                               .getLoader(IOnStopService.class, ServiceLoader.load(IOnStopService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

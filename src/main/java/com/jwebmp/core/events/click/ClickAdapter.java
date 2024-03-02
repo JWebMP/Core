@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.click;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -90,7 +91,7 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnClickService> services = GuiceContext.instance()
+		Set<IOnClickService> services = IGuiceContext.instance()
 		                                            .getLoader(IOnClickService.class, ServiceLoader.load(IOnClickService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -111,8 +112,9 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
 	@SuppressWarnings("unchecked")
 	protected void onCreate()
 	{
-		Set<IOnClickService> services = GuiceContext.instance()
-		                                            .getLoader(IOnClickService.class, ServiceLoader.load(IOnClickService.class));
+		Set<IOnClickService> services = IGuiceContext
+				                                .instance()
+				                                .getLoader(IOnClickService.class, ServiceLoader.load(IOnClickService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

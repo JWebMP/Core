@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.deactivate;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -85,7 +86,7 @@ public abstract class DeactivateAdapter<J extends DeactivateAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnDeActivateService> services = GuiceContext.instance()
+		Set<IOnDeActivateService> services = IGuiceContext.instance()
 		                                                 .getLoader(IOnDeActivateService.class, ServiceLoader.load(IOnDeActivateService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -107,8 +108,9 @@ public abstract class DeactivateAdapter<J extends DeactivateAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnDeActivateService> services = GuiceContext.instance()
-		                                                 .getLoader(IOnDeActivateService.class, ServiceLoader.load(IOnDeActivateService.class));
+		Set<IOnDeActivateService> services = IGuiceContext
+				                                     .instance()
+				                                     .getLoader(IOnDeActivateService.class, ServiceLoader.load(IOnDeActivateService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 

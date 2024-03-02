@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.beforestop;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -82,7 +83,7 @@ public abstract class BeforeStopAdapter<J extends BeforeStopAdapter<J>>
 
 	private void onCall()
 	{
-		Set<IOnBeforeStopService> services = GuiceContext.instance()
+		Set<IOnBeforeStopService> services = IGuiceContext.instance()
 		                                                 .getLoader(IOnBeforeStopService.class, ServiceLoader.load(IOnBeforeStopService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -104,8 +105,9 @@ public abstract class BeforeStopAdapter<J extends BeforeStopAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnBeforeStopService> services = GuiceContext.instance()
-		                                                 .getLoader(IOnBeforeStopService.class, ServiceLoader.load(IOnBeforeStopService.class));
+		Set<IOnBeforeStopService> services = IGuiceContext
+				                                     .instance()
+				                                     .getLoader(IOnBeforeStopService.class, ServiceLoader.load(IOnBeforeStopService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

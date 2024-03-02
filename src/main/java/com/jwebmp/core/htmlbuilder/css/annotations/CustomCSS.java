@@ -17,6 +17,7 @@
 
 package com.jwebmp.core.htmlbuilder.css.annotations;
 
+import com.jwebmp.core.htmlbuilder.css.enumarations.*;
 import com.jwebmp.core.htmlbuilder.css.interfaces.NameValuePairCSS;
 
 import java.lang.annotation.*;
@@ -26,7 +27,7 @@ import java.lang.annotation.*;
  *
  * @author mmagon
  */
-@com.jwebmp.core.htmlbuilder.css.annotations.CSSAnnotationType
+@CSSAnnotationType
 @Target(
 		{
 				ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE

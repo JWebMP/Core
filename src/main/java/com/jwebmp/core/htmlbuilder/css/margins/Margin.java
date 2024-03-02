@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.htmlbuilder.css.margins;
 
-import com.jwebmp.core.htmlbuilder.css.annotations.CSSAnnotationType;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSAnnotationType;
 import com.jwebmp.core.htmlbuilder.css.enumarations.MarginSetting;
 import com.jwebmp.core.htmlbuilder.css.measurement.MeasurementCSS;
 

@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.unselected;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -81,7 +82,7 @@ public abstract class UnselectedAdapter<J extends UnselectedAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnUnSelectedService> services = GuiceContext.instance()
+		Set<IOnUnSelectedService> services = IGuiceContext.instance()
 		                                                 .getLoader(IOnUnSelectedService.class, ServiceLoader.load(IOnUnSelectedService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -102,8 +103,9 @@ public abstract class UnselectedAdapter<J extends UnselectedAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnUnSelectedService> services = GuiceContext.instance()
-		                                                 .getLoader(IOnUnSelectedService.class, ServiceLoader.load(IOnUnSelectedService.class));
+		Set<IOnUnSelectedService> services = IGuiceContext
+				                                     .instance()
+				                                     .getLoader(IOnUnSelectedService.class, ServiceLoader.load(IOnUnSelectedService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

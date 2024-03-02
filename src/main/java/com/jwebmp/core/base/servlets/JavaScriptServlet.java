@@ -17,10 +17,11 @@
 package com.jwebmp.core.base.servlets;
 
 import com.google.inject.Singleton;
+import com.guicedee.client.*;
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.Page;
 import com.guicedee.services.jsonrepresentation.json.StaticStrings;
-import com.guicedee.guicedinjection.GuiceContext;
+
 import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -32,7 +33,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-import static com.guicedee.guicedinjection.GuiceContext.get;
+import static com.guicedee.client.IGuiceContext.get;
 import static com.jwebmp.core.implementations.JWebMPJavaScriptDynamicScriptRenderer.renderJavascript;
 import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -61,7 +62,7 @@ public class JavaScriptServlet
 			Page<?> page = (Page<?>) get(IPage.class);
 			for (AjaxCallIntercepter<?> ajaxCallIntercepter : get(AjaxCallInterceptorKey)) {
 
-				ajaxCallIntercepter.intercept(GuiceContext.get(AjaxCall.class), GuiceContext.get(AjaxResponse.class));
+				ajaxCallIntercepter.intercept(IGuiceContext.get(AjaxCall.class), IGuiceContext.get(AjaxResponse.class));
 			}
 			page.toString(0);
 			FileTemplates.removeTemplate(JavaScriptServlet.scriptReplacement);

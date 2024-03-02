@@ -1,11 +1,13 @@
-package com.jwebmp.core.services;
+package com.jwebmp.core.implementations;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Key;
 import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.guicedee.guicedinjection.interfaces.IGuiceModule;
+import com.jwebmp.core.services.*;
 
 import java.util.ServiceLoader;
 import java.util.Set;
@@ -28,32 +30,33 @@ public class JWebMPServicesBindings
 	{
 		//noinspection unchecked
 		bind(JWebMPServicesBindings.IPageConfiguratorsKey)
-		      .toProvider(() -> GuiceContext.instance()
+		      .toProvider(() -> IGuiceContext.instance()
 		                                    .getLoader(IPageConfigurator.class, ServiceLoader.load(IPageConfigurator.class)))
 		      .in(Singleton.class);
 		bind(JWebMPServicesBindings.RenderAfterScriptsKey)
-		      .toProvider(() -> GuiceContext.instance()
+		      .toProvider(() -> IGuiceContext.instance()
 		                                    .getLoader(RenderAfterScripts.class, ServiceLoader.load(RenderAfterScripts.class)))
 		      .in(Singleton.class);
 		bind(JWebMPServicesBindings.RenderAfterDynamicScriptsKey)
-		      .toProvider(() -> GuiceContext.instance()
+		      .toProvider(() -> IGuiceContext.instance()
 		                                    .getLoader(RenderAfterDynamicScripts.class, ServiceLoader.load(RenderAfterDynamicScripts.class)))
 		      .in(Singleton.class);
 		bind(JWebMPServicesBindings.RenderBeforeScriptsKey)
-		      .toProvider(() -> GuiceContext.instance()
+		      .toProvider(() -> IGuiceContext.instance()
 		                                    .getLoader(RenderBeforeScripts.class, ServiceLoader.load(RenderBeforeScripts.class)))
 		      .in(Singleton.class);
 		bind(JWebMPServicesBindings.RenderBeforeDynamicScriptsKey)
-		      .toProvider(() -> GuiceContext.instance()
+		      .toProvider(() -> IGuiceContext.instance()
 		                                    .getLoader(RenderBeforeDynamicScripts.class, ServiceLoader.load(RenderBeforeDynamicScripts.class)))
 		      .in(Singleton.class);
 		bind(JWebMPServicesBindings.RenderBeforeLinksKey)
-		      .toProvider(() -> GuiceContext.instance()
+		      .toProvider(() -> IGuiceContext.instance()
 		                                    .getLoader(RenderBeforeLinks.class, ServiceLoader.load(RenderBeforeLinks.class)))
 		      .in(Singleton.class);
 		bind(JWebMPServicesBindings.RenderAfterLinksKey)
-		      .toProvider(() -> GuiceContext.instance()
-		                                    .getLoader(RenderAfterLinks.class, ServiceLoader.load(RenderAfterLinks.class)))
+		      .toProvider(() -> IGuiceContext
+				                        .instance()
+				                        .getLoader(RenderAfterLinks.class, ServiceLoader.load(RenderAfterLinks.class)))
 		      .in(Singleton.class);
 	}
 }

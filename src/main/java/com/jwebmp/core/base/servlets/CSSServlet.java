@@ -17,9 +17,10 @@
 package com.jwebmp.core.base.servlets;
 
 import com.google.inject.Singleton;
+import com.guicedee.client.*;
 import com.jwebmp.core.Page;
 import com.guicedee.services.jsonrepresentation.json.StaticStrings;
-import com.guicedee.guicedinjection.GuiceContext;
+
 import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.jwebmp.core.services.IPage;
 
@@ -37,7 +38,7 @@ public class CSSServlet
 	{
 		@SuppressWarnings("MismatchedQueryAndUpdateOfStringBuilder")
 		StringBuilder scripts = new StringBuilder();
-		Page<?> page = (Page<?>) GuiceContext.get(IPage.class);
+		Page<?> page = (Page<?>) IGuiceContext.get(IPage.class);
 		StringBuilder css = page.getBody()
 		                        .renderCss(0);
 		scripts.append(css);

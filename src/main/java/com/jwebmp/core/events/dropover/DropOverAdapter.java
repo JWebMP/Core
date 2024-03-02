@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.dropover;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -85,7 +86,7 @@ public abstract class DropOverAdapter<J extends DropOverAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnDropOverService> services = GuiceContext.instance()
+		Set<IOnDropOverService> services = IGuiceContext.instance()
 		                                               .getLoader(IOnDropOverService.class, ServiceLoader.load(IOnDropOverService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -107,8 +108,9 @@ public abstract class DropOverAdapter<J extends DropOverAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnDropOverService> services = GuiceContext.instance()
-		                                               .getLoader(IOnDropOverService.class, ServiceLoader.load(IOnDropOverService.class));
+		Set<IOnDropOverService> services = IGuiceContext
+				                                   .instance()
+				                                   .getLoader(IOnDropOverService.class, ServiceLoader.load(IOnDropOverService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 

@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.events.resize;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -82,8 +82,8 @@ public abstract class ResizeAdapter<J extends ResizeAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnResizeService> services = GuiceContext.instance()
-		                                             .getLoader(IOnResizeService.class, ServiceLoader.load(IOnResizeService.class));
+		Set<IOnResizeService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnResizeService.class, ServiceLoader.load(IOnResizeService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 
@@ -103,8 +103,8 @@ public abstract class ResizeAdapter<J extends ResizeAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnResizeService> services = GuiceContext.instance()
-		                                             .getLoader(IOnResizeService.class, ServiceLoader.load(IOnResizeService.class));
+		Set<IOnResizeService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnResizeService.class, ServiceLoader.load(IOnResizeService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

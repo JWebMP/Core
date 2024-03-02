@@ -29,6 +29,7 @@ import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
+import com.jwebmp.core.services.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.java.Log;
 
@@ -62,7 +63,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	 * The actual event type
 	 */
 	@JsonIgnore
-	private EventTypes eventType;
+	private IEventTypes<?> eventType;
 	
 	/**
 	 * Constructs a new event for the given component type
@@ -150,7 +151,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	@Override
 	@NotNull
 	@JsonIgnore
-	public EventTypes getEventTypes()
+	public IEventTypes<?> getEventTypes()
 	{
 		if (eventType == EventTypes.undefined)
 		{
@@ -183,13 +184,13 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	 * Returns all the events associated with the given type
 	 *
 	 * @param eventType All child events on this component with the given event type
+	 *
 	 * @return An in order list of all the events of the given type for this component
 	 */
 	@Override
-	@NotNull
-	public Set<ComponentEventBase<?, ?, ?>> getEventsFor(@NotNull EventTypes eventType)
+	public Set<IComponentEventBase<?, ?>> getEventsFor(@NotNull IEventTypes<?> eventType)
 	{
-		Set<ComponentEventBase<?, ?, ?>> output = new LinkedHashSet<>();
+		Set<IComponentEventBase<?, ?>> output = new LinkedHashSet<>();
 		for (E e : getEvents())
 		{
 			ComponentEventBase<?, ?, ?> next = (ComponentEventBase<?, ?, ?>) e;
@@ -229,7 +230,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	@Override
 	@NotNull
 	@SuppressWarnings("unchecked")
-	public J setEventType(@NotNull EventTypes eventType)
+	public J setEventType(@NotNull IEventTypes<?> eventType)
 	{
 		this.eventType = eventType;
 		return (J) this;
@@ -264,7 +265,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	@JsonProperty("eventType")
 	@JsonInclude(value = JsonInclude.Include.NON_NULL)
 	@SuppressWarnings("unused")
-	private EventTypes getEventTypesJSON()
+	private IEventTypes<?> getEventTypesJSON()
 	{
 		if (eventType == EventTypes.undefined)
 		{

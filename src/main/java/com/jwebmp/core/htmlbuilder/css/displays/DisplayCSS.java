@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.htmlbuilder.css.displays;
 
-import com.jwebmp.core.htmlbuilder.css.annotations.CSSAnnotationType;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSAnnotationType;
 import com.jwebmp.core.htmlbuilder.css.measurement.MeasurementCSS;
 
 import java.lang.annotation.*;

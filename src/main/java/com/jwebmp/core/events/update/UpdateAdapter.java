@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.events.update;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -81,8 +81,8 @@ public abstract class UpdateAdapter<J extends UpdateAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnUpdateService> services = GuiceContext.instance()
-		                                             .getLoader(IOnUpdateService.class, ServiceLoader.load(IOnUpdateService.class));
+		Set<IOnUpdateService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnUpdateService.class, ServiceLoader.load(IOnUpdateService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 
@@ -102,8 +102,8 @@ public abstract class UpdateAdapter<J extends UpdateAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnUpdateService> services = GuiceContext.instance()
-		                                             .getLoader(IOnUpdateService.class, ServiceLoader.load(IOnUpdateService.class));
+		Set<IOnUpdateService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnUpdateService.class, ServiceLoader.load(IOnUpdateService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

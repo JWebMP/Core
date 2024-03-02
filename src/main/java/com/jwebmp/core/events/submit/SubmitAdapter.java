@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.events.submit;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -94,8 +94,8 @@ public abstract class SubmitAdapter<J extends SubmitAdapter<J>>
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	private void onCall()
 	{
-		Set<IOnSubmitService> services = GuiceContext.instance()
-		                                             .getLoader(IOnSubmitService.class, ServiceLoader.load(IOnSubmitService.class));
+		Set<IOnSubmitService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnSubmitService.class, ServiceLoader.load(IOnSubmitService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 
@@ -117,8 +117,8 @@ public abstract class SubmitAdapter<J extends SubmitAdapter<J>>
 	private void onCreate()
 	{
 		@SuppressWarnings({"rawtypes", "unchecked"})
-		Set<IOnSubmitService> services = GuiceContext.instance()
-		                                             .getLoader(IOnSubmitService.class, ServiceLoader.load(IOnSubmitService.class));
+		Set<IOnSubmitService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnSubmitService.class, ServiceLoader.load(IOnSubmitService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

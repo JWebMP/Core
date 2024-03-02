@@ -1,7 +1,9 @@
 package com.jwebmp.core.base.page;
 
+import com.guicedee.client.*;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.SessionHelper;
+import com.jwebmp.core.base.interfaces.*;
 import com.jwebmp.core.implementations.JWebMPSiteBinder;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.CSSLink;
@@ -10,18 +12,15 @@ import com.jwebmp.core.base.html.Script;
 import com.jwebmp.core.base.html.Style;
 import com.jwebmp.core.base.html.attributes.ScriptAttributes;
 import com.jwebmp.core.htmlbuilder.css.composer.CSSComposer;
-import com.jwebmp.core.services.IDynamicRenderingServlet;
-import com.jwebmp.core.services.IPageConfigurator;
-import com.jwebmp.core.services.RenderAfterDynamicScripts;
-import com.jwebmp.core.services.RenderBeforeDynamicScripts;
+import com.jwebmp.core.services.*;
 import com.guicedee.services.jsonrepresentation.json.StaticStrings;
-import com.guicedee.guicedinjection.GuiceContext;
+
 
 import jakarta.validation.constraints.NotNull;
 import java.util.ServiceLoader;
 import java.util.Set;
 
-import static com.jwebmp.core.services.JWebMPServicesBindings.*;
+import static com.jwebmp.core.implementations.JWebMPServicesBindings.*;
 
 /**
  * Configures the dynamic script insertions that run last into the page
@@ -74,7 +73,7 @@ public class ScriptsDynamicPageConfigurator
 	/**
 	 * Configures the given page for the parameters
 	 *
-	 * @param page
+	 * @param pager
 	 * 		The page incoming
 	 *
 	 * @return The original page incoming or a new page, never null
@@ -82,17 +81,18 @@ public class ScriptsDynamicPageConfigurator
 	@NotNull
 	@Override
 	@SuppressWarnings("unchecked")
-	public Page<?> configure(Page<?> page)
+	public Page<?> configure(IPage<?> pager)
 	{
+		Page page = (Page)pager;
 		if (!page.isConfigured() && enabled())
 		{
 			//Render Before Dynamic Scripts
 			Paragraph beforeText = new Paragraph().setTextOnly(true);
 			StringBuilder sbBeforeText = new StringBuilder();
-			Set<RenderBeforeDynamicScripts> beforeLoader = GuiceContext.get(RenderBeforeDynamicScriptsKey);
+			Set<RenderBeforeDynamicScripts> beforeLoader = IGuiceContext.get(RenderBeforeDynamicScriptsKey);
 			for (RenderBeforeDynamicScripts renderAfterDynamicScripts : beforeLoader)
 			{
-				sbBeforeText.append(GuiceContext.get(renderAfterDynamicScripts.getClass())
+				sbBeforeText.append(IGuiceContext.get(renderAfterDynamicScripts.getClass())
 				                                .render(page)
 				                                .append(page.getNewLine()));
 			}
@@ -115,7 +115,7 @@ public class ScriptsDynamicPageConfigurator
 					                                                                       .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY)));
 				}
 
-				Set<IDynamicRenderingServlet> dynamicRenderingServlets = GuiceContext.instance()
+				Set<IDynamicRenderingServlet> dynamicRenderingServlets = IGuiceContext.instance()
 				                                                                     .getLoader(IDynamicRenderingServlet.class, ServiceLoader.load(IDynamicRenderingServlet.class));
 				for (IDynamicRenderingServlet dynamicRenderingServlet : dynamicRenderingServlets)
 				{
@@ -144,13 +144,13 @@ public class ScriptsDynamicPageConfigurator
 					addable = page.getBody();
 				}
 
-				Set<IDynamicRenderingServlet> dynamicRenderingServlets = GuiceContext.instance()
+				Set<IDynamicRenderingServlet> dynamicRenderingServlets = IGuiceContext.instance()
 				                                                                     .getLoader(IDynamicRenderingServlet.class, ServiceLoader.load(IDynamicRenderingServlet.class));
 				for (IDynamicRenderingServlet dynamicRenderingServlet : dynamicRenderingServlets)
 				{
 					if (dynamicRenderingServlet.enabled())
 					{
-						Script script = dynamicRenderingServlet.renderScript(page);
+						IComponentHierarchyBase script = dynamicRenderingServlet.renderScript(page);
 						if (script != null)
 						{
 							addable.add(script);
@@ -161,12 +161,13 @@ public class ScriptsDynamicPageConfigurator
 			//Render After Dynamic Scripts
 			Paragraph afterText = new Paragraph().setTextOnly(true);
 			StringBuilder sbAfterText = new StringBuilder();
-			Set<RenderAfterDynamicScripts> afterLoader = GuiceContext.get(RenderAfterDynamicScriptsKey);
+			Set<RenderAfterDynamicScripts> afterLoader = IGuiceContext.get(RenderAfterDynamicScriptsKey);
 			for (RenderAfterDynamicScripts renderAfterDynamicScripts : afterLoader)
 			{
-				sbAfterText.append(GuiceContext.get(renderAfterDynamicScripts.getClass())
-				                               .render(page)
-				                               .append(page.getNewLine()));
+				sbAfterText.append(IGuiceContext
+						                   .get(renderAfterDynamicScripts.getClass())
+						                   .render(page)
+						                   .append(page.getNewLine()));
 			}
 			if (!sbAfterText.toString()
 			                .isEmpty())

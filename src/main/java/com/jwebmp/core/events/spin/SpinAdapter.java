@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.spin;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -81,7 +82,7 @@ public abstract class SpinAdapter<J extends SpinAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnSpinService> services = GuiceContext.instance()
+		Set<IOnSpinService> services = IGuiceContext.instance()
 		                                           .getLoader(IOnSpinService.class, ServiceLoader.load(IOnSpinService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -102,8 +103,9 @@ public abstract class SpinAdapter<J extends SpinAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnSpinService> services = GuiceContext.instance()
-		                                           .getLoader(IOnSpinService.class, ServiceLoader.load(IOnSpinService.class));
+		Set<IOnSpinService> services = IGuiceContext
+				                               .instance()
+				                               .getLoader(IOnSpinService.class, ServiceLoader.load(IOnSpinService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

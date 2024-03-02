@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.events.dragstart;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -83,8 +83,8 @@ public abstract class DragStartAdapter<J extends DragStartAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnDragStartService> services = GuiceContext.instance()
-		                                                .getLoader(IOnDragStartService.class, ServiceLoader.load(IOnDragStartService.class));
+		Set<IOnDragStartService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnDragStartService.class, ServiceLoader.load(IOnDragStartService.class));
 		services.forEach(service -> service.onCall(this));
 	}
 
@@ -104,8 +104,8 @@ public abstract class DragStartAdapter<J extends DragStartAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnDragStartService> services = GuiceContext.instance()
-		                                                .getLoader(IOnDragStartService.class, ServiceLoader.load(IOnDragStartService.class));
+		Set<IOnDragStartService> services = com.guicedee.client.IGuiceContext.instance()
+		            .getLoader(IOnDragStartService.class, ServiceLoader.load(IOnDragStartService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 }

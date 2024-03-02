@@ -17,8 +17,8 @@
 package com.jwebmp.core.htmlbuilder.css.backgrounds;
 
 import com.jwebmp.core.base.client.CSSVersions;
-import com.jwebmp.core.htmlbuilder.css.CSSEnumeration;
-import com.jwebmp.core.htmlbuilder.css.annotations.CSSAnnotationType;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSEnumeration;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSAnnotationType;
 import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 
 /**

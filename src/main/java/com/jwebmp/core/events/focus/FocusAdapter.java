@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.focus;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -85,7 +86,7 @@ public abstract class FocusAdapter<J extends FocusAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnFocusService> services = GuiceContext.instance()
+		Set<IOnFocusService> services = IGuiceContext.instance()
 		                                            .getLoader(IOnFocusService.class, ServiceLoader.load(IOnFocusService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -107,8 +108,9 @@ public abstract class FocusAdapter<J extends FocusAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnFocusService> services = GuiceContext.instance()
-		                                            .getLoader(IOnFocusService.class, ServiceLoader.load(IOnFocusService.class));
+		Set<IOnFocusService> services = IGuiceContext
+				                                .instance()
+				                                .getLoader(IOnFocusService.class, ServiceLoader.load(IOnFocusService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 

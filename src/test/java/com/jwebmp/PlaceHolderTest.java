@@ -17,16 +17,18 @@
 
 package com.jwebmp;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.IGuiceContext;
 import org.junit.jupiter.api.Test;
 
 class PlaceHolderTest
-		extends BaseTestClass
+        extends BaseTestClass
 {
 
-	@Test
-	public void testGuice()
-	{
-		GuiceContext.inject();
-	}
+    @Test
+    public void testGuice()
+    {
+        IGuiceContext.instance()
+                     .inject();
+    }
 }

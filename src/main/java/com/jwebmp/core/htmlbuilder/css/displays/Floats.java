@@ -1,7 +1,7 @@
 package com.jwebmp.core.htmlbuilder.css.displays;
 
 import com.jwebmp.core.base.client.CSSVersions;
-import com.jwebmp.core.htmlbuilder.css.CSSEnumeration;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSEnumeration;
 
 /**
  * The float property specifies whether or not an element should float.

@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.mouseup;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -82,7 +83,7 @@ public abstract class MouseUpAdapter<J extends MouseUpAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnMouseUpService> services = GuiceContext.instance()
+		Set<IOnMouseUpService> services = IGuiceContext.instance()
 		                                              .getLoader(IOnMouseUpService.class, ServiceLoader.load(IOnMouseUpService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -104,8 +105,9 @@ public abstract class MouseUpAdapter<J extends MouseUpAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnMouseUpService> services = GuiceContext.instance()
-		                                              .getLoader(IOnMouseUpService.class, ServiceLoader.load(IOnMouseUpService.class));
+		Set<IOnMouseUpService> services = IGuiceContext
+				                                  .instance()
+				                                  .getLoader(IOnMouseUpService.class, ServiceLoader.load(IOnMouseUpService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 

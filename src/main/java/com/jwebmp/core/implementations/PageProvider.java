@@ -1,21 +1,16 @@
 package com.jwebmp.core.implementations;
 
-import com.google.common.base.Strings;
-import com.google.inject.OutOfScopeException;
-import com.google.inject.Provider;
-import com.google.inject.ProvisionException;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.guicedservlets.GuicedServletKeys;
-import com.guicedee.services.jsonrepresentation.json.StaticStrings;
-import com.jwebmp.core.Page;
-import com.jwebmp.core.base.ajax.AjaxCall;
-import com.jwebmp.core.services.IPage;
-import jakarta.servlet.http.HttpServletRequest;
+import com.google.common.base.*;
+import com.google.inject.*;
+import com.guicedee.client.*;
+import com.guicedee.guicedservlets.*;
+import com.guicedee.services.jsonrepresentation.json.*;
+import com.jwebmp.core.*;
+import com.jwebmp.core.base.ajax.*;
+import com.jwebmp.core.services.*;
+import jakarta.servlet.http.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ServiceLoader;
-import java.util.Set;
+import java.util.*;
 
 @SuppressWarnings("rawtypes")
 public class PageProvider
@@ -28,17 +23,17 @@ public class PageProvider
 	{
 		try
 		{
-			AjaxCall<?> call = GuiceContext.get(AjaxCall.class);
+			AjaxCall<?> call = IGuiceContext.get(AjaxCall.class);
 			if (call.getHeaders()
 			        .getAppClassName() != null && !Strings.isNullOrEmpty(call.getHeaders()
 			                                                                 .getAppClassName()))
 			{
 				String className = call.getHeaders()
 				                       .getAppClassName();
-				Class pageClass = GuiceContext.instance()
+				Class pageClass = IGuiceContext.instance()
 				                              .getScanResult()
 				                              .loadClass(className, true);
-				return (Page<?>) GuiceContext.get(pageClass);
+				return (Page<?>) IGuiceContext.get(pageClass);
 			}
 		}
 		catch (ProvisionException | OutOfScopeException e)
@@ -46,7 +41,7 @@ public class PageProvider
 		
 		}
 		
-		HttpServletRequest request = GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
+		HttpServletRequest request = IGuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
 		String pathInfo = request.getRequestURI();
 		if (pathInfo == null)
 		{
@@ -55,12 +50,12 @@ public class PageProvider
 		pathInfo = pathInfo.toLowerCase();
 		if (urlToClass.containsKey(pathInfo))
 		{
-			return (Page) GuiceContext.get(urlToClass.get(pathInfo));
+			return (Page) IGuiceContext.get(urlToClass.get(pathInfo));
 		}
 		pathInfo = pathInfo.substring(0, pathInfo.lastIndexOf('/') + 1);
 		if (urlToClass.containsKey(pathInfo))
 		{
-			return (Page) GuiceContext.get(urlToClass.get(pathInfo));
+			return (Page) IGuiceContext.get(urlToClass.get(pathInfo));
 		}
 		
 		
@@ -76,7 +71,7 @@ public class PageProvider
 	public static Set<IPage<?>> getPages()
 	{
 		@SuppressWarnings("UnnecessaryLocalVariable")
-		Set pages = GuiceContext.instance()
+		Set pages = IGuiceContext.instance()
 		                        .getLoader(IPage.class, ServiceLoader.load(IPage.class));
 		return pages;
 	}

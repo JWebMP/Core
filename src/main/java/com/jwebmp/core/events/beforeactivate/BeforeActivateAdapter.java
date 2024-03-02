@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.events.beforeactivate;
 
-import com.guicedee.guicedinjection.GuiceContext;
+
+import com.guicedee.client.*;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -82,7 +83,7 @@ public abstract class BeforeActivateAdapter<J extends BeforeActivateAdapter<J>>
 
 	private void onCall()
 	{
-		Set<IOnBeforeActivateService> services = GuiceContext.instance()
+		Set<IOnBeforeActivateService> services = IGuiceContext.instance()
 		                                                     .getLoader(IOnBeforeActivateService.class, ServiceLoader.load(IOnBeforeActivateService.class));
 		services.forEach(service -> service.onCall(this));
 	}
@@ -104,8 +105,9 @@ public abstract class BeforeActivateAdapter<J extends BeforeActivateAdapter<J>>
 	@SuppressWarnings("unchecked")
 	private void onCreate()
 	{
-		Set<IOnBeforeActivateService> services = GuiceContext.instance()
-		                                                     .getLoader(IOnBeforeActivateService.class, ServiceLoader.load(IOnBeforeActivateService.class));
+		Set<IOnBeforeActivateService> services = IGuiceContext
+				                                         .instance()
+				                                         .getLoader(IOnBeforeActivateService.class, ServiceLoader.load(IOnBeforeActivateService.class));
 		services.forEach(service -> service.onCreate(this));
 	}
 
