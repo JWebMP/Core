@@ -61,7 +61,20 @@
             <groupId>com.guicedee.services</groupId>
             <artifactId>uadetector-core</artifactId>
         </dependency>
+        <!--
 
+                <dependency>
+                    <groupId>com.guicedee.services</groupId>
+                    <artifactId>vertx-core</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.guicedee.servlets</groupId>
+                    <artifactId>guiced-vertx-sockets</artifactId>
+                </dependency>
+        -->
+
+        <!--
         <dependency>
             <groupId>jakarta.websocket</groupId>
             <artifactId>jakarta.websocket-api</artifactId>
@@ -81,7 +94,7 @@
             <groupId>com.guicedee.servlets</groupId>
             <artifactId>guiced-websockets</artifactId>
         </dependency>
-
+-->
         <dependency>
             <groupId>com.guicedee.services</groupId>
             <artifactId>uadetector-resources</artifactId>
@@ -125,7 +138,13 @@
                 <scope>import</scope>
                 <version>${guicedee.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.guicedee</groupId>
+                <artifactId>guicedee-bom</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${guicedee.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.jwebmp</groupId>
                 <artifactId>jwebmp-bom</artifactId>

@@ -34,7 +34,7 @@ import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.services.IPage;
 import com.jwebmp.core.services.IPageConfigurator;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.interception.services.StaticStrings;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.java.Log;
 import net.sf.uadetector.ReadableDeviceCategory;
@@ -47,7 +47,6 @@ import java.util.logging.Level;
 
 import static com.guicedee.services.jsonrepresentation.json.StaticStrings.STRING_SEMICOLON;
 import static com.jwebmp.core.implementations.JWebMPServicesBindings.IPageConfiguratorsKey;
-import static com.jwebmp.core.implementations.ReadableUserAgentProvider.defaultAgent;
 
 /**
  * Top level of any HTML page.
@@ -76,7 +75,6 @@ public class Page<J extends Page<J>>
 
     private ContentSecurityPolicy contentSecurityPolicy;
 
-    private ReadableUserAgent readableUserAgent;
 
     /**
      * If this page has already gone through initialization
@@ -402,8 +400,8 @@ public class Page<J extends Page<J>>
     public boolean isMobileOrSmartTablet()
     {
         Set<ReadableDeviceCategory.Category> mobiles = EnumSet.of(ReadableDeviceCategory.Category.SMARTPHONE,
-                ReadableDeviceCategory.Category.SMART_TV,
-                ReadableDeviceCategory.Category.TABLET);
+                                                                  ReadableDeviceCategory.Category.SMART_TV,
+                                                                  ReadableDeviceCategory.Category.TABLET);
         return mobiles.contains(getUserAgent().getDeviceCategory()
                                               .getCategory());
     }
@@ -416,18 +414,7 @@ public class Page<J extends Page<J>>
     @NotNull
     public ReadableUserAgent getUserAgent()
     {
-        try
-        {
-            readableUserAgent = IGuiceContext.get(ReadableUserAgent.class);
-        }
-        catch (ProvisionException | OutOfScopeException e)
-        {
-            if (readableUserAgent == null)
-            {
-                readableUserAgent = defaultAgent();
-            }
-        }
-        return readableUserAgent;
+        return IGuiceContext.get(ReadableUserAgent.class);
     }
 
     /**

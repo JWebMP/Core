@@ -17,8 +17,8 @@
 package com.jwebmp.core;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-
-import com.guicedee.client.*;
+import com.guicedee.client.IGuiceContext;
+import com.guicedee.services.jsonrepresentation.IJsonRepresentation;
 import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import com.jwebmp.core.base.ComponentEventBase;
 import com.jwebmp.core.base.ajax.AjaxCall;
@@ -49,7 +49,7 @@ import static com.guicedee.services.jsonrepresentation.json.StaticStrings.*;
 @SuppressWarnings("unused")
 public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
         extends ComponentEventBase<F, GlobalEvents, J>
-        implements GlobalEvents<J>, IEvent<F, J>
+        implements GlobalEvents<J>, IEvent<F, J>, IJsonRepresentation<J>
 {
     /**
      * A list of all queries to execute on ajax response
