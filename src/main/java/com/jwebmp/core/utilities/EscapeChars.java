@@ -16,6 +16,7 @@
  */
 package com.jwebmp.core.utilities;
 
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import org.apache.commons.text.StringEscapeUtils;
 
 import jakarta.validation.constraints.NotNull;

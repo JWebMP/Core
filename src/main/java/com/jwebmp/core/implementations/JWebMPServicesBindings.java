@@ -43,7 +43,7 @@ public class JWebMPServicesBindings
     @Override
     public void configure()
     {
-        bind(Page.class).to(IPage.class);
+        bind(IPage.class).to(Page.class);
         
         //noinspection unchecked
         bind(JWebMPServicesBindings.IPageConfiguratorsKey)
