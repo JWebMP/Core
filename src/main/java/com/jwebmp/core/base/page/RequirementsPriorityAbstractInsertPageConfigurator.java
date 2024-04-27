@@ -19,7 +19,6 @@ package com.jwebmp.core.base.page;
 
 import com.google.common.base.Strings;
 import com.jwebmp.core.Page;
-import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.CSSLink;
 import com.jwebmp.core.base.html.Script;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
@@ -36,7 +35,6 @@ import java.util.List;
 import java.util.Set;
 
 import static com.guicedee.services.jsonrepresentation.json.StaticStrings.STRING_EMPTY;
-import static com.jwebmp.core.utilities.StaticStrings.*;
 
 abstract class RequirementsPriorityAbstractInsertPageConfigurator<J extends RequirementsPriorityAbstractInsertPageConfigurator<J>>
 		implements IPageConfigurator<J>
