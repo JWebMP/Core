@@ -18,130 +18,125 @@
 package com.jwebmp.core.base.page;
 
 
-import com.guicedee.client.*;
+import com.guicedee.client.IGuiceContext;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.html.Paragraph;
 import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
-import com.jwebmp.core.services.*;
+import com.jwebmp.core.services.IPage;
+import com.jwebmp.core.services.RenderAfterScripts;
+import com.jwebmp.core.services.RenderBeforeScripts;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-
-import static com.jwebmp.core.implementations.JWebMPServicesBindings.RenderAfterScriptsKey;
-import static com.jwebmp.core.implementations.JWebMPServicesBindings.RenderBeforeScriptsKey;
+import java.util.*;
 
 public class ScriptsInsertPageConfigurator
-		extends RequirementsPriorityAbstractInsertPageConfigurator<ScriptsInsertPageConfigurator>
+        extends RequirementsPriorityAbstractInsertPageConfigurator<ScriptsInsertPageConfigurator>
 {
-	public ScriptsInsertPageConfigurator()
-	{
-		//No config required
-	}
+    public ScriptsInsertPageConfigurator()
+    {
+        //No config required
+    }
 
-	@NotNull
-	@Override
-	public Page<?> configure(IPage<?> pager)
-	{
-		Page page = (Page)pager;
-		if (!page.isConfigured() && enabled())
-		{
-			IComponentHierarchyBase<?,?> addable;
-			if (page.getOptions()
-			        .isScriptsInHead())
-			{
-				addable = page.getHead();
-			}
-			else
-			{
-				addable = page.getBody();
-			}
-			
-			//noinspection unchecked
-			getScripts(page, (IComponentHierarchyBase<GlobalChildren, ?>) addable);
-			for (Object o : page.getHead()
-			                    .getChildren())
-			{
-				IComponentHierarchyBase<?,?> headObject = (IComponentHierarchyBase<?,?>) o;
-				headObject.preConfigure();
-			}
-		}
-		return page;
-	}
+    @NotNull
+    @Override
+    public Page<?> configure(IPage<?> pager)
+    {
+        Page page = (Page) pager;
+        if (!page.isConfigured() && enabled())
+        {
+            IComponentHierarchyBase<?, ?> addable;
+            if (page.getOptions()
+                    .isScriptsInHead())
+            {
+                addable = page.getHead();
+            }
+            else
+            {
+                addable = page.getBody();
+            }
 
-	private void getScripts(Page<?> page, IComponentHierarchyBase<GlobalChildren,?> scriptAddTo)
-	{
-		renderBeforeScripts(scriptAddTo);
-		addScriptsTo(page, scriptAddTo);
-		renderAfterScripts(scriptAddTo);
-	}
-	
-	private void renderBeforeScripts(IComponentHierarchyBase<GlobalChildren,?> scriptAddTo)
-	{
-		Set<RenderBeforeScripts> renderB = IGuiceContext.get(RenderBeforeScriptsKey);
-		Paragraph<?> before = new Paragraph<>().setTextOnly(true);
-		renderB.forEach(render -> before.setText(before.getText(0)
-		                                               .toString() + render.render(scriptAddTo.getPage())
-		                                                                   .toString()));
-		if (before.getText(0)
-		          .toString()
-		          .trim()
-		          .length() > 0)
-		{
-			scriptAddTo.add(before);
-		}
-	}
+            //noinspection unchecked
+            getScripts(page, (IComponentHierarchyBase<GlobalChildren, ?>) addable);
+            for (Object o : page.getHead()
+                                .getChildren())
+            {
+                IComponentHierarchyBase<?, ?> headObject = (IComponentHierarchyBase<?, ?>) o;
+                headObject.preConfigure();
+            }
+        }
+        return page;
+    }
 
-	/**
-	 * Adds scripts to a component, ordered by priority and sort order.
-	 * <p>
-	 * Does not do top shelf
-	 *
-	 * @param component
-	 * 		The component to add scripts to
-	 */
-	private void addScriptsTo(Page<?> page, IComponentHierarchyBase<GlobalChildren,?> component)
-	{
-		List<IComponentHierarchyBase<?,?>> requirements = new ArrayList<>();
+    private void getScripts(Page<?> page, IComponentHierarchyBase<GlobalChildren, ?> scriptAddTo)
+    {
+        renderBeforeScripts(scriptAddTo);
+        addScriptsTo(page, scriptAddTo);
+        renderAfterScripts(scriptAddTo);
+    }
 
-		List<RequirementsPriority> arrs = new ArrayList<>(Arrays.asList(RequirementsPriority.values()));
-		for (RequirementsPriority priority : arrs)
-		{
-			if (priority.equals(RequirementsPriority.Top_Shelf))
-			{
-				continue;
-			}
-			List<IComponentHierarchyBase<?,?>> alls = getPriorityRequirements(page, priority, requirements, false, true);
-			alls.forEach(component::add);
-		}
-	}
-	
-	private void renderAfterScripts(IComponentHierarchyBase<GlobalChildren,?> scriptAddTo)
-	{
-		Set<RenderAfterScripts> renderA = IGuiceContext.get(RenderAfterScriptsKey);
-		Paragraph<?> after = new Paragraph<>().setTextOnly(true);
-		for (RenderAfterScripts render : renderA)
-		{
-			after.setText(after.getText(0)
-			                   .toString() + render.render(scriptAddTo.getPage())
-			                                       .toString());
-		}
-		if (after.getText(0)
-		         .toString()
-		         .trim()
-		         .length() > 0)
-		{
-			scriptAddTo.add(after);
-		}
-	}
+    private void renderBeforeScripts(IComponentHierarchyBase<GlobalChildren, ?> scriptAddTo)
+    {
+        Set<RenderBeforeScripts> renderB = IGuiceContext.loaderToSetNoInjection(ServiceLoader.load(RenderBeforeScripts.class));//.get(RenderBeforeScriptsKey);
+        Paragraph<?> before = new Paragraph<>().setTextOnly(true);
+        renderB.forEach(render -> before.setText(before.getText(0)
+                                                       .toString() + render.render(scriptAddTo.getPage())
+                                                                           .toString()));
+        if (before.getText(0)
+                  .toString()
+                  .trim()
+                  .length() > 0)
+        {
+            scriptAddTo.add(before);
+        }
+    }
 
-	@Override
-	public Integer sortOrder()
-	{
-		return Integer.MAX_VALUE - 8;
-	}
+    /**
+     * Adds scripts to a component, ordered by priority and sort order.
+     * <p>
+     * Does not do top shelf
+     *
+     * @param component The component to add scripts to
+     */
+    private void addScriptsTo(Page<?> page, IComponentHierarchyBase<GlobalChildren, ?> component)
+    {
+        List<IComponentHierarchyBase<?, ?>> requirements = new ArrayList<>();
+
+        List<RequirementsPriority> arrs = new ArrayList<>(Arrays.asList(RequirementsPriority.values()));
+        for (RequirementsPriority priority : arrs)
+        {
+            if (priority.equals(RequirementsPriority.Top_Shelf))
+            {
+                continue;
+            }
+            List<IComponentHierarchyBase<?, ?>> alls = getPriorityRequirements(page, priority, requirements, false, true);
+            alls.forEach(component::add);
+        }
+    }
+
+    private void renderAfterScripts(IComponentHierarchyBase<GlobalChildren, ?> scriptAddTo)
+    {
+        Set<RenderAfterScripts> renderA = IGuiceContext.loaderToSetNoInjection(ServiceLoader.load(RenderAfterScripts.class));//.get(RenderAfterScriptsKey);
+        Paragraph<?> after = new Paragraph<>().setTextOnly(true);
+        for (RenderAfterScripts render : renderA)
+        {
+            after.setText(after.getText(0)
+                               .toString() + render.render(scriptAddTo.getPage())
+                                                   .toString());
+        }
+        if (after.getText(0)
+                 .toString()
+                 .trim()
+                 .length() > 0)
+        {
+            scriptAddTo.add(after);
+        }
+    }
+
+    @Override
+    public Integer sortOrder()
+    {
+        return Integer.MAX_VALUE - 8;
+    }
 }

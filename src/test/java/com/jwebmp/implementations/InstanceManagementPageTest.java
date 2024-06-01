@@ -1,8 +1,6 @@
 package com.jwebmp.implementations;
 
 
-import com.guicedee.client.IGuiceContext;
-import com.jwebmp.BaseTestClass;
 import com.jwebmp.testing.BaseTest;
 import com.jwebmp.testing.services.ITestInstanceDestroyService;
 import com.jwebmp.testing.services.ITestInstanceInitializerService;
@@ -21,21 +19,21 @@ public class InstanceManagementPageTest<J extends InstanceManagementPageTest<J>>
     @Override
     public void destroy(BaseTest testInstance)
     {
-        if (BaseTestClass.class.isAssignableFrom(testInstance.getClass()))
+  /*      if (BaseTestClass.class.isAssignableFrom(testInstance.getClass()))
         {
             ((BaseTestClass) testInstance)
                     .getInstance()
                     .destroy();
         }
         IGuiceContext.instance()
-                     .destroy();
+                     .destroy();*/
     }
 
     @Override
     public void initialize(BaseTest testInstance)
     {
-        IGuiceContext.instance()
-                     .inject();
+        //    IGuiceContext.instance()
+        //                  .inject();
     }
 
     @Override

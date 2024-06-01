@@ -41,12 +41,11 @@ import net.sf.uadetector.ReadableDeviceCategory;
 import net.sf.uadetector.ReadableUserAgent;
 
 import java.util.EnumSet;
-import java.util.LinkedHashSet;
+import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.logging.Level;
 
 import static com.guicedee.services.jsonrepresentation.json.StaticStrings.STRING_SEMICOLON;
-import static com.jwebmp.core.implementations.JWebMPServicesBindings.IPageConfiguratorsKey;
 
 /**
  * Top level of any HTML page.
@@ -531,7 +530,8 @@ public class Page<J extends Page<J>>
     private void configurePage()
     {
         @SuppressWarnings("rawtypes")
-        Set<IPageConfigurator> sortedConfigurators = new LinkedHashSet<>(IGuiceContext.get(IPageConfiguratorsKey));
+        Set<IPageConfigurator> sortedConfigurators = IGuiceContext.loaderToSetNoInjection(ServiceLoader.load(IPageConfigurator.class));
+        //new LinkedHashSet<>(IGuiceContext.get(IPageConfiguratorsKey));
         sortedConfigurators.removeIf(a -> !a.enabled());
         for (IPageConfigurator<?> sortedConfigurator : sortedConfigurators)
         {

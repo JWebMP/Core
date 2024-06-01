@@ -16,9 +16,6 @@ import jakarta.validation.constraints.NotNull;
 import java.util.ServiceLoader;
 import java.util.Set;
 
-import static com.jwebmp.core.implementations.JWebMPServicesBindings.RenderAfterDynamicScriptsKey;
-import static com.jwebmp.core.implementations.JWebMPServicesBindings.RenderBeforeDynamicScriptsKey;
-
 /**
  * Configures the dynamic script insertions that run last into the page
  *
@@ -83,7 +80,7 @@ public class ScriptsDynamicPageConfigurator
             //Render Before Dynamic Scripts
             Paragraph beforeText = new Paragraph().setTextOnly(true);
             StringBuilder sbBeforeText = new StringBuilder();
-            Set<RenderBeforeDynamicScripts> beforeLoader = IGuiceContext.get(RenderBeforeDynamicScriptsKey);
+            Set<RenderBeforeDynamicScripts> beforeLoader = IGuiceContext.loaderToSetNoInjection(ServiceLoader.load(RenderBeforeDynamicScripts.class));// get(RenderBeforeDynamicScriptsKey);
             for (RenderBeforeDynamicScripts renderAfterDynamicScripts : beforeLoader)
             {
                 sbBeforeText.append(IGuiceContext.get(renderAfterDynamicScripts.getClass())
@@ -155,7 +152,7 @@ public class ScriptsDynamicPageConfigurator
             //Render After Dynamic Scripts
             Paragraph afterText = new Paragraph().setTextOnly(true);
             StringBuilder sbAfterText = new StringBuilder();
-            Set<RenderAfterDynamicScripts> afterLoader = IGuiceContext.get(RenderAfterDynamicScriptsKey);
+            Set<RenderAfterDynamicScripts> afterLoader = IGuiceContext.loaderToSetNoInjection(ServiceLoader.load(RenderAfterDynamicScripts.class));//.get(RenderAfterDynamicScriptsKey);
             for (RenderAfterDynamicScripts renderAfterDynamicScripts : afterLoader)
             {
                 sbAfterText.append(IGuiceContext
