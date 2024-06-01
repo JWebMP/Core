@@ -14,9 +14,6 @@ module com.jwebmp.core {
     //requires transitive jakarta.servlet;
     //requires transitive com.google.guice.extensions.servlet;
 
-    requires net.sf.uadetector.core;
-    requires net.sf.uadetector.resources;
-
     requires aopalliance;
 
     requires com.google.guice;
