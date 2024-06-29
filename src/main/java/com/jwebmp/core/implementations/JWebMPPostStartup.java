@@ -13,11 +13,12 @@ public class JWebMPPostStartup implements IGuicePostStartup<JWebMPPostStartup>
     @Override
     public List<CompletableFuture<Boolean>> postLoad()
     {
-        return List.of(CompletableFuture.supplyAsync(()-> {
+        return List.of(CompletableFuture.supplyAsync(() -> {
+            JWebMPJacksonModule jWebMPJacksonModule = new JWebMPJacksonModule();
             IGuiceContext.get(ObjectMapper.class)
-                         .registerModule(new JWebMPJacksonModule());
+                         .registerModule(jWebMPJacksonModule);
             IGuiceContext.get(ObjectBinderKeys.DefaultObjectMapper)
-                         .registerModule(new JWebMPJacksonModule());
+                         .registerModule(jWebMPJacksonModule);
             return true;
         }));
     }
