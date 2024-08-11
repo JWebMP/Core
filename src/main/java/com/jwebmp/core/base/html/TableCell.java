@@ -23,9 +23,7 @@ import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.children.TableRowChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-
 import jakarta.validation.constraints.NotNull;
 
 /**
@@ -61,99 +59,101 @@ import jakarta.validation.constraints.NotNull;
  * <p>
  *
  * @param <J>
- *
  * @author GedMarc
  * @version 1.0
  * @since 2012/10/01
  */
 @SuppressWarnings("MissingClassJavaDoc")
 public class TableCell<J extends TableCell<J>>
-		extends Component<GlobalChildren, TableCellAttributes, GlobalFeatures, GlobalEvents, J>
-		implements TableRowChildren
+        extends Component<GlobalChildren, TableCellAttributes, GlobalFeatures, GlobalEvents, J>
+        implements TableRowChildren
 {
-	/**
-	 * Constructs a normal table cell
-	 */
-	public TableCell()
-	{
-		this((GlobalChildren) null);
-	}
+    /**
+     * Constructs a normal table cell
+     */
+    public TableCell()
+    {
+        this((GlobalChildren) null);
+    }
 
-	/**
-	 * Constructs a table cell with the given child.
-	 *
-	 * @param dataDisplay
-	 * 		The component that is a child
-	 */
-	public TableCell(GlobalChildren dataDisplay)
-	{
-		super(ComponentTypes.TableCell);
-		if (dataDisplay != null)
-		{
-			add(dataDisplay);
-		}
-	}
+    /**
+     * Constructs a table cell with the given child.
+     *
+     * @param dataDisplay The component that is a child
+     */
+    public TableCell(GlobalChildren dataDisplay)
+    {
+        super(ComponentTypes.TableCell);
+        if (dataDisplay != null)
+        {
+            add(dataDisplay);
+        }
+    }
 
-	/**
-	 * A paragraph as a child. Good for testing or Render on Load
-	 *
-	 * @param dataDisplay
-	 * 		The display for the table cell
-	 */
-	public TableCell(String dataDisplay)
-	{
-		this((GlobalChildren) null);
-		setText(dataDisplay);
-	}
+    /**
+     * A paragraph as a child. Good for testing or Render on Load
+     *
+     * @param dataDisplay The display for the table cell
+     */
+    public TableCell(String dataDisplay)
+    {
+        this((GlobalChildren) null);
+        setText(dataDisplay);
+    }
 
-	/**
-	 * Returns this table cell column span
-	 *
-	 * @return Integer of Column Span
-	 */
-	public int getColumnSpan()
-	{
-		String s = getAttribute(TableCellAttributes.ColSpan);
-		if (Strings.isNullOrEmpty(s))
-		{
-			s = "0";
-		}
-		return Integer.parseInt(s);
-	}
+    /**
+     * Returns this table cell column span
+     *
+     * @return Integer of Column Span
+     */
+    public int getColumnSpan()
+    {
+        String s = getAttribute(TableCellAttributes.ColSpan);
+        if (Strings.isNullOrEmpty(s))
+        {
+            s = "0";
+        }
+        return Integer.parseInt(s);
+    }
 
-	/**
-	 * @param columnSpan
-	 * 		Sets this table cells column span
-	 */
-	@NotNull
-	@SuppressWarnings("unchecked")
-	public J setColumnSpan(int columnSpan)
-	{
-		addAttribute(TableCellAttributes.ColSpan, columnSpan);
-		return (J) this;
-	}
+    /**
+     * @param columnSpan Sets this table cells column span
+     */
+    @NotNull
+    @SuppressWarnings("unchecked")
+    public J setColumnSpan(int columnSpan)
+    {
+        addAttribute(TableCellAttributes.ColSpan, columnSpan);
+        return (J) this;
+    }
 
-	/**
-	 * Gets this table cells row span
-	 *
-	 * @return Integer of Row Span
-	 */
-	public int getRowSpan()
-	{
-		return Integer.parseInt(getAttribute(TableCellAttributes.RowSpan));
-	}
+    /**
+     * Gets this table cells row span
+     *
+     * @return Integer of Row Span
+     */
+    public int getRowSpan()
+    {
+        return Integer.parseInt(getAttribute(TableCellAttributes.RowSpan));
+    }
 
-	/**
-	 * Sets this objects row span
-	 *
-	 * @param rowSpan
-	 * 		Integer that is row span
-	 */
-	@NotNull
-	@SuppressWarnings("unchecked")
-	public J setRowSpan(int rowSpan)
-	{
-		addAttribute(TableCellAttributes.RowSpan, Integer.toString(rowSpan));
-		return (J) this;
-	}
+    /**
+     * Sets this objects row span
+     *
+     * @param rowSpan Integer that is row span
+     */
+    @NotNull
+    @SuppressWarnings("unchecked")
+    public J setRowSpan(int rowSpan)
+    {
+        addAttribute(TableCellAttributes.RowSpan, Integer.toString(rowSpan));
+        return (J) this;
+    }
+
+    @Override
+    public J bind(String variableName)
+    {
+        setText("{{" + variableName + "}}");
+        return (J) this;
+    }
 }
