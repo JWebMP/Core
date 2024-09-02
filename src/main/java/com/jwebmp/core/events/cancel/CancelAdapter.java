@@ -86,7 +86,7 @@ public abstract class CancelAdapter<J extends CancelAdapter<J>>
 
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {

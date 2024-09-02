@@ -87,7 +87,7 @@ public abstract class DropAdapter<J extends DropAdapter<J>>
     }
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {

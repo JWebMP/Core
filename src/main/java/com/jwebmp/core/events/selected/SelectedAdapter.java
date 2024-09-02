@@ -41,76 +41,73 @@ import java.util.logging.Level;
  */
 @Log
 public abstract class SelectedAdapter<J extends SelectedAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements GlobalEvents<J>
 {
-	/**
-	 * Performs a click
-	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
-	 */
-	public SelectedAdapter(Option component)
-	{
-		super(EventTypes.selected, component);
-	}
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    public SelectedAdapter(Option component)
+    {
+        super(EventTypes.selected, component);
+    }
 
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onSelected(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			SelectedAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onSelected(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            SelectedAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
 
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onSelected(AjaxCall<?> call, AjaxResponse<?> response);
+    /**
+     * Triggers on Click
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onSelected(AjaxCall<?> call, AjaxResponse<?> response);
 
 
-	/**
-	 * Method onCall ...
-	 */
-	private void onCall()
-	{
-		Set<IOnSelectedService> services = IGuiceContext.instance()
+    /**
+     * Method onCall ...
+     */
+    private void onCall()
+    {
+        Set<IOnSelectedService> services = IGuiceContext.instance()
                                                         .getLoader(IOnSelectedService.class, ServiceLoader.load(IOnSelectedService.class));
-		services.forEach(service -> service.onCall(this));
-	}
+        services.forEach(service -> service.onCall(this));
+    }
 
 
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
+    @Override
+    protected void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	private void onCreate()
-	{
-		Set<IOnSelectedService> services = IGuiceContext
-				                                   .instance()
-				                                   .getLoader(IOnSelectedService.class, ServiceLoader.load(IOnSelectedService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    private void onCreate()
+    {
+        Set<IOnSelectedService> services = IGuiceContext
+                .instance()
+                .getLoader(IOnSelectedService.class, ServiceLoader.load(IOnSelectedService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 }

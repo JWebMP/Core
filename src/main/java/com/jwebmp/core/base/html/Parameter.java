@@ -49,49 +49,48 @@ import java.util.logging.Level;
  * <p>
  *
  * @param <J>
- *
  * @author GedMarc
  * @version 1.0
- * 		<p>
+ * <p>
  * @since Mar 1, 2015
  */
 @Log
 public class Parameter<J extends Parameter<J>>
-		extends Component<IComponentHierarchyBase<?,?>, ParameterAttributes, GlobalFeatures, GlobalEvents, J>
-		implements ObjectTagChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
+        extends Component<IComponentHierarchyBase<?, ?>, ParameterAttributes, GlobalFeatures, GlobalEvents, J>
+        implements ObjectTagChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
-	
-	/**
-	 *
-	 */
-	public Parameter()
-	{
-		super(ComponentTypes.Parameter);
-	}
 
-	/**
-	 * Differences Between HTML and XHTML
-	 * <p>
-	 * In HTML the base tag has no end tag.
-	 * <p>
-	 * In XHTML the base tag must be properly closed.
-	 */
-	@Override
-	public void preConfigure()
-	{
-		super.preConfigure();
-		try
-		{
-			if (getPage().getHtmlVersion()
-			             .name()
-			             .startsWith("X"))
-			{
-				setInlineClosingTag(true);
-			}
-		}
-		catch (Exception e)
-		{
-			Parameter.log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
-		}
-	}
+    /**
+     *
+     */
+    public Parameter()
+    {
+        super(ComponentTypes.Parameter);
+    }
+
+    /**
+     * Differences Between HTML and XHTML
+     * <p>
+     * In HTML the base tag has no end tag.
+     * <p>
+     * In XHTML the base tag must be properly closed.
+     */
+    @Override
+    protected void preConfigure()
+    {
+        super.preConfigure();
+        try
+        {
+            if (getPage().getHtmlVersion()
+                         .name()
+                         .startsWith("X"))
+            {
+                setInlineClosingTag(true);
+            }
+        }
+        catch (Exception e)
+        {
+            Parameter.log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
+        }
+    }
 }

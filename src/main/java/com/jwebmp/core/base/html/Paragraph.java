@@ -25,7 +25,6 @@ import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.utilities.TextUtilities;
-
 import jakarta.validation.constraints.NotNull;
 
 /**
@@ -51,91 +50,89 @@ import jakarta.validation.constraints.NotNull;
  * <p>
  *
  * @param <J>
- *
  * @author GedMarc
  * @version 1.0
  * @since forever, 2008 or 2007 sometime I think - will need to check on the original version named "radio on live".
  */
 public class Paragraph<J extends Paragraph<J>>
-		extends Component<ParagraphChildren, ParagraphAttributes, GlobalFeatures, GlobalEvents, J>
-		implements BodyChildren, NoNewLineForRawText, ParagraphChildren, DetailsChildren,
-		           FormChildren, ListItemChildren,ListChildren,HeadChildren
+        extends Component<ParagraphChildren, ParagraphAttributes, GlobalFeatures, GlobalEvents, J>
+        implements BodyChildren, NoNewLineForRawText, ParagraphChildren, DetailsChildren,
+                   FormChildren, ListItemChildren, ListChildren, HeadChildren
 {
 
 
-	/**
-	 * Sets if this paragraph must render the text directly without a tag
-	 */
-	private boolean textOnly;
+    /**
+     * Sets if this paragraph must render the text directly without a tag
+     */
+    private boolean textOnly;
 
-	/**
-	 * Constructs a blank paragraph
-	 */
-	public Paragraph()
-	{
-		this("");
-	}
+    /**
+     * Constructs a blank paragraph
+     */
+    public Paragraph()
+    {
+        this("");
+    }
 
-	/**
-	 * Constructs a new paragraph with the raw text set as the input text
-	 * <p>
-	 *
-	 * @param text
-	 */
-	public Paragraph(String text)
-	{
-		super("p", ComponentTypes.Paragraph);
-		setText(text);
-	}
+    /**
+     * Constructs a new paragraph with the raw text set as the input text
+     * <p>
+     *
+     * @param text
+     */
+    public Paragraph(String text)
+    {
+        super("p", ComponentTypes.Paragraph);
+        setText(text);
+    }
 
-	@Override
-	@NotNull
-	protected StringBuilder renderHTML(int tabCount)
-	{
-		if (isTextOnly())
-		{
-			return TextUtilities.getTabString(tabCount)
-			                    .append(getText(tabCount));
-		}
-		else
-		{
-			return super.renderHTML(tabCount);
-		}
-	}
+    @Override
+    @NotNull
+    protected StringBuilder renderHTML(int tabCount)
+    {
+        if (isTextOnly())
+        {
+            return TextUtilities.getTabString(tabCount)
+                                .append(getText(tabCount));
+        }
+        else
+        {
+            return super.renderHTML(tabCount);
+        }
+    }
 
-	/**
-	 * Sets if this paragraph must render the text directly without a tag
-	 *
-	 * @return
-	 */
-	public boolean isTextOnly()
-	{
-		return textOnly;
-	}
+    /**
+     * Sets if this paragraph must render the text directly without a tag
+     *
+     * @return
+     */
+    public boolean isTextOnly()
+    {
+        return textOnly;
+    }
 
-	/**
-	 * Sets if this paragraph must render the text directly without a tag
-	 *
-	 * @param textOnly
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public J setTextOnly(boolean textOnly)
-	{
-		this.textOnly = textOnly;
-		return (J) this;
-	}
+    /**
+     * Sets if this paragraph must render the text directly without a tag
+     *
+     * @param textOnly
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public J setTextOnly(boolean textOnly)
+    {
+        this.textOnly = textOnly;
+        return (J) this;
+    }
 
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
+    @Override
+    public int hashCode()
+    {
+        return super.hashCode();
+    }
 
-	@Override
-	public boolean equals(Object o)
-	{
-		return super.equals(o);
-	}
+    @Override
+    public boolean equals(Object o)
+    {
+        return super.equals(o);
+    }
 }

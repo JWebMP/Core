@@ -75,7 +75,8 @@ public abstract class ButtonClickAdapter<J extends ButtonClickAdapter<J>>
     /**
      * Method onCall ...
      */
-    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SuppressWarnings({"rawtypes",
+            "unchecked"})
     private void onCall()
     {
         Set<IOnButtonClickService> services = IGuiceContext.instance()
@@ -85,7 +86,7 @@ public abstract class ButtonClickAdapter<J extends ButtonClickAdapter<J>>
 
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {

@@ -37,75 +37,72 @@ import java.util.logging.Level;
  */
 @Log
 public abstract class ResizeAdapter<J extends ResizeAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements GlobalEvents<J>
 {
-	
-	/**
-	 * Performs a click
-	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
-	 */
-	public ResizeAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
-	{
-		super(EventTypes.resize, component);
 
-	}
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    public ResizeAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.resize, component);
 
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onResize(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			ResizeAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+    }
 
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onResize(AjaxCall<?> call, AjaxResponse<?> response);
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onResize(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            ResizeAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
 
-	/**
-	 * Method onCall ...
-	 */
-	private void onCall()
-	{
-		Set<IOnResizeService> services = com.guicedee.client.IGuiceContext.instance()
+    /**
+     * Triggers on Click
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onResize(AjaxCall<?> call, AjaxResponse<?> response);
+
+    /**
+     * Method onCall ...
+     */
+    private void onCall()
+    {
+        Set<IOnResizeService> services = com.guicedee.client.IGuiceContext.instance()
                                                                           .getLoader(IOnResizeService.class, ServiceLoader.load(IOnResizeService.class));
-		services.forEach(service -> service.onCall(this));
-	}
+        services.forEach(service -> service.onCall(this));
+    }
 
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
+    @Override
+    protected void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	private void onCreate()
-	{
-		Set<IOnResizeService> services = com.guicedee.client.IGuiceContext.instance()
-		            .getLoader(IOnResizeService.class, ServiceLoader.load(IOnResizeService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    private void onCreate()
+    {
+        Set<IOnResizeService> services = com.guicedee.client.IGuiceContext.instance()
+                                                                          .getLoader(IOnResizeService.class, ServiceLoader.load(IOnResizeService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 }

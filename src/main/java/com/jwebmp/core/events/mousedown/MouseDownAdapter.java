@@ -37,75 +37,72 @@ import java.util.logging.Level;
  */
 @Log
 public abstract class MouseDownAdapter<J extends MouseDownAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements GlobalEvents<J>
 {
-	
-	/**
-	 * Performs a click
-	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
-	 */
-	public MouseDownAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
-	{
-		super(EventTypes.mouseDown, component);
 
-	}
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    public MouseDownAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.mouseDown, component);
 
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onMouseDown(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			MouseDownAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+    }
 
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onMouseDown(AjaxCall<?> call, AjaxResponse<?> response);
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onMouseDown(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            MouseDownAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
 
-	/**
-	 * Method onCall ...
-	 */
-	private void onCall()
-	{
-		Set<IOnMouseDownService> services = com.guicedee.client.IGuiceContext.instance()
+    /**
+     * Triggers on Click
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onMouseDown(AjaxCall<?> call, AjaxResponse<?> response);
+
+    /**
+     * Method onCall ...
+     */
+    private void onCall()
+    {
+        Set<IOnMouseDownService> services = com.guicedee.client.IGuiceContext.instance()
                                                                              .getLoader(IOnMouseDownService.class, ServiceLoader.load(IOnMouseDownService.class));
-		services.forEach(service -> service.onCall(this));
-	}
+        services.forEach(service -> service.onCall(this));
+    }
 
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
+    @Override
+    protected void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	private void onCreate()
-	{
-		Set<IOnMouseDownService> services = com.guicedee.client.IGuiceContext.instance()
-		            .getLoader(IOnMouseDownService.class, ServiceLoader.load(IOnMouseDownService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    private void onCreate()
+    {
+        Set<IOnMouseDownService> services = com.guicedee.client.IGuiceContext.instance()
+                                                                             .getLoader(IOnMouseDownService.class, ServiceLoader.load(IOnMouseDownService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 }

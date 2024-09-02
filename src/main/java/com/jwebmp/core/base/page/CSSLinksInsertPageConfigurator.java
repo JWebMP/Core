@@ -46,7 +46,7 @@ public class CSSLinksInsertPageConfigurator
                                 .getChildren())
             {
                 ComponentHierarchyBase<?, ?, ?, ?, ?> headObject = (ComponentHierarchyBase<?, ?, ?, ?, ?>) o;
-                headObject.preConfigure();
+                // headObject.toString(0);
             }
             renderAfterLinks(page);
         }

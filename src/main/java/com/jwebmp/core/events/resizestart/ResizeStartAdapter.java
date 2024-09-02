@@ -38,76 +38,73 @@ import java.util.logging.Level;
  */
 @Log
 public abstract class ResizeStartAdapter<J extends ResizeStartAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements GlobalEvents<J>
 {
-	
-	/**
-	 * Performs a click
-	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
-	 */
-	public ResizeStartAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
-	{
-		super(EventTypes.resizeStart, component);
 
-	}
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    public ResizeStartAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.resizeStart, component);
 
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onResizeStart(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			ResizeStartAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+    }
 
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onResizeStart(AjaxCall<?> call, AjaxResponse<?> response);
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onResizeStart(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            ResizeStartAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
 
-	/**
-	 * Method onCall ...
-	 */
-	private void onCall()
-	{
-		Set<IOnResizeStartService> services = IGuiceContext.instance()
+    /**
+     * Triggers on Click
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onResizeStart(AjaxCall<?> call, AjaxResponse<?> response);
+
+    /**
+     * Method onCall ...
+     */
+    private void onCall()
+    {
+        Set<IOnResizeStartService> services = IGuiceContext.instance()
                                                            .getLoader(IOnResizeStartService.class, ServiceLoader.load(IOnResizeStartService.class));
-		services.forEach(service -> service.onCall(this));
-	}
+        services.forEach(service -> service.onCall(this));
+    }
 
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
+    @Override
+    protected void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	private void onCreate()
-	{
-		Set<IOnResizeStartService> services = IGuiceContext
-				                                      .instance()
-				                                      .getLoader(IOnResizeStartService.class, ServiceLoader.load(IOnResizeStartService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    private void onCreate()
+    {
+        Set<IOnResizeStartService> services = IGuiceContext
+                .instance()
+                .getLoader(IOnResizeStartService.class, ServiceLoader.load(IOnResizeStartService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 }

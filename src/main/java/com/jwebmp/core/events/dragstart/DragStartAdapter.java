@@ -84,7 +84,7 @@ public abstract class DragStartAdapter<J extends DragStartAdapter<J>>
     }
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {

@@ -38,83 +38,78 @@ import java.util.logging.Level;
  */
 @Log
 public abstract class SortAdapter<J extends SortAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements GlobalEvents<J>
 {
-	/**
-	 * Performs a click
-	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
-	 */
-	@SuppressWarnings("WeakerAccess")
-	public SortAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
-	{
-		super(EventTypes.sort, component);
-	}
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    @SuppressWarnings("WeakerAccess")
+    public SortAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.sort, component);
+    }
 
-	/**
-	 * The method that is fired on call
-	 *
-	 * @param call
-	 * 		The component that made the call
-	 * @param response
-	 * 		The Response Object Being Returned
-	 */
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onCall();
-			onSort(call, response);
-		}
-		catch (Exception e)
-		{
-			SortAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+    /**
+     * The method that is fired on call
+     *
+     * @param call     The component that made the call
+     * @param response The Response Object Being Returned
+     */
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onCall();
+            onSort(call, response);
+        }
+        catch (Exception e)
+        {
+            SortAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
 
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
+    @Override
+    protected void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	private void onCreate()
-	{
-		Set<IOnSortService> services = IGuiceContext.instance()
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    private void onCreate()
+    {
+        Set<IOnSortService> services = IGuiceContext.instance()
                                                     .getLoader(IOnSortService.class, ServiceLoader.load(IOnSortService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+        services.forEach(service -> service.onCreate(this));
+    }
 
-	/**
-	 * Method onCall ...
-	 */
-	private void onCall()
-	{
-		Set<IOnSortService> services = IGuiceContext
-				                               .instance()
-				                               .getLoader(IOnSortService.class, ServiceLoader.load(IOnSortService.class));
-		services.forEach(service -> service.onCall(this));
-	}
+    /**
+     * Method onCall ...
+     */
+    private void onCall()
+    {
+        Set<IOnSortService> services = IGuiceContext
+                .instance()
+                .getLoader(IOnSortService.class, ServiceLoader.load(IOnSortService.class));
+        services.forEach(service -> service.onCall(this));
+    }
 
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onSort(AjaxCall<?> call, AjaxResponse<?> response);
+    /**
+     * Triggers on Click
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onSort(AjaxCall<?> call, AjaxResponse<?> response);
 }

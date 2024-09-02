@@ -67,7 +67,7 @@ public abstract class ActivateAdapter<J extends ActivateAdapter<J>>
     }
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {

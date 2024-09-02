@@ -88,7 +88,7 @@ public abstract class FocusAdapter<J extends FocusAdapter<J>>
 
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {

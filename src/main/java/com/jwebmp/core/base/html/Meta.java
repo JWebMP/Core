@@ -57,212 +57,212 @@ import java.util.logging.Level;
  */
 @Log
 public class Meta
-		extends ComponentHierarchyBase<NoChildren, MetaAttributes, NoFeatures, NoEvents, Meta>
-		implements NoIDTag, NoClosingTag, HeadChildren, NoClassAttribute, NoNewLineBeforeClosingTag
+        extends ComponentHierarchyBase<NoChildren, MetaAttributes, NoFeatures, NoEvents, Meta>
+        implements NoIDTag, NoClosingTag, HeadChildren, NoClassAttribute, NoNewLineBeforeClosingTag
 {
-	
-	/**
-	 * Constructs an empty Meta tag
-	 */
-	public Meta()
-	{
-		super(ComponentTypes.Metadata);
-	}
-	
-	/**
-	 * Creates a Meta tag of HTTP Equiv with the custom name
-	 *
-	 * @param httpEquivName
-	 */
-	public Meta(String httpEquivName)
-	{
-		super(ComponentTypes.Metadata);
-		addAttribute(MetaAttributes.Http_Equiv, httpEquivName);
-	}
-	
-	/**
-	 * Constructs a Meta tag
-	 *
-	 * @param field The MetaData tag to generate
-	 * @param value doh
-	 */
-	public Meta(MetadataFields field, String value)
-	{
-		super(ComponentTypes.Metadata);
-		//noinspection EnhancedSwitchMigration
-		switch (field)
-		{
-			case Charset:
-			{
-				addAttribute(MetaAttributes.Charset, value);
-				break;
-			}
-			case http_equiv:
-			case XUACompatible:
-			{
-				addAttribute(MetaAttributes.Http_Equiv, MetadataFields.http_equiv.getDataNameField());
-				addAttribute(MetaAttributes.Http_Equiv, value);
-				break;
-			}
-			case Author:
-			{
-				
-				addAttribute(MetaAttributes.Content, value);
-				addAttribute(MetaAttributes.Name, MetadataFields.Author.getDataNameField());
-				break;
-			}
-			case Description:
-			{
-				
-				addAttribute(MetaAttributes.Content, value);
-				addAttribute(MetaAttributes.Name, MetadataFields.Description.getDataNameField());
-				break;
-			}
-			case ViewPort:
-			{
-				
-				addAttribute(MetaAttributes.Content, value);
-				addAttribute(MetaAttributes.Name, MetadataFields.ViewPort.getDataNameField());
-				break;
-			}
-			case Keywords:
-			{
-				addAttribute(MetaAttributes.Content, value);
-				addAttribute(MetaAttributes.Name, MetadataFields.Keywords.getDataNameField());
-				break;
-			}
-			default:
-			{
-				break;
-			}
-		}
-		if (field == MetadataFields.http_equiv)
-		{
-			addAttribute(MetaAttributes.Http_Equiv, field.getDataNameField());
-		}
-		else if (field != MetadataFields.Charset)
-		{
-			addAttribute(MetaAttributes.Name, field.getDataNameField());
-		}
-		if (field != MetadataFields.Charset)
-		{
-			addAttribute(MetaAttributes.Content, value);
-		}
-		setTiny(true);
-	}
-	
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-	
-	@Override
-	public boolean equals(Object o)
-	{
-		if (o instanceof Meta)
-		{
-			Meta m = (Meta) o;
-			return getAttributes().entrySet()
-			                      .equals(m.getAttributes()
-			                               .entrySet());
-		}
-		return false;
-	}
-	
-	/**
-	 * Differences Between HTML and XHTML
-	 * <p>
-	 * In HTML the base tag has no end tag.
-	 * <p>
-	 * In XHTML the base tag must be properly closed.
-	 */
-	@Override
-	public void preConfigure()
-	{
-		try
-		{
-			if (getPage().getHtmlVersion()
-			             .name()
-			             .startsWith("X"))
-			{
-				setInlineClosingTag(true);
-			}
-		}
-		catch (Exception e)
-		{
-			Meta.log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
-		}
-	}
-	
-	/**
-	 * A set list of fields available to the Meta tag
-	 */
-	public enum MetadataFields
-	{
-		
-		Application_Name("application-name"),
-		Generator("generator"),
-		Charset("charset"),
-		Author("author"),
-		Keywords("keywords"),
-		Description("description"),
-		ViewPort("viewport"),
-		http_equiv("http-equiv"),
-		XUACompatible("X-UA-Compatible"),
-		Name("name");
-		
-		private String dataNameField;
-		
-		/**
-		 * Doh
-		 *
-		 * @param dataNameField
-		 */
-		MetadataFields(String dataNameField)
-		{
-			this.dataNameField = dataNameField;
-		}
-		
-		/**
-		 * Returns this tags data name field
-		 *
-		 * @return
-		 */
-		public String getDataNameField()
-		{
-			return dataNameField;
-		}
-		
-		/**
-		 * Sets this fields dataset name Useful.
-		 *
-		 * @param dataNameField The name to set the field
-		 */
-		public void setDataNameField(String dataNameField)
-		{
-			this.dataNameField = dataNameField;
-		}
-	}
-	
-	@Override
-	public @NotNull Integer getSortOrder()
-	{
-		if (getAttributes().containsKey("charset"))
-		{
-			return 0;
-		}
-		
-		if (getAttributes().containsValue("viewport"))
-		{
-			return 3;
-		}
-		
-		if (getAttributes().containsValue("Content-Security-Policy"))
-		{
-			return Integer.MAX_VALUE - 2;
-		}
-		
-		return super.getSortOrder();
-	}
+
+    /**
+     * Constructs an empty Meta tag
+     */
+    public Meta()
+    {
+        super(ComponentTypes.Metadata);
+    }
+
+    /**
+     * Creates a Meta tag of HTTP Equiv with the custom name
+     *
+     * @param httpEquivName
+     */
+    public Meta(String httpEquivName)
+    {
+        super(ComponentTypes.Metadata);
+        addAttribute(MetaAttributes.Http_Equiv, httpEquivName);
+    }
+
+    /**
+     * Constructs a Meta tag
+     *
+     * @param field The MetaData tag to generate
+     * @param value doh
+     */
+    public Meta(MetadataFields field, String value)
+    {
+        super(ComponentTypes.Metadata);
+        //noinspection EnhancedSwitchMigration
+        switch (field)
+        {
+            case Charset:
+            {
+                addAttribute(MetaAttributes.Charset, value);
+                break;
+            }
+            case http_equiv:
+            case XUACompatible:
+            {
+                addAttribute(MetaAttributes.Http_Equiv, MetadataFields.http_equiv.getDataNameField());
+                addAttribute(MetaAttributes.Http_Equiv, value);
+                break;
+            }
+            case Author:
+            {
+
+                addAttribute(MetaAttributes.Content, value);
+                addAttribute(MetaAttributes.Name, MetadataFields.Author.getDataNameField());
+                break;
+            }
+            case Description:
+            {
+
+                addAttribute(MetaAttributes.Content, value);
+                addAttribute(MetaAttributes.Name, MetadataFields.Description.getDataNameField());
+                break;
+            }
+            case ViewPort:
+            {
+
+                addAttribute(MetaAttributes.Content, value);
+                addAttribute(MetaAttributes.Name, MetadataFields.ViewPort.getDataNameField());
+                break;
+            }
+            case Keywords:
+            {
+                addAttribute(MetaAttributes.Content, value);
+                addAttribute(MetaAttributes.Name, MetadataFields.Keywords.getDataNameField());
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
+        if (field == MetadataFields.http_equiv)
+        {
+            addAttribute(MetaAttributes.Http_Equiv, field.getDataNameField());
+        }
+        else if (field != MetadataFields.Charset)
+        {
+            addAttribute(MetaAttributes.Name, field.getDataNameField());
+        }
+        if (field != MetadataFields.Charset)
+        {
+            addAttribute(MetaAttributes.Content, value);
+        }
+        setTiny(true);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o instanceof Meta)
+        {
+            Meta m = (Meta) o;
+            return getAttributes().entrySet()
+                                  .equals(m.getAttributes()
+                                           .entrySet());
+        }
+        return false;
+    }
+
+    /**
+     * Differences Between HTML and XHTML
+     * <p>
+     * In HTML the base tag has no end tag.
+     * <p>
+     * In XHTML the base tag must be properly closed.
+     */
+    @Override
+    protected void preConfigure()
+    {
+        try
+        {
+            if (getPage().getHtmlVersion()
+                         .name()
+                         .startsWith("X"))
+            {
+                setInlineClosingTag(true);
+            }
+        }
+        catch (Exception e)
+        {
+            Meta.log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
+        }
+    }
+
+    /**
+     * A set list of fields available to the Meta tag
+     */
+    public enum MetadataFields
+    {
+
+        Application_Name("application-name"),
+        Generator("generator"),
+        Charset("charset"),
+        Author("author"),
+        Keywords("keywords"),
+        Description("description"),
+        ViewPort("viewport"),
+        http_equiv("http-equiv"),
+        XUACompatible("X-UA-Compatible"),
+        Name("name");
+
+        private String dataNameField;
+
+        /**
+         * Doh
+         *
+         * @param dataNameField
+         */
+        MetadataFields(String dataNameField)
+        {
+            this.dataNameField = dataNameField;
+        }
+
+        /**
+         * Returns this tags data name field
+         *
+         * @return
+         */
+        public String getDataNameField()
+        {
+            return dataNameField;
+        }
+
+        /**
+         * Sets this fields dataset name Useful.
+         *
+         * @param dataNameField The name to set the field
+         */
+        public void setDataNameField(String dataNameField)
+        {
+            this.dataNameField = dataNameField;
+        }
+    }
+
+    @Override
+    public @NotNull Integer getSortOrder()
+    {
+        if (getAttributes().containsKey("charset"))
+        {
+            return 0;
+        }
+
+        if (getAttributes().containsValue("viewport"))
+        {
+            return 3;
+        }
+
+        if (getAttributes().containsValue("Content-Security-Policy"))
+        {
+            return Integer.MAX_VALUE - 2;
+        }
+
+        return super.getSortOrder();
+    }
 }

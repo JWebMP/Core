@@ -86,7 +86,7 @@ public abstract class BeforeCloseAdapter<J extends BeforeCloseAdapter<J>>
 
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {

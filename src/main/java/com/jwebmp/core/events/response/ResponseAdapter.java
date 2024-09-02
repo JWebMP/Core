@@ -38,76 +38,73 @@ import java.util.logging.Level;
  */
 @Log
 public abstract class ResponseAdapter<J extends ResponseAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements GlobalEvents<J>
 {
-	/**
-	 * Performs a click
-	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
-	 */
-	public ResponseAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
-	{
-		super(EventTypes.response, component);
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    public ResponseAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.response, component);
 
-	}
+    }
 
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onResponse(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			ResponseAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onResponse(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            ResponseAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
 
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onResponse(AjaxCall<?> call, AjaxResponse<?> response);
+    /**
+     * Triggers on Click
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onResponse(AjaxCall<?> call, AjaxResponse<?> response);
 
-	/**
-	 * Method onCall ...
-	 */
-	private void onCall()
-	{
-		Set<IOnResponseService> services = IGuiceContext.instance()
+    /**
+     * Method onCall ...
+     */
+    private void onCall()
+    {
+        Set<IOnResponseService> services = IGuiceContext.instance()
                                                         .getLoader(IOnResponseService.class, ServiceLoader.load(IOnResponseService.class));
-		services.forEach(service -> service.onCall(this));
-	}
+        services.forEach(service -> service.onCall(this));
+    }
 
 
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
+    @Override
+    protected void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	private void onCreate()
-	{
-		Set<IOnResponseService> services = IGuiceContext
-				                                   .instance()
-				                                   .getLoader(IOnResponseService.class, ServiceLoader.load(IOnResponseService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    private void onCreate()
+    {
+        Set<IOnResponseService> services = IGuiceContext
+                .instance()
+                .getLoader(IOnResponseService.class, ServiceLoader.load(IOnResponseService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 }

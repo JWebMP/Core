@@ -38,80 +38,77 @@ import java.util.logging.Level;
  */
 @Log
 public abstract class KeyPressedAdapter<J extends KeyPressedAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements GlobalEvents<J>
 {
-	
-	/**
-	 * Performs a click
-	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
-	 */
-	public KeyPressedAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
-	{
-		super(EventTypes.keyPressed, component);
 
-	}
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    public KeyPressedAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.keyPressed, component);
 
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onKeyPressed(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			KeyPressedAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+    }
 
-
-	/**
-	 * Triggers on Key Pressed
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onKeyPressed(AjaxCall<?> call, AjaxResponse<?> response);
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onKeyPressed(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            KeyPressedAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
 
 
-	/**
-	 * Method onCall ...
-	 */
-	private void onCall()
-	{
-		Set<IOnKeyPressedService> services = IGuiceContext.instance()
+    /**
+     * Triggers on Key Pressed
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onKeyPressed(AjaxCall<?> call, AjaxResponse<?> response);
+
+
+    /**
+     * Method onCall ...
+     */
+    private void onCall()
+    {
+        Set<IOnKeyPressedService> services = IGuiceContext.instance()
                                                           .getLoader(IOnKeyPressedService.class, ServiceLoader.load(IOnKeyPressedService.class));
-		services.forEach(service -> service.onCall(this));
-	}
+        services.forEach(service -> service.onCall(this));
+    }
 
 
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
+    @Override
+    protected void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	private void onCreate()
-	{
-		Set<IOnKeyPressedService> services = IGuiceContext
-				                                     .instance()
-				                                     .getLoader(IOnKeyPressedService.class, ServiceLoader.load(IOnKeyPressedService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    private void onCreate()
+    {
+        Set<IOnKeyPressedService> services = IGuiceContext
+                .instance()
+                .getLoader(IOnKeyPressedService.class, ServiceLoader.load(IOnKeyPressedService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 
 }

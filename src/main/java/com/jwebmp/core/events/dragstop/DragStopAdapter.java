@@ -88,7 +88,7 @@ public abstract class DragStopAdapter<J extends DragStopAdapter<J>>
 
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {

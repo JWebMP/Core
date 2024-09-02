@@ -85,7 +85,7 @@ public abstract class BeforeActivateAdapter<J extends BeforeActivateAdapter<J>>
 
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {

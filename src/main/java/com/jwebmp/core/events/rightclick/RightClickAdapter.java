@@ -40,73 +40,73 @@ import java.util.logging.Level;
  */
 @Log
 public abstract class RightClickAdapter<J extends RightClickAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements ParagraphEvents<GlobalFeatures, J>, BodyEvents<GlobalFeatures, J>, GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements ParagraphEvents<GlobalFeatures, J>, BodyEvents<GlobalFeatures, J>, GlobalEvents<J>
 {
-	/**
-	 * Performs a click
-	 *
-	 * @param component The component this click is going to be acting on
-	 */
-	public RightClickAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?, ?> component)
-	{
-		super(EventTypes.contextmenu, component);
-		
-	}
-	
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onRightClick(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			RightClickAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
-	
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call     The physical AJAX call
-	 * @param response The physical Ajax Receiver
-	 */
-	public abstract void onRightClick(AjaxCall<?> call, AjaxResponse<?> response);
-	
-	
-	/**
-	 * Method onCall ...
-	 */
-	private void onCall()
-	{
-		Set<IOnRightClickService> services = IGuiceContext.instance()
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    public RightClickAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.contextmenu, component);
+
+    }
+
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onRightClick(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            RightClickAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
+
+    /**
+     * Triggers on Click
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onRightClick(AjaxCall<?> call, AjaxResponse<?> response);
+
+
+    /**
+     * Method onCall ...
+     */
+    private void onCall()
+    {
+        Set<IOnRightClickService> services = IGuiceContext.instance()
                                                           .getLoader(IOnRightClickService.class, ServiceLoader.load(IOnRightClickService.class));
-		services.forEach(service -> service.onCall(this));
-	}
-	
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
-	
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	private void onCreate()
-	{
-		Set<IOnRightClickService> services = IGuiceContext
-				                                     .instance()
-				                                     .getLoader(IOnRightClickService.class, ServiceLoader.load(IOnRightClickService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+        services.forEach(service -> service.onCall(this));
+    }
+
+    @Override
+    protected void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
+
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    private void onCreate()
+    {
+        Set<IOnRightClickService> services = IGuiceContext
+                .instance()
+                .getLoader(IOnRightClickService.class, ServiceLoader.load(IOnRightClickService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 }

@@ -49,7 +49,7 @@ public class ContentSecurityPolicy
     }
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {

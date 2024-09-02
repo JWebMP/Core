@@ -38,76 +38,73 @@ import java.util.logging.Level;
  */
 @Log
 public abstract class OpenAdapter<J extends OpenAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements GlobalEvents<J>
 {
-	/**
-	 * Performs a click
-	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
-	 */
-	public OpenAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
-	{
-		super(EventTypes.open, component);
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    public OpenAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.open, component);
 
-	}
+    }
 
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onOpen(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			OpenAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onOpen(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            OpenAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
 
-	/**
-	 * Triggers on Open
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onOpen(AjaxCall<?> call, AjaxResponse<?> response);
+    /**
+     * Triggers on Open
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onOpen(AjaxCall<?> call, AjaxResponse<?> response);
 
-	/**
-	 * Method onCall ...
-	 */
-	private void onCall()
-	{
-		Set<IOnOpenService> services = IGuiceContext.instance()
+    /**
+     * Method onCall ...
+     */
+    private void onCall()
+    {
+        Set<IOnOpenService> services = IGuiceContext.instance()
                                                     .getLoader(IOnOpenService.class, ServiceLoader.load(IOnOpenService.class));
-		services.forEach(service -> service.onCall(this));
-	}
+        services.forEach(service -> service.onCall(this));
+    }
 
 
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
+    @Override
+    protected void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	private void onCreate()
-	{
-		Set<IOnOpenService> services = IGuiceContext
-				                               .instance()
-				                               .getLoader(IOnOpenService.class, ServiceLoader.load(IOnOpenService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    private void onCreate()
+    {
+        Set<IOnOpenService> services = IGuiceContext
+                .instance()
+                .getLoader(IOnOpenService.class, ServiceLoader.load(IOnOpenService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 }

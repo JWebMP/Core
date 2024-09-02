@@ -78,7 +78,8 @@ public abstract class ChangeAdapter<J extends ChangeAdapter<J>>
     /**
      * Method onCall ...
      */
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({"unchecked",
+            "rawtypes"})
     private void onCall()
     {
         Set<IOnChangeService> services = com.guicedee.client.IGuiceContext.instance()
@@ -88,7 +89,7 @@ public abstract class ChangeAdapter<J extends ChangeAdapter<J>>
 
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {
@@ -100,7 +101,8 @@ public abstract class ChangeAdapter<J extends ChangeAdapter<J>>
     /**
      * Occurs when the event is called
      */
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({"unchecked",
+            "rawtypes"})
     private void onCreate()
     {
         Set<IOnChangeService> services = com.guicedee.client.IGuiceContext.instance()

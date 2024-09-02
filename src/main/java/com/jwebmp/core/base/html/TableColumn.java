@@ -46,47 +46,46 @@ import java.util.logging.Level;
  * <p>
  *
  * @param <J>
- *
  * @author GedMarc
  * @since 2014/12/20
  */
 @Log
 public class TableColumn<J extends TableColumn<J>>
-		extends Component<IComponentHierarchyBase<?,?>, TableColumnAttributes, GlobalFeatures, GlobalEvents, J>
-		implements TableColumnGroupChildren
+        extends Component<IComponentHierarchyBase<?, ?>, TableColumnAttributes, GlobalFeatures, GlobalEvents, J>
+        implements TableColumnGroupChildren
 {
-	/**
-	 * Constructs a new table column
-	 */
-	public TableColumn()
-	{
-		super(ComponentTypes.TableColumn);
-	}
+    /**
+     * Constructs a new table column
+     */
+    public TableColumn()
+    {
+        super(ComponentTypes.TableColumn);
+    }
 
-	/**
-	 * Differences Between HTML and XHTML
-	 * <p>
-	 * In HTML the base tag has no end tag.
-	 * <p>
-	 * In XHTML the base tag must be properly closed.
-	 */
-	@Override
-	public void preConfigure()
-	{
-		super.preConfigure();
-		try
-		{
-			if (getPage().getHtmlVersion()
-			             .name()
-			             .startsWith("X"))
-			{
-				setInlineClosingTag(true);
-			}
-		}
-		catch (Exception e)
-		{
-			TableColumn.log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
-		}
-	}
+    /**
+     * Differences Between HTML and XHTML
+     * <p>
+     * In HTML the base tag has no end tag.
+     * <p>
+     * In XHTML the base tag must be properly closed.
+     */
+    @Override
+    protected void preConfigure()
+    {
+        super.preConfigure();
+        try
+        {
+            if (getPage().getHtmlVersion()
+                         .name()
+                         .startsWith("X"))
+            {
+                setInlineClosingTag(true);
+            }
+        }
+        catch (Exception e)
+        {
+            TableColumn.log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
+        }
+    }
 
 }

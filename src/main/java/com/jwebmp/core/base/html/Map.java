@@ -43,32 +43,31 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * In XHTML, the name attribute is deprecated, and will be removed. Use the id attribute instead.<p>
  *
  * @param <J>
- *
  * @author MMagon
  * @version 1.0
  * @since 2013/11/22
  */
 public class Map<J extends Map<J>>
-		extends Component<MapChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements ImageMapChildren
+        extends Component<MapChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements ImageMapChildren
 {
 
 
-	/**
-	 * Constructs a new Map for use with the Image Map Useless really without
-	 */
-	public Map()
-	{
-		super(ComponentTypes.Map);
-	}
+    /**
+     * Constructs a new Map for use with the Image Map Useless really without
+     */
+    public Map()
+    {
+        super(ComponentTypes.Map);
+    }
 
-	/**
-	 * Adds the absolute CSS Configuration, and sets the name to the ID of the Map
-	 */
-	@Override
-	public void preConfigure()
-	{
-		super.preConfigure();
-		addAttribute(GlobalAttributes.Name, getID());
-	}
+    /**
+     * Adds the absolute CSS Configuration, and sets the name to the ID of the Map
+     */
+    @Override
+    protected void preConfigure()
+    {
+        super.preConfigure();
+        addAttribute(GlobalAttributes.Name, getID());
+    }
 }

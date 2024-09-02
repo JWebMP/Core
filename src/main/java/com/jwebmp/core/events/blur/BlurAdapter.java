@@ -84,7 +84,7 @@ public abstract class BlurAdapter<J extends BlurAdapter<J>>
 
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {

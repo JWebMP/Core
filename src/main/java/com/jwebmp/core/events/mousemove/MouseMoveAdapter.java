@@ -37,76 +37,73 @@ import java.util.logging.Level;
  */
 @Log
 public abstract class MouseMoveAdapter<J extends MouseMoveAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements GlobalEvents<J>
 {
 
 
-	/**
-	 * Performs a click
-	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
-	 */
-	public MouseMoveAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
-	{
-		super(EventTypes.mouseMove, component);
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    public MouseMoveAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.mouseMove, component);
 
-	}
+    }
 
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onMouseMove(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			MouseMoveAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onMouseMove(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            MouseMoveAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
 
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onMouseMove(AjaxCall<?> call, AjaxResponse<?> response);
+    /**
+     * Triggers on Click
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onMouseMove(AjaxCall<?> call, AjaxResponse<?> response);
 
-	/**
-	 * Method onCall ...
-	 */
-	private void onCall()
-	{
-		Set<IOnMouseMoveService> services = com.guicedee.client.IGuiceContext.instance()
+    /**
+     * Method onCall ...
+     */
+    private void onCall()
+    {
+        Set<IOnMouseMoveService> services = com.guicedee.client.IGuiceContext.instance()
                                                                              .getLoader(IOnMouseMoveService.class, ServiceLoader.load(IOnMouseMoveService.class));
-		services.forEach(service -> service.onCall(this));
-	}
+        services.forEach(service -> service.onCall(this));
+    }
 
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
+    @Override
+    protected void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	private void onCreate()
-	{
-		Set<IOnMouseMoveService> services = com.guicedee.client.IGuiceContext.instance()
-		            .getLoader(IOnMouseMoveService.class, ServiceLoader.load(IOnMouseMoveService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    private void onCreate()
+    {
+        Set<IOnMouseMoveService> services = com.guicedee.client.IGuiceContext.instance()
+                                                                             .getLoader(IOnMouseMoveService.class, ServiceLoader.load(IOnMouseMoveService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 }

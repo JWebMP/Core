@@ -83,7 +83,8 @@ import java.util.logging.Level;
 @Log
 public class Script<C extends GlobalChildren & CastableComponent<J>, J extends Script<C, J>>
         extends ComponentHierarchyBase<C, ScriptAttributes, NoFeatures, NoEvents, J>
-        implements NoIDTag, HeadChildren, NoClassAttribute, BodyChildren, FormChildren {
+        implements NoIDTag, HeadChildren, NoClassAttribute, BodyChildren, FormChildren
+{
 
     private JavascriptReference reference;
 
@@ -92,7 +93,8 @@ public class Script<C extends GlobalChildren & CastableComponent<J>, J extends S
      *
      * @param reference
      */
-    public Script(JavascriptReference reference) {
+    public Script(JavascriptReference reference)
+    {
         this(reference.toString());
         this.reference = reference;
     }
@@ -103,7 +105,8 @@ public class Script<C extends GlobalChildren & CastableComponent<J>, J extends S
      *
      * @param src The source of the file
      */
-    public Script(String src) {
+    public Script(String src)
+    {
         this();
         addAttribute(ScriptAttributes.Src, src);
         addAttribute(ScriptAttributes.Type, "text/javascript");
@@ -112,7 +115,8 @@ public class Script<C extends GlobalChildren & CastableComponent<J>, J extends S
     /**
      * Constructs a script component
      */
-    public Script() {
+    public Script()
+    {
         super(ComponentTypes.Script);
     }
 
@@ -123,12 +127,15 @@ public class Script<C extends GlobalChildren & CastableComponent<J>, J extends S
      * @param src  The source of the file
      * @param type The type of script
      */
-    public Script(String src, String type) {
+    public Script(String src, String type)
+    {
         this();
-        if (src != null) {
+        if (src != null)
+        {
             addAttribute(ScriptAttributes.Src, src);
         }
-        if (type != null) {
+        if (type != null)
+        {
             addAttribute(ScriptAttributes.Type, type);
         }
     }
@@ -138,7 +145,8 @@ public class Script<C extends GlobalChildren & CastableComponent<J>, J extends S
      *
      * @return The JavaScript
      */
-    public StringBuilder getJavascript() {
+    public StringBuilder getJavascript()
+    {
         return getJavascript(0);
     }
 
@@ -148,7 +156,8 @@ public class Script<C extends GlobalChildren & CastableComponent<J>, J extends S
      * @param javascript The JavaScript to directly insert
      */
     @SuppressWarnings("unchecked")
-    public J setJavascript(String javascript) {
+    public J setJavascript(String javascript)
+    {
         setText(javascript);
         return (J) this;
     }
@@ -160,38 +169,49 @@ public class Script<C extends GlobalChildren & CastableComponent<J>, J extends S
      *                 <p>
      * @return The JavaScript
      */
-    public StringBuilder getJavascript(Integer tabCount) {
+    public StringBuilder getJavascript(Integer tabCount)
+    {
         preConfigure();
         return getText(tabCount);
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return getText(0).append(getAttribute(ScriptAttributes.Src))
-                .hashCode();
+                         .hashCode();
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
+    public boolean equals(Object obj)
+    {
+        if (obj == null)
+        {
             return false;
         }
-        if (obj.getClass() != getClass()) {
+        if (obj.getClass() != getClass())
+        {
             return false;
         }
 
         Script<?, ?> s = (Script<?, ?>) obj;
         if (s.getAttribute(ScriptAttributes.Src)
-                .equals(getAttribute(ScriptAttributes.Src))) {
+             .equals(getAttribute(ScriptAttributes.Src)))
+        {
             if (s.getAttribute(ScriptAttributes.Type)
-                    .equals(getAttribute(ScriptAttributes.Type))) {
+                 .equals(getAttribute(ScriptAttributes.Type)))
+            {
                 return s.getText(0)
                         .toString()
                         .equals(getText(0).toString());
-            } else {
+            }
+            else
+            {
                 return false;
             }
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -204,19 +224,25 @@ public class Script<C extends GlobalChildren & CastableComponent<J>, J extends S
      * This means that in XHTML, all special characters should be encoded, or all content should be wrapped inside a CDATA section:
      */
     @Override
-    public void preConfigure() {
+    protected void preConfigure()
+    {
         super.preConfigure();
-        if (getAttribute(ScriptAttributes.Src) != null || !getAttribute(ScriptAttributes.Src).isEmpty()) {
-            try {
+        if (getAttribute(ScriptAttributes.Src) != null || !getAttribute(ScriptAttributes.Src).isEmpty())
+        {
+            try
+            {
                 if (getPage().getHtmlVersion()
-                        .name()
-                        .startsWith("X")) {
+                             .name()
+                             .startsWith("X"))
+                {
                     String sb = "//<![CDATA[" +
                             getText(0) +
                             "//]]";
                     setText(sb);
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Skipping CDATA Implementation", e);
             }
         }
@@ -227,7 +253,8 @@ public class Script<C extends GlobalChildren & CastableComponent<J>, J extends S
      *
      * @return
      */
-    public JavascriptReference getReference() {
+    public JavascriptReference getReference()
+    {
         return reference;
     }
 

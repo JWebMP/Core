@@ -87,7 +87,7 @@ public abstract class CloseAdapter<J extends CloseAdapter<J>>
 
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {

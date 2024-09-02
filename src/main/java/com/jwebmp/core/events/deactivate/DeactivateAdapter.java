@@ -88,7 +88,7 @@ public abstract class DeactivateAdapter<J extends DeactivateAdapter<J>>
 
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {

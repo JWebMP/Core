@@ -37,75 +37,72 @@ import java.util.logging.Level;
  */
 @Log
 public abstract class SearchAdapter<J extends SearchAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements GlobalEvents<J>
 {
-	/**
-	 * Performs a click
-	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
-	 */
-	public SearchAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
-	{
-		super(EventTypes.search, component);
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    public SearchAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.search, component);
 
-	}
+    }
 
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onSearch(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			SearchAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onSearch(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            SearchAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
 
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onSearch(AjaxCall<?> call, AjaxResponse<?> response);
+    /**
+     * Triggers on Click
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onSearch(AjaxCall<?> call, AjaxResponse<?> response);
 
-	/**
-	 * Method onCall ...
-	 */
-	private void onCall()
-	{
-		Set<IOnSearchService> services = com.guicedee.client.IGuiceContext.instance()
+    /**
+     * Method onCall ...
+     */
+    private void onCall()
+    {
+        Set<IOnSearchService> services = com.guicedee.client.IGuiceContext.instance()
                                                                           .getLoader(IOnSearchService.class, ServiceLoader.load(IOnSearchService.class));
-		services.forEach(service -> service.onCall(this));
-	}
+        services.forEach(service -> service.onCall(this));
+    }
 
 
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
+    @Override
+    protected void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	private void onCreate()
-	{
-		Set<IOnSearchService> services = com.guicedee.client.IGuiceContext.instance()
-		            .getLoader(IOnSearchService.class, ServiceLoader.load(IOnSearchService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    private void onCreate()
+    {
+        Set<IOnSearchService> services = com.guicedee.client.IGuiceContext.instance()
+                                                                          .getLoader(IOnSearchService.class, ServiceLoader.load(IOnSearchService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 }

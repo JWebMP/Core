@@ -16,6 +16,7 @@
  */
 package com.jwebmp.core.base.html;
 
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.GlobalAttributes;
 import com.jwebmp.core.base.html.attributes.InputTypes;
@@ -27,8 +28,6 @@ import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.guicedee.services.jsonrepresentation.json.StaticStrings;
-
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Objects;
@@ -70,316 +69,304 @@ import java.util.Objects;
  * In XHTML, the input tag must be properly closed.<p>
  * <p>
  *
- * @param <A>
- * 		The attribute set for the input component
+ * @param <A> The attribute set for the input component
  * @param <J>
- *
  * @author GedMarc
  */
 public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, J>>
-		extends Component<IComponentHierarchyBase<?,?>, A, GlobalFeatures, GlobalEvents, J>
-		implements ParagraphChildren, FormChildren, ListItemChildren
+        extends Component<IComponentHierarchyBase<?, ?>, A, GlobalFeatures, GlobalEvents, J>
+        implements ParagraphChildren, FormChildren, ListItemChildren
 {
-	/**
-	 * The input type of this input tag
-	 */
-	private InputTypes inputType;
+    /**
+     * The input type of this input tag
+     */
+    private InputTypes inputType;
 
-	/**
-	 * Constructs a blank instance of input - generally not recommended.
-	 */
-	public Input()
-	{
-		this(null);
-	}
+    /**
+     * Constructs a blank instance of input - generally not recommended.
+     */
+    public Input()
+    {
+        this(null);
+    }
 
-	/**
-	 * Construct a new instance of the input type field
-	 * <p>
-	 *
-	 * @param inputType
-	 */
-	public Input(InputTypes inputType)
-	{
-		super(ComponentTypes.Input);
-		setRenderIDAttribute(true);
-		if (inputType != null)
-		{
-			this.inputType = inputType;
-			addAttribute(GlobalAttributes.Type, getInputType().name()
-			                                                  .toLowerCase());
-			addAttribute(GlobalAttributes.Name, getID());
-		}
-		if (!getInlineClosingTag() && getPage().getHtmlVersion()
-		                                       .name()
-		                                       .startsWith("X") || !"select".equals(getTag()))
-		{
-			setInlineClosingTag(true);
+    /**
+     * Construct a new instance of the input type field
+     * <p>
+     *
+     * @param inputType
+     */
+    public Input(InputTypes inputType)
+    {
+        super(ComponentTypes.Input);
+        setRenderIDAttribute(true);
+        if (inputType != null)
+        {
+            this.inputType = inputType;
+            addAttribute(GlobalAttributes.Type, getInputType().name()
+                                                              .toLowerCase());
+            addAttribute(GlobalAttributes.Name, getID());
+        }
+        if (!getInlineClosingTag() && getPage().getHtmlVersion()
+                                               .name()
+                                               .startsWith("X") || !"select".equals(getTag()))
+        {
+            setInlineClosingTag(true);
 
-		}
-		setClosingTag(false);
-	}
+        }
+        setClosingTag(false);
+    }
 
-	@Override
-	public void preConfigure()
-	{
-		if(!isConfigured())
-		{
-			if(getText() != null && !getText().isEmpty())
-			{
-				setInlineClosingTag(false);
-			}
-		}
-		super.preConfigure();
-	}
+    @Override
+    protected void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            if (getText() != null && !getText().isEmpty())
+            {
+                setInlineClosingTag(false);
+            }
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Returns the input type of the input field
-	 * <p>
-	 *
-	 * @return
-	 */
-	public final InputTypes getInputType()
-	{
-		return inputType;
-	}
+    /**
+     * Returns the input type of the input field
+     * <p>
+     *
+     * @return
+     */
+    public final InputTypes getInputType()
+    {
+        return inputType;
+    }
 
-	/**
-	 * Sets the input type of this field
-	 * <p>
-	 *
-	 * @param inputType
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public J setInputType(InputTypes inputType)
-	{
-		this.inputType = inputType;
-		addAttribute(GlobalAttributes.Type, inputType.toString());
-		return (J) this;
-	}
+    /**
+     * Sets the input type of this field
+     * <p>
+     *
+     * @param inputType
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public J setInputType(InputTypes inputType)
+    {
+        this.inputType = inputType;
+        addAttribute(GlobalAttributes.Type, inputType.toString());
+        return (J) this;
+    }
 
-	@Override
-	@NotNull
-	public J setID(String id)
-	{
-		setName(id);
-		return super.setID(id);
-	}
-	
-	@Override
-	public J setName(String name)
-	{
-		addAttribute(GlobalAttributes.Name, name);
-		addAttribute("#" + name,"ngModel");
-		return super.setName(name);
-	}
-	
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return getAttribute(GlobalAttributes.Name);
-	}
+    @Override
+    @NotNull
+    public J setID(String id)
+    {
+        setName(id);
+        return super.setID(id);
+    }
 
-	/**
-	 * Sets this input as required in the form
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public J setRequired()
-	{
-		addAttribute("required", StaticStrings.STRING_EMPTY);
-		return (J) this;
-	}
+    @Override
+    public J setName(String name)
+    {
+        addAttribute(GlobalAttributes.Name, name);
+        addAttribute(GlobalAttributes.ID, name);
+        //addAttribute("#" + name, "ngModel");
+        return super.setName(name);
+    }
 
-	/**
-	 * Sets the minimum length of this input
-	 *
-	 * @param minLength
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public J setMinimumLength(int minLength)
-	{
-		addAttribute("data-minlength", Integer.toString(minLength));
-		addAttribute("minlength", Integer.toString(minLength));
-		return (J) this;
-	}
-	
-	
-	/**
-	 * Sets the minimum length of this input
-	 *
-	 * @param minimum
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public J setMinimum(int minimum)
-	{
-		addAttribute("data-min", Integer.toString(minimum));
-		addAttribute("min", Integer.toString(minimum));
-		return (J) this;
-	}
-	
-	/**
-	 * Sets the minimum length of this input
-	 *
-	 * @param minimum
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public J setMinimum(double minimum)
-	{
-		addAttribute("data-min", Double.toString(minimum));
-		addAttribute("min", Double.toString(minimum));
-		return (J) this;
-	}
-	
-	
-	/**
-	 * Sets the minimum length of this input
-	 *
-	 * @param minLength
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public J setMaximumLength(int minLength)
-	{
-		addAttribute("data-maxlength", Integer.toString(minLength));
-		addAttribute("maxlength", Integer.toString(minLength));
-		return (J) this;
-	}
-	
-	
-	/**
-	 * Sets the minimum length of this input
-	 *
-	 * @param max
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public J setMaximum(int max)
-	{
-		addAttribute("data-max", Integer.toString(max));
-		addAttribute("max", Integer.toString(max));
-		return (J) this;
-	}
-	
-	
-	/**
-	 * Sets the minimum length of this input
-	 *
-	 * @param max
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public J setMaximum(double max)
-	{
-		addAttribute("data-max", Double.toString(max));
-		addAttribute("max", Double.toString(max));
-		return (J) this;
-	}
-	
-	/**
-	 * Sets the place holder for this input
-	 *
-	 * @param placeholder
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public J setPlaceholder(String placeholder)
-	{
-		addAttribute("placeholder", placeholder);
-		return (J) this;
-	}
+    @NotNull
+    @Override
+    public String getName()
+    {
+        return getAttribute(GlobalAttributes.Name);
+    }
 
-	/**
-	 * Sets the value attribute
-	 *
-	 * @param value
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public J setValue(String value)
-	{
-		addAttribute("value", value);
-		return (J) this;
-	}
+    /**
+     * Sets this input as required in the form
+     *
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public J setRequired()
+    {
+        addAttribute("required", StaticStrings.STRING_EMPTY);
+        return (J) this;
+    }
 
-	public String getValue()
-	{
-		return getAttribute("value");
-	}
-	
-	/**
-	 * Sets the raw pattern for this input object if required
-	 *
-	 * @param pattern
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public J setPattern(String pattern, boolean raw)
-	{
-		if (raw)
-		{
-			addAttribute("pattern", pattern);
-		}
-		else
-		{
-			setPattern(pattern);
-		}
-		return (J) this;
-	}
+    /**
+     * Sets the minimum length of this input
+     *
+     * @param minLength
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public J setMinimumLength(int minLength)
+    {
+        addAttribute("data-minlength", Integer.toString(minLength));
+        addAttribute("minlength", Integer.toString(minLength));
+        return (J) this;
+    }
 
-	/**
-	 * Sets the pattern for this input object if required
-	 *
-	 * @param angularPatternName
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public J setPattern(String angularPatternName)
-	{
-		addAttribute("pattern", angularPatternName);
-		return (J) this;
-	}
-	
-	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof Input))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-		Input<?, ?> input = (Input<?, ?>) o;
-		return getInputType() == input.getInputType();
-	}
-	
-	@Override
-	public int hashCode()
-	{
-		return Objects.hash(super.hashCode(), getInputType());
-	}
-	
+
+    /**
+     * Sets the minimum length of this input
+     *
+     * @param minimum
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public J setMinimum(int minimum)
+    {
+        addAttribute("data-min", Integer.toString(minimum));
+        addAttribute("min", Integer.toString(minimum));
+        return (J) this;
+    }
+
+    /**
+     * Sets the minimum length of this input
+     *
+     * @param minimum
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public J setMinimum(double minimum)
+    {
+        addAttribute("data-min", Double.toString(minimum));
+        addAttribute("min", Double.toString(minimum));
+        return (J) this;
+    }
+
+
+    /**
+     * Sets the minimum length of this input
+     *
+     * @param minLength
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public J setMaximumLength(int minLength)
+    {
+        addAttribute("data-maxlength", Integer.toString(minLength));
+        addAttribute("maxlength", Integer.toString(minLength));
+        return (J) this;
+    }
+
+
+    /**
+     * Sets the minimum length of this input
+     *
+     * @param max
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public J setMaximum(int max)
+    {
+        addAttribute("data-max", Integer.toString(max));
+        addAttribute("max", Integer.toString(max));
+        return (J) this;
+    }
+
+
+    /**
+     * Sets the minimum length of this input
+     *
+     * @param max
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public J setMaximum(double max)
+    {
+        addAttribute("data-max", Double.toString(max));
+        addAttribute("max", Double.toString(max));
+        return (J) this;
+    }
+
+    /**
+     * Sets the place holder for this input
+     *
+     * @param placeholder
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public J setPlaceholder(String placeholder)
+    {
+        addAttribute("placeholder", placeholder);
+        return (J) this;
+    }
+
+    /**
+     * Sets the value attribute
+     *
+     * @param value
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public J setValue(String value)
+    {
+        addAttribute("value", value);
+        return (J) this;
+    }
+
+    public String getValue()
+    {
+        return getAttribute("value");
+    }
+
+    /**
+     * Sets the raw pattern for this input object if required
+     *
+     * @param pattern
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public J setPattern(String pattern, boolean raw)
+    {
+        if (raw)
+        {
+            addAttribute("pattern", pattern);
+        }
+        else
+        {
+            setPattern(pattern);
+        }
+        return (J) this;
+    }
+
+    /**
+     * Sets the pattern for this input object if required
+     *
+     * @param angularPatternName
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public J setPattern(String angularPatternName)
+    {
+        addAttribute("pattern", angularPatternName);
+        return (J) this;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+        {
+            return true;
+        }
+        if (!(o instanceof Input))
+        {
+            return false;
+        }
+        if (!super.equals(o))
+        {
+            return false;
+        }
+        Input<?, ?> input = (Input<?, ?>) o;
+        return getInputType() == input.getInputType();
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), getInputType());
+    }
+
 }

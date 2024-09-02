@@ -38,77 +38,74 @@ import java.util.logging.Level;
  */
 @Log
 public abstract class MouseEnterAdapter<J extends MouseEnterAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements GlobalEvents<J>
 {
-	
-	/**
-	 * Performs a click
-	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
-	 */
-	public MouseEnterAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
-	{
-		super(EventTypes.mouseEnter, component);
 
-	}
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    public MouseEnterAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.mouseEnter, component);
 
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onMouseEnter(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			MouseEnterAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+    }
 
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onMouseEnter(AjaxCall<?> call, AjaxResponse<?> response);
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onMouseEnter(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            MouseEnterAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
 
-	/**
-	 * Method onCall ...
-	 */
-	private void onCall()
-	{
-		Set<IOnMouseEnterService> services = IGuiceContext.instance()
+    /**
+     * Triggers on Click
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onMouseEnter(AjaxCall<?> call, AjaxResponse<?> response);
+
+    /**
+     * Method onCall ...
+     */
+    private void onCall()
+    {
+        Set<IOnMouseEnterService> services = IGuiceContext.instance()
                                                           .getLoader(IOnMouseEnterService.class, ServiceLoader.load(IOnMouseEnterService.class));
-		services.forEach(service -> service.onCall(this));
-	}
+        services.forEach(service -> service.onCall(this));
+    }
 
 
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
+    @Override
+    protected void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	private void onCreate()
-	{
-		Set<IOnMouseEnterService> services = IGuiceContext
-				                                     .instance()
-				                                     .getLoader(IOnMouseEnterService.class, ServiceLoader.load(IOnMouseEnterService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    private void onCreate()
+    {
+        Set<IOnMouseEnterService> services = IGuiceContext
+                .instance()
+                .getLoader(IOnMouseEnterService.class, ServiceLoader.load(IOnMouseEnterService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 }

@@ -88,7 +88,7 @@ public abstract class CreateAdapter<J extends CreateAdapter<J>>
 
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {

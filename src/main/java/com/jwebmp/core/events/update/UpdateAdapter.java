@@ -37,74 +37,71 @@ import java.util.logging.Level;
  */
 @Log
 public abstract class UpdateAdapter<J extends UpdateAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements GlobalEvents<J>
 {
-	/**
-	 * Performs a click
-	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
-	 */
-	public UpdateAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
-	{
-		super(EventTypes.update, component);
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    public UpdateAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.update, component);
 
-	}
+    }
 
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onUpdate(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			UpdateAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onUpdate(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            UpdateAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
 
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onUpdate(AjaxCall<?> call, AjaxResponse<?> response);
+    /**
+     * Triggers on Click
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onUpdate(AjaxCall<?> call, AjaxResponse<?> response);
 
-	/**
-	 * Method onCall ...
-	 */
-	private void onCall()
-	{
-		Set<IOnUpdateService> services = com.guicedee.client.IGuiceContext.instance()
+    /**
+     * Method onCall ...
+     */
+    private void onCall()
+    {
+        Set<IOnUpdateService> services = com.guicedee.client.IGuiceContext.instance()
                                                                           .getLoader(IOnUpdateService.class, ServiceLoader.load(IOnUpdateService.class));
-		services.forEach(service -> service.onCall(this));
-	}
+        services.forEach(service -> service.onCall(this));
+    }
 
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
+    @Override
+    protected void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	private void onCreate()
-	{
-		Set<IOnUpdateService> services = com.guicedee.client.IGuiceContext.instance()
-		            .getLoader(IOnUpdateService.class, ServiceLoader.load(IOnUpdateService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    private void onCreate()
+    {
+        Set<IOnUpdateService> services = com.guicedee.client.IGuiceContext.instance()
+                                                                          .getLoader(IOnUpdateService.class, ServiceLoader.load(IOnUpdateService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 }

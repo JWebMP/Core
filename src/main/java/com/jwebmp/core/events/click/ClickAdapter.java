@@ -95,7 +95,7 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
     }
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {

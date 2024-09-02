@@ -63,7 +63,7 @@ public class ScriptsInsertPageConfigurator
                                 .getChildren())
             {
                 IComponentHierarchyBase<?, ?> headObject = (IComponentHierarchyBase<?, ?>) o;
-                headObject.preConfigure();
+                //headObject.toString();
             }
         }
         return page;

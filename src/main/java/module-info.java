@@ -117,7 +117,7 @@ module com.jwebmp.core {
 
     //   exports com.jwebmp.core.generics;
 
-  //  exports com.jwebmp.core.annotations;
+    //  exports com.jwebmp.core.annotations;
 
     exports com.jwebmp.core.htmlbuilder.css;
     exports com.jwebmp.core.htmlbuilder.css.animatable;
@@ -232,6 +232,7 @@ module com.jwebmp.core {
     uses com.jwebmp.core.events.IEventConfigurator;
     uses com.jwebmp.core.databind.IOnComponentHtmlRender;
     uses com.jwebmp.core.databind.IOnComponentAdded;
+    uses com.jwebmp.core.databind.IAfterRenderComplete;
 
 
     provides IGuiceModule with JWebMPServicesBindings;

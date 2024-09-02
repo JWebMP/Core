@@ -85,7 +85,7 @@ public abstract class BeforeStopAdapter<J extends BeforeStopAdapter<J>>
 
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {

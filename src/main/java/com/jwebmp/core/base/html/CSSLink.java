@@ -40,208 +40,202 @@ import java.util.logging.Logger;
  * <p>
  *
  * @param <J>
- *
  * @author MMagon
- * 		<p>
- * 		<p>
- * 		<p>
- * 		Browser Support<p>
- * 		<p>
- * 		Internet Explorer Firefox Opera Google Chrome Safari<p>
- * 		<p>
- * 		When used for style sheets, the link tag is supported in all major browsers.<p>
- * 		No real support for anything else. Definition and Usage<p>
- * 		<p>
- * 		The link tag defines the relationship between a document and an external<p>
- * 		resource.<p>
- * 		<p>
- * 		The link tag is most used to link to style sheets.<p>
- * 		<p>
- * 		Note: The link element is an empty element, it contains attributes only.<p>
- * 		<p>
- * 		Note: This element goes only in the head section, but it can appear any<p>
- * 		number of times. Differences Between HTML 4.01 and HTML5<p>
- * 		<p>
- * 		Some HTML 4.01 attributes are not supported in HTML5.<p>
- * 		<p>
- * 		The "sizes" attribute is new in HTML5.<p>
+ * <p>
+ * <p>
+ * <p>
+ * Browser Support<p>
+ * <p>
+ * Internet Explorer Firefox Opera Google Chrome Safari<p>
+ * <p>
+ * When used for style sheets, the link tag is supported in all major browsers.<p>
+ * No real support for anything else. Definition and Usage<p>
+ * <p>
+ * The link tag defines the relationship between a document and an external<p>
+ * resource.<p>
+ * <p>
+ * The link tag is most used to link to style sheets.<p>
+ * <p>
+ * Note: The link element is an empty element, it contains attributes only.<p>
+ * <p>
+ * Note: This element goes only in the head section, but it can appear any<p>
+ * number of times. Differences Between HTML 4.01 and HTML5<p>
+ * <p>
+ * Some HTML 4.01 attributes are not supported in HTML5.<p>
+ * <p>
+ * The "sizes" attribute is new in HTML5.<p>
  * @version 1.0
  * @since 2013/11/12
  */
 @Log
 public class CSSLink<J extends CSSLink<J>>
-		extends Component<NoChildren, CSSLinkAttributes, NoFeatures, NoEvents, J>
-		implements NoClosingTag, HeadChildren
+        extends Component<NoChildren, CSSLinkAttributes, NoFeatures, NoEvents, J>
+        implements NoClosingTag, HeadChildren
 {
 
-	
 
+    /**
+     * If this link is a theme link
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private Boolean themeLink;
+    /**
+     * An applied linked reference
+     */
+    private CSSReference linkedReference;
 
-	/**
-	 * If this link is a theme link
-	 */
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private Boolean themeLink;
-	/**
-	 * An applied linked reference
-	 */
-	private CSSReference linkedReference;
+    /**
+     * Constructs an empty link
+     */
+    public CSSLink()
+    {
+        super(ComponentTypes.CSSLink);
+        setRenderIDAttribute(false);
+    }
 
-	/**
-	 * Constructs an empty link
-	 */
-	public CSSLink()
-	{
-		super(ComponentTypes.CSSLink);
-		setRenderIDAttribute(false);
-	}
+    /**
+     * Constructs a new Head Link
+     *
+     * @param linkedReference
+     */
+    public CSSLink(CSSReference linkedReference)
+    {
+        this(linkedReference.toString());
+        this.linkedReference = linkedReference;
 
-	/**
-	 * Constructs a new Head Link
-	 *
-	 * @param linkedReference
-	 */
-	public CSSLink(CSSReference linkedReference)
-	{
-		this(linkedReference.toString());
-		this.linkedReference = linkedReference;
+    }
 
-	}
+    /**
+     * The CSS file link
+     *
+     * @param cssFile The file to route
+     */
+    public CSSLink(String cssFile)
+    {
+        super("link", ComponentTypes.CSSLink);
+        addAttribute(CSSLinkAttributes.Type, "text/css");
+        addAttribute(CSSLinkAttributes.Rel, "stylesheet");
+        addAttribute(CSSLinkAttributes.HRef, cssFile);
+        setInlineClosingTag(false);
+    }
 
-	/**
-	 * The CSS file link
-	 *
-	 * @param cssFile
-	 * 		The file to route
-	 */
-	public CSSLink(String cssFile)
-	{
-		super("link", ComponentTypes.CSSLink);
-		addAttribute(CSSLinkAttributes.Type, "text/css");
-		addAttribute(CSSLinkAttributes.Rel, "stylesheet");
-		addAttribute(CSSLinkAttributes.HRef, cssFile);
-		setInlineClosingTag(false);
-	}
+    /**
+     * Creates a new header link with the given properties
+     *
+     * @param type
+     * @param rel
+     * @param href
+     */
+    public CSSLink(String type, String rel, String href)
+    {
+        super("link", ComponentTypes.CSSLink);
+        if (type != null)
+        {
+            addAttribute(CSSLinkAttributes.Type, type);
+        }
+        if (rel != null)
+        {
+            addAttribute(CSSLinkAttributes.Rel, rel);
+        }
+        if (href != null)
+        {
+            addAttribute(CSSLinkAttributes.HRef, href);
+        }
+        setInlineClosingTag(false);
+    }
 
-	/**
-	 * Creates a new header link with the given properties
-	 *
-	 * @param type
-	 * @param rel
-	 * @param href
-	 */
-	public CSSLink(String type, String rel, String href)
-	{
-		super("link", ComponentTypes.CSSLink);
-		if (type != null)
-		{
-			addAttribute(CSSLinkAttributes.Type, type);
-		}
-		if (rel != null)
-		{
-			addAttribute(CSSLinkAttributes.Rel, rel);
-		}
-		if (href != null)
-		{
-			addAttribute(CSSLinkAttributes.HRef, href);
-		}
-		setInlineClosingTag(false);
-	}
+    /**
+     * Differences Between HTML and XHTML
+     * <p>
+     * In HTML the base tag has no end tag.
+     * <p>
+     * In XHTML the base tag must be properly closed.
+     */
+    @Override
+    protected void preConfigure()
+    {
+        super.preConfigure();
+        try
+        {
+            if (getPage().getBrowser()
+                         .getHtmlVersion()
+                         .name()
+                         .startsWith("X"))
+            {
+                setInlineClosingTag(true);
+            }
+        }
+        catch (Exception e)
+        {
+            log.log(Level.WARNING, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
+        }
+    }
 
-	/**
-	 * Differences Between HTML and XHTML
-	 * <p>
-	 * In HTML the base tag has no end tag.
-	 * <p>
-	 * In XHTML the base tag must be properly closed.
-	 */
-	@Override
-	public void preConfigure()
-	{
-		super.preConfigure();
-		try
-		{
-			if (getPage().getBrowser()
-			             .getHtmlVersion()
-			             .name()
-			             .startsWith("X"))
-			{
-				setInlineClosingTag(true);
-			}
-		}
-		catch (Exception e)
-		{
-			log.log(Level.WARNING, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
-		}
-	}
+    @Override
+    public int hashCode()
+    {
+        return super.hashCode();
+    }
 
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
+    /**
+     * Is a valid equals clause
+     * <p>
+     *
+     * @param obj <p>
+     * @return
+     */
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == null || !(obj instanceof CSSLink))
+        {
+            return false;
+        }
+        CSSLink lin = (CSSLink) obj;
 
-	/**
-	 * Is a valid equals clause
-	 * <p>
-	 *
-	 * @param obj
-	 * 		<p>
-	 *
-	 * @return
-	 */
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (obj == null || !(obj instanceof CSSLink))
-		{
-			return false;
-		}
-		CSSLink lin = (CSSLink) obj;
+        return getAttribute(CSSLinkAttributes.HRef).equals(lin.getAttribute(CSSLinkAttributes.HRef));
+    }
 
-		return getAttribute(CSSLinkAttributes.HRef).equals(lin.getAttribute(CSSLinkAttributes.HRef));
-	}
+    /**
+     * Returns the linked reference if any for the link
+     *
+     * @return
+     */
+    public CSSReference getLinkedReference()
+    {
+        return linkedReference;
+    }
 
-	/**
-	 * Returns the linked reference if any for the link
-	 *
-	 * @return
-	 */
-	public CSSReference getLinkedReference()
-	{
-		return linkedReference;
-	}
+    /**
+     * Returns the linked reference if any for the link
+     *
+     * @param linkedReference
+     */
+    public void setLinkedReference(CSSReference linkedReference)
+    {
+        this.linkedReference = linkedReference;
+    }
 
-	/**
-	 * Returns the linked reference if any for the link
-	 *
-	 * @param linkedReference
-	 */
-	public void setLinkedReference(CSSReference linkedReference)
-	{
-		this.linkedReference = linkedReference;
-	}
+    /**
+     * @return
+     */
+    @JsonIgnore
+    public boolean isThemeLink()
+    {
+        if (getAttribute(CSSLinkAttributes.HRef) != null && getAttribute(CSSLinkAttributes.HRef).contains("_theme"))
+        {
+            themeLink = true;
+        }
 
-	/**
-	 * @return
-	 */
-	@JsonIgnore
-	public boolean isThemeLink()
-	{
-		if (getAttribute(CSSLinkAttributes.HRef) != null && getAttribute(CSSLinkAttributes.HRef).contains("_theme"))
-		{
-			themeLink = true;
-		}
+        return themeLink;
+    }
 
-		return themeLink;
-	}
-
-	/**
-	 * @param themeLink
-	 */
-	public void setThemeLink(boolean themeLink)
-	{
-		this.themeLink = themeLink;
-	}
+    /**
+     * @param themeLink
+     */
+    public void setThemeLink(boolean themeLink)
+    {
+        this.themeLink = themeLink;
+    }
 
 }

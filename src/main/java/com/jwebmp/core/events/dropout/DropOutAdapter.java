@@ -88,7 +88,7 @@ public abstract class DropOutAdapter<J extends DropOutAdapter<J>>
 
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {

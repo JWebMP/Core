@@ -24,152 +24,152 @@ import com.jwebmp.core.base.html.attributes.BaseAttributes;
 import com.jwebmp.testing.IBaseTest;
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author MMagon
  */
 public class BaseTest
-		extends BaseTestClass
+        extends BaseTestClass
 {
 
-	@AfterAll
-	public static void tearDownAll()
-	{
-		IBaseTest.tearDownAll();
-	}
+    @AfterAll
+    public static void tearDownAll()
+    {
+        IBaseTest.tearDownAll();
+    }
 
-	@BeforeAll
-	public static void initAll()
-	{
-		IBaseTest.initAll();
-	}
-
-
-	@Override
-	@AfterEach
-	public void tearDown()
-	{
-		super.tearDown();
-	}
-
-	@Override
-	@BeforeEach
-	public void init()
-	{
-		super.init();
-	}
+    @BeforeAll
+    public static void initializeAll()
+    {
+        IBaseTest.initializeAll();
+    }
 
 
-	public BaseTest()
-	{
-	}
+    @Override
+    @AfterEach
+    public void tearDown()
+    {
+        super.tearDown();
+    }
 
-	@Test
-	public void testBaseOutputTiny()
-	{
-		Page<?> page = getInstance();
-		Base instance = new Base();
-		page.getOptions()
-		    .setBase(instance);
-		instance.addAttribute(BaseAttributes.Target, "Target Frame");
-		instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
-		instance.setTiny(true);
-		System.out.println(instance.toString(true));
-		String expResult = "<base href=\"This is a link to something\" target=\"Target Frame\">";
-		String result = instance.toString(true);
-		assertEquals(expResult, result);
-	}
+    @Override
+    @BeforeEach
+    public void initialize()
+    {
+        super.initialize();
+    }
 
-	@Test
-	public void testBaseOutputOldBrowsers()
-	{
-		Page<?> page = getInstance();
-		Base instance = new Base();
-		page.getOptions()
-		    .setBase(instance);
-		instance.addAttribute(BaseAttributes.Target, "Target Frame");
-		instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
-		/**
-		 * Test XHTML change to the tag
-		 */
-		page.setBrowser(Browsers.InternetExplorer6);
-		String expResult = "<base href=\"This is a link to something\" target=\"Target Frame\"/>";
-		String result = instance.toString(true);
-		System.out.println(instance.toString(true));
-		assertEquals(expResult, result);
-	}
 
-	@Test
-	public void testBaseOutputOldBrowsersTiny()
-	{
-		Page<?> page = getInstance();
-		Base instance = new Base();
-		page.getOptions()
-		    .setBase(instance);
-		instance.addAttribute(BaseAttributes.Target, "Target Frame");
-		instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
-		/**
-		 * Test XHTML change to the tag
-		 */
-		page.setBrowser(Browsers.InternetExplorer6);
-		String expResult = "<base href=\"This is a link to something\" target=\"Target Frame\"/>";
-		String result = instance.toString(true);
-		System.out.println(instance.toString(true));
-		assertEquals(expResult, result);
-	}
+    public BaseTest()
+    {
+    }
 
-	@Test
-	public void testBaseOutput()
-	{
-		Page<?> page = getInstance();
-		Base instance = new Base();
-		page.getOptions()
-		    .setBase(instance);
-		instance.addAttribute(BaseAttributes.Target, "Target Frame");
-		instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
-		System.out.println(instance.toString(true));
-		String expResult = "<base href=\"This is a link to something\" target=\"Target Frame\">";
-		String result = instance.toString(true);
-		assertEquals(expResult, result);
-	}
+    @Test
+    public void testBaseOutputTiny()
+    {
+        Page<?> page = getInstance();
+        Base instance = new Base();
+        page.getOptions()
+            .setBase(instance);
+        instance.addAttribute(BaseAttributes.Target, "Target Frame");
+        instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
+        instance.setTiny(true);
+        System.out.println(instance.toString(true));
+        String expResult = "<base href=\"This is a link to something\" target=\"Target Frame\">";
+        String result = instance.toString(true);
+        assertEquals(expResult, result);
+    }
 
-	@Test
-	public void testBaseTiny()
-	{
-		Page<?> page = getInstance();
-		Base instance = new Base();
-		page.getOptions()
-		    .setBase(instance);
-		instance.addAttribute(BaseAttributes.Target, "Target Frame");
-		instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
-		System.out.println(instance.toString(true));
-		String expResult;
-		String result;
-		page.setTiny(false);
-		System.out.println(page.toString(true));
-		expResult = "<!DOCTYPE html>\n" + "<html>\n" + "\t<head>\n" + "\t\t<base href=\"This is a link to something\" target=\"Target Frame\">\n" + "\t</head>\n" + "</html>";
-		result = page.toString(true);
-		assertEquals(expResult, result);
-	}
+    @Test
+    public void testBaseOutputOldBrowsers()
+    {
+        Page<?> page = getInstance();
+        Base instance = new Base();
+        page.getOptions()
+            .setBase(instance);
+        instance.addAttribute(BaseAttributes.Target, "Target Frame");
+        instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
+        /**
+         * Test XHTML change to the tag
+         */
+        page.setBrowser(Browsers.InternetExplorer6);
+        String expResult = "<base href=\"This is a link to something\" target=\"Target Frame\"/>";
+        String result = instance.toString(true);
+        System.out.println(instance.toString(true));
+        assertEquals(expResult, result);
+    }
 
-	@Test
-	public void testBaseTinyPage()
-	{
-		Page<?> page = getInstance();
-		Base instance = new Base();
-		page.getOptions()
-		    .setBase(instance);
-		instance.addAttribute(BaseAttributes.Target, "Target Frame");
-		instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
-		System.out.println(instance.toString(true));
-		String expResult;
-		String result;
+    @Test
+    public void testBaseOutputOldBrowsersTiny()
+    {
+        Page<?> page = getInstance();
+        Base instance = new Base();
+        page.getOptions()
+            .setBase(instance);
+        instance.addAttribute(BaseAttributes.Target, "Target Frame");
+        instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
+        /**
+         * Test XHTML change to the tag
+         */
+        page.setBrowser(Browsers.InternetExplorer6);
+        String expResult = "<base href=\"This is a link to something\" target=\"Target Frame\"/>";
+        String result = instance.toString(true);
+        System.out.println(instance.toString(true));
+        assertEquals(expResult, result);
+    }
 
-		page.setTiny(true);
-		System.out.println(page.toString(true));
-		expResult = "<!DOCTYPE html><html><head><base href=\"This is a link to something\" target=\"Target Frame\"></head></html>";
-		result = page.toString(true);
-		assertEquals(expResult, result);
-	}
+    @Test
+    public void testBaseOutput()
+    {
+        Page<?> page = getInstance();
+        Base instance = new Base();
+        page.getOptions()
+            .setBase(instance);
+        instance.addAttribute(BaseAttributes.Target, "Target Frame");
+        instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
+        System.out.println(instance.toString(true));
+        String expResult = "<base href=\"This is a link to something\" target=\"Target Frame\">";
+        String result = instance.toString(true);
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testBaseTiny()
+    {
+        Page<?> page = getInstance();
+        Base instance = new Base();
+        page.getOptions()
+            .setBase(instance);
+        instance.addAttribute(BaseAttributes.Target, "Target Frame");
+        instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
+        System.out.println(instance.toString(true));
+        String expResult;
+        String result;
+        page.setTiny(false);
+        System.out.println(page.toString(true));
+        expResult = "<!DOCTYPE html>\n" + "<html>\n" + "\t<head>\n" + "\t\t<base href=\"This is a link to something\" target=\"Target Frame\">\n" + "\t</head>\n" + "</html>";
+        result = page.toString(true);
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testBaseTinyPage()
+    {
+        Page<?> page = getInstance();
+        Base instance = new Base();
+        page.getOptions()
+            .setBase(instance);
+        instance.addAttribute(BaseAttributes.Target, "Target Frame");
+        instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
+        System.out.println(instance.toString(true));
+        String expResult;
+        String result;
+
+        page.setTiny(true);
+        System.out.println(page.toString(true));
+        expResult = "<!DOCTYPE html><html><head><base href=\"This is a link to something\" target=\"Target Frame\"></head></html>";
+        result = page.toString(true);
+        assertEquals(expResult, result);
+    }
 }

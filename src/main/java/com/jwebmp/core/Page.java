@@ -465,7 +465,7 @@ public class Page<J extends Page<J>>
      * Initialize all children
      */
     @Override
-    public void init()
+    protected void init()
     {
         if (!isInitialized())
         {
@@ -476,9 +476,9 @@ public class Page<J extends Page<J>>
                           .isEmpty())
             {
                 add(getHead());
-                getHead().init();
+                //getHead().toString(0);
             }
-            getBody().init();
+            // getBody().toString(0);
             if (!getBody().getChildren()
                           .isEmpty())
             {

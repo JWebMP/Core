@@ -54,79 +54,78 @@ import java.util.logging.Level;
  * <p>
  *
  * @param <J>
- *
  * @author GedMarc
  */
 @Log
 public class HorizontalRule<J extends HorizontalRule<J>>
-		extends Component<IComponentHierarchyBase<?,?>, NoAttributes, NoFeatures, NoEvents, J>
-		implements NoIDTag, NoClassAttribute
+        extends Component<IComponentHierarchyBase<?, ?>, NoAttributes, NoFeatures, NoEvents, J>
+        implements NoIDTag, NoClassAttribute
 {
-	private static final HorizontalRule hr = new HorizontalRule();
+    private static final HorizontalRule hr = new HorizontalRule();
 
 
-	public HorizontalRule()
-	{
-		super("hr", ComponentTypes.HorizontalRule);
-		setInlineClosingTag(true);
-	}
+    public HorizontalRule()
+    {
+        super("hr", ComponentTypes.HorizontalRule);
+        setInlineClosingTag(true);
+    }
 
-	/**
-	 * Return the Horizontal Rule Instance
-	 *
-	 * @return
-	 */
-	public static HorizontalRule<?> getInstance()
-	{
-		return HorizontalRule.hr;
-	}
+    /**
+     * Return the Horizontal Rule Instance
+     *
+     * @return
+     */
+    public static HorizontalRule<?> getInstance()
+    {
+        return HorizontalRule.hr;
+    }
 
-	/**
-	 * Return a new instance of the Horizontal Rule
-	 *
-	 * @return
-	 */
-	public static HorizontalRule<?> getNewInstance()
-	{
-		return new HorizontalRule<>();
-	}
+    /**
+     * Return a new instance of the Horizontal Rule
+     *
+     * @return
+     */
+    public static HorizontalRule<?> getNewInstance()
+    {
+        return new HorizontalRule<>();
+    }
 
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
+    @Override
+    public int hashCode()
+    {
+        return super.hashCode();
+    }
 
-	@Override
-	public boolean equals(Object obj)
-	{
-		return false;
-	}
+    @Override
+    public boolean equals(Object obj)
+    {
+        return false;
+    }
 
-	/**
-	 * Differences Between HTML and XHTML
-	 * <p>
-	 * In HTML the base tag has no end tag.
-	 * <p>
-	 * In XHTML the base tag must be properly closed.
-	 */
-	@Override
-	public void preConfigure()
-	{
-		super.preConfigure();
-		try
-		{
-			if (getPage().getBrowser()
-			             .getHtmlVersion()
-			             .name()
-			             .startsWith("X"))
-			{
-				setInlineClosingTag(true);
-			}
-		}
-		catch (Exception e)
-		{
-			HorizontalRule.log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
-		}
-	}
+    /**
+     * Differences Between HTML and XHTML
+     * <p>
+     * In HTML the base tag has no end tag.
+     * <p>
+     * In XHTML the base tag must be properly closed.
+     */
+    @Override
+    protected void preConfigure()
+    {
+        super.preConfigure();
+        try
+        {
+            if (getPage().getBrowser()
+                         .getHtmlVersion()
+                         .name()
+                         .startsWith("X"))
+            {
+                setInlineClosingTag(true);
+            }
+        }
+        catch (Exception e)
+        {
+            HorizontalRule.log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
+        }
+    }
 }

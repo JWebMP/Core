@@ -38,75 +38,72 @@ import java.util.logging.Level;
  */
 @Log
 public abstract class SlideAdapter<J extends SlideAdapter<J>>
-		extends Event<GlobalFeatures, J>
-		implements GlobalEvents<J>
+        extends Event<GlobalFeatures, J>
+        implements GlobalEvents<J>
 {
-	/**
-	 * Performs a click
-	 *
-	 * @param component
-	 * 		The component this click is going to be acting on
-	 */
-	public SlideAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?,?> component)
-	{
-		super(EventTypes.slide, component);
-	}
+    /**
+     * Performs a click
+     *
+     * @param component The component this click is going to be acting on
+     */
+    public SlideAdapter(com.jwebmp.core.base.interfaces.IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.slide, component);
+    }
 
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		try
-		{
-			onSlide(call, response);
-			onCall();
-		}
-		catch (Exception e)
-		{
-			SlideAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+    @Override
+    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        try
+        {
+            onSlide(call, response);
+            onCall();
+        }
+        catch (Exception e)
+        {
+            SlideAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
+        }
+    }
 
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onSlide(AjaxCall<?> call, AjaxResponse<?> response);
+    /**
+     * Triggers on Click
+     * <p>
+     *
+     * @param call     The physical AJAX call
+     * @param response The physical Ajax Receiver
+     */
+    public abstract void onSlide(AjaxCall<?> call, AjaxResponse<?> response);
 
-	/**
-	 * Method onCall ...
-	 */
-	private void onCall()
-	{
-		Set<IOnSlideService> services = IGuiceContext
-				                                .instance()
-				                                .getLoader(IOnSlideService.class, ServiceLoader.load(IOnSlideService.class));
-		services.forEach(service -> service.onCall(this));
-	}
+    /**
+     * Method onCall ...
+     */
+    private void onCall()
+    {
+        Set<IOnSlideService> services = IGuiceContext
+                .instance()
+                .getLoader(IOnSlideService.class, ServiceLoader.load(IOnSlideService.class));
+        services.forEach(service -> service.onCall(this));
+    }
 
 
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			onCreate();
-		}
-		super.preConfigure();
-	}
+    @Override
+    protected void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            onCreate();
+        }
+        super.preConfigure();
+    }
 
-	/**
-	 * Occurs when the event is called
-	 */
-	@SuppressWarnings("unchecked")
-	private void onCreate()
-	{
-		Set<IOnSlideService> services = IGuiceContext.instance()
-		                                            .getLoader(IOnSlideService.class, ServiceLoader.load(IOnSlideService.class));
-		services.forEach(service -> service.onCreate(this));
-	}
+    /**
+     * Occurs when the event is called
+     */
+    @SuppressWarnings("unchecked")
+    private void onCreate()
+    {
+        Set<IOnSlideService> services = IGuiceContext.instance()
+                                                     .getLoader(IOnSlideService.class, ServiceLoader.load(IOnSlideService.class));
+        services.forEach(service -> service.onCreate(this));
+    }
 }

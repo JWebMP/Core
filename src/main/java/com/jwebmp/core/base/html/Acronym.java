@@ -54,58 +54,57 @@ import java.util.logging.Level;
  * The &lt;acronym&gt; tag is not supported in HTML5. Use the &lt;abbr&gt; tag instead.<p>
  *
  * @param <J>
- *
  * @author MMagon
  * @version 1.0
  * @since 2014 09 22
  */
 @Log
 public class Acronym<J extends Acronym<J>>
-		extends Component<NoChildren, NoAttributes, NoFeatures, GlobalEvents, J>
-		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, HtmlChildren, BodyChildren, Serializable, NoIDTag
+        extends Component<NoChildren, NoAttributes, NoFeatures, GlobalEvents, J>
+        implements NoNewLineBeforeClosingTag, NoNewLineForRawText, HtmlChildren, BodyChildren, Serializable, NoIDTag
 {
 
-	/**
-	 * Constructs an Acronym
-	 * <p>
-	 *
-	 * @param text
-	 */
-	public Acronym(String text)
-	{
-		this();
-		setText(text);
-	}
+    /**
+     * Constructs an Acronym
+     * <p>
+     *
+     * @param text
+     */
+    public Acronym(String text)
+    {
+        this();
+        setText(text);
+    }
 
-	/**
-	 * Constructs an Acronym
-	 * <p>
-	 */
-	public Acronym()
-	{
-		super(ComponentTypes.Acronym.getComponentTag(), ComponentTypes.Acronym);
-	}
+    /**
+     * Constructs an Acronym
+     * <p>
+     */
+    public Acronym()
+    {
+        super(ComponentTypes.Acronym.getComponentTag(), ComponentTypes.Acronym);
+    }
 
-	/**
-	 * Differences Between HTML and HTML 5
-	 * <p>
-	 * The &gt;acronym&lt; tag is not supported in HTML5. Use the &gt;abbr&lt; tag instead.
-	 */
-	@Override
-	public void preConfigure()
-	{
-		super.preConfigure();
-		try
-		{
-			if (getPage().getBrowser()
-			             .getHtmlVersion() == HTMLVersions.HTML5)
-			{
-				setTag("abbr");
-			}
-		}
-		catch (Exception e)
-		{
-			Acronym.log.log(Level.FINE, "Unable to determine whether HTML or HTML5. Document type not set?", e);
-		}
-	}
+    /**
+     * Differences Between HTML and HTML 5
+     * <p>
+     * The &gt;acronym&lt; tag is not supported in HTML5. Use the &gt;abbr&lt; tag instead.
+     */
+    @Override
+    protected void preConfigure()
+    {
+        super.preConfigure();
+        try
+        {
+            if (getPage().getBrowser()
+                         .getHtmlVersion() == HTMLVersions.HTML5)
+            {
+                setTag("abbr");
+            }
+        }
+        catch (Exception e)
+        {
+            Acronym.log.log(Level.FINE, "Unable to determine whether HTML or HTML5. Document type not set?", e);
+        }
+    }
 }

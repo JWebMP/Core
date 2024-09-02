@@ -86,7 +86,8 @@ public abstract class SubmitAdapter<J extends SubmitAdapter<J>>
     /**
      * Method onCall ...
      */
-    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SuppressWarnings({"rawtypes",
+            "unchecked"})
     private void onCall()
     {
         Set<IOnSubmitService> services = com.guicedee.client.IGuiceContext.instance()
@@ -96,7 +97,7 @@ public abstract class SubmitAdapter<J extends SubmitAdapter<J>>
 
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {
@@ -111,7 +112,8 @@ public abstract class SubmitAdapter<J extends SubmitAdapter<J>>
     @SuppressWarnings("unchecked")
     private void onCreate()
     {
-        @SuppressWarnings({"rawtypes", "unchecked"})
+        @SuppressWarnings({"rawtypes",
+                "unchecked"})
         Set<IOnSubmitService> services = com.guicedee.client.IGuiceContext.instance()
                                                                           .getLoader(IOnSubmitService.class, ServiceLoader.load(IOnSubmitService.class));
         services.forEach(service -> service.onCreate(this));

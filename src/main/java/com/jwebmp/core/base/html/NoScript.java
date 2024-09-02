@@ -38,29 +38,28 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * The content inside the &gt;noscript&lt; element will be displayed if scripts are not supported, or are disabled in the user's browser.<p>
  *
  * @param <J>
- *
  * @author GedMarc
  * @version 1.0
- * 		<p>
+ * <p>
  * @since Feb 9, 2015
  */
 public class NoScript<J extends NoScript<J>>
-		extends Component<IComponentHierarchyBase<?,?>, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements BodyChildren, NoIDTag
+        extends Component<IComponentHierarchyBase<?, ?>, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements BodyChildren, NoIDTag
 {
-	public NoScript()
-	{
-		super(ComponentTypes.NoScript);
-	}
+    public NoScript()
+    {
+        super(ComponentTypes.NoScript);
+    }
 
-	/**
-	 * Means no script available, so no point in rendering ID tags
-	 */
-	@Override
-	public void preConfigure()
-	{
-		setRenderIDAttribute(false);
-		super.preConfigure();
-	}
+    /**
+     * Means no script available, so no point in rendering ID tags
+     */
+    @Override
+    protected void preConfigure()
+    {
+        setRenderIDAttribute(false);
+        super.preConfigure();
+    }
 
 }

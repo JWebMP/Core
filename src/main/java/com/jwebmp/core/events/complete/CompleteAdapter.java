@@ -88,7 +88,7 @@ public abstract class CompleteAdapter<J extends CompleteAdapter<J>>
 
 
     @Override
-    public void preConfigure()
+    protected void preConfigure()
     {
         if (!isConfigured())
         {
