@@ -22,10 +22,7 @@ import com.jwebmp.core.base.html.attributes.LinkAttributes;
 import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
-import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
-import com.jwebmp.core.base.html.interfaces.children.FormChildren;
-import com.jwebmp.core.base.html.interfaces.children.ListChildren;
-import com.jwebmp.core.base.html.interfaces.children.ListItemChildren;
+import com.jwebmp.core.base.html.interfaces.children.*;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
@@ -62,175 +59,164 @@ import lombok.extern.java.Log;
  * HTML5 has some new attributes, and some HTML 4.01 attributes are no longer supported.<p>
  *
  * @param <J>
- *
  * @author GedMarc
  */
 @Log
 public class Link<J extends Link<J>>
-		extends Component<GlobalChildren, LinkAttributes, GlobalFeatures, GlobalEvents, J>
-		implements BodyChildren, NoNewLineForRawText,
-		           ListItemChildren,
-		           ListChildren, FormChildren
+        extends Component<GlobalChildren, LinkAttributes, GlobalFeatures, GlobalEvents, J>
+        implements BodyChildren, NoNewLineForRawText,
+                   ListItemChildren,
+                   ListChildren, FormChildren, HeadChildren
 {
-	/**
-	 * The address directing to
-	 */
-	private String directToAddress;
-	/**
-	 * The target frame
-	 */
-	private String targetFrameName;
+    /**
+     * The address directing to
+     */
+    private String directToAddress;
+    /**
+     * The target frame
+     */
+    private String targetFrameName;
 
-	/**
-	 * Constructs a new A tag
-	 */
-	public Link()
-	{
-		super("a", ComponentTypes.Link);
-	}
+    /**
+     * Constructs a new A tag
+     */
+    public Link()
+    {
+        super("a", ComponentTypes.Link);
+    }
 
-	/**
-	 * Creates a link directly to the address in the current window
-	 * <p>
-	 *
-	 * @param directToAddress
-	 * 		The address to redirect to
-	 */
-	public Link(String directToAddress)
-	{
-		this(directToAddress, null);
-	}
+    /**
+     * Creates a link directly to the address in the current window
+     * <p>
+     *
+     * @param directToAddress The address to redirect to
+     */
+    public Link(String directToAddress)
+    {
+        this(directToAddress, null);
+    }
 
-	/**
-	 * Creates a link directly to the address in the specified target frame
-	 * <p>
-	 *
-	 * @param directToAddress
-	 * 		The address to redirect to
-	 * @param targetFrameName
-	 * 		The frame to redirect
-	 */
-	public Link(String directToAddress, String targetFrameName)
-	{
-		this(directToAddress, targetFrameName, (String) null);
-	}
+    /**
+     * Creates a link directly to the address in the specified target frame
+     * <p>
+     *
+     * @param directToAddress The address to redirect to
+     * @param targetFrameName The frame to redirect
+     */
+    public Link(String directToAddress, String targetFrameName)
+    {
+        this(directToAddress, targetFrameName, (String) null);
+    }
 
-	/**
-	 * Creates a link directly to the address in the specified target frame
-	 * <p>
-	 *
-	 * @param directToAddress
-	 * 		The address to redirect to
-	 * @param targetFrameName
-	 * 		The frame to redirect
-	 * @param text
-	 * 		Includes raw text in the link
-	 */
-	public Link(String directToAddress, String targetFrameName, String text)
-	{
-		super("a", ComponentTypes.Link);
-		this.directToAddress = directToAddress;
-		this.targetFrameName = targetFrameName;
-		if (directToAddress != null)
-		{
-			addAttribute(LinkAttributes.HRef, directToAddress);
-		}
-		if (targetFrameName != null)
-		{
-			addAttribute(LinkAttributes.Target, targetFrameName);
-		}
-		setText(text);
-	}
+    /**
+     * Creates a link directly to the address in the specified target frame
+     * <p>
+     *
+     * @param directToAddress The address to redirect to
+     * @param targetFrameName The frame to redirect
+     * @param text            Includes raw text in the link
+     */
+    public Link(String directToAddress, String targetFrameName, String text)
+    {
+        super("a", ComponentTypes.Link);
+        this.directToAddress = directToAddress;
+        this.targetFrameName = targetFrameName;
+        if (directToAddress != null)
+        {
+            addAttribute(LinkAttributes.HRef, directToAddress);
+        }
+        if (targetFrameName != null)
+        {
+            addAttribute(LinkAttributes.Target, targetFrameName);
+        }
+        setText(text);
+    }
 
-	/**
-	 * Creates a link directly to the address in the specified target frame
-	 * <p>
-	 *
-	 * @param directToAddress
-	 * 		The address to redirect to
-	 * @param targetFrameName
-	 * 		The frame to redirect
-	 * @param component
-	 * 		Includes raw text in the link
-	 */
-	public Link(String directToAddress, String targetFrameName, IComponentHierarchyBase<?,?> component)
-	{
-		super("a", ComponentTypes.Link);
-		this.directToAddress = directToAddress;
-		this.targetFrameName = targetFrameName;
-		if (directToAddress != null)
-		{
-			addAttribute(LinkAttributes.HRef, directToAddress);
-		}
-		if (targetFrameName != null)
-		{
-			addAttribute(LinkAttributes.Target, targetFrameName);
-		}
-		add(component);
-	}
+    /**
+     * Creates a link directly to the address in the specified target frame
+     * <p>
+     *
+     * @param directToAddress The address to redirect to
+     * @param targetFrameName The frame to redirect
+     * @param component       Includes raw text in the link
+     */
+    public Link(String directToAddress, String targetFrameName, IComponentHierarchyBase<?, ?> component)
+    {
+        super("a", ComponentTypes.Link);
+        this.directToAddress = directToAddress;
+        this.targetFrameName = targetFrameName;
+        if (directToAddress != null)
+        {
+            addAttribute(LinkAttributes.HRef, directToAddress);
+        }
+        if (targetFrameName != null)
+        {
+            addAttribute(LinkAttributes.Target, targetFrameName);
+        }
+        add(component);
+    }
 
-	/**
-	 * Returns the direct to address
-	 * <p>
-	 *
-	 * @return The address redirecting to
-	 */
-	public String getDirectToAddress()
-	{
-		return directToAddress;
-	}
+    /**
+     * Returns the direct to address
+     * <p>
+     *
+     * @return The address redirecting to
+     */
+    public String getDirectToAddress()
+    {
+        return directToAddress;
+    }
 
-	/**
-	 * Sets the address to direct to
-	 * <p>
-	 *
-	 * @param directToAddress
-	 */
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J setDirectToAddress(String directToAddress)
-	{
-		this.directToAddress = directToAddress;
-		addAttribute(LinkAttributes.HRef, directToAddress);
-		return (J) this;
-	}
+    /**
+     * Sets the address to direct to
+     * <p>
+     *
+     * @param directToAddress
+     */
+    @SuppressWarnings("unchecked")
+    @NotNull
+    public J setDirectToAddress(String directToAddress)
+    {
+        this.directToAddress = directToAddress;
+        addAttribute(LinkAttributes.HRef, directToAddress);
+        return (J) this;
+    }
 
-	/**
-	 * Returns the current target frame name
-	 * <p>
-	 *
-	 * @return The current target frame. Can be Null
-	 */
-	public String getTargetFrameName()
-	{
-		return targetFrameName;
-	}
+    /**
+     * Returns the current target frame name
+     * <p>
+     *
+     * @return The current target frame. Can be Null
+     */
+    public String getTargetFrameName()
+    {
+        return targetFrameName;
+    }
 
-	/**
-	 * Sets the target frame
-	 * <p>
-	 *
-	 * @param targetFrameName
-	 * 		The target frame
-	 */
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J setTargetFrameName(String targetFrameName)
-	{
-		this.targetFrameName = targetFrameName;
-		addAttribute(LinkAttributes.Target, targetFrameName);
-		return (J) this;
-	}
+    /**
+     * Sets the target frame
+     * <p>
+     *
+     * @param targetFrameName The target frame
+     */
+    @SuppressWarnings("unchecked")
+    @NotNull
+    public J setTargetFrameName(String targetFrameName)
+    {
+        this.targetFrameName = targetFrameName;
+        addAttribute(LinkAttributes.Target, targetFrameName);
+        return (J) this;
+    }
 
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
+    @Override
+    public int hashCode()
+    {
+        return super.hashCode();
+    }
 
-	@Override
-	public boolean equals(Object o)
-	{
-		return super.equals(o);
-	}
+    @Override
+    public boolean equals(Object o)
+    {
+        return super.equals(o);
+    }
 }
