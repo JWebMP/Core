@@ -31,6 +31,9 @@ import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.base.servlets.enumarations.DevelopmentEnvironments;
+import com.jwebmp.core.services.IBody;
+import com.jwebmp.core.services.IHead;
+import com.jwebmp.core.services.IHtml;
 import jakarta.validation.constraints.NotNull;
 
 /**
@@ -69,7 +72,7 @@ import jakarta.validation.constraints.NotNull;
  */
 public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
         extends Component<C, NoAttributes, HTMLFeatures, NoEvents, J>
-        implements NoIDTag, NoClassAttribute
+        implements NoIDTag, NoClassAttribute, IHtml<C, J>
 {
     /**
      * The head object
@@ -111,7 +114,7 @@ public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
     {
         super(ComponentTypes.Html);
         htmlVersion = browser.getHtmlVersion();
-        head = new Head<>();
+        setHead(new Head<>());
     }
 
     /**
@@ -125,8 +128,8 @@ public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
     {
         StringBuilder sb = new StringBuilder();
         sb.append(getBrowser().getHtmlVersion()
-                              .getDtd())
-          .append(getNewLine());
+                        .getDtd())
+                .append(getNewLine());
         return sb;
     }
 
@@ -135,6 +138,7 @@ public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
      *
      * @return
      */
+    @Override
     public IComponentHierarchyBase<BodyChildren, ?> getBody()
     {
         if (body == null)
@@ -149,6 +153,7 @@ public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
      *
      * @return
      */
+    @Override
     public Browsers getBrowser()
     {
         if (browser == null)
@@ -163,6 +168,7 @@ public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
      *
      * @param browser
      */
+    @Override
     public J setBrowser(Browsers browser)
     {
         this.browser = browser;
@@ -187,6 +193,7 @@ public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
      *
      * @return Browser
      */
+    @Override
     public HTMLVersions getHtmlVersion()
     {
         return htmlVersion;
@@ -198,6 +205,7 @@ public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
      *
      * @return The current Environment.
      */
+    @Override
     public DevelopmentEnvironments getRunningEnvironment()
     {
         return runningEnvironment;
@@ -210,8 +218,8 @@ public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
      * @param runningEnvironmentSetting The running environment value
      */
     @SuppressWarnings("unchecked")
-    @NotNull
-    public J setRunningEnvironment(DevelopmentEnvironments runningEnvironmentSetting)
+    @Override
+    public @NotNull J setRunningEnvironment(DevelopmentEnvironments runningEnvironmentSetting)
     {
         runningEnvironment = runningEnvironmentSetting;
         return (J) this;
@@ -222,8 +230,13 @@ public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
      *
      * @return
      */
+    @Override
     public Head<?> getHead()
     {
+        if (head == null)
+        {
+            setHead(new Head<>());
+        }
         return head;
     }
 
@@ -251,9 +264,14 @@ public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
      * @param body
      */
     @SuppressWarnings("unchecked")
-    public J setBody(Body<?, ?> body)
+    public J setBody(IBody<?, ?> body)
     {
-        this.body = body;
+        if (getChildren().size() == 2)
+        {
+            getChildren().remove(1);
+        }
+        this.body = (Body<?, ?>) body;
+        getChildren().add((C) body);
         return (J) this;
     }
 
@@ -264,11 +282,15 @@ public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
      * @return
      */
     @SuppressWarnings("unchecked")
-    public J setHead(Head<?> head)
+    public J setHead(IHead head)
     {
-        this.head = head;
+        if (!getChildren().isEmpty())
+        {
+            getChildren().remove(0);
+        }
+        this.head = (Head<?>) head;
+        getChildren().add(0, (C) head);
         return (J) this;
     }
-
 
 }

@@ -17,22 +17,18 @@
 package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
-import com.jwebmp.core.Page;
 import com.jwebmp.core.base.html.attributes.BodyAttributes;
 import com.jwebmp.core.base.html.interfaces.ContainerType;
-import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.LayoutHandler;
 import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
 import com.jwebmp.core.base.html.interfaces.children.BodyFeatures;
 import com.jwebmp.core.base.html.interfaces.children.HtmlChildren;
 import com.jwebmp.core.base.html.interfaces.children.PageChildren;
 import com.jwebmp.core.base.html.interfaces.events.BodyEvents;
-import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
+import com.jwebmp.core.services.IBody;
 import com.jwebmp.core.services.IPage;
 import jakarta.validation.constraints.NotNull;
-
-import java.util.Objects;
 
 /**
  * Browser Support<p>
@@ -65,7 +61,7 @@ import java.util.Objects;
  */
 public class Body<F extends BodyFeatures, J extends Body<F, J>>
         extends Component<BodyChildren, BodyAttributes, F, BodyEvents, J>
-        implements PageChildren, HtmlChildren, LayoutHandler, ContainerType {
+        implements PageChildren, HtmlChildren, LayoutHandler, ContainerType, IBody<F, J> {
 
     /**
      * If this body has rendered the scripts on itself
@@ -93,9 +89,9 @@ public class Body<F extends BodyFeatures, J extends Body<F, J>>
 
     }
 
-    @NotNull
     @SuppressWarnings("unchecked")
-    public J setFullScreen() {
+    @Override
+    public @NotNull J setFullScreen() {
         addStyle("width:100%;height:100%;margin:0px;");
         getPage().addStyle("width:100%;height:100%;margin:0px;");
         return (J) this;
@@ -106,7 +102,8 @@ public class Body<F extends BodyFeatures, J extends Body<F, J>>
      *
      * @return
      */
-    protected boolean isRenderedScripts() {
+    @Override
+    public boolean isRenderedScripts() {
         return renderedScripts;
     }
 
@@ -116,8 +113,9 @@ public class Body<F extends BodyFeatures, J extends Body<F, J>>
      * @param renderedScripts
      * @return
      */
-    protected Body<?, ?> setRenderedScripts(boolean renderedScripts) {
+    @Override
+    public J setRenderedScripts(boolean renderedScripts) {
         this.renderedScripts = renderedScripts;
-        return this;
+        return (J) this;
     }
 }

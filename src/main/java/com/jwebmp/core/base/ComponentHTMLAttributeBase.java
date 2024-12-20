@@ -51,9 +51,10 @@ import static com.jwebmp.core.base.html.attributes.GlobalAttributes.Style;
  * @since 23 Apr 2016
  */
 @Log
-public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHTMLAttributeBase<A, F, E, J>> extends
-                                                                                                                                                                                      ComponentHTMLOptionsBase<F, E, J> implements
-                                                                                                                                                                                                                        IComponentHTMLAttributeBase<A, J>
+public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions,
+        F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHTMLAttributeBase<A, F, E, J>>
+        extends ComponentHTMLOptionsBase<F, E, J>
+        implements IComponentHTMLAttributeBase<A, J>
 {
     /**
      * The current stored attribute lists
@@ -122,9 +123,9 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
             String property = e.getKey();
             String v = e.getValue();
             stylesString.append(property)
-                        .append(StaticStrings.STRING_DOUBLE_COLON)
-                        .append(v)
-                        .append(StaticStrings.STRING_SEMICOLON);
+                    .append(StaticStrings.STRING_DOUBLE_COLON)
+                    .append(v)
+                    .append(StaticStrings.STRING_SEMICOLON);
         }
 
         if (!getStyles().isEmpty())
@@ -148,8 +149,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
             if (isInvertColonRender())
             {
                 value = value.replaceAll(StaticStrings.STRING_SINGLE_QUOTES, StaticStrings.STRING_DOUBLE_QUOTES);
-            }
-            else
+            } else
             {
                 value = value.replaceAll(StaticStrings.STRING_DOUBLE_QUOTES, StaticStrings.STRING_SINGLE_QUOTES);
             }
@@ -159,22 +159,20 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
                 if (isInvertColonRender())
                 {
                     sb.append(key)
-                      .append(StaticStrings.STRING_EQUALS_SINGLE_QUOTES)
-                      .append(value)
-                      .append(StaticStrings.STRING_SINGLE_QUOTES_SPACE);
-                }
-                else
+                            .append(StaticStrings.STRING_EQUALS_SINGLE_QUOTES)
+                            .append(value)
+                            .append(StaticStrings.STRING_SINGLE_QUOTES_SPACE);
+                } else
                 {
                     sb.append(key)
-                      .append(StaticStrings.STRING_EQUALS_DOUBLE_QUOTES)
-                      .append(value)
-                      .append(StaticStrings.STRING_DOUBLE_QUOTES_SPACE);
+                            .append(StaticStrings.STRING_EQUALS_DOUBLE_QUOTES)
+                            .append(value)
+                            .append(StaticStrings.STRING_DOUBLE_QUOTES_SPACE);
                 }
-            }
-            else
+            } else
             {
                 sb.append(key)
-                  .append(StaticStrings.STRING_SPACE);
+                        .append(StaticStrings.STRING_SPACE);
             }
         }
         if (!getAttributes().isEmpty())
@@ -182,7 +180,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
             sb.deleteCharAt(sb.lastIndexOf(StaticStrings.STRING_SPACE));
         }
         sb = new StringBuilder(sb.toString()
-                                 .toLowerCase());
+                .toLowerCase());
         return sb;
     }
 
@@ -197,8 +195,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
             if (isRenderIDAttibute())
             {
                 addAttribute(GlobalAttributes.ID, getID());
-            }
-            else
+            } else
             {
                 removeAttribute(GlobalAttributes.ID);
             }
@@ -218,8 +215,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
         if (!renderIDAttibute || NoIDTag.class.isAssignableFrom(getClass()))
         {
             return false;
-        }
-        else
+        } else
         {
             return renderIDAttibute;
         }
@@ -442,8 +438,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
         try
         {
             return Integer.parseInt(getAttributes().get(attribute.toString()));
-        }
-        catch (NumberFormatException | NullPointerException nfe)
+        } catch (NumberFormatException | NullPointerException nfe)
         {
             ComponentHTMLAttributeBase.log.log(Level.FINE, "Invalid Global Attribute Reference [" + getClass().getSimpleName() + "] - [" + attribute + "]. Ignoring.", nfe);
             return bop;
@@ -626,8 +621,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
         {
             removeAttribute(GlobalAttributes.ID);
             setRenderIDAttribute(false);
-        }
-        else
+        } else
         {
             addAttribute(GlobalAttributes.ID, id);
             setRenderIDAttribute(true);
@@ -767,8 +761,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
         if (!Strings.isNullOrEmpty(name))
         {
             addAttribute("name", name);
-        }
-        else
+        } else
         {
             removeAttribute("name");
         }

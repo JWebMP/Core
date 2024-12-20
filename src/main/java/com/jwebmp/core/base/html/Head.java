@@ -18,7 +18,6 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.NoClassAttribute;
 import com.jwebmp.core.base.html.interfaces.NoFeatures;
 import com.jwebmp.core.base.html.interfaces.NoIDTag;
@@ -26,10 +25,8 @@ import com.jwebmp.core.base.html.interfaces.children.HeadChildren;
 import com.jwebmp.core.base.html.interfaces.children.HtmlChildren;
 import com.jwebmp.core.base.html.interfaces.children.PageChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
-import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-
-import java.util.TreeSet;
+import com.jwebmp.core.services.IHead;
 
 /**
  * The head tag for HTML
@@ -77,13 +74,11 @@ import java.util.TreeSet;
  */
 public class Head<J extends Head<J>>
         extends ComponentHierarchyBase<HeadChildren, NoAttributes, NoFeatures, NoEvents, J>
-        implements NoIDTag, HtmlChildren, NoClassAttribute, PageChildren
-{
+        implements NoIDTag, HtmlChildren, NoClassAttribute, PageChildren, IHead {
     /**
      * Constructs a new Head Tag
      */
-    public Head()
-    {
+    public Head() {
         super(ComponentTypes.Head);
     }
 }

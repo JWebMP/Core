@@ -65,8 +65,7 @@ import static com.guicedee.services.jsonrepresentation.json.StaticStrings.STRING
 @Log
 public class Page<J extends Page<J>>
         extends Html<PageChildren, J>
-        implements IPage<J>
-{
+        implements IPage<J> {
     /**
      * The options available
      */
@@ -84,8 +83,7 @@ public class Page<J extends Page<J>>
      * @param title             Sets the title of the page
      * @param compatibilityMode Sets the Internet explorer mode to work on
      */
-    public Page(Title<?> title, InternetExplorerCompatibilityMode compatibilityMode)
-    {
+    public Page(Title<?> title, InternetExplorerCompatibilityMode compatibilityMode) {
         this(title, compatibilityMode, null);
     }
 
@@ -96,38 +94,34 @@ public class Page<J extends Page<J>>
      * @param compatibilityMode Sets the Internet explorer mode to work on
      * @param base              Sets the base tag for the page. Convenience Parameter
      */
-    public Page(Title<?> title, InternetExplorerCompatibilityMode compatibilityMode, Base<?> base)
-    {
+    public Page(Title<?> title, InternetExplorerCompatibilityMode compatibilityMode, Base<?> base) {
         this.getOptions()
-            .setTitle(title);
+                .setTitle(title);
         this.getOptions()
-            .setCompatibilityMode(compatibilityMode);
+                .setCompatibilityMode(compatibilityMode);
         this.getOptions()
-            .setBase(base);
+                .setBase(base);
         setID("jwPage");
     }
 
     /**
      * @param title Sets the title of the page
      */
-    public Page(Title<?> title)
-    {
+    public Page(Title<?> title) {
         this(title, null, null);
     }
 
     /**
      * @param title Sets the title of the page
      */
-    public Page(String title)
-    {
+    public Page(String title) {
         this(new Title<>(title), null, null);
     }
 
     /**
      * Constructs an empty page object
      */
-    public Page()
-    {
+    public Page() {
         this(null, null, null);
     }
 
@@ -141,8 +135,7 @@ public class Page<J extends Page<J>>
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J add(@NotNull String addText)
-    {
+    public J add(@NotNull String addText) {
         getBody().add(addText);
         return (J) this;
     }
@@ -150,13 +143,11 @@ public class Page<J extends Page<J>>
     /**
      * Initializes the page
      */
-    public void initialize()
-    {
+    public void initialize() {
         //Interception Marker
     }
 
-    public Body<?, ?> getBody()
-    {
+    public Body<?, ?> getBody() {
         return (Body<?, ?>) super.getBody();
     }
 
@@ -172,8 +163,7 @@ public class Page<J extends Page<J>>
     @SuppressWarnings("unused")
     @NotNull
     @Override
-    public AjaxResponse<?> onConnect(AjaxCall<?> call, AjaxResponse<?> response)
-    {
+    public AjaxResponse<?> onConnect(AjaxCall<?> call, AjaxResponse<?> response) {
         return response;
     }
 
@@ -187,8 +177,7 @@ public class Page<J extends Page<J>>
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J addCssReference(CSSReference cssReference)
-    {
+    public J addCssReference(CSSReference cssReference) {
         getBody().addCssReference(cssReference);
         return (J) this;
     }
@@ -203,8 +192,7 @@ public class Page<J extends Page<J>>
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J addJavaScriptReference(JavascriptReference jsReference)
-    {
+    public J addJavaScriptReference(JavascriptReference jsReference) {
         getBody().addJavaScriptReference(jsReference);
         return (J) this;
     }
@@ -216,8 +204,7 @@ public class Page<J extends Page<J>>
      * @see ComponentDependencyBase#getCssReferences()
      */
     @Override
-    public Set<CSSReference> getCssReferences()
-    {
+    public Set<CSSReference> getCssReferences() {
         return getBody().getCssReferences();
     }
 
@@ -228,8 +215,7 @@ public class Page<J extends Page<J>>
      * @see ComponentDependencyBase#getJavascriptReferences()
      */
     @Override
-    public Set<JavascriptReference> getJavascriptReferences()
-    {
+    public Set<JavascriptReference> getJavascriptReferences() {
         return getBody().getJavascriptReferences();
     }
 
@@ -242,8 +228,7 @@ public class Page<J extends Page<J>>
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J addFeature(@NotNull IComponentFeatureBase<?, ?> feature)
-    {
+    public J addFeature(@NotNull IComponentFeatureBase<?, ?> feature) {
         getBody().addFeature(feature);
         return (J) this;
     }
@@ -256,8 +241,7 @@ public class Page<J extends Page<J>>
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J addVariable(@NotNull String variable)
-    {
+    public J addVariable(@NotNull String variable) {
         getBody().addVariable(variable);
         return (J) this;
     }
@@ -270,10 +254,8 @@ public class Page<J extends Page<J>>
      */
     @Override
     @NotNull
-    public PageOptions<?> getOptions()
-    {
-        if (options == null)
-        {
+    public PageOptions<?> getOptions() {
+        if (options == null) {
             options = new PageOptions<>(this);
         }
         return options;
@@ -287,8 +269,7 @@ public class Page<J extends Page<J>>
      */
     @NotNull
     @Override
-    public StringBuilder renderJavascript()
-    {
+    public StringBuilder renderJavascript() {
         return getBody().renderJavascriptAll();
     }
 
@@ -299,8 +280,7 @@ public class Page<J extends Page<J>>
      */
     @NotNull
     @Override
-    public Set<StringBuilder> getQueries()
-    {
+    public Set<StringBuilder> getQueries() {
         return getBody().getQueries();
     }
 
@@ -308,14 +288,11 @@ public class Page<J extends Page<J>>
      * Method destroy ...
      */
     @Override
-    public void destroy()
-    {
-        if (getHead() != null)
-        {
+    public void destroy() {
+        if (getHead() != null) {
             getHead().destroy();
         }
-        if (getBody() != null)
-        {
+        if (getBody() != null) {
             getBody().destroy();
         }
         options = null;
@@ -327,8 +304,7 @@ public class Page<J extends Page<J>>
      *
      * @return Returns a trimmed out version of this page
      */
-    public IPage<J> asMe()
-    {
+    public IPage<J> asMe() {
         return this;
     }
 
@@ -337,8 +313,7 @@ public class Page<J extends Page<J>>
      *
      * @return If initialized or not
      */
-    public boolean isPageInitialized()
-    {
+    public boolean isPageInitialized() {
         return pageInitialized;
     }
 
@@ -347,8 +322,7 @@ public class Page<J extends Page<J>>
      *
      * @param pageInitialized If this page is initialized
      */
-    public void setPageInitialized(boolean pageInitialized)
-    {
+    public void setPageInitialized(boolean pageInitialized) {
         this.pageInitialized = pageInitialized;
     }
 
@@ -358,8 +332,7 @@ public class Page<J extends Page<J>>
      * @return int
      */
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return super.hashCode();
     }
 
@@ -370,8 +343,7 @@ public class Page<J extends Page<J>>
      * @return boolean
      */
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         return super.equals(o);
     }
 
@@ -383,8 +355,7 @@ public class Page<J extends Page<J>>
      */
     @Override
     @NotNull
-    public DocumentType<?> getDocumentType()
-    {
+    public DocumentType<?> getDocumentType() {
         return new DocumentType<>(getBrowser().getHtmlVersion());
     }
 
@@ -396,13 +367,12 @@ public class Page<J extends Page<J>>
      * @see com.jwebmp.core.services.IPage#isMobileOrSmartTablet()
      */
     @Override
-    public boolean isMobileOrSmartTablet()
-    {
+    public boolean isMobileOrSmartTablet() {
         Set<ReadableDeviceCategory.Category> mobiles = EnumSet.of(ReadableDeviceCategory.Category.SMARTPHONE,
-                                                                  ReadableDeviceCategory.Category.SMART_TV,
-                                                                  ReadableDeviceCategory.Category.TABLET);
+                ReadableDeviceCategory.Category.SMART_TV,
+                ReadableDeviceCategory.Category.TABLET);
         return mobiles.contains(getUserAgent().getDeviceCategory()
-                                              .getCategory());
+                .getCategory());
     }
 
     /**
@@ -411,8 +381,7 @@ public class Page<J extends Page<J>>
      * @return The user agent, or an empty identifiable
      */
     @NotNull
-    public ReadableUserAgent getUserAgent()
-    {
+    public ReadableUserAgent getUserAgent() {
         return IGuiceContext.get(ReadableUserAgent.class);
     }
 
@@ -426,8 +395,7 @@ public class Page<J extends Page<J>>
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setTiny(boolean tiny)
-    {
+    public J setTiny(boolean tiny) {
         super.setTiny(tiny);
         getHead().setTiny(tiny);
         getBody().setTiny(tiny);
@@ -441,8 +409,7 @@ public class Page<J extends Page<J>>
      * @return J
      */
     @SuppressWarnings("unchecked")
-    public J add(@NotNull BodyChildren child)
-    {
+    public J add(@NotNull BodyChildren child) {
         getBody().add(child);
         return (J) this;
     }
@@ -455,8 +422,7 @@ public class Page<J extends Page<J>>
      */
     @Override
     @NotNull
-    public Page<?> getPage()
-    {
+    public Page<?> getPage() {
         return this;
     }
 
@@ -465,23 +431,19 @@ public class Page<J extends Page<J>>
      * Initialize all children
      */
     @Override
-    protected void init()
-    {
-        if (!isInitialized())
-        {
+    protected void init() {
+        if (!isInitialized()) {
             configurePageHeader();
             addVariablesScriptToPage();
 
             if (!getHead().getChildren()
-                          .isEmpty())
-            {
-                add(getHead());
+                    .isEmpty()) {
+                add(0, getHead());
                 //getHead().toString(0);
             }
             // getBody().toString(0);
             if (!getBody().getChildren()
-                          .isEmpty())
-            {
+                    .isEmpty()) {
                 add(getBody());
             }
             configurePage();
@@ -497,8 +459,7 @@ public class Page<J extends Page<J>>
      */
     @NotNull
     @Override
-    public Set<StringBuilder> getQueriesAll()
-    {
+    public Set<StringBuilder> getQueriesAll() {
         return getBody().getQueriesAll();
     }
 
@@ -507,10 +468,9 @@ public class Page<J extends Page<J>>
      *
      * @return if the body is empty
      */
-    private boolean isBodyEmpty()
-    {
+    private boolean isBodyEmpty() {
         return getBody().getChildren()
-                        .isEmpty();
+                .isEmpty();
     }
 
     /**
@@ -518,26 +478,23 @@ public class Page<J extends Page<J>>
      *
      * @return if the head is empty
      */
-    private boolean isHeadEmpty()
-    {
+    private boolean isHeadEmpty() {
         return getHead().getChildren()
-                        .isEmpty();
+                .isEmpty();
     }
 
     /**
      * Method configurePage ...
      */
-    private void configurePage()
-    {
+    private void configurePage() {
         @SuppressWarnings("rawtypes")
         Set<IPageConfigurator> sortedConfigurators = IGuiceContext.loaderToSetNoInjection(ServiceLoader.load(IPageConfigurator.class));
         //new LinkedHashSet<>(IGuiceContext.get(IPageConfiguratorsKey));
         sortedConfigurators.removeIf(a -> !a.enabled());
-        for (IPageConfigurator<?> sortedConfigurator : sortedConfigurators)
-        {
+        for (IPageConfigurator<?> sortedConfigurator : sortedConfigurators) {
             Page.log.log(Level.FINEST, "Loading IPageConfigurator - " +
                     sortedConfigurator.getClass()
-                                      .getSimpleName());
+                            .getSimpleName());
             sortedConfigurator.configure(this);
         }
     }
@@ -545,80 +502,64 @@ public class Page<J extends Page<J>>
     /**
      * Builds up the Header Tag
      */
-    private void configurePageHeader()
-    {
+    private void configurePageHeader() {
         if (this.getOptions()
-                .getTitle() != null)
-        {
+                .getTitle() != null) {
             getHead().add(this.getOptions()
-                              .getTitle());
+                    .getTitle());
         }
         if (this.getOptions()
-                .getBase() != null)
-        {
+                .getBase() != null) {
             getHead().add(this.getOptions()
-                              .getBase());
+                    .getBase());
         }
         if (this.getOptions()
-                .getHttpEquivMeta() != null)
-        {
+                .getHttpEquivMeta() != null) {
             getHead().add(this.getOptions()
-                              .getHttpEquivMeta());
+                    .getHttpEquivMeta());
         }
         if (this.getOptions()
-                .getCacheControl() != null)
-        {
+                .getCacheControl() != null) {
             getHead().add(this.getOptions()
-                              .getCacheControl());
+                    .getCacheControl());
         }
         if (this.getOptions()
-                .getAuthor() != null)
-        {
+                .getAuthor() != null) {
             getHead().add(this.getOptions()
-                              .getAuthor());
+                    .getAuthor());
         }
         if (this.getOptions()
-                .getApplicationName() != null)
-        {
+                .getApplicationName() != null) {
             getHead().add(this.getOptions()
-                              .getApplicationName());
+                    .getApplicationName());
         }
         if (this.getOptions()
-                .getGenerator() != null)
-        {
+                .getGenerator() != null) {
             getHead().add(this.getOptions()
-                              .getGenerator());
+                    .getGenerator());
         }
         if (this.getOptions()
-                .getDescription() != null)
-        {
+                .getDescription() != null) {
             getHead().add(this.getOptions()
-                              .getDescription());
+                    .getDescription());
         }
         if (this.getOptions()
-                .getKeywords() != null)
-        {
+                .getKeywords() != null) {
             getHead().add(this.getOptions()
-                              .getKeywords());
+                    .getKeywords());
         }
         if (this.getOptions()
-                .getFavIconLink() != null)
-        {
+                .getFavIconLink() != null) {
             getHead().add(this.getOptions()
-                              .getFavIconLink());
+                    .getFavIconLink());
         }
     }
 
-    public ContentSecurityPolicy getContentSecurityPolicy()
-    {
-        try
-        {
+    public ContentSecurityPolicy getContentSecurityPolicy() {
+        try {
             contentSecurityPolicy = IGuiceContext.get(ContentSecurityPolicy.class);
-        }
-        catch (ProvisionException | OutOfScopeException e)
-        {
-            if (contentSecurityPolicy == null)
-            {
+        } catch (ProvisionException | OutOfScopeException e) {
+            if (contentSecurityPolicy == null) {
                 contentSecurityPolicy = new ContentSecurityPolicy();
             }
         }
@@ -628,39 +569,33 @@ public class Page<J extends Page<J>>
     /**
      * Adds the variables in the application to the collection
      */
-    private void addVariablesScriptToPage()
-    {
+    private void addVariablesScriptToPage() {
         StringBuilder variablesScriptBuilder = new StringBuilder();
-        for (Object o : getBody().getVariablesAll())
-        {
+        for (Object o : getBody().getVariablesAll()) {
             String var = (String) o;
             variablesScriptBuilder.append("var ")
-                                  .append(var)
-                                  .append(STRING_SEMICOLON);
+                    .append(var)
+                    .append(STRING_SEMICOLON);
         }
-        if (!variablesScriptBuilder.isEmpty())
-        {
+        if (!variablesScriptBuilder.isEmpty()) {
             Script<?, ?> variablesScript = new Script<>();
             variablesScript.setID("variables");
             variablesScript.setNewLineForRawText(true);
             variablesScript.addAttribute(ScriptAttributes.Type, StaticStrings.HTML_HEADER_JAVASCRIPT);
             variablesScript.setText(variablesScriptBuilder.toString());
             if (!getHead().getChildren()
-                          .contains(variablesScript))
-            {
+                    .contains(variablesScript)) {
                 getHead().add(variablesScript);
             }
         }
     }
 
-    public J setOptions(PageOptions<?> options)
-    {
+    public J setOptions(PageOptions<?> options) {
         this.options = options;
         return (J) this;
     }
 
-    public J setContentSecurityPolicy(ContentSecurityPolicy contentSecurityPolicy)
-    {
+    public J setContentSecurityPolicy(ContentSecurityPolicy contentSecurityPolicy) {
         this.contentSecurityPolicy = contentSecurityPolicy;
         return (J) this;
     }

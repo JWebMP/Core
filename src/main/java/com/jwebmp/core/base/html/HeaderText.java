@@ -62,108 +62,108 @@ import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
  * @since forever
  */
 public class HeaderText<J extends HeaderText<J>>
-		extends Component<IComponentHierarchyBase<?, ?>, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements BodyChildren,
-		           HeaderGroupChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, FormChildren, ListItemChildren, ListChildren
+        extends Component<IComponentHierarchyBase<?, ?>, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements BodyChildren,
+        HeaderGroupChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, FormChildren, ListItemChildren, ListChildren
 
 {
-	private HeaderTypes headerType;
-	
-	/**
-	 * Constructs a new blank header of type H1
-	 */
-	public HeaderText()
-	{
-		this(HeaderTypes.H1, "");
-	}
-	
-	/**
-	 * Constructs a new header of specified type with the text
-	 *
-	 * @param headerType The type of header
-	 * @param text       The text for the header
-	 */
-	public HeaderText(HeaderTypes headerType, String text)
-	{
-		super(headerType.name(), headerType.getLinkedComponent());
-		setText(text == null ? "" : text);
-		this.headerType = headerType;
-	}
-	
-	/**
-	 * Returns the current header text
-	 *
-	 * @return The header text
-	 */
-	public String getHeaderText()
-	{
-		return getText(0).toString();
-	}
-	
-	/**
-	 * Sets the current text
-	 *
-	 * @param headerText The text for the header
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public final J setHeaderText(String headerText)
-	{
-		setText(headerText);
-		return (J) this;
-	}
-	
-	@Override
-	public int hashCode()
-	{
-		int result = super.hashCode();
-		result = 31 * result + getHeaderType().hashCode();
-		return result;
-	}
-	
-	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof HeaderText))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-		
-		HeaderText<?> that = (HeaderText<?>) o;
-		
-		return getHeaderType() == that.getHeaderType();
-	}
-	
-	/**
-	 * Returns the current header type
-	 *
-	 * @return The header type
-	 */
-	public HeaderTypes getHeaderType()
-	{
-		return headerType;
-	}
-	
-	/**
-	 * Sets this headers type
-	 *
-	 * @param headerType The type of header this is
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public J setHeaderType(HeaderTypes headerType)
-	{
-		this.headerType = headerType;
-		super.setTag(headerType.name());
-		super.setComponentType(headerType.getLinkedComponent());
-		return (J) this;
-	}
+    private HeaderTypes headerType;
+
+    /**
+     * Constructs a new blank header of type H1
+     */
+    public HeaderText()
+    {
+        this(HeaderTypes.H1, "");
+    }
+
+    /**
+     * Constructs a new header of specified type with the text
+     *
+     * @param headerType The type of header
+     * @param text       The text for the header
+     */
+    public HeaderText(HeaderTypes headerType, String text)
+    {
+        super(headerType.name().toLowerCase(), headerType.getLinkedComponent());
+        setText(text == null ? "" : text);
+        this.headerType = headerType;
+    }
+
+    /**
+     * Returns the current header text
+     *
+     * @return The header text
+     */
+    public String getHeaderText()
+    {
+        return getText(0).toString();
+    }
+
+    /**
+     * Sets the current text
+     *
+     * @param headerText The text for the header
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public final J setHeaderText(String headerText)
+    {
+        setText(headerText);
+        return (J) this;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = super.hashCode();
+        result = 31 * result + getHeaderType().hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+        {
+            return true;
+        }
+        if (!(o instanceof HeaderText))
+        {
+            return false;
+        }
+        if (!super.equals(o))
+        {
+            return false;
+        }
+
+        HeaderText<?> that = (HeaderText<?>) o;
+
+        return getHeaderType() == that.getHeaderType();
+    }
+
+    /**
+     * Returns the current header type
+     *
+     * @return The header type
+     */
+    public HeaderTypes getHeaderType()
+    {
+        return headerType;
+    }
+
+    /**
+     * Sets this headers type
+     *
+     * @param headerType The type of header this is
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public J setHeaderType(HeaderTypes headerType)
+    {
+        this.headerType = headerType;
+        super.setTag(headerType.name());
+        super.setComponentType(headerType.getLinkedComponent());
+        return (J) this;
+    }
 }

@@ -9,6 +9,8 @@ module com.jwebmp.core {
     requires static lombok;
 
     requires transitive com.guicedee.client;
+    requires transitive com.jwebmp.client;
+
     //requires transitive com.guicedee.guicedservlets;
     requires transitive jakarta.validation;
     //requires transitive jakarta.servlet;
@@ -33,7 +35,6 @@ module com.jwebmp.core {
     requires org.apache.commons.io;
     requires org.apache.commons.lang3;
     requires org.apache.commons.text;
-    requires com.jwebmp.client;
 
     exports com.jwebmp.core;
     exports com.jwebmp.core.base;
