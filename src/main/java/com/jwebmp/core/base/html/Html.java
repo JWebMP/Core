@@ -240,24 +240,6 @@ public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
         return head;
     }
 
-    /*
-     * Returns the body object on the HTML Tag
-     */
-    /*public Body<?, ?> getBody()
-    {
-        if (body == null)
-        {
-            body = new Body<>((IPage) this);
-        }
-        return body;
-    }*/
-
-/*    public Body<?, ?> getBody()
-    {
-        return body;
-    }*/
-
-
     /**
      * Sets the body for this class
      *
@@ -266,12 +248,7 @@ public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
     @SuppressWarnings("unchecked")
     public J setBody(IBody<?, ?> body)
     {
-        if (getChildren().size() == 2)
-        {
-            getChildren().remove(1);
-        }
         this.body = (Body<?, ?>) body;
-        getChildren().add((C) body);
         return (J) this;
     }
 
@@ -284,13 +261,18 @@ public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
     @SuppressWarnings("unchecked")
     public J setHead(IHead head)
     {
-        if (!getChildren().isEmpty())
-        {
-            getChildren().remove(0);
-        }
         this.head = (Head<?>) head;
-        getChildren().add(0, (C) head);
         return (J) this;
     }
 
+    @Override
+    protected void init()
+    {
+        if (!isInitialized())
+        {
+            add((C) head);
+            add((C) body);
+        }
+        super.init();
+    }
 }

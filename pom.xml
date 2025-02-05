@@ -86,12 +86,12 @@
 
 
         <dependency>
-            <groupId>com.guicedee.servlets</groupId>
+            <groupId>com.guicedee</groupId>
             <artifactId>guiced-servlets</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.guicedee.servlets</groupId>
+            <groupId>com.guicedee</groupId>
             <artifactId>guiced-websockets</artifactId>
         </dependency>
 -->

@@ -26,8 +26,8 @@ module com.jwebmp.core {
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.core;
 
-    //requires guiced.vertx;
-    //requires guiced.vertx.sockets;
+    //requires com.guicedee.vertx;
+    //requires com.guicedee.vertx.sockets;
 
     //requires jakarta.websocket;
     //requires jakarta.websocket.client;

@@ -74,11 +74,13 @@ import com.jwebmp.core.services.IHead;
  */
 public class Head<J extends Head<J>>
         extends ComponentHierarchyBase<HeadChildren, NoAttributes, NoFeatures, NoEvents, J>
-        implements NoIDTag, HtmlChildren, NoClassAttribute, PageChildren, IHead {
+        implements NoIDTag, HtmlChildren, NoClassAttribute, PageChildren, IHead
+{
     /**
      * Constructs a new Head Tag
      */
-    public Head() {
+    public Head()
+    {
         super(ComponentTypes.Head);
     }
 }

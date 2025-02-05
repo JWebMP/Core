@@ -685,6 +685,12 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
         return (J) cloned;
     }
 
+    @Override
+    public boolean hasAttribute(String attribute)
+    {
+        return attributes.containsKey(attribute);
+    }
+    
     /**
      * Shortcut to adding a style attribute
      *
