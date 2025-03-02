@@ -114,6 +114,10 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.guicedee</groupId>
+            <artifactId>guiced-vertx</artifactId>
+        </dependency>
     </dependencies>
 
     <issueManagement>

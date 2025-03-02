@@ -2,14 +2,22 @@ package com.jwebmp.core.implementations;
 
 import com.guicedee.guicedinjection.interfaces.IGuicePreStartup;
 import com.guicedee.services.jsonrepresentation.IJsonRepresentation;
+import com.guicedee.vertx.spi.VertXPreStartup;
+import io.vertx.core.Future;
+
+import java.util.List;
 
 public class JWebMPPreStartup implements IGuicePreStartup<JWebMPPreStartup>
 {
     @Override
-    public void onStartup()
+    public List<Future<Boolean>> onStartup()
     {
-        JWebMPJacksonModule jWebMPJacksonModule = new JWebMPJacksonModule();
-        IJsonRepresentation.getObjectMapper().registerModule(jWebMPJacksonModule);
+
+        return List.of(VertXPreStartup.getVertx().executeBlocking(() -> {
+            JWebMPJacksonModule jWebMPJacksonModule = new JWebMPJacksonModule();
+            IJsonRepresentation.getObjectMapper().registerModule(jWebMPJacksonModule);
+            return true;
+        }));
     }
 
     @Override

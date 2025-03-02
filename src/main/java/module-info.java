@@ -12,6 +12,8 @@ module com.jwebmp.core {
     requires transitive com.guicedee.client;
     requires transitive com.jwebmp.client;
 
+    requires transitive com.guicedee.vertx;
+
     //requires transitive com.guicedee.guicedservlets;
     requires transitive jakarta.validation;
     //requires transitive jakarta.servlet;
