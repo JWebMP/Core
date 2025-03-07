@@ -164,6 +164,9 @@ module com.jwebmp.core {
     uses com.jwebmp.interception.services.DataCallIntercepter;
     uses com.jwebmp.interception.services.SiteCallIntercepter;
 */
+
+    uses com.jwebmp.core.databind.IOnComponentConfigured;
+
     uses com.jwebmp.core.services.IRegularExpressions;
 
     uses com.jwebmp.core.services.IPageConfigurator;
