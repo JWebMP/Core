@@ -38,10 +38,10 @@ import java.util.logging.Level;
  * @author GedMarc
  * @since 22 Apr 2016
  */
-@SuppressWarnings("MissingClassJavaDoc")
+@SuppressWarnings({"MissingClassJavaDoc", "LombokGetterMayBeUsed"})
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY,
-                getterVisibility = JsonAutoDetect.Visibility.NONE,
-                setterVisibility = JsonAutoDetect.Visibility.NONE)
+        getterVisibility = JsonAutoDetect.Visibility.NONE,
+        setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Log
 public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase<J>
@@ -77,6 +77,11 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
      * Sets if this component should be sent on the next call back
      */
     private boolean touched;
+
+    /**
+     * If the render/preconfigure started from this component
+     */
+    private boolean startOfRender;
 
     /**
      * A set of properties for this component
@@ -124,8 +129,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
         {
             component = (J) clone();
             component.setID(GUIDGenerator.generateGuid());
-        }
-        catch (CloneNotSupportedException ex)
+        } catch (CloneNotSupportedException ex)
         {
             ComponentBase.log.log(Level.SEVERE, "Cloning Error in Shell", ex);
         }
@@ -202,8 +206,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
         if (!isTiny())
         {
             return StaticStrings.STRING_NEWLINE_TEXT;
-        }
-        else
+        } else
         {
             return StaticStrings.STRING_EMPTY;
         }
@@ -255,8 +258,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
         if (text == null)
         {
             return new StringBuilder();
-        }
-        else
+        } else
         {
             sb.append(text);
             return sb;
@@ -434,7 +436,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
         }
         ComponentBase<?> other = (ComponentBase<?>) obj;
         return other.getID()
-                    .equals(getID());
+                .equals(getID());
     }
 
     /**
@@ -581,7 +583,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
     public String getProperty(String propertyName)
     {
         return getProperties().get(propertyName)
-                              .toString();
+                .toString();
     }
 
     /**
@@ -597,12 +599,11 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
             if (getClass().getCanonicalName() != null)
             {
                 return getClass().getCanonicalName()
-                                 .replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE);
+                        .replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE);
             }
             return getClass().getName()
-                             .replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE);
-        }
-        catch (NullPointerException npe)
+                    .replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE);
+        } catch (NullPointerException npe)
         {
             ComponentBase.log.log(Level.FINE, "Null Pointer in getting canonical name", npe);
             return getClass().getTypeName();
@@ -616,5 +617,29 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
     {
         getProperties().clear();
         setProperties(null);
+    }
+
+    /**
+     * If the render process was started by this
+     *
+     * @return startOfRender
+     */
+    @Override
+    public boolean isStartOfRender()
+    {
+        return startOfRender;
+    }
+
+    /**
+     * If this component started the render process
+     *
+     * @param startOfRender
+     * @return
+     */
+    @Override
+    public J setStartOfRender(boolean startOfRender)
+    {
+        this.startOfRender = startOfRender;
+        return (J) this;
     }
 }

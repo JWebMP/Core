@@ -277,7 +277,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum<?> 
                 try
                 {
                     next.destroy();
-                } catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     ComponentHierarchyBase.log.log(Level.SEVERE, "UUnable to destroy", e);
                 }
@@ -759,7 +760,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum<?> 
         {
             getClasses().remove(className.toString());
             return true;
-        } else
+        }
+        else
         {
             return false;
         }
@@ -883,36 +885,6 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum<?> 
     }
 
     @Override
-    public String toString(Integer tabCount)
-    {
-        var s = super.toString(tabCount);
-        if (isStartedRender())
-        {
-            //  for (C child : getChildren())
-            // {
-            Set<IOnComponentAdded> components = IGuiceContext.loaderToSet(ServiceLoader.load(IOnComponentAdded.class));
-            for (IOnComponentAdded component : components)
-            {
-                try
-                {
-                    component.onComponentAdded(null, (ComponentHierarchyBase<?, ?, ?, ?, ?>) this);
-                } catch (Throwable T)
-                {
-                    log.log(Level.SEVERE, "Error on component added", T);
-                }
-            }
-            //  }
-
-            Set<IAfterRenderComplete> afterRenderCompletes = IGuiceContext.loaderToSet(ServiceLoader.load(IAfterRenderComplete.class));
-            for (var renderComplete : afterRenderCompletes)
-            {
-                renderComplete.process(this);
-            }
-        }
-        return s;
-    }
-
-    @Override
     protected StringBuilder renderHTML(int tabCount)
     {
         boolean renderChildren = true;
@@ -926,7 +898,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum<?> 
                 {
                     renderChildren = result;
                 }
-            } catch (Throwable T)
+            }
+            catch (Throwable T)
             {
                 log.log(Level.WARNING, "Error in processing html render interceptor", T);
             }
@@ -1004,16 +977,24 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum<?> 
             setNewLineForClosingTag(hasChildren());
         }
         super.preConfigure();
-        Set<IOnComponentConfigured> components = IGuiceContext.loaderToSet(ServiceLoader.load(IOnComponentConfigured.class));
-        for (IOnComponentConfigured component : components)
+        if (isStartOfRender())
         {
-            try
+            Set<IOnComponentConfigured> components = IGuiceContext.loaderToSet(ServiceLoader.load(IOnComponentConfigured.class));
+            for (IOnComponentConfigured component : components)
             {
-                component.onComponentConfigured(null, this);
-            } catch (Throwable T)
-            {
-                log.log(Level.SEVERE, "Error on component added", T);
+                try
+                {
+                    component.onComponentConfigured(null, this);
+                }
+                catch (Throwable T)
+                {
+                    log.log(Level.SEVERE, "Error on component added", T);
+                }
             }
+        }
+        else
+        {
+            getProperties().put("ComponentConfigured", true);
         }
     }
 
@@ -1081,19 +1062,6 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum<?> 
     }
 
     /**
-     * Pre-Configure the children tree
-     *
-     * @return
-     * @see ComponentBase#toString()
-     */
-    @Override
-    @NotNull
-    public String toString()
-    {
-        return super.toString();
-    }
-
-    /**
      * Processes the queries
      *
      * @param componentQuery
@@ -1156,10 +1124,12 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum<?> 
                 try
                 {
                     map.put(key, value);
-                } catch (ClassCastException cce)
+                }
+                catch (ClassCastException cce)
                 {
                     ComponentHierarchyBase.log.log(Level.WARNING, "Incorrect Object Type, Perhaps JavaScriptPart?", cce);
-                } catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     ComponentHierarchyBase.log.log(Level.WARNING, "Unable to render angular object", e);
                 }
@@ -1192,7 +1162,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum<?> 
                     try
                     {
                         return Boolean.parseBoolean(propertyValue);
-                    } catch (Exception e)
+                    }
+                    catch (Exception e)
                     {
                         ComponentHierarchyBase.log.log(Level.WARNING, "Property value was not a boolean.", e);
                     }
@@ -1311,7 +1282,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum<?> 
                         {
                             sb.append(getNewLine())
                                     .append(chb.renderHTML(getCurrentTabIndents() + (chb.isTiny() ? 0 : 1)));
-                        } catch (Exception e)
+                        }
+                        catch (Exception e)
                         {
                             log.log(Level.SEVERE, "Cannot work on child object - " + child.getClass()
                                     .getCanonicalName() + "\n, adding to the tree\n", e);
@@ -1340,7 +1312,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum<?> 
         if (hasChildren() && !isTiny())
         {
             return true;
-        } else
+        }
+        else
         {
             return super.isNewLineForClosingTag();
         }
@@ -1405,7 +1378,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum<?> 
                         .filter(b -> configurationType.isAssignableFrom(b.getClass()))
                         .collect(Collectors.toSet()));
             }
-        } else
+        }
+        else
         {
             out.addAll((Collection<? extends T>) getConfigurations().stream()
                     .filter(b -> configurationType.isAssignableFrom(b.getClass()))

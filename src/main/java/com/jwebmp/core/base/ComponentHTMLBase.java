@@ -44,8 +44,8 @@ import lombok.Setter;
         "WeakerAccess",
         "UnusedReturnValue"})
 public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHTMLBase<F, E, J>> extends
-                                                                                                                                ComponentEventBase<F, E, J> implements
-                                                                                                                                                            IComponentHTMLBase<J>
+        ComponentEventBase<F, E, J> implements
+        IComponentHTMLBase<J>
 {
 
     /**
@@ -496,7 +496,6 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
         return (J) this;
     }
 
-
     /**
      * Returns the HTML for the given object
      * <p>
@@ -511,22 +510,11 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
         return toString(0);
     }
 
-    /**
-     * Returns this components HTML after configuration and pre-rendering
-     *
-     * @param tabCount The number of tabs to indent by
-     * @return The sting with the given tab counts
-     */
-    @JsonIgnore
-    @Getter
-    @Setter
-    private boolean startedRender = false;
-
     @Override
     @NotNull
     public String toString(Integer tabCount)
     {
-        startedRender = true;
+        setStartOfRender(true);
         var out = String.valueOf(renderHTML(tabCount));
         return out;
     }
