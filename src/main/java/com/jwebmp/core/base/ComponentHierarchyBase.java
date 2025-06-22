@@ -45,6 +45,7 @@ import lombok.extern.java.Log;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
@@ -1354,7 +1355,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum<?> 
     {
         if (configurations == null)
         {
-            configurations = new LinkedHashSet<>();
+            configurations = new CopyOnWriteArraySet<>();
         }
         return configurations;
     }
