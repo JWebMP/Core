@@ -38,11 +38,6 @@
 
         <dependency>
             <groupId>com.guicedee.services</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.guicedee.services</groupId>
             <artifactId>json-representation</artifactId>
         </dependency>
 
