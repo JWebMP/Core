@@ -47,76 +47,75 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  * @param <J>
- *
  * @author MMagon
- * 		<p>
- * 		<p>
+ * <p>
+ * <p>
  * @version 1.0
  * @since 2013/11/12
  */
 @SuppressWarnings("MissingClassJavaDoc")
 public class Style<C extends GlobalChildren, J extends Style<C, J>>
-		extends ComponentHierarchyBase<C, StyleAttributes, NoFeatures, NoEvents, J>
-		implements NoIDTag, HeadChildren, NoClassAttribute
+        extends ComponentHierarchyBase<C, StyleAttributes, NoFeatures, NoEvents, J>
+        implements NoIDTag, HeadChildren, NoClassAttribute
 {
-	/**
-	 * Constructs a new blank Style tag
-	 */
-	public Style()
-	{
-		super(ComponentTypes.Style);
-		addAttribute(StyleAttributes.Type, "text/css");
-	}
+    /**
+     * Constructs a new blank Style tag
+     */
+    public Style()
+    {
+        super(ComponentTypes.Style);
+        //get warnings in typescript now
+        //addAttribute(StyleAttributes.Type, "text/css");
+    }
 
-	/**
-	 * Returns the raw CSS Data (getText shortcut)
-	 * <p>
-	 *
-	 * @return The generated css
-	 */
-	public String getCSS()
-	{
-		return getText(0).toString();
-	}
+    /**
+     * Returns the raw CSS Data (getText shortcut)
+     * <p>
+     *
+     * @return The generated css
+     */
+    public String getCSS()
+    {
+        return getText(0).toString();
+    }
 
-	/**
-	 * Sets the raw CSS Data
-	 * <p>
-	 *
-	 * @param cssString
-	 * 		The css String (raw txt)
-	 */
-	public void setCSS(String cssString)
-	{
-		setText(cssString);
-	}
+    /**
+     * Sets the raw CSS Data
+     * <p>
+     *
+     * @param cssString The css String (raw txt)
+     */
+    public void setCSS(String cssString)
+    {
+        setText(cssString);
+    }
 
-	/**
-	 * @see com.jwebmp.core.base.ComponentHierarchyBase#hashCode()
-	 */
-	@Override
-	public int hashCode()
-	{
-		return getText(0).hashCode();
-	}
+    /**
+     * @see com.jwebmp.core.base.ComponentHierarchyBase#hashCode()
+     */
+    @Override
+    public int hashCode()
+    {
+        return getText(0).hashCode();
+    }
 
-	/**
-	 * @see com.jwebmp.core.base.ComponentHierarchyBase#equals(Object)
-	 */
-	@Override
-	public boolean equals(Object o)
-	{
-		if (o == null)
-		{
-			return false;
-		}
-		if (Style.class.isAssignableFrom(o.getClass()))
-		{
-			return getText(0).toString()
-			                 .equals(((Style<?,?>) o)
-					                         .getText(0)
-					                         .toString());
-		}
-		return false;
-	}
+    /**
+     * @see com.jwebmp.core.base.ComponentHierarchyBase#equals(Object)
+     */
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o == null)
+        {
+            return false;
+        }
+        if (Style.class.isAssignableFrom(o.getClass()))
+        {
+            return getText(0).toString()
+                             .equals(((Style<?, ?>) o)
+                                     .getText(0)
+                                     .toString());
+        }
+        return false;
+    }
 }
