@@ -19,7 +19,6 @@ package com.jwebmp.core.htmlbuilder.css.backgrounds;
 import com.jwebmp.core.base.client.CSSVersions;
 import com.jwebmp.core.htmlbuilder.css.CSSDetail;
 import com.jwebmp.core.htmlbuilder.css.annotations.CSSImplementationAdapter;
-import com.jwebmp.core.htmlbuilder.css.annotations.CSSImplementationClass;
 import com.jwebmp.core.htmlbuilder.css.colours.ColourCSSImpl;
 import com.jwebmp.core.htmlbuilder.css.colours.ColourNames;
 import com.jwebmp.core.htmlbuilder.css.enumarations.Repeats;
@@ -33,326 +32,351 @@ import com.jwebmp.core.htmlbuilder.css.measurement.MeasurementCSSImpl;
  * @since 17 Jan 2016
  */
 public class BackgroundCSSImpl
-		extends CSSImplementationAdapter<BackgroundCSS, BackgroundCSSImpl>
-		implements CSSImplementationClass<BackgroundCSS, BackgroundCSSImpl>
+        extends CSSImplementationAdapter<BackgroundCSS, BackgroundCSSImpl>
 {
 
 
-	@CSSDetail(cssName = "background-attachment",
-			cssVersion = CSSVersions.CSS21,
-			jsName = "backgroundAttachment")
-	private BackgroundAttachments backgroundAttachment;
-	@CSSDetail(cssName = "background-color",
-			cssVersion = CSSVersions.CSS21,
-			jsName = "backgroundColor")
-	private ColourCSSImpl backgroundColor;
-	@CSSDetail(cssName = "background-color",
-			cssVersion = CSSVersions.CSS21,
-			jsName = "backgroundColor")
-	private ColourNames backgroundColor$;
-	@CSSDetail(cssName = "background-image",
-			cssVersion = CSSVersions.CSS21,
-			jsName = "backgroundImage")
-	private ImageCSSImpl backgroundImage;
-	@CSSDetail(cssName = "background-image",
-			cssVersion = CSSVersions.CSS21,
-			jsName = "backgroundImage")
-	private ImageCSSImpl[] backgroundImage$;
-	@CSSDetail(cssName = "background-position",
-			cssVersion = CSSVersions.CSS21,
-			jsName = "backgroundPosition")
-	private BackgroundPositions backgroundPosition;
-	@CSSDetail(cssName = "background-repeat",
-			cssVersion = CSSVersions.CSS21,
-			jsName = "backgroundRepeat")
-	private Repeats backgroundRepeat;
-	@CSSDetail(cssName = "background-blendmode",
-			cssVersion = CSSVersions.CSS21,
-			jsName = "backgroundBlendmode")
-	private BackgroundBlendMode backgroundBlendMode;
-	@CSSDetail(cssName = "background-clip",
-			cssVersion = CSSVersions.CSS21,
-			jsName = "backgroundClip")
-	private BackgroundClip backgroundClip;
-	@CSSDetail(cssName = "background-origins",
-			cssVersion = CSSVersions.CSS21,
-			jsName = "backgroundOrigins")
-	private BackgroundOrigins backgroundOrigin;
-	@CSSDetail(cssName = "background-size",
-			cssVersion = CSSVersions.CSS21,
-			jsName = "backgroundSize")
-	private BackgroundSizes backgroundSize$;
-	@CSSDetail(cssName = "background-size",
-			cssVersion = CSSVersions.CSS21,
-			jsName = "backgroundSize")
-	private MeasurementCSSImpl[] backgroundSize;
-	@CSSDetail(cssName = "background",
-			cssVersion = CSSVersions.CSS21,
-			jsName = "background")
-	private BackgroundImpl background;
+    @CSSDetail(cssName = "background-attachment",
+            cssVersion = CSSVersions.CSS21,
+            jsName = "backgroundAttachment")
+    private BackgroundAttachments backgroundAttachment;
+    @CSSDetail(cssName = "background-color",
+            cssVersion = CSSVersions.CSS21,
+            jsName = "backgroundColor")
+    private ColourCSSImpl backgroundColor;
+    @CSSDetail(cssName = "background-color",
+            cssVersion = CSSVersions.CSS21,
+            jsName = "backgroundColor")
+    private ColourNames backgroundColor$;
+    @CSSDetail(cssName = "background-image",
+            cssVersion = CSSVersions.CSS21,
+            jsName = "backgroundImage")
+    private ImageCSSImpl backgroundImage;
+    @CSSDetail(cssName = "background-image",
+            cssVersion = CSSVersions.CSS21,
+            jsName = "backgroundImage")
+    private ImageCSSImpl[] backgroundImage$;
+    @CSSDetail(cssName = "background-position",
+            cssVersion = CSSVersions.CSS21,
+            jsName = "backgroundPosition")
+    private BackgroundPositions backgroundPosition;
+    @CSSDetail(cssName = "background-repeat",
+            cssVersion = CSSVersions.CSS21,
+            jsName = "backgroundRepeat")
+    private Repeats backgroundRepeat;
+    @CSSDetail(cssName = "background-blendmode",
+            cssVersion = CSSVersions.CSS21,
+            jsName = "backgroundBlendmode")
+    private BackgroundBlendMode backgroundBlendMode;
+    @CSSDetail(cssName = "background-clip",
+            cssVersion = CSSVersions.CSS21,
+            jsName = "backgroundClip")
+    private BackgroundClip backgroundClip;
+    @CSSDetail(cssName = "background-origins",
+            cssVersion = CSSVersions.CSS21,
+            jsName = "backgroundOrigins")
+    private BackgroundOrigins backgroundOrigin;
+    @CSSDetail(cssName = "background-size",
+            cssVersion = CSSVersions.CSS21,
+            jsName = "backgroundSize")
+    private BackgroundSizes backgroundSize$;
+    @CSSDetail(cssName = "background-size",
+            cssVersion = CSSVersions.CSS21,
+            jsName = "backgroundSize")
+    private MeasurementCSSImpl[] backgroundSize;
+    @CSSDetail(cssName = "background",
+            cssVersion = CSSVersions.CSS21,
+            jsName = "background")
+    private BackgroundImpl background;
 
-	/**
-	 * Specifies the background color of an element
-	 *
-	 * @return
-	 */
-	public ColourCSSImpl getBackgroundColor()
-	{
-		return backgroundColor;
-	}
+    /**
+     * Specifies the background color of an element
+     *
+     * @return
+     */
 
-	/**
-	 * Sets the background colour
-	 *
-	 * @param backgroundColor
-	 */
-	public void setBackgroundColor(ColourCSSImpl backgroundColor)
-	{
-		this.backgroundColor = backgroundColor;
-	}
+    public ColourCSSImpl getBackgroundColor()
+    {
+        return backgroundColor;
+    }
 
-	/**
-	 * Specifies the background color of an element
-	 *
-	 * @return
-	 */
-	public ColourNames getBackgroundColor$()
-	{
-		return backgroundColor$;
-	}
+    /**
+     * Sets the background colour
+     *
+     * @param backgroundColor
+     */
 
-	/**
-	 * Sets the background colour
-	 *
-	 * @param backgroundColor$
-	 */
-	public void setBackgroundColor$(ColourNames backgroundColor$)
-	{
-		this.backgroundColor$ = backgroundColor$;
-	}
+    public void setBackgroundColor(ColourCSSImpl backgroundColor)
+    {
+        this.backgroundColor = backgroundColor;
+    }
 
-	/**
-	 * Specifies one or more background images for an element
-	 *
-	 * @return
-	 */
-	public ImageCSSImpl getBackgroundImage()
-	{
-		return backgroundImage;
-	}
+    /**
+     * Specifies the background color of an element
+     *
+     * @return
+     */
 
-	/**
-	 * Sets the background image
-	 *
-	 * @param backgroundImage
-	 */
-	public void setBackgroundImage(ImageCSSImpl backgroundImage)
-	{
-		this.backgroundImage = backgroundImage;
-	}
+    public ColourNames getBackgroundColor$()
+    {
+        return backgroundColor$;
+    }
 
-	/**
-	 * Specifies the position of a background image
-	 *
-	 * @return
-	 */
-	public BackgroundPositions getBackgroundPosition()
-	{
-		return backgroundPosition;
-	}
+    /**
+     * Sets the background colour
+     *
+     * @param backgroundColor$
+     */
 
-	/**
-	 * Gets the background position
-	 *
-	 * @param backgroundPosition
-	 */
-	public void setBackgroundPosition(BackgroundPositions backgroundPosition)
-	{
-		this.backgroundPosition = backgroundPosition;
-	}
+    public void setBackgroundColor$(ColourNames backgroundColor$)
+    {
+        this.backgroundColor$ = backgroundColor$;
+    }
 
-	/**
-	 * Sets how a background image will be repeated
-	 *
-	 * @return
-	 */
-	public Repeats getBackgroundRepeat()
-	{
-		return backgroundRepeat;
-	}
+    /**
+     * Specifies one or more background images for an element
+     *
+     * @return
+     */
 
-	/**
-	 * Sets the background repeat
-	 *
-	 * @param backgroundRepeat
-	 */
-	public void setBackgroundRepeat(Repeats backgroundRepeat)
-	{
-		this.backgroundRepeat = backgroundRepeat;
-	}
+    public ImageCSSImpl getBackgroundImage()
+    {
+        return backgroundImage;
+    }
 
-	/**
-	 * Specifies the blending mode of each background layer (color/image)
-	 *
-	 * @return
-	 */
-	public BackgroundBlendMode getBackgroundBlendMode()
-	{
-		return backgroundBlendMode;
-	}
+    /**
+     * Sets the background image
+     *
+     * @param backgroundImage
+     */
 
-	/**
-	 * Sets the background blend mode
-	 *
-	 * @param backgroundBlendMode
-	 */
-	public void setBackgroundBlendMode(BackgroundBlendMode backgroundBlendMode)
-	{
-		this.backgroundBlendMode = backgroundBlendMode;
-	}
+    public void setBackgroundImage(ImageCSSImpl backgroundImage)
+    {
+        this.backgroundImage = backgroundImage;
+    }
 
-	/**
-	 * Specifies the painting area of the background
-	 *
-	 * @return
-	 */
-	public BackgroundClip getBackgroundClip()
-	{
-		return backgroundClip;
-	}
+    /**
+     * Specifies the position of a background image
+     *
+     * @return
+     */
 
-	/**
-	 * Sets the background clip
-	 *
-	 * @param backgroundClip
-	 */
-	public void setBackgroundClip(BackgroundClip backgroundClip)
-	{
-		this.backgroundClip = backgroundClip;
-	}
+    public BackgroundPositions getBackgroundPosition()
+    {
+        return backgroundPosition;
+    }
 
-	/**
-	 * Specifies where the background image(s) is/are positioned
-	 *
-	 * @return
-	 */
-	public BackgroundOrigins getBackgroundOrigin()
-	{
-		return backgroundOrigin;
-	}
+    /**
+     * Gets the background position
+     *
+     * @param backgroundPosition
+     */
 
-	/**
-	 * Sets the background origin
-	 *
-	 * @param backgroundOrigin
-	 */
-	public void setBackgroundOrigin(BackgroundOrigins backgroundOrigin)
-	{
-		this.backgroundOrigin = backgroundOrigin;
-	}
+    public void setBackgroundPosition(BackgroundPositions backgroundPosition)
+    {
+        this.backgroundPosition = backgroundPosition;
+    }
 
-	/**
-	 * Specifies the size of the background image(s)
-	 *
-	 * @return
-	 */
-	public MeasurementCSSImpl[] getBackgroundSize()
-	{
-		return backgroundSize;
-	}
+    /**
+     * Sets how a background image will be repeated
+     *
+     * @return
+     */
 
-	/**
-	 * Sets the background size
-	 *
-	 * @param backgroundSize
-	 */
-	public void setBackgroundSize(MeasurementCSSImpl[] backgroundSize)
-	{
-		this.backgroundSize = backgroundSize;
-	}
+    public Repeats getBackgroundRepeat()
+    {
+        return backgroundRepeat;
+    }
 
-	/**
-	 * Specifies the size of the background image(s)
-	 *
-	 * @return
-	 */
-	public BackgroundSizes getBackgroundSize$()
-	{
-		return backgroundSize$;
-	}
+    /**
+     * Sets the background repeat
+     *
+     * @param backgroundRepeat
+     */
 
-	/**
-	 * Sets the background size
-	 *
-	 * @param backgroundSize$
-	 */
-	public void setBackgroundSize$(BackgroundSizes backgroundSize$)
-	{
-		this.backgroundSize$ = backgroundSize$;
-	}
+    public void setBackgroundRepeat(Repeats backgroundRepeat)
+    {
+        this.backgroundRepeat = backgroundRepeat;
+    }
 
-	/**
-	 * Specifies one or more background images for an element
-	 *
-	 * @return
-	 */
-	public ImageCSSImpl[] getBackgroundImage$()
-	{
-		return backgroundImage$;
-	}
+    /**
+     * Specifies the blending mode of each background layer (color/image)
+     *
+     * @return
+     */
 
-	/**
-	 * Sets the background images
-	 *
-	 * @param backgroundImage$
-	 */
-	public void setBackgroundImage$(ImageCSSImpl[] backgroundImage$)
-	{
-		this.backgroundImage$ = backgroundImage$;
-	}
+    public BackgroundBlendMode getBackgroundBlendMode()
+    {
+        return backgroundBlendMode;
+    }
 
-	/**
-	 * Sets whether a background image is fixed or scrolls with the rest of the page
-	 *
-	 * @return
-	 */
-	public BackgroundAttachments getBackgroundAttachment()
-	{
-		return backgroundAttachment;
-	}
+    /**
+     * Sets the background blend mode
+     *
+     * @param backgroundBlendMode
+     */
 
-	/**
-	 * Sets the background attachment
-	 *
-	 * @param backgroundAttachment
-	 */
-	public void setBackgroundAttachment(BackgroundAttachments backgroundAttachment)
-	{
-		this.backgroundAttachment = backgroundAttachment;
-	}
+    public void setBackgroundBlendMode(BackgroundBlendMode backgroundBlendMode)
+    {
+        this.backgroundBlendMode = backgroundBlendMode;
+    }
 
-	/**
-	 * The background
-	 *
-	 * @return
-	 */
-	public BackgroundImpl getBackground()
-	{
-		if (background == null)
-		{
-			background = new BackgroundImpl();
-		}
-		return background;
-	}
+    /**
+     * Specifies the painting area of the background
+     *
+     * @return
+     */
 
-	/**
-	 * Sets the background
-	 *
-	 * @param background
-	 */
-	public void setBackground(BackgroundImpl background)
-	{
-		this.background = background;
-	}
+    public BackgroundClip getBackgroundClip()
+    {
+        return backgroundClip;
+    }
+
+    /**
+     * Sets the background clip
+     *
+     * @param backgroundClip
+     */
+
+    public void setBackgroundClip(BackgroundClip backgroundClip)
+    {
+        this.backgroundClip = backgroundClip;
+    }
+
+    /**
+     * Specifies where the background image(s) is/are positioned
+     *
+     * @return
+     */
+
+    public BackgroundOrigins getBackgroundOrigin()
+    {
+        return backgroundOrigin;
+    }
+
+    /**
+     * Sets the background origin
+     *
+     * @param backgroundOrigin
+     */
+
+    public void setBackgroundOrigin(BackgroundOrigins backgroundOrigin)
+    {
+        this.backgroundOrigin = backgroundOrigin;
+    }
+
+    /**
+     * Specifies the size of the background image(s)
+     *
+     * @return
+     */
+
+    public MeasurementCSSImpl[] getBackgroundSize()
+    {
+        return backgroundSize;
+    }
+
+    /**
+     * Sets the background size
+     *
+     * @param backgroundSize
+     */
+
+    public void setBackgroundSize(MeasurementCSSImpl[] backgroundSize)
+    {
+        this.backgroundSize = backgroundSize;
+    }
+
+    /**
+     * Specifies the size of the background image(s)
+     *
+     * @return
+     */
+
+    public BackgroundSizes getBackgroundSize$()
+    {
+        return backgroundSize$;
+    }
+
+    /**
+     * Sets the background size
+     *
+     * @param backgroundSize$
+     */
+
+    public void setBackgroundSize$(BackgroundSizes backgroundSize$)
+    {
+        this.backgroundSize$ = backgroundSize$;
+    }
+
+    /**
+     * Specifies one or more background images for an element
+     *
+     * @return
+     */
+
+    public ImageCSSImpl[] getBackgroundImage$()
+    {
+        return backgroundImage$;
+    }
+
+    /**
+     * Sets the background images
+     *
+     * @param backgroundImage$
+     */
+
+    public void setBackgroundImage$(ImageCSSImpl[] backgroundImage$)
+    {
+        this.backgroundImage$ = backgroundImage$;
+    }
+
+    /**
+     * Sets whether a background image is fixed or scrolls with the rest of the page
+     *
+     * @return
+     */
+
+    public BackgroundAttachments getBackgroundAttachment()
+    {
+        return backgroundAttachment;
+    }
+
+    /**
+     * Sets the background attachment
+     *
+     * @param backgroundAttachment
+     */
+
+    public void setBackgroundAttachment(BackgroundAttachments backgroundAttachment)
+    {
+        this.backgroundAttachment = backgroundAttachment;
+    }
+
+    /**
+     * The background
+     *
+     * @return
+     */
+
+    public BackgroundImpl getBackground()
+    {
+        if (background == null)
+        {
+            background = new BackgroundImpl();
+        }
+        return background;
+    }
+
+    /**
+     * Sets the background
+     *
+     * @param background
+     */
+
+    public void setBackground(BackgroundImpl background)
+    {
+        this.background = background;
+    }
 
 }

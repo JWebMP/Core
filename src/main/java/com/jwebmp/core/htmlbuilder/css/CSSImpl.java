@@ -34,6 +34,7 @@ import com.jwebmp.core.htmlbuilder.css.tables.TableCSSImpl;
 import com.jwebmp.core.htmlbuilder.css.text.TextCSSImpl;
 
 import jakarta.validation.constraints.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,387 +46,399 @@ import java.util.Map;
  * @since 2012/10/01
  */
 public class CSSImpl
-		extends CSSImplementationAdapter<CSS, CSSImpl>
-		implements CSSImplementationClass<CSS, CSSImpl>, ICSSImpl
+        extends CSSImplementationAdapter<CSS, CSSImpl>
+        implements ICSSImpl, com.jwebmp.core.htmlbuilder.css.interfaces.ICSSImpl<com.jwebmp.core.htmlbuilder.css.CSS, com.jwebmp.core.htmlbuilder.css.CSSImpl>
 {
 
 
-	/**
-	 * The animation CSS
-	 */
-	private AnimateCSSImpl animatable;
-	/**
-	 * The getBackground css
-	 */
-	private BackgroundCSSImpl background;
-	/**
-	 * The getBorder CSS
-	 */
-	private BorderCSSImpl border;
-	/**
-	 * The getDisplay CSS
-	 */
-	private DisplayCSSImpl display;
-	/**
-	 * The font CSS
-	 */
-	private FontsCSSImpl font;
-	/**
-	 * The getDimensions CSS
-	 */
-	private HeightWidthCSSImpl dimensions;
-	/**
-	 * getList Style CSS
-	 */
-	private ListCSSImpl list;
-	/**
-	 * getMargin CSS
-	 */
-	private MarginsCSSImpl margins;
-	/**
-	 * getOutline CSS
-	 */
-	private OutlineCSSImpl outline;
-	/**
-	 * getPadding CSS
-	 */
-	private PaddingCSSImpl padding;
-	/**
-	 * getTable CSS
-	 */
-	private TableCSSImpl table;
-	/**
-	 * Text CSS
-	 */
-	private TextCSSImpl text;
+    /**
+     * The animation CSS
+     */
+    private AnimateCSSImpl animatable;
+    /**
+     * The getBackground css
+     */
+    private BackgroundCSSImpl background;
+    /**
+     * The getBorder CSS
+     */
+    private BorderCSSImpl border;
+    /**
+     * The getDisplay CSS
+     */
+    private DisplayCSSImpl display;
+    /**
+     * The font CSS
+     */
+    private FontsCSSImpl font;
+    /**
+     * The getDimensions CSS
+     */
+    private HeightWidthCSSImpl dimensions;
+    /**
+     * getList Style CSS
+     */
+    private ListCSSImpl list;
+    /**
+     * getMargin CSS
+     */
+    private MarginsCSSImpl margins;
+    /**
+     * getOutline CSS
+     */
+    private OutlineCSSImpl outline;
+    /**
+     * getPadding CSS
+     */
+    private PaddingCSSImpl padding;
+    /**
+     * getTable CSS
+     */
+    private TableCSSImpl table;
+    /**
+     * Text CSS
+     */
+    private TextCSSImpl text;
 
-	/**
-	 * Construct a new instance
-	 */
-	public CSSImpl()
-	{
-		//No need to configure anything on startup
-	}
+    /**
+     * Construct a new instance
+     */
+    public CSSImpl()
+    {
+        //No need to configure anything on startup
+    }
 
-	/**
-	 * Returns all the maps of the underlying objects
-	 *
-	 * @return
-	 */
-	@Override
-	public Map<StringBuilder, Object> getMap()
-	{
-		Map<StringBuilder, Object> returnable = new HashMap<>();
-		returnable.putAll(getBackground().getMap());
-		returnable.putAll(getDimensions().getMap());
-		returnable.putAll(getMargins().getMap());
-		returnable.putAll(getDisplay().getMap());
-		returnable.putAll(getPadding().getMap());
-		returnable.putAll(getText().getMap());
-		returnable.putAll(getBorder().getMap());
-		returnable.putAll(getFont().getMap());
-		returnable.putAll(getList().getMap());
-		returnable.putAll(getOutline().getMap());
-		returnable.putAll(getTable().getMap());
-		returnable.putAll(getAnimatable().getMap());
-		return returnable;
-	}
+    /**
+     * Returns all the maps of the underlying objects
+     *
+     * @return
+     */
+    @Override
+    public Map<StringBuilder, Object> getMap()
+    {
+        Map<StringBuilder, Object> returnable = new HashMap<>();
+        returnable.putAll(getBackground().getMap());
+        returnable.putAll(getDimensions().getMap());
+        returnable.putAll(getMargins().getMap());
+        returnable.putAll(getDisplay().getMap());
+        returnable.putAll(getPadding().getMap());
+        returnable.putAll(getText().getMap());
+        returnable.putAll(getBorder().getMap());
+        returnable.putAll(getFont().getMap());
+        returnable.putAll(getList().getMap());
+        returnable.putAll(getOutline().getMap());
+        returnable.putAll(getTable().getMap());
+        returnable.putAll(getAnimatable().getMap());
+        return returnable;
+    }
 
-	/**
-	 * Gets the background css
-	 *
-	 * @return
-	 */
-	@NotNull
-	public BackgroundCSSImpl getBackground()
-	{
-		if (background == null)
-		{
-			background = new BackgroundCSSImpl();
-		}
-		return background;
-	}
+    /**
+     * Gets the background css
+     *
+     * @return
+     */
+    @Override
+    public @NotNull BackgroundCSSImpl getBackground()
+    {
+        if (background == null)
+        {
+            background = new BackgroundCSSImpl();
+        }
+        return background;
+    }
 
-	/**
-	 * Sets the background object
-	 *
-	 * @param background
-	 */
-	public void setBackground(BackgroundCSSImpl background)
-	{
-		this.background = background;
-	}
+    /**
+     * Sets the background object
+     *
+     * @param background
+     */
+    @Override
+    public void setBackground(BackgroundCSSImpl background)
+    {
+        this.background = background;
+    }
 
-	/**
-	 * Returns dimension settings for the object
-	 *
-	 * @return
-	 */
-	@NotNull
-	public HeightWidthCSSImpl getDimensions()
-	{
-		if (dimensions == null)
-		{
-			dimensions = new HeightWidthCSSImpl();
-		}
-		return dimensions;
-	}
+    /**
+     * Returns dimension settings for the object
+     *
+     * @return
+     */
+    @Override
+    public @NotNull HeightWidthCSSImpl getDimensions()
+    {
+        if (dimensions == null)
+        {
+            dimensions = new HeightWidthCSSImpl();
+        }
+        return dimensions;
+    }
 
-	/**
-	 * Returns the margins
-	 *
-	 * @return
-	 */
-	@NotNull
-	public MarginsCSSImpl getMargins()
-	{
-		if (margins == null)
-		{
-			margins = new MarginsCSSImpl();
-		}
-		return margins;
-	}
+    /**
+     * Returns the margins
+     *
+     * @return
+     */
+    @Override
+    public @NotNull MarginsCSSImpl getMargins()
+    {
+        if (margins == null)
+        {
+            margins = new MarginsCSSImpl();
+        }
+        return margins;
+    }
 
-	/**
-	 * Returns the display
-	 *
-	 * @return
-	 */
-	@NotNull
-	public DisplayCSSImpl getDisplay()
-	{
-		if (display == null)
-		{
-			display = new DisplayCSSImpl();
-		}
-		return display;
-	}
+    /**
+     * Returns the display
+     *
+     * @return
+     */
+    @Override
+    public @NotNull DisplayCSSImpl getDisplay()
+    {
+        if (display == null)
+        {
+            display = new DisplayCSSImpl();
+        }
+        return display;
+    }
 
-	/**
-	 * Returns the padding
-	 *
-	 * @return
-	 */
-	@NotNull
-	public PaddingCSSImpl getPadding()
-	{
-		if (padding == null)
-		{
-			padding = new PaddingCSSImpl();
-		}
-		return padding;
-	}
+    /**
+     * Returns the padding
+     *
+     * @return
+     */
+    @Override
+    public @NotNull PaddingCSSImpl getPadding()
+    {
+        if (padding == null)
+        {
+            padding = new PaddingCSSImpl();
+        }
+        return padding;
+    }
 
-	/**
-	 * Returns the text
-	 *
-	 * @return
-	 */
-	@NotNull
-	public TextCSSImpl getText()
-	{
-		if (text == null)
-		{
-			text = new TextCSSImpl();
-		}
-		return text;
-	}
+    /**
+     * Returns the text
+     *
+     * @return
+     */
+    @Override
+    public @NotNull TextCSSImpl getText()
+    {
+        if (text == null)
+        {
+            text = new TextCSSImpl();
+        }
+        return text;
+    }
 
-	/**
-	 * Gets the border
-	 *
-	 * @return
-	 */
-	@NotNull
-	public BorderCSSImpl getBorder()
-	{
-		if (border == null)
-		{
-			border = new BorderCSSImpl();
-		}
-		return border;
-	}
+    /**
+     * Gets the border
+     *
+     * @return
+     */
+    @Override
+    public @NotNull BorderCSSImpl getBorder()
+    {
+        if (border == null)
+        {
+            border = new BorderCSSImpl();
+        }
+        return border;
+    }
 
-	/**
-	 * @return
-	 */
-	@NotNull
-	public FontsCSSImpl getFont()
-	{
-		if (font == null)
-		{
-			font = new FontsCSSImpl();
-		}
-		return font;
-	}
+    /**
+     * @return
+     */
+    @Override
+    public @NotNull FontsCSSImpl getFont()
+    {
+        if (font == null)
+        {
+            font = new FontsCSSImpl();
+        }
+        return font;
+    }
 
-	/**
-	 * Returns the list
-	 *
-	 * @return
-	 */
-	@NotNull
-	public ListCSSImpl getList()
-	{
-		if (list == null)
-		{
-			list = new ListCSSImpl();
-		}
-		return list;
-	}
+    /**
+     * Returns the list
+     *
+     * @return
+     */
+    @Override
+    public @NotNull ListCSSImpl getList()
+    {
+        if (list == null)
+        {
+            list = new ListCSSImpl();
+        }
+        return list;
+    }
 
-	/**
-	 * Returns the outline
-	 *
-	 * @return
-	 */
-	@NotNull
-	public OutlineCSSImpl getOutline()
-	{
-		if (outline == null)
-		{
-			outline = new OutlineCSSImpl();
-		}
-		return outline;
-	}
+    /**
+     * Returns the outline
+     *
+     * @return
+     */
+    @Override
+    public @NotNull OutlineCSSImpl getOutline()
+    {
+        if (outline == null)
+        {
+            outline = new OutlineCSSImpl();
+        }
+        return outline;
+    }
 
-	/**
-	 * Returns the table
-	 *
-	 * @return
-	 */
-	@NotNull
-	public TableCSSImpl getTable()
-	{
-		if (table == null)
-		{
-			table = new TableCSSImpl();
-		}
-		return table;
-	}
+    /**
+     * Returns the table
+     *
+     * @return
+     */
+    @Override
+    public @NotNull TableCSSImpl getTable()
+    {
+        if (table == null)
+        {
+            table = new TableCSSImpl();
+        }
+        return table;
+    }
 
-	/**
-	 * Returns the animatable object
-	 *
-	 * @return
-	 */
-	@NotNull
-	public AnimateCSSImpl getAnimatable()
-	{
-		if (animatable == null)
-		{
-			animatable = new AnimateCSSImpl();
-		}
-		return animatable;
-	}
+    /**
+     * Returns the animatable object
+     *
+     * @return
+     */
+    @Override
+    public @NotNull AnimateCSSImpl getAnimatable()
+    {
+        if (animatable == null)
+        {
+            animatable = new AnimateCSSImpl();
+        }
+        return animatable;
+    }
 
-	/**
-	 * Sets animatable object
-	 *
-	 * @param animatable
-	 */
-	public void setAnimatable(AnimateCSSImpl animatable)
-	{
-		this.animatable = animatable;
-	}
+    /**
+     * Sets animatable object
+     *
+     * @param animatable
+     */
+    @Override
+    public void setAnimatable(AnimateCSSImpl animatable)
+    {
+        this.animatable = animatable;
+    }
 
-	/**
-	 * Sets the table object
-	 *
-	 * @param table
-	 */
-	public void setTable(TableCSSImpl table)
-	{
-		this.table = table;
-	}
+    /**
+     * Sets the table object
+     *
+     * @param table
+     */
+    @Override
+    public void setTable(TableCSSImpl table)
+    {
+        this.table = table;
+    }
 
-	/**
-	 * Sets the outline object
-	 *
-	 * @param outline
-	 */
-	public void setOutline(OutlineCSSImpl outline)
-	{
-		this.outline = outline;
-	}
+    /**
+     * Sets the outline object
+     *
+     * @param outline
+     */
+    @Override
+    public void setOutline(OutlineCSSImpl outline)
+    {
+        this.outline = outline;
+    }
 
-	/**
-	 * Sets the list object
-	 *
-	 * @param list
-	 */
-	public void setList(ListCSSImpl list)
-	{
-		this.list = list;
-	}
+    /**
+     * Sets the list object
+     *
+     * @param list
+     */
+    @Override
+    public void setList(ListCSSImpl list)
+    {
+        this.list = list;
+    }
 
-	/**
-	 * Sets the font object
-	 *
-	 * @param font
-	 */
-	public void setFont(FontsCSSImpl font)
-	{
-		this.font = font;
-	}
+    /**
+     * Sets the font object
+     *
+     * @param font
+     */
+    @Override
+    public void setFont(FontsCSSImpl font)
+    {
+        this.font = font;
+    }
 
-	/**
-	 * Sets the border object
-	 *
-	 * @param border
-	 */
-	public void setBorder(BorderCSSImpl border)
-	{
-		this.border = border;
-	}
+    /**
+     * Sets the border object
+     *
+     * @param border
+     */
+    @Override
+    public void setBorder(BorderCSSImpl border)
+    {
+        this.border = border;
+    }
 
-	/**
-	 * Sets the text object
-	 *
-	 * @param text
-	 */
-	public void setText(TextCSSImpl text)
-	{
-		this.text = text;
-	}
+    /**
+     * Sets the text object
+     *
+     * @param text
+     */
+    @Override
+    public void setText(TextCSSImpl text)
+    {
+        this.text = text;
+    }
 
-	/**
-	 * Sets the padding object
-	 *
-	 * @param padding
-	 */
-	public void setPadding(PaddingCSSImpl padding)
-	{
-		this.padding = padding;
-	}
+    /**
+     * Sets the padding object
+     *
+     * @param padding
+     */
+    @Override
+    public void setPadding(PaddingCSSImpl padding)
+    {
+        this.padding = padding;
+    }
 
-	/**
-	 * Sets the display object
-	 *
-	 * @param display
-	 */
-	public void setDisplay(DisplayCSSImpl display)
-	{
-		this.display = display;
-	}
+    /**
+     * Sets the display object
+     *
+     * @param display
+     */
+    @Override
+    public void setDisplay(DisplayCSSImpl display)
+    {
+        this.display = display;
+    }
 
-	/**
-	 * Sets the margins object
-	 *
-	 * @param margins
-	 */
-	public void setMargins(MarginsCSSImpl margins)
-	{
-		this.margins = margins;
-	}
+    /**
+     * Sets the margins object
+     *
+     * @param margins
+     */
+    @Override
+    public void setMargins(MarginsCSSImpl margins)
+    {
+        this.margins = margins;
+    }
 
-	/**
-	 * Sets the dimensions object
-	 *
-	 * @param dimensions
-	 */
-	public void setDimensions(HeightWidthCSSImpl dimensions)
-	{
-		this.dimensions = dimensions;
-	}
+    /**
+     * Sets the dimensions object
+     *
+     * @param dimensions
+     */
+    @Override
+    public void setDimensions(HeightWidthCSSImpl dimensions)
+    {
+        this.dimensions = dimensions;
+    }
 }

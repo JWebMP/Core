@@ -23,6 +23,9 @@ module com.jwebmp.core {
 
     requires com.google.guice;
 
+    requires static jdk.httpserver;
+    requires static java.net.http;
+
     requires com.guicedee.jsonrepresentation;
 
     requires com.fasterxml.jackson.databind;
@@ -33,6 +36,9 @@ module com.jwebmp.core {
 
     //requires jakarta.websocket;
     //requires jakarta.websocket.client;
+
+    requires io.vertx.core;
+    requires io.vertx.web;
 
     requires com.google.common;
     requires org.apache.commons.io;

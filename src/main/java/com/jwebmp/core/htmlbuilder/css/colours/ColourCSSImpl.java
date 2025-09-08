@@ -28,135 +28,126 @@ import com.jwebmp.core.htmlbuilder.css.annotations.CSSImplementationValue;
  * @author GedMarc
  */
 public class ColourCSSImpl
-		extends CSSImplementationAdapter<ColourCSS, ColourCSSImpl>
-		implements CSSImplementationValue, CSSImplementationClass<ColourCSS, ColourCSSImpl>
+        extends CSSImplementationAdapter<ColourCSS, ColourCSSImpl>
+        implements CSSImplementationValue, CSSImplementationClass<ColourCSS, ColourCSSImpl>
 {
+    /**
+     * The actual value
+     */
+    private String value;
 
-	/**
-	 * Version 1
-	 */
+    /**
+     * Constructs a new Colour CSS
+     */
+    public ColourCSSImpl()
+    {
+        //No need for anything here
+    }
 
-	/**
-	 * The actual value
-	 */
-	private String value;
+    /**
+     * Constructs a new colour with a value
+     *
+     * @param value
+     */
+    public ColourCSSImpl(String value)
+    {
+        this.value = value;
+    }
 
-	/**
-	 * Constructs a new Colour CSS
-	 */
-	public ColourCSSImpl()
-	{
-		//No need for anything here
-	}
+    /**
+     * Sets the actual value
+     *
+     * @param value
+     */
+    public void setValue(String value)
+    {
+        this.value = value;
+    }
 
-	/**
-	 * Constructs a new colour with a value
-	 *
-	 * @param value
-	 */
-	public ColourCSSImpl(String value)
-	{
-		this.value = value;
-	}
+    public ColourCSSImpl setValue(ColourRGBAImpl value)
+    {
+        this.value = new ColourRGBAImpl().setBlue(value.Blue())
+                                         .setGreen(value.Green())
+                                         .setRed(value.Red())
+                                         .setAlpha(value.Alpha())
+                                         .toString();
+        return this;
+    }
 
-	/**
-	 * Sets the actual value
-	 *
-	 * @param value
-	 */
-	public void setValue(String value)
-	{
-		this.value = value;
-	}
+    /**
+     * Sets the colour value associated
+     *
+     * @param value
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public ColourCSSImpl setValue(ColourCSSImpl value)
+    {
+        this.value = value.value();
+        return this;
+    }
 
-	public ColourCSSImpl setValue(ColourRGBAImpl value)
-	{
-		this.value = new ColourRGBAImpl().setBlue(value.Blue())
-		                                 .setGreen(value.Green())
-		                                 .setRed(value.Red())
-		                                 .setAlpha(value.Alpha())
-		                                 .toString();
-		return this;
-	}
+    @JsonValue
+    /**
+     * Returns the actual value
+     *
+     * @return
+     */ public String value()
+    {
+        return value;
+    }
 
-	/**
-	 * Sets the colour value associated
-	 *
-	 * @param value
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public ColourCSSImpl setValue(ColourCSSImpl value)
-	{
-		this.value = value.value();
-		return this;
-	}
+    /**
+     * Sets the colour
+     *
+     * @param value
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public ColourCSSImpl setValue(ColourNames value)
+    {
+        this.value = value.toString();
+        return this;
+    }
 
-	@JsonValue
-	/**
-	 * Returns the actual value
-	 *
-	 * @return
-	 */ public String value()
-	{
-		return value;
-	}
+    /**
+     * Sets the colour
+     *
+     * @param value
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public ColourCSSImpl setValue(ColourHexImpl value)
+    {
+        this.value = value.toString();
+        return this;
+    }
 
-	/**
-	 * Sets the colour
-	 *
-	 * @param value
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public ColourCSSImpl setValue(ColourNames value)
-	{
-		this.value = value.toString();
-		return this;
-	}
+    /**
+     * Sets the colour
+     *
+     * @param value
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public ColourCSSImpl setValue(ColourRGBImpl value)
+    {
+        this.value = new ColourRGBImpl().setBlue(value.Blue())
+                                        .setGreen(value.Green())
+                                        .setRed(value.Red())
+                                        .toString();
+        return this;
+    }
 
-	/**
-	 * Sets the colour
-	 *
-	 * @param value
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public ColourCSSImpl setValue(ColourHexImpl value)
-	{
-		this.value = value.toString();
-		return this;
-	}
-
-	/**
-	 * Sets the colour
-	 *
-	 * @param value
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public ColourCSSImpl setValue(ColourRGBImpl value)
-	{
-		this.value = new ColourRGBImpl().setBlue(value.Blue())
-		                                .setGreen(value.Green())
-		                                .setRed(value.Red())
-		                                .toString();
-		return this;
-	}
-
-	/**
-	 * Returns the value of this colour
-	 *
-	 * @return
-	 */
-	@Override
-	public String toString()
-	{
-		return value == null ? "" : value;
-	}
+    /**
+     * Returns the value of this colour
+     *
+     * @return
+     */
+    @Override
+    public String toString()
+    {
+        return value == null ? "" : value;
+    }
 
 }
