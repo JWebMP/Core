@@ -25,6 +25,7 @@ import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.events.services.IOnStartService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
+import io.smallrye.mutiny.Uni;
 import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
@@ -52,7 +53,7 @@ public abstract class StartAdapter<J extends StartAdapter<J>>
     }
 
     @Override
-    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    public Uni<Void> fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
     {
         try
         {
@@ -63,6 +64,8 @@ public abstract class StartAdapter<J extends StartAdapter<J>>
         {
             StartAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
         }
+        return Uni.createFrom()
+                  .voidItem();
     }
 
     /**

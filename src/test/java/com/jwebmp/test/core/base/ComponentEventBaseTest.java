@@ -26,6 +26,7 @@ import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.Div;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.events.click.ClickAdapter;
+import io.smallrye.mutiny.Uni;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -36,148 +37,148 @@ import org.junit.jupiter.api.Test;
  * @since 2016/04/23
  */
 public class ComponentEventBaseTest
-		extends BaseTestClass
+        extends BaseTestClass
 {
 
-	public ComponentEventBaseTest()
-	{
-	}
+    public ComponentEventBaseTest()
+    {
+    }
 
 
-	@Test
-	public void testClone()
-	{
-		ComponentEventBase shell = new ComponentEventBase(ComponentTypes.Abbreviation);
-		shell.setID("shell");
-		shell.addEvent(new ClickAdapter(new Div())
-		{
-			@Override
-			public void onClick(AjaxCall call, AjaxResponse response)
-			{
-				throw new UnsupportedOperationException("Not supported yet.");
-			}
-		});
-		Event.class.cast(shell.getEvents()
-		                      .stream()
-		                      .findFirst()
-		                      .get())
-		           .setID("clickEvent");
+    @Test
+    public void testClone()
+    {
+        ComponentEventBase shell = new ComponentEventBase(ComponentTypes.Abbreviation);
+        shell.setID("shell");
+        shell.addEvent(new ClickAdapter(new Div())
+        {
+            @Override
+            public Uni<Void> onClick(AjaxCall call, AjaxResponse response)
+            {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+        });
+        Event.class.cast(shell.getEvents()
+                              .stream()
+                              .findFirst()
+                              .get())
+                   .setID("clickEvent");
 
-		ComponentBase shell2 = shell.cloneComponent();
-		shell2.setID("shell2");
-		System.out.println(shell);
-		System.out.println(shell2);
-		String shellExpected = "{\n" +
-		                       "  \"id\" : \"shell\",\n" +
-		                       "  \"componentType\" : \"abbreviation\",\n" +
-		                       "  \"tiny\" : false,\n" +
-		                       "  \"configured\" : true,\n" +
-		                       "  \"initialized\" : true,\n" +
-		                       "  \"touched\" : false,\n" +
-		                       "  \"sortOrder\" : 1000,\n" +
-		                       "  \"renderAfterLoad\" : false,\n" +
-		                       "  \"javascriptRenderedElsewhere\" : false,\n" +
-		                       "  \"events\" : [ {\n" +
-		                       "    \"id\" : \"clickEvent\",\n" +
-		                       "    \"componentType\" : \"event\",\n" +
-		                       "    \"tiny\" : false,\n" +
-		                       "    \"configured\" : true,\n" +
-		                       "    \"initialized\" : true,\n" +
-		                       "    \"touched\" : false,\n" +
-		                       "    \"sortOrder\" : 1000,\n" +
-		                       "    \"variables\" : [ \"jwCntrl.jw.localstorage\" ],\n" +
-		                       "    \"name\" : \"click\",\n" +
-		                       "    \"renderAfterLoad\" : false,\n" +
-		                       "    \"javascriptRenderedElsewhere\" : false,\n" +
-		                       "    \"registeredComponents\" : [ \"com.jwebmp.core.base.html.Div\" ],\n" +
-		                       "    \"eventType\" : \"click\"\n" +
-		                       "  } ],\n" +
-		                       "  \"componentClass\" : \"com.jwebmp.core.base.ComponentEventBase\"\n" +
-		                       "}";
-		String shell2Expected = "{\n" +
-		                        "  \"id\" : \"shell2\",\n" +
-		                        "  \"componentType\" : \"abbreviation\",\n" +
-		                        "  \"tiny\" : false,\n" +
-		                        "  \"configured\" : true,\n" +
-		                        "  \"initialized\" : true,\n" +
-		                        "  \"touched\" : false,\n" +
-		                        "  \"sortOrder\" : 1000,\n" +
-		                        "  \"renderAfterLoad\" : false,\n" +
-		                        "  \"javascriptRenderedElsewhere\" : false,\n" +
-		                        "  \"events\" : [ {\n" +
-		                        "    \"id\" : \"clickEvent\",\n" +
-		                        "    \"componentType\" : \"event\",\n" +
-		                        "    \"tiny\" : false,\n" +
-		                        "    \"configured\" : true,\n" +
-		                        "    \"initialized\" : true,\n" +
-		                        "    \"touched\" : false,\n" +
-		                        "    \"sortOrder\" : 1000,\n" +
-		                        "    \"variables\" : [ \"jwCntrl.jw.localstorage\" ],\n" +
-		                        "    \"name\" : \"click\",\n" +
-		                        "    \"renderAfterLoad\" : false,\n" +
-		                        "    \"javascriptRenderedElsewhere\" : false,\n" +
-		                        "    \"registeredComponents\" : [ \"com.jwebmp.core.base.html.Div\" ],\n" +
-		                        "    \"eventType\" : \"click\"\n" +
-		                        "  } ],\n" +
-		                        "  \"componentClass\" : \"com.jwebmp.core.base.ComponentEventBase\"\n" +
-		                        "}";
-		//		Assertions.assertEquals(shell.toJson(), shellExpected);
-		//	Assertions.assertEquals(shell2.toJson(), shell2Expected);
-	}
+        ComponentBase shell2 = shell.cloneComponent();
+        shell2.setID("shell2");
+        System.out.println(shell);
+        System.out.println(shell2);
+        String shellExpected = "{\n" +
+                "  \"id\" : \"shell\",\n" +
+                "  \"componentType\" : \"abbreviation\",\n" +
+                "  \"tiny\" : false,\n" +
+                "  \"configured\" : true,\n" +
+                "  \"initialized\" : true,\n" +
+                "  \"touched\" : false,\n" +
+                "  \"sortOrder\" : 1000,\n" +
+                "  \"renderAfterLoad\" : false,\n" +
+                "  \"javascriptRenderedElsewhere\" : false,\n" +
+                "  \"events\" : [ {\n" +
+                "    \"id\" : \"clickEvent\",\n" +
+                "    \"componentType\" : \"event\",\n" +
+                "    \"tiny\" : false,\n" +
+                "    \"configured\" : true,\n" +
+                "    \"initialized\" : true,\n" +
+                "    \"touched\" : false,\n" +
+                "    \"sortOrder\" : 1000,\n" +
+                "    \"variables\" : [ \"jwCntrl.jw.localstorage\" ],\n" +
+                "    \"name\" : \"click\",\n" +
+                "    \"renderAfterLoad\" : false,\n" +
+                "    \"javascriptRenderedElsewhere\" : false,\n" +
+                "    \"registeredComponents\" : [ \"com.jwebmp.core.base.html.Div\" ],\n" +
+                "    \"eventType\" : \"click\"\n" +
+                "  } ],\n" +
+                "  \"componentClass\" : \"com.jwebmp.core.base.ComponentEventBase\"\n" +
+                "}";
+        String shell2Expected = "{\n" +
+                "  \"id\" : \"shell2\",\n" +
+                "  \"componentType\" : \"abbreviation\",\n" +
+                "  \"tiny\" : false,\n" +
+                "  \"configured\" : true,\n" +
+                "  \"initialized\" : true,\n" +
+                "  \"touched\" : false,\n" +
+                "  \"sortOrder\" : 1000,\n" +
+                "  \"renderAfterLoad\" : false,\n" +
+                "  \"javascriptRenderedElsewhere\" : false,\n" +
+                "  \"events\" : [ {\n" +
+                "    \"id\" : \"clickEvent\",\n" +
+                "    \"componentType\" : \"event\",\n" +
+                "    \"tiny\" : false,\n" +
+                "    \"configured\" : true,\n" +
+                "    \"initialized\" : true,\n" +
+                "    \"touched\" : false,\n" +
+                "    \"sortOrder\" : 1000,\n" +
+                "    \"variables\" : [ \"jwCntrl.jw.localstorage\" ],\n" +
+                "    \"name\" : \"click\",\n" +
+                "    \"renderAfterLoad\" : false,\n" +
+                "    \"javascriptRenderedElsewhere\" : false,\n" +
+                "    \"registeredComponents\" : [ \"com.jwebmp.core.base.html.Div\" ],\n" +
+                "    \"eventType\" : \"click\"\n" +
+                "  } ],\n" +
+                "  \"componentClass\" : \"com.jwebmp.core.base.ComponentEventBase\"\n" +
+                "}";
+        //		Assertions.assertEquals(shell.toJson(), shellExpected);
+        //	Assertions.assertEquals(shell2.toJson(), shell2Expected);
+    }
 
-	@Test
-	public void testHtml()
-	{
-		ComponentEventBase shell = new ComponentEventBase(ComponentTypes.Abbreviation);
-		shell.setID("shell");
-		Event e;
-		Div d;
-		shell.addEvent(e = new ClickAdapter(d = new Div())
-		{
-			@Override
-			public void onClick(AjaxCall call, AjaxResponse response)
-			{
-				throw new UnsupportedOperationException("Not supported yet.");
-			}
-		});
+    @Test
+    public void testHtml()
+    {
+        ComponentEventBase shell = new ComponentEventBase(ComponentTypes.Abbreviation);
+        shell.setID("shell");
+        Event e;
+        Div d;
+        shell.addEvent(e = new ClickAdapter(d = new Div())
+        {
+            @Override
+            public Uni<Void> onClick(AjaxCall call, AjaxResponse response)
+            {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+        });
 
-		Event.class.cast(shell.getEvents()
-		                      .stream()
-		                      .findFirst()
-		                      .get())
-		           .setID("clickEvent");
-		d.addEvent(e);
+        Event.class.cast(shell.getEvents()
+                              .stream()
+                              .findFirst()
+                              .get())
+                   .setID("clickEvent");
+        d.addEvent(e);
 
-		System.out.println(d.toString(true));
-	}
+        System.out.println(d.toString(true));
+    }
 
-	@Test
-	public void testPageHtml()
-	{
-		ComponentEventBase shell = new ComponentEventBase(ComponentTypes.Abbreviation);
-		shell.setID("shell");
-		Event e;
-		Div d;
-		shell.addEvent(e = new ClickAdapter(d = new Div())
-		{
-			@Override
-			public void onClick(AjaxCall call, AjaxResponse response)
-			{
-				throw new UnsupportedOperationException("Not supported yet.");
-			}
-		});
+    @Test
+    public void testPageHtml()
+    {
+        ComponentEventBase shell = new ComponentEventBase(ComponentTypes.Abbreviation);
+        shell.setID("shell");
+        Event e;
+        Div d;
+        shell.addEvent(e = new ClickAdapter(d = new Div())
+        {
+            @Override
+            public Uni<Void> onClick(AjaxCall call, AjaxResponse response)
+            {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+        });
 
-		Event.class.cast(shell.getEvents()
-		                      .stream()
-		                      .findFirst()
-		                      .get())
-		           .setID("clickEvent");
-		d.addEvent(e);
+        Event.class.cast(shell.getEvents()
+                              .stream()
+                              .findFirst()
+                              .get())
+                   .setID("clickEvent");
+        d.addEvent(e);
 
-		Page<?> page = getInstance();
-		page.getBody()
-		    .add(d);
-		System.out.println(page.toString(true));
+        Page<?> page = getInstance();
+        page.getBody()
+            .add(d);
+        System.out.println(page.toString(true));
 
-	}
+    }
 }

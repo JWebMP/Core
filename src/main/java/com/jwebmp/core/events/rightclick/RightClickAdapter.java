@@ -27,6 +27,7 @@ import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.html.interfaces.events.ParagraphEvents;
 import com.jwebmp.core.events.services.IOnRightClickService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
+import io.smallrye.mutiny.Uni;
 import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
@@ -55,17 +56,10 @@ public abstract class RightClickAdapter<J extends RightClickAdapter<J>>
     }
 
     @Override
-    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    public Uni<Void> fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
     {
-        try
-        {
-            onRightClick(call, response);
-            onCall();
-        }
-        catch (Exception e)
-        {
-            RightClickAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-        }
+        return onRightClick(call, response).invoke(_ -> onCall());
+
     }
 
     /**
@@ -75,7 +69,7 @@ public abstract class RightClickAdapter<J extends RightClickAdapter<J>>
      * @param call     The physical AJAX call
      * @param response The physical Ajax Receiver
      */
-    public abstract void onRightClick(AjaxCall<?> call, AjaxResponse<?> response);
+    public abstract Uni<Void> onRightClick(AjaxCall<?> call, AjaxResponse<?> response);
 
 
     /**

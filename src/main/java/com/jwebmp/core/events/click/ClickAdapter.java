@@ -28,7 +28,9 @@ import com.jwebmp.core.base.html.interfaces.events.ParagraphEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.events.services.IOnClickService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
+import io.smallrye.mutiny.Uni;
 import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 
 import java.util.ServiceLoader;
 import java.util.Set;
@@ -39,12 +41,12 @@ import java.util.logging.Level;
  *
  * @author GedMarc
  */
-@Log
+@Log4j2
 public abstract class ClickAdapter<J extends ClickAdapter<J>>
         extends Event<GlobalFeatures, J>
         implements ParagraphEvents<GlobalFeatures, J>,
-                   BodyEvents<GlobalFeatures, J>,
-                   GlobalEvents<J>
+        BodyEvents<GlobalFeatures, J>,
+        GlobalEvents<J>
 {
     protected ClickAdapter()
     {
@@ -62,17 +64,28 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
     }
 
     @Override
-    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    public Uni<Void> fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
     {
-        try
-        {
-            onClick(call, response);
-            onCall();
-        }
-        catch (Exception e)
-        {
-            ClickAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-        }
+        return onClick(call, response)
+                .onFailure()
+                .invoke(t -> log.error("fireEvent: onClick Uni failed for {}", getClass().getName(), t))
+                // Use call(...) to make onCall() an ordered side-effect without changing the item
+                .call(() -> {
+                    try
+                    {
+                        onCall();
+                    }
+                    catch (Throwable t)
+                    {
+                        log.error("fireEvent: onCall() threw", t);
+                        // Don’t fail the chain because a legacy onCall() may throw unexpectedly
+                    }
+                    return io.smallrye.mutiny.Uni.createFrom()
+                                                 .voidItem();
+                })
+                ;
+        //.onTermination()
+        //.invoke(() -> log.info("fireEvent: terminated for {}", getClass().getName()));
     }
 
     /**
@@ -81,8 +94,9 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
      *
      * @param call     The physical AJAX call
      * @param response The physical Ajax Receiver
+     * @return
      */
-    public abstract void onClick(AjaxCall<?> call, AjaxResponse<?> response);
+    public abstract Uni<Void> onClick(AjaxCall<?> call, AjaxResponse<?> response);
 
     /**
      * Method onCall ...

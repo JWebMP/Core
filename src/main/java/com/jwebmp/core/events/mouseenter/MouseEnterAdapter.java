@@ -25,6 +25,7 @@ import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.events.services.IOnMouseEnterService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
+import io.smallrye.mutiny.Uni;
 import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
@@ -54,17 +55,10 @@ public abstract class MouseEnterAdapter<J extends MouseEnterAdapter<J>>
     }
 
     @Override
-    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    public Uni<Void> fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
     {
-        try
-        {
-            onMouseEnter(call, response);
-            onCall();
-        }
-        catch (Exception e)
-        {
-            MouseEnterAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-        }
+        return onMouseEnter(call, response).invoke(_ -> onCall());
+
     }
 
     /**
@@ -74,7 +68,7 @@ public abstract class MouseEnterAdapter<J extends MouseEnterAdapter<J>>
      * @param call     The physical AJAX call
      * @param response The physical Ajax Receiver
      */
-    public abstract void onMouseEnter(AjaxCall<?> call, AjaxResponse<?> response);
+    public abstract Uni<Void> onMouseEnter(AjaxCall<?> call, AjaxResponse<?> response);
 
     /**
      * Method onCall ...

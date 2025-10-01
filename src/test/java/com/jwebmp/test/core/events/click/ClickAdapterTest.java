@@ -22,6 +22,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.Div;
 import com.jwebmp.core.base.html.DivSimple;
+import io.smallrye.mutiny.Uni;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,14 +46,15 @@ public class ClickAdapterTest
         ClickAdapter aa = new ClickAdapter(test)
         {
             @Override
-            public void onClick(AjaxCall call, AjaxResponse response)
+            public Uni<Void> onClick(AjaxCall call, AjaxResponse response)
             {
-
+                return Uni.createFrom()
+                          .voidItem();
             }
         };
         test.addEvent(aa.setID("test"));
         assertTrue(!test.getEvents()
-                .isEmpty());
+                        .isEmpty());
     }
 
     @Test
@@ -64,9 +66,10 @@ public class ClickAdapterTest
         ClickAdapter aa = new ClickAdapter(test)
         {
             @Override
-            public void onClick(AjaxCall call, AjaxResponse response)
+            public Uni<Void> onClick(AjaxCall call, AjaxResponse response)
             {
-
+                return Uni.createFrom()
+                          .voidItem();
             }
         };
         test.addEvent(aa.setID("test"));
@@ -83,17 +86,19 @@ public class ClickAdapterTest
         ClickAdapter aa = new ClickAdapter(test)
         {
             @Override
-            public void onClick(AjaxCall call, AjaxResponse response)
+            public Uni<Void> onClick(AjaxCall call, AjaxResponse response)
             {
-
+                return Uni.createFrom()
+                          .voidItem();
             }
         };
         ClickAdapter ab = new ClickAdapter(test)
         {
             @Override
-            public void onClick(AjaxCall call, AjaxResponse response)
+            public Uni<Void> onClick(AjaxCall call, AjaxResponse response)
             {
-
+                return Uni.createFrom()
+                          .voidItem();
             }
         };
         ab.setID("test4");

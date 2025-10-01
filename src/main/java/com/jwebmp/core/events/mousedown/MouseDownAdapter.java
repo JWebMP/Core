@@ -24,6 +24,7 @@ import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.events.services.IOnMouseDownService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
+import io.smallrye.mutiny.Uni;
 import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
@@ -53,17 +54,10 @@ public abstract class MouseDownAdapter<J extends MouseDownAdapter<J>>
     }
 
     @Override
-    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    public Uni<Void> fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
     {
-        try
-        {
-            onMouseDown(call, response);
-            onCall();
-        }
-        catch (Exception e)
-        {
-            MouseDownAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
-        }
+        return onMouseDown(call, response).invoke(_ -> onCall());
+
     }
 
     /**
@@ -73,7 +67,7 @@ public abstract class MouseDownAdapter<J extends MouseDownAdapter<J>>
      * @param call     The physical AJAX call
      * @param response The physical Ajax Receiver
      */
-    public abstract void onMouseDown(AjaxCall<?> call, AjaxResponse<?> response);
+    public abstract Uni<Void> onMouseDown(AjaxCall<?> call, AjaxResponse<?> response);
 
     /**
      * Method onCall ...

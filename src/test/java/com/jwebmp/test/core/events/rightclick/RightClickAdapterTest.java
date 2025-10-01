@@ -23,6 +23,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.Div;
 import com.jwebmp.core.base.html.DivSimple;
+import io.smallrye.mutiny.Uni;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,14 +39,15 @@ public class RightClickAdapterTest
         RightClickAdapter aa = new RightClickAdapter(test)
         {
             @Override
-            public void onRightClick(AjaxCall call, AjaxResponse response)
+            public Uni<Void> onRightClick(AjaxCall call, AjaxResponse response)
             {
-
+                return Uni.createFrom()
+                          .voidItem();
             }
         };
         test.addEvent(aa.setID("test"));
         assertTrue(!test.getEvents()
-                .isEmpty());
+                        .isEmpty());
     }
 
 }

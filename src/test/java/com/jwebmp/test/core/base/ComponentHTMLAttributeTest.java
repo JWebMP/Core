@@ -24,6 +24,7 @@ import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.Div;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.events.click.ClickAdapter;
+import io.smallrye.mutiny.Uni;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -32,102 +33,102 @@ import org.junit.jupiter.api.Test;
 public class ComponentHTMLAttributeTest
 {
 
-	public ComponentHTMLAttributeTest()
-	{
-	}
+    public ComponentHTMLAttributeTest()
+    {
+    }
 
-	@Test
-	public void testClone()
-	{
-		ComponentHTMLAttributeBase shell = new ComponentHTMLAttributeBase(ComponentTypes.Abbreviation);
-		shell.setID("shell");
-		shell.addEvent(new ClickAdapter(new Div())
-		{
-			@Override
-			public void onClick(AjaxCall call, AjaxResponse response)
-			{
-				throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-			}
-		});
-		Event.class.cast(shell.getEvents()
-		                      .stream()
-		                      .findFirst()
-		                      .get())
-		           .setID("clickEvent");
+    @Test
+    public void testClone()
+    {
+        ComponentHTMLAttributeBase shell = new ComponentHTMLAttributeBase(ComponentTypes.Abbreviation);
+        shell.setID("shell");
+        shell.addEvent(new ClickAdapter(new Div())
+        {
+            @Override
+            public Uni<Void> onClick(AjaxCall call, AjaxResponse response)
+            {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        Event.class.cast(shell.getEvents()
+                              .stream()
+                              .findFirst()
+                              .get())
+                   .setID("clickEvent");
 
-		ComponentBase shell2 = shell.cloneComponent();
-		shell2.setID("shell2");
-		System.out.println(shell);
-		System.out.println(shell2);
-		String shellExpected = "{\n" +
-		                       "  \"id\" : \"shell\",\n" +
-		                       "  \"componentType\" : \"abbreviation\",\n" +
-		                       "  \"tiny\" : false,\n" +
-		                       "  \"configured\" : true,\n" +
-		                       "  \"initialized\" : true,\n" +
-		                       "  \"touched\" : false,\n" +
-		                       "  \"sortOrder\" : 1000,\n" +
-		                       "  \"renderAfterLoad\" : false,\n" +
-		                       "  \"javascriptRenderedElsewhere\" : false,\n" +
-		                       "  \"events\" : [ {\n" +
-		                       "    \"id\" : \"clickEvent\",\n" +
-		                       "    \"componentType\" : \"event\",\n" +
-		                       "    \"tiny\" : false,\n" +
-		                       "    \"configured\" : true,\n" +
-		                       "    \"initialized\" : true,\n" +
-		                       "    \"touched\" : false,\n" +
-		                       "    \"sortOrder\" : 1000,\n" +
-		                       "    \"name\" : \"click\",\n" +
-		                       "    \"renderAfterLoad\" : false,\n" +
-		                       "    \"javascriptRenderedElsewhere\" : false,\n" +
-		                       "    \"registeredComponents\" : [ \"com.jwebmp.core.base.html.Div\" ],\n" +
-		                       "    \"eventType\" : \"click\"\n" +
-		                       "  } ],\n" +
-		                       "  \"tag\" : \"abbr\",\n" +
-		                       "  \"closingTag\" : true,\n" +
-		                       "  \"newLineForRawText\" : false,\n" +
-		                       "  \"newLineForClosingTag\" : true,\n" +
-		                       "  \"renderTextBeforeChildren\" : true,\n" +
-		                       "  \"attributes\" : {\n" +
-		                       "    \"id\" : \"shell\"\n" +
-		                       "  },\n" +
-		                       "  \"componentClass\" : \"com.jwebmp.core.base.ComponentHTMLAttributeBase\"\n" +
-		                       "}";
-		String shell2Expected = "{\n" +
-		                        "  \"id\" : \"shell2\",\n" +
-		                        "  \"componentType\" : \"abbreviation\",\n" +
-		                        "  \"tiny\" : false,\n" +
-		                        "  \"configured\" : true,\n" +
-		                        "  \"initialized\" : true,\n" +
-		                        "  \"touched\" : false,\n" +
-		                        "  \"sortOrder\" : 1000,\n" +
-		                        "  \"renderAfterLoad\" : false,\n" +
-		                        "  \"javascriptRenderedElsewhere\" : false,\n" +
-		                        "  \"events\" : [ {\n" +
-		                        "    \"id\" : \"clickEvent\",\n" +
-		                        "    \"componentType\" : \"event\",\n" +
-		                        "    \"tiny\" : false,\n" +
-		                        "    \"configured\" : true,\n" +
-		                        "    \"initialized\" : true,\n" +
-		                        "    \"touched\" : false,\n" +
-		                        "    \"sortOrder\" : 1000,\n" +
-		                        "    \"name\" : \"click\",\n" +
-		                        "    \"renderAfterLoad\" : false,\n" +
-		                        "    \"javascriptRenderedElsewhere\" : false,\n" +
-		                        "    \"registeredComponents\" : [ \"com.jwebmp.core.base.html.Div\" ],\n" +
-		                        "    \"eventType\" : \"click\"\n" +
-		                        "  } ],\n" +
-		                        "  \"tag\" : \"abbr\",\n" +
-		                        "  \"closingTag\" : true,\n" +
-		                        "  \"newLineForRawText\" : false,\n" +
-		                        "  \"newLineForClosingTag\" : true,\n" +
-		                        "  \"renderTextBeforeChildren\" : true,\n" +
-		                        "  \"attributes\" : {\n" +
-		                        "    \"id\" : \"shell2\"\n" +
-		                        "  },\n" +
-		                        "  \"componentClass\" : \"com.jwebmp.core.base.ComponentHTMLAttributeBase\"\n" +
-		                        "}";
-		//		Assertions.assertEquals(shell.toJson(), shellExpected);
-		//	Assertions.assertEquals(shell2.toJson(), shell2Expected);
-	}
+        ComponentBase shell2 = shell.cloneComponent();
+        shell2.setID("shell2");
+        System.out.println(shell);
+        System.out.println(shell2);
+        String shellExpected = "{\n" +
+                "  \"id\" : \"shell\",\n" +
+                "  \"componentType\" : \"abbreviation\",\n" +
+                "  \"tiny\" : false,\n" +
+                "  \"configured\" : true,\n" +
+                "  \"initialized\" : true,\n" +
+                "  \"touched\" : false,\n" +
+                "  \"sortOrder\" : 1000,\n" +
+                "  \"renderAfterLoad\" : false,\n" +
+                "  \"javascriptRenderedElsewhere\" : false,\n" +
+                "  \"events\" : [ {\n" +
+                "    \"id\" : \"clickEvent\",\n" +
+                "    \"componentType\" : \"event\",\n" +
+                "    \"tiny\" : false,\n" +
+                "    \"configured\" : true,\n" +
+                "    \"initialized\" : true,\n" +
+                "    \"touched\" : false,\n" +
+                "    \"sortOrder\" : 1000,\n" +
+                "    \"name\" : \"click\",\n" +
+                "    \"renderAfterLoad\" : false,\n" +
+                "    \"javascriptRenderedElsewhere\" : false,\n" +
+                "    \"registeredComponents\" : [ \"com.jwebmp.core.base.html.Div\" ],\n" +
+                "    \"eventType\" : \"click\"\n" +
+                "  } ],\n" +
+                "  \"tag\" : \"abbr\",\n" +
+                "  \"closingTag\" : true,\n" +
+                "  \"newLineForRawText\" : false,\n" +
+                "  \"newLineForClosingTag\" : true,\n" +
+                "  \"renderTextBeforeChildren\" : true,\n" +
+                "  \"attributes\" : {\n" +
+                "    \"id\" : \"shell\"\n" +
+                "  },\n" +
+                "  \"componentClass\" : \"com.jwebmp.core.base.ComponentHTMLAttributeBase\"\n" +
+                "}";
+        String shell2Expected = "{\n" +
+                "  \"id\" : \"shell2\",\n" +
+                "  \"componentType\" : \"abbreviation\",\n" +
+                "  \"tiny\" : false,\n" +
+                "  \"configured\" : true,\n" +
+                "  \"initialized\" : true,\n" +
+                "  \"touched\" : false,\n" +
+                "  \"sortOrder\" : 1000,\n" +
+                "  \"renderAfterLoad\" : false,\n" +
+                "  \"javascriptRenderedElsewhere\" : false,\n" +
+                "  \"events\" : [ {\n" +
+                "    \"id\" : \"clickEvent\",\n" +
+                "    \"componentType\" : \"event\",\n" +
+                "    \"tiny\" : false,\n" +
+                "    \"configured\" : true,\n" +
+                "    \"initialized\" : true,\n" +
+                "    \"touched\" : false,\n" +
+                "    \"sortOrder\" : 1000,\n" +
+                "    \"name\" : \"click\",\n" +
+                "    \"renderAfterLoad\" : false,\n" +
+                "    \"javascriptRenderedElsewhere\" : false,\n" +
+                "    \"registeredComponents\" : [ \"com.jwebmp.core.base.html.Div\" ],\n" +
+                "    \"eventType\" : \"click\"\n" +
+                "  } ],\n" +
+                "  \"tag\" : \"abbr\",\n" +
+                "  \"closingTag\" : true,\n" +
+                "  \"newLineForRawText\" : false,\n" +
+                "  \"newLineForClosingTag\" : true,\n" +
+                "  \"renderTextBeforeChildren\" : true,\n" +
+                "  \"attributes\" : {\n" +
+                "    \"id\" : \"shell2\"\n" +
+                "  },\n" +
+                "  \"componentClass\" : \"com.jwebmp.core.base.ComponentHTMLAttributeBase\"\n" +
+                "}";
+        //		Assertions.assertEquals(shell.toJson(), shellExpected);
+        //	Assertions.assertEquals(shell2.toJson(), shell2Expected);
+    }
 }

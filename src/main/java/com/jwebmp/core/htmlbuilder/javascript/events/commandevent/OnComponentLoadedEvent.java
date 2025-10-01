@@ -23,6 +23,7 @@ import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
+import io.smallrye.mutiny.Uni;
 
 /**
  * This class enables a JQuery call to execute a java function directly after it
@@ -33,33 +34,36 @@ import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
  * @since 2012-12-30
  */
 public abstract class OnComponentLoadedEvent<J extends OnComponentLoadedEvent<J>>
-		extends Event<GlobalFeatures, J>
+        extends Event<GlobalFeatures, J>
 {
-	public OnComponentLoadedEvent(IComponentHierarchyBase<?,?> component)
-	{
-		super(EventTypes.performCommand, component);
-	}
+    public OnComponentLoadedEvent(IComponentHierarchyBase<?, ?> component)
+    {
+        super(EventTypes.performCommand, component);
+    }
 
-	@Override
-	public void assignFunctionsToComponent()
-	{
-		String jQuery = "jw.env.controller.makeCall(jw.env.controller.makeEmptyArticle('" +
-				getComponent().asBase().getID() + "','" + getClassCanonicalName() + "'," + renderVariables()+ "));" + getNewLine();
+    @Override
+    public void assignFunctionsToComponent()
+    {
+        String jQuery = "jw.env.controller.makeCall(jw.env.controller.makeEmptyArticle('" +
+                getComponent().asBase()
+                              .getID() + "','" + getClassCanonicalName() + "'," + renderVariables() + "));" + getNewLine();
 
-		addQuery(new StringBuilder(jQuery));
-	}
-	
-	@Override
-	public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
-	{
-		perform(call, response);
-	}
+        addQuery(new StringBuilder(jQuery));
+    }
 
-	/**
-	 * Executes the JavaScript lines of code directly after the component is executed
-	 *
-	 * @param call The call object
-	 * @param response The response object
-	 */
-	public abstract void perform(AjaxCall<?> call, AjaxResponse<?> response);
+    @Override
+    public Uni<Void> fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    {
+        perform(call, response);
+        return Uni.createFrom()
+                  .voidItem();
+    }
+
+    /**
+     * Executes the JavaScript lines of code directly after the component is executed
+     *
+     * @param call     The call object
+     * @param response The response object
+     */
+    public abstract void perform(AjaxCall<?> call, AjaxResponse<?> response);
 }

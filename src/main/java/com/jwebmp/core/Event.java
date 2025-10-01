@@ -30,6 +30,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.events.IEventConfigurator;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.htmlbuilder.javascript.events.interfaces.IEvent;
+import io.smallrye.mutiny.Uni;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
@@ -192,10 +193,12 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
      *
      * @param call     The component that made the call
      * @param response The Response Object Being Returned
+     * @return
      */
-    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    public Uni<Void> fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
     {
-
+        return Uni.createFrom()
+                  .voidItem();
     }
 
     /**

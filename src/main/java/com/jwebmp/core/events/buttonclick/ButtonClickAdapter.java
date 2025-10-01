@@ -24,6 +24,7 @@ import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.events.services.IOnButtonClickService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
+import io.smallrye.mutiny.Uni;
 import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
@@ -54,12 +55,15 @@ public abstract class ButtonClickAdapter<J extends ButtonClickAdapter<J>>
      *
      * @param ajaxObject   The component that made the call
      * @param ajaxReceiver The Response Object Being Returned
+     * @return
      */
     @Override
-    public void fireEvent(AjaxCall<?> ajaxObject, AjaxResponse<?> ajaxReceiver)
+    public Uni<Void> fireEvent(AjaxCall<?> ajaxObject, AjaxResponse<?> ajaxReceiver)
     {
         onButtonClick(ajaxObject, ajaxReceiver);
         onCall();
+        return Uni.createFrom()
+                  .voidItem();
     }
 
 

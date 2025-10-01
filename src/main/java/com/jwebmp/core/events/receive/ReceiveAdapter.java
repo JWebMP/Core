@@ -25,6 +25,7 @@ import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.events.services.IOnReceiveService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
+import io.smallrye.mutiny.Uni;
 import lombok.extern.java.Log;
 
 import java.util.ServiceLoader;
@@ -54,7 +55,7 @@ public abstract class ReceiveAdapter<J extends ReceiveAdapter<J>>
     }
 
     @Override
-    public void fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
+    public Uni<Void> fireEvent(AjaxCall<?> call, AjaxResponse<?> response)
     {
         try
         {
@@ -65,6 +66,8 @@ public abstract class ReceiveAdapter<J extends ReceiveAdapter<J>>
         {
             ReceiveAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
         }
+        return Uni.createFrom()
+                  .voidItem();
     }
 
     /**
