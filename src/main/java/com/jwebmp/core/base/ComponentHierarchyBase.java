@@ -162,7 +162,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum<?> 
      */
     @Override
     @NotNull
-    public J setTiny(boolean tiny)
+    public @org.jspecify.annotations.NonNull J setTiny(boolean tiny)
     {
         getChildren().stream()
                 .filter(a -> a != null)
@@ -672,7 +672,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum<?> 
     @Override
     @NotNull
     @SuppressWarnings("unchecked")
-    public J setParent(IComponentHierarchyBase<?, ?> parent)
+    public @org.jspecify.annotations.NonNull J setParent(IComponentHierarchyBase<?, ?> parent)
     {
         this.parent = parent;
         return (J) this;
@@ -809,7 +809,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum<?> 
     @NotNull
     @SuppressWarnings("unchecked")
     @Override
-    public J setClasses(Set<String> classes)
+    public @org.jspecify.annotations.NonNull J setClasses(Set<String> classes)
     {
         this.classes = classes;
         return (J) this;
@@ -1095,7 +1095,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum<?> 
      */
     @Override
     @SuppressWarnings("unchecked")
-    public J setPage(IPage<?> page)
+    public @org.jspecify.annotations.NonNull J setPage(IPage<?> page)
     {
         this.page = page;
         getChildren().stream()
@@ -1405,7 +1405,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum<?> 
      * @param renderChildren
      * @return
      */
-    public J setRenderChildren(boolean renderChildren)
+    public @org.jspecify.annotations.NonNull J setRenderChildren(boolean renderChildren)
     {
         this.renderChildren = renderChildren;
         return (J) this;

@@ -284,7 +284,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setConfigured(boolean configured)
+    public @org.jspecify.annotations.NonNull J setConfigured(boolean configured)
     {
         this.configured = configured;
         return (J) this;
@@ -311,7 +311,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setTiny(boolean tiny)
+    public @org.jspecify.annotations.NonNull J setTiny(boolean tiny)
     {
         this.tiny = tiny;
         return (J) this;
@@ -339,7 +339,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setTouched(boolean touched)
+    public @org.jspecify.annotations.NonNull J setTouched(boolean touched)
     {
         this.touched = touched;
         return (J) this;
@@ -366,7 +366,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setProperties(Map<String, Object> properties)
+    public @org.jspecify.annotations.NonNull J setProperties(Map<String, Object> properties)
     {
         this.properties = properties;
         return (J) this;
@@ -381,7 +381,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setText(String text)
+    public @org.jspecify.annotations.NonNull J setText(String text)
     {
         this.text = text;
         return (J) this;
@@ -396,7 +396,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setID(String id)
+    public @org.jspecify.annotations.NonNull J setID(String id)
     {
         this.id = id;
         return (J) this;
@@ -492,7 +492,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setText(StringBuilder text)
+    public @org.jspecify.annotations.NonNull J setText(StringBuilder text)
     {
         this.text = text.toString();
         return (J) this;
@@ -520,7 +520,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
      */
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setComponentType(ComponentTypes componentType)
+    public @org.jspecify.annotations.NonNull J setComponentType(ComponentTypes componentType)
     {
         this.componentType = componentType;
         return (J) this;
@@ -544,7 +544,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
      */
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setInitialized(boolean initialized)
+    public @org.jspecify.annotations.NonNull J setInitialized(boolean initialized)
     {
         this.initialized = initialized;
         return (J) this;
@@ -637,7 +637,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
      * @return
      */
     @Override
-    public J setStartOfRender(boolean startOfRender)
+    public @org.jspecify.annotations.NonNull J setStartOfRender(boolean startOfRender)
     {
         this.startOfRender = startOfRender;
         return (J) this;

@@ -50,7 +50,7 @@ public class InputNumberType<J extends InputNumberType<J>>
 	}
 	
 	@Override
-	public J setMinimum(int minimum)
+	public @org.jspecify.annotations.NonNull J setMinimum(int minimum)
 	{
 		return super.setMinimum(minimum);
 	}

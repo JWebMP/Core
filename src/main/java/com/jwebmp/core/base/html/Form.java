@@ -124,7 +124,7 @@ public class Form<J extends Form<J>>
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J setLabel(Label label)
+	public @org.jspecify.annotations.NonNull J setLabel(Label label)
 	{
 		this.label = label;
 		return (J) this;
@@ -132,7 +132,7 @@ public class Form<J extends Form<J>>
 
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J setNoValidate(boolean noValidate)
+	public @org.jspecify.annotations.NonNull J setNoValidate(boolean noValidate)
 	{
 		if (noValidate)
 		{
@@ -147,7 +147,7 @@ public class Form<J extends Form<J>>
 
 	@NotNull
 	@Override
-	public J setID(String id)
+	public @org.jspecify.annotations.NonNull J setID(String id)
 	{
 		setName(id);
 		return super.setID(id);
@@ -162,7 +162,7 @@ public class Form<J extends Form<J>>
 
 	@NotNull
 	@Override
-	public J setName(@NotNull String name)
+	public @org.jspecify.annotations.NonNull J setName(@NotNull String name)
 	{
 		addAttribute("name", name);
 		return super.setName(name);

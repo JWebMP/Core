@@ -42,7 +42,7 @@ public class InputTextAreaType<J extends InputTextAreaType<J>>
 	}
 	
 	@Override
-	public J setValue(String value)
+	public @org.jspecify.annotations.NonNull J setValue(String value)
 	{
 		setText(value);
 		//noinspection unchecked

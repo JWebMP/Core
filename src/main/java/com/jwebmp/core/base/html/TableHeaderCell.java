@@ -126,7 +126,7 @@ public class TableHeaderCell<J extends TableHeaderCell<J>>
 	 * 		Sets this table cells column span
 	 */
 	@SuppressWarnings("unchecked")
-	public J setColumnSpan(int columnSpan)
+	public @org.jspecify.annotations.NonNull J setColumnSpan(int columnSpan)
 	{
 		addAttribute(TableCellAttributes.ColSpan, columnSpan);
 		return (J) this;
@@ -149,7 +149,7 @@ public class TableHeaderCell<J extends TableHeaderCell<J>>
 	 * 		Integer that is row span
 	 */
 	@SuppressWarnings("unchecked")
-	public J setRowSpan(int rowSpan)
+	public @org.jspecify.annotations.NonNull J setRowSpan(int rowSpan)
 	{
 		addAttribute(TableCellAttributes.RowSpan, Integer.toString(rowSpan));
 		return (J) this;

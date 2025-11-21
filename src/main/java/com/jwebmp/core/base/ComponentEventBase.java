@@ -228,7 +228,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
     @Override
     @NotNull
     @SuppressWarnings("unchecked")
-    public J setEventType(@NotNull IEventTypes<?> eventType)
+    public @org.jspecify.annotations.NonNull J setEventType(@NotNull IEventTypes<?> eventType)
     {
         this.eventType = eventType;
         return (J) this;
@@ -375,7 +375,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
      */
     @Override
     @NotNull
-    public J setTiny(boolean tiny)
+    public @org.jspecify.annotations.NonNull J setTiny(boolean tiny)
     {
         for (E e : getEvents())
         {

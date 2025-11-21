@@ -395,7 +395,7 @@ public class Page<J extends Page<J>>
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setTiny(boolean tiny) {
+    public @org.jspecify.annotations.NonNull J setTiny(boolean tiny) {
         super.setTiny(tiny);
         getHead().setTiny(tiny);
         getBody().setTiny(tiny);
@@ -590,12 +590,12 @@ public class Page<J extends Page<J>>
         }
     }
 
-    public J setOptions(PageOptions<?> options) {
+    public @org.jspecify.annotations.NonNull J setOptions(PageOptions<?> options) {
         this.options = options;
         return (J) this;
     }
 
-    public J setContentSecurityPolicy(ContentSecurityPolicy contentSecurityPolicy) {
+    public @org.jspecify.annotations.NonNull J setContentSecurityPolicy(ContentSecurityPolicy contentSecurityPolicy) {
         this.contentSecurityPolicy = contentSecurityPolicy;
         return (J) this;
     }

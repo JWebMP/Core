@@ -156,7 +156,7 @@ public class Script<C extends GlobalChildren & CastableComponent<J>, J extends S
      * @param javascript The JavaScript to directly insert
      */
     @SuppressWarnings("unchecked")
-    public J setJavascript(String javascript)
+    public @org.jspecify.annotations.NonNull J setJavascript(String javascript)
     {
         setText(javascript);
         return (J) this;

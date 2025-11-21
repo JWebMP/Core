@@ -118,7 +118,7 @@ public class Paragraph<J extends Paragraph<J>>
      * @return
      */
     @SuppressWarnings("unchecked")
-    public J setTextOnly(boolean textOnly)
+    public @org.jspecify.annotations.NonNull J setTextOnly(boolean textOnly)
     {
         this.textOnly = textOnly;
         return (J) this;

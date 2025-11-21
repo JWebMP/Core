@@ -11,7 +11,7 @@ import java.util.function.Function;
  * <pre>
  *   public class Paragraph<J extends Paragraph<J>>
  *       extends ComponentHierarchyBase implements Self<J> {
- *     public J setText(String text) {
+ *     public @org.jspecify.annotations.NonNull J setText(String text) {
  *       this.text = text;
  *       return self();
  *     }

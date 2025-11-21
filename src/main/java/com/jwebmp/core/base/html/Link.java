@@ -175,7 +175,7 @@ public class Link<J extends Link<J>>
      */
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setDirectToAddress(String directToAddress)
+    public @org.jspecify.annotations.NonNull J setDirectToAddress(String directToAddress)
     {
         this.directToAddress = directToAddress;
         addAttribute(LinkAttributes.HRef, directToAddress);
@@ -201,7 +201,7 @@ public class Link<J extends Link<J>>
      */
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setTargetFrameName(String targetFrameName)
+    public @org.jspecify.annotations.NonNull J setTargetFrameName(String targetFrameName)
     {
         this.targetFrameName = targetFrameName;
         addAttribute(LinkAttributes.Target, targetFrameName);

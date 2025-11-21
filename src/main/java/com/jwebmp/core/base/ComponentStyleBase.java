@@ -28,6 +28,7 @@ import com.jwebmp.core.htmlbuilder.css.composer.CSSComposer;
 import com.jwebmp.core.htmlbuilder.css.enumarations.CSSTypes;
 
 import jakarta.validation.constraints.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -140,7 +141,7 @@ public abstract class ComponentStyleBase<C extends GlobalChildren,
     @Override
     @NotNull
     @SuppressWarnings("unchecked")
-    public J setCss(ICSSImpl css) {
+    public @org.jspecify.annotations.NonNull J setCss(ICSSImpl css) {
         this.css = (CSSImpl) css;
         return (J) this;
     }
@@ -165,7 +166,7 @@ public abstract class ComponentStyleBase<C extends GlobalChildren,
     @Override
     @NotNull
     @SuppressWarnings("unchecked")
-    public J setCssName(@NotNull String cssName) {
+    public @org.jspecify.annotations.NonNull J setCssName(@NotNull String cssName) {
         this.cssName = cssName;
         return (J) this;
     }

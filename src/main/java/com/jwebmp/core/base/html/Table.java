@@ -82,7 +82,7 @@ public class Table<J extends Table<J>>
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J setCellSpacing(int cellSpacing)
+	public @org.jspecify.annotations.NonNull J setCellSpacing(int cellSpacing)
 	{
 		addAttribute(TableAttributes.CellSpacing, cellSpacing);
 		return (J) this;
@@ -109,7 +109,7 @@ public class Table<J extends Table<J>>
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J setCellPadding(int cellPadding)
+	public @org.jspecify.annotations.NonNull J setCellPadding(int cellPadding)
 	{
 		addAttribute(TableAttributes.CellPadding, cellPadding);
 		return (J) this;

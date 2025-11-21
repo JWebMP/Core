@@ -153,7 +153,7 @@ public abstract class Feature<F extends GlobalFeatures, O extends JavaScriptPart
      */
     @NotNull
     @Override
-    public J setComponent(IComponentHierarchyBase<?, ?> component)
+    public @org.jspecify.annotations.NonNull J setComponent(IComponentHierarchyBase<?, ?> component)
     {
         if (getComponent() != null)
         {
@@ -171,7 +171,7 @@ public abstract class Feature<F extends GlobalFeatures, O extends JavaScriptPart
      */
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setOptions(O options)
+    public @org.jspecify.annotations.NonNull J setOptions(O options)
     {
         this.options = options;
         return (J) this;

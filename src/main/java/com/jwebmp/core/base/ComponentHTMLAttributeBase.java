@@ -256,7 +256,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
     @Override
     @NotNull
     @SuppressWarnings("unchecked")
-    public final J addAttribute(@NotNull GlobalAttributes attribute, @NotNull String value)
+    public @org.jspecify.annotations.NonNull J addAttribute(@NotNull GlobalAttributes attribute, @NotNull String value)
     {
         getAttributes().put(attribute.toString(), value);
         return (J) this;
@@ -274,7 +274,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
     @Override
     @NotNull
     @SuppressWarnings("unchecked")
-    public final J addAttribute(@NotNull GlobalAttributes attribute, @NotNull Object value)
+    public @org.jspecify.annotations.NonNull J addAttribute(@NotNull GlobalAttributes attribute, @NotNull Object value)
     {
         getAttributes().put(attribute.toString(), value + "");
         return (J) this;
@@ -328,7 +328,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
      */
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setInvertColonRender(boolean invertColonRender)
+    public @org.jspecify.annotations.NonNull J setInvertColonRender(boolean invertColonRender)
     {
         this.invertColonRender = invertColonRender;
         return (J) this;
@@ -363,7 +363,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public final J addAttribute(String attribute, String value)
+    public @org.jspecify.annotations.NonNull J addAttribute(String attribute, String value)
     {
         if (!Strings.isNullOrEmpty(attribute))
         {
@@ -383,7 +383,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public final J addAttribute(@NotNull A attribute, @NotNull Integer value)
+    public @org.jspecify.annotations.NonNull J addAttribute(@NotNull A attribute, @NotNull Integer value)
     {
         getAttributes().put(attribute.toString(), value.toString());
         return (J) this;
@@ -400,7 +400,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public final J addAttribute(@NotNull A attribute, @NotNull Boolean value)
+    public @org.jspecify.annotations.NonNull J addAttribute(@NotNull A attribute, @NotNull Boolean value)
     {
         getAttributes().put(attribute.toString(), value.toString());
         return (J) this;
@@ -582,7 +582,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
     @NotNull
     @SuppressWarnings({"unchecked",
             "unused"})
-    public J setRenderIDAttribute(boolean renderIDAttribute)
+    public @org.jspecify.annotations.NonNull J setRenderIDAttribute(boolean renderIDAttribute)
     {
         renderIDAttibute = renderIDAttribute;
         if (!renderIDAttibute)
@@ -615,7 +615,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
      */
     @Override
     @NotNull
-    public J setID(String id)
+    public @org.jspecify.annotations.NonNull J setID(String id)
     {
         if (Strings.isNullOrEmpty(id))
         {
@@ -762,7 +762,7 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
     }
 
     @Override
-    public J setName(String name)
+    public @org.jspecify.annotations.NonNull J setName(String name)
     {
         if (!Strings.isNullOrEmpty(name))
         {

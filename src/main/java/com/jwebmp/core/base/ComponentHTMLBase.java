@@ -199,7 +199,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
      * @return Always this object
      */
     @SuppressWarnings("unchecked")
-    public J setRenderTextBeforeChildren(boolean renderTextBeforeChildren)
+    public @org.jspecify.annotations.NonNull J setRenderTextBeforeChildren(boolean renderTextBeforeChildren)
     {
         this.renderTextBeforeChildren = renderTextBeforeChildren;
         return (J) this;
@@ -418,7 +418,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setNewLineForClosingTag(boolean newLineForClosingTag)
+    public @org.jspecify.annotations.NonNull J setNewLineForClosingTag(boolean newLineForClosingTag)
     {
         this.newLineForClosingTag = newLineForClosingTag;
         return (J) this;
@@ -446,7 +446,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setClosingTag(boolean noCloseTag)
+    public @org.jspecify.annotations.NonNull J setClosingTag(boolean noCloseTag)
     {
         closingTag = noCloseTag;
         return (J) this;
@@ -474,7 +474,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setTag(String tag)
+    public @org.jspecify.annotations.NonNull J setTag(String tag)
     {
         this.tag = tag;
         return (J) this;
@@ -490,7 +490,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setTag(ComponentTypes tag)
+    public @org.jspecify.annotations.NonNull J setTag(ComponentTypes tag)
     {
         this.tag = tag.getComponentTag();
         return (J) this;
@@ -573,7 +573,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setCurrentTabIndents(int currentTabIndents)
+    public @org.jspecify.annotations.NonNull J setCurrentTabIndents(int currentTabIndents)
     {
         this.currentTabIndents = currentTabIndents;
         return (J) this;
@@ -588,7 +588,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     @Override
     @SuppressWarnings("unchecked")
     @NotNull
-    public J setNewLineForRawText(boolean newLineForRawText)
+    public @org.jspecify.annotations.NonNull J setNewLineForRawText(boolean newLineForRawText)
     {
         this.newLineForRawText = newLineForRawText;
         return (J) this;
@@ -766,7 +766,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
      * @param renderTag
      * @return
      */
-    public J setRenderTag(boolean renderTag)
+    public @org.jspecify.annotations.NonNull J setRenderTag(boolean renderTag)
     {
         this.renderTag = renderTag;
         return (J) this;

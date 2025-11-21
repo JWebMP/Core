@@ -127,7 +127,7 @@ public class PageOptions<J extends PageOptions<J>>
 	 * 		The description of the page
 	 */
 	@SuppressWarnings("unchecked")
-	public final J setDescription(String description)
+	public @org.jspecify.annotations.NonNull J setDescription(String description)
 	{
 		if (descriptionMeta == null)
 		{
@@ -157,7 +157,7 @@ public class PageOptions<J extends PageOptions<J>>
 	 * 		The Application Name of the page
 	 */
 	@SuppressWarnings("unchecked")
-	public final J setApplicationNameMeta(String applicationName)
+	public @org.jspecify.annotations.NonNull J setApplicationNameMeta(String applicationName)
 	{
 		if (applicationNameMeta == null)
 		{
@@ -187,7 +187,7 @@ public class PageOptions<J extends PageOptions<J>>
 	 * 		The Generator of the page
 	 */
 	@SuppressWarnings("unchecked")
-	public final J setGenerator(String Generator)
+	public @org.jspecify.annotations.NonNull J setGenerator(String Generator)
 	{
 		if (generatorMeta == null)
 		{
@@ -217,7 +217,7 @@ public class PageOptions<J extends PageOptions<J>>
 	 * 		The Keywords of the page
 	 */
 	@SuppressWarnings("unchecked")
-	public final J setKeywords(String Keywords)
+	public @org.jspecify.annotations.NonNull J setKeywords(String Keywords)
 	{
 		if (keywordsMeta == null)
 		{
@@ -259,7 +259,7 @@ public class PageOptions<J extends PageOptions<J>>
 	 * 		The Title of the page
 	 */
 	@SuppressWarnings("unchecked")
-	public final J setTitle(String Title)
+	public @org.jspecify.annotations.NonNull J setTitle(String Title)
 	{
 		title = new Title(Title);
 		title.setPage(page);
@@ -273,7 +273,7 @@ public class PageOptions<J extends PageOptions<J>>
 	 * 		The Title of the page
 	 */
 	@SuppressWarnings("unchecked")
-	public final J setTitle(Title Title)
+	public @org.jspecify.annotations.NonNull J setTitle(Title Title)
 	{
 		title = Title;
 		if (title != null)
@@ -300,7 +300,7 @@ public class PageOptions<J extends PageOptions<J>>
 	 * 		The Application Name of the page
 	 */
 	@SuppressWarnings("unchecked")
-	public final J setCompatibilityMode(InternetExplorerCompatibilityMode httpEquiv)
+	public @org.jspecify.annotations.NonNull J setCompatibilityMode(InternetExplorerCompatibilityMode httpEquiv)
 	{
 		if (httpEquivMeta != null && httpEquiv != null)
 		{
@@ -338,7 +338,7 @@ public class PageOptions<J extends PageOptions<J>>
 	 * 		The path to the icon
 	 */
 	@SuppressWarnings("unchecked")
-	public J setFavIcon(String favIconURL)
+	public @org.jspecify.annotations.NonNull J setFavIcon(String favIconURL)
 	{
 		favIconLink = new CSSLink();
 		favIconLink.addAttribute(CSSLinkAttributes.Rel, "icon");
@@ -374,7 +374,7 @@ public class PageOptions<J extends PageOptions<J>>
 	 * 		The author of this page
 	 */
 	@SuppressWarnings("unchecked")
-	public final J setAuthor(String author)
+	public @org.jspecify.annotations.NonNull J setAuthor(String author)
 	{
 		this.author = new Meta(Meta.MetadataFields.Author, author);
 		return (J) this;
@@ -437,7 +437,7 @@ public class PageOptions<J extends PageOptions<J>>
 	 * @param enable
 	 */
 	@SuppressWarnings("unchecked")
-	public J setCacheControl(CacheControl enable)
+	public @org.jspecify.annotations.NonNull J setCacheControl(CacheControl enable)
 	{
 		Meta appleMeta = new Meta();
 		appleMeta.addAttribute("name", "CACHE-CONTROL");
@@ -490,7 +490,7 @@ public class PageOptions<J extends PageOptions<J>>
 	 * 		The Base of the page
 	 */
 	@SuppressWarnings("unchecked")
-	public final J setBase(Base base)
+	public @org.jspecify.annotations.NonNull J setBase(Base base)
 	{
 		this.base = base;
 		if (base != null)
@@ -550,7 +550,7 @@ public class PageOptions<J extends PageOptions<J>>
 	 * @return This
 	 */
 	@SuppressWarnings("unchecked")
-	public J setCanonicalLink(String url)
+	public @org.jspecify.annotations.NonNull J setCanonicalLink(String url)
 	{
 		page.getHead()
 		    .add(new CSSLink("canonical", null, url));
@@ -568,7 +568,7 @@ public class PageOptions<J extends PageOptions<J>>
 	 * @return This
 	 */
 	@SuppressWarnings("unchecked")
-	public J setIcon(String iconUrl, String sizes)
+	public @org.jspecify.annotations.NonNull J setIcon(String iconUrl, String sizes)
 	{
 		page.getHead()
 		    .add(new CSSLink<>(null, "icon", iconUrl).addAttribute("sizes", sizes));
@@ -586,7 +586,7 @@ public class PageOptions<J extends PageOptions<J>>
 	 * @return This
 	 */
 	@SuppressWarnings("unchecked")
-	public J setAppleTouchIconPrecomposed(String iconUrl, String sizes)
+	public @org.jspecify.annotations.NonNull J setAppleTouchIconPrecomposed(String iconUrl, String sizes)
 	{
 		page.getHead()
 		    .add(new CSSLink<>(null, "apple-touch-icon-precomposed", iconUrl).addAttribute("sizes", sizes));
@@ -604,7 +604,7 @@ public class PageOptions<J extends PageOptions<J>>
 	 * @return This
 	 */
 	@SuppressWarnings("unchecked")
-	public J setMSApplicationTileImage(String iconUrl, String sizes)
+	public @org.jspecify.annotations.NonNull J setMSApplicationTileImage(String iconUrl, String sizes)
 	{
 		page.getHead()
 		    .add(new CSSLink<>(null, "msapplication-TileImage", iconUrl).addAttribute("sizes", sizes));
@@ -617,7 +617,7 @@ public class PageOptions<J extends PageOptions<J>>
 	 * @return This
 	 */
 	@SuppressWarnings("unchecked")
-	public J setAppleMobileAppCapable(boolean capable)
+	public @org.jspecify.annotations.NonNull J setAppleMobileAppCapable(boolean capable)
 	{
 		Meta appleMeta = new Meta();
 		appleMeta.addAttribute("name", "apple-mobile-web-app-capable");
@@ -635,7 +635,7 @@ public class PageOptions<J extends PageOptions<J>>
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public J setAppleMobileStatusBarStyle(AppleMobileStatusBarStyles style)
+	public @org.jspecify.annotations.NonNull J setAppleMobileStatusBarStyle(AppleMobileStatusBarStyles style)
 	{
 		Meta appleMeta = new Meta();
 		appleMeta.addAttribute("name", "apple-mobile-web-app-status-bar-style");

@@ -322,7 +322,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
      */
     @NotNull
     @SuppressWarnings("unchecked")
-    public final J setSortOrder(int sortOrder)
+    public @org.jspecify.annotations.NonNull J setSortOrder(int sortOrder)
     {
         this.sortOrder = sortOrder;
         return (J) this;
@@ -513,7 +513,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
     @NotNull
     @SuppressWarnings({"unchecked",
             "UnusedReturnValue"})
-    public J setRenderAfterLoad(boolean renderAfterLoad)
+    public @org.jspecify.annotations.NonNull J setRenderAfterLoad(boolean renderAfterLoad)
     {
         this.renderAfterLoad = renderAfterLoad;
         return (J) this;
@@ -527,7 +527,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
      */
     @NotNull
     @SuppressWarnings("unchecked")
-    public J setPriority(@NotNull RequirementsPriority priority)
+    public @org.jspecify.annotations.NonNull J setPriority(@NotNull RequirementsPriority priority)
     {
         this.priority = priority;
         return (J) this;
@@ -541,7 +541,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
      */
     @NotNull
     @SuppressWarnings("unchecked")
-    public J setName(@NotNull String name)
+    public @org.jspecify.annotations.NonNull J setName(@NotNull String name)
     {
         this.name = name;
         return (J) this;
@@ -574,7 +574,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
      */
     @NotNull
     @Override
-    public J setTiny(boolean tiny)
+    public @org.jspecify.annotations.NonNull J setTiny(boolean tiny)
     {
         for (F f : getFeatures())
         {
@@ -635,7 +635,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
     @NotNull
     @SuppressWarnings({"unused",
             "unchecked"})
-    public J setJavascriptRenderedElsewhere(boolean javascriptRenderedElsewhere)
+    public @org.jspecify.annotations.NonNull J setJavascriptRenderedElsewhere(boolean javascriptRenderedElsewhere)
     {
         this.javascriptRenderedElsewhere = javascriptRenderedElsewhere;
         return (J) this;
@@ -687,7 +687,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
     @SuppressWarnings({"unused",
             "unchecked"})
     @Override
-    public J setComponent(IComponentHierarchyBase<?, ?> component)
+    public @org.jspecify.annotations.NonNull J setComponent(IComponentHierarchyBase<?, ?> component)
     {
         this.component = component;
         return (J) this;

@@ -172,7 +172,7 @@ public class ImportFile<J extends ImportFile<J>>
 	 * @return Always this
 	 */
 	@SuppressWarnings("unchecked")
-	public J setTemplateName(String templateName)
+	public @org.jspecify.annotations.NonNull J setTemplateName(String templateName)
 	{
 		this.templateName = templateName;
 		return (J) this;

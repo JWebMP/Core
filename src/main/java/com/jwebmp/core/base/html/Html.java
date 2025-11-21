@@ -169,7 +169,7 @@ public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
      * @param browser
      */
     @Override
-    public J setBrowser(Browsers browser)
+    public @org.jspecify.annotations.NonNull J setBrowser(Browsers browser)
     {
         this.browser = browser;
         return (J) this;
@@ -246,7 +246,7 @@ public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
      * @param body
      */
     @SuppressWarnings("unchecked")
-    public J setBody(IBody<?, ?> body)
+    public @org.jspecify.annotations.NonNull J setBody(IBody<?, ?> body)
     {
         this.body = (Body<?, ?>) body;
         return (J) this;
@@ -259,7 +259,7 @@ public abstract class Html<C extends HtmlChildren, J extends Html<C, J>>
      * @return
      */
     @SuppressWarnings("unchecked")
-    public J setHead(IHead head)
+    public @org.jspecify.annotations.NonNull J setHead(IHead head)
     {
         this.head = (Head<?>) head;
         return (J) this;

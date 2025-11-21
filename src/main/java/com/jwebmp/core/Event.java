@@ -235,7 +235,7 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
      * @return This object
      */
     @SuppressWarnings("unchecked")
-    public J setOnDemandQueries(List<Event<?, ?>> onDemandQueries)
+    public @org.jspecify.annotations.NonNull J setOnDemandQueries(List<Event<?, ?>> onDemandQueries)
     {
         runEvents = onDemandQueries;
         return (J) this;
@@ -272,7 +272,7 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
      */
     @NotNull
     @Override
-    public J setID(String id)
+    public @org.jspecify.annotations.NonNull J setID(String id)
     {
         return super.setID(id.replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE));
     }

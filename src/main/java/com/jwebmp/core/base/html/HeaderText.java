@@ -107,7 +107,7 @@ public class HeaderText<J extends HeaderText<J>>
      * @return
      */
     @SuppressWarnings("unchecked")
-    public final J setHeaderText(String headerText)
+    public @org.jspecify.annotations.NonNull J setHeaderText(String headerText)
     {
         setText(headerText);
         return (J) this;
@@ -159,7 +159,7 @@ public class HeaderText<J extends HeaderText<J>>
      * @return
      */
     @SuppressWarnings("unchecked")
-    public J setHeaderType(HeaderTypes headerType)
+    public @org.jspecify.annotations.NonNull J setHeaderType(HeaderTypes headerType)
     {
         this.headerType = headerType;
         super.setTag(headerType.name());

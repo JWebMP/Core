@@ -149,7 +149,7 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
      * @return
      */
     @SuppressWarnings("unchecked")
-    public J setInputType(InputTypes inputType)
+    public @org.jspecify.annotations.NonNull J setInputType(InputTypes inputType)
     {
         this.inputType = inputType;
         addAttribute(GlobalAttributes.Type, inputType.toString());
@@ -158,14 +158,14 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
 
     @Override
     @NotNull
-    public J setID(String id)
+    public @org.jspecify.annotations.NonNull J setID(String id)
     {
         setName(id);
         return super.setID(id);
     }
 
     @Override
-    public J setName(String name)
+    public @org.jspecify.annotations.NonNull J setName(String name)
     {
         addAttribute(GlobalAttributes.Name, name);
         addAttribute(GlobalAttributes.ID, name);
@@ -186,7 +186,7 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
      * @return
      */
     @SuppressWarnings("unchecked")
-    public J setRequired()
+    public @org.jspecify.annotations.NonNull J setRequired()
     {
         addAttribute("required", StaticStrings.STRING_EMPTY);
         return (J) this;
@@ -199,7 +199,7 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
      * @return
      */
     @SuppressWarnings("unchecked")
-    public J setMinimumLength(int minLength)
+    public @org.jspecify.annotations.NonNull J setMinimumLength(int minLength)
     {
         addAttribute("data-minlength", Integer.toString(minLength));
         addAttribute("minlength", Integer.toString(minLength));
@@ -214,7 +214,7 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
      * @return
      */
     @SuppressWarnings("unchecked")
-    public J setMinimum(int minimum)
+    public @org.jspecify.annotations.NonNull J setMinimum(int minimum)
     {
         addAttribute("data-min", Integer.toString(minimum));
         addAttribute("min", Integer.toString(minimum));
@@ -228,7 +228,7 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
      * @return
      */
     @SuppressWarnings("unchecked")
-    public J setMinimum(double minimum)
+    public @org.jspecify.annotations.NonNull J setMinimum(double minimum)
     {
         addAttribute("data-min", Double.toString(minimum));
         addAttribute("min", Double.toString(minimum));
@@ -243,7 +243,7 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
      * @return
      */
     @SuppressWarnings("unchecked")
-    public J setMaximumLength(int minLength)
+    public @org.jspecify.annotations.NonNull J setMaximumLength(int minLength)
     {
         addAttribute("data-maxlength", Integer.toString(minLength));
         addAttribute("maxlength", Integer.toString(minLength));
@@ -258,7 +258,7 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
      * @return
      */
     @SuppressWarnings("unchecked")
-    public J setMaximum(int max)
+    public @org.jspecify.annotations.NonNull J setMaximum(int max)
     {
         addAttribute("data-max", Integer.toString(max));
         addAttribute("max", Integer.toString(max));
@@ -273,7 +273,7 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
      * @return
      */
     @SuppressWarnings("unchecked")
-    public J setMaximum(double max)
+    public @org.jspecify.annotations.NonNull J setMaximum(double max)
     {
         addAttribute("data-max", Double.toString(max));
         addAttribute("max", Double.toString(max));
@@ -287,7 +287,7 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
      * @return
      */
     @SuppressWarnings("unchecked")
-    public J setPlaceholder(String placeholder)
+    public @org.jspecify.annotations.NonNull J setPlaceholder(String placeholder)
     {
         addAttribute("placeholder", placeholder);
         return (J) this;
@@ -300,7 +300,7 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
      * @return
      */
     @SuppressWarnings("unchecked")
-    public J setValue(String value)
+    public @org.jspecify.annotations.NonNull J setValue(String value)
     {
         addAttribute("value", value);
         return (J) this;
@@ -318,7 +318,7 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
      * @return
      */
     @SuppressWarnings("unchecked")
-    public J setPattern(String pattern, boolean raw)
+    public @org.jspecify.annotations.NonNull J setPattern(String pattern, boolean raw)
     {
         if (raw)
         {
@@ -338,7 +338,7 @@ public class Input<A extends Enum<?> & AttributeDefinitions, J extends Input<A, 
      * @return
      */
     @SuppressWarnings("unchecked")
-    public J setPattern(String angularPatternName)
+    public @org.jspecify.annotations.NonNull J setPattern(String angularPatternName)
     {
         addAttribute("pattern", angularPatternName);
         return (J) this;

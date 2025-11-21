@@ -108,7 +108,7 @@ public class InputSelectType<J extends InputSelectType<J>>
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J setMultiple(boolean multiple)
+	public @org.jspecify.annotations.NonNull J setMultiple(boolean multiple)
 	{
 		this.multiple = multiple;
 		if (multiple)

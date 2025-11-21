@@ -53,7 +53,7 @@ public class InputCheckBoxType<J extends InputCheckBoxType<J>>
 	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J setChecked(boolean checked)
+	public @org.jspecify.annotations.NonNull J setChecked(boolean checked)
 	{
 		if (checked)
 		{

@@ -121,7 +121,7 @@ public class TableCell<J extends TableCell<J>>
      */
     @NotNull
     @SuppressWarnings("unchecked")
-    public J setColumnSpan(int columnSpan)
+    public @org.jspecify.annotations.NonNull J setColumnSpan(int columnSpan)
     {
         addAttribute(TableCellAttributes.ColSpan, columnSpan);
         return (J) this;
@@ -144,7 +144,7 @@ public class TableCell<J extends TableCell<J>>
      */
     @NotNull
     @SuppressWarnings("unchecked")
-    public J setRowSpan(int rowSpan)
+    public @org.jspecify.annotations.NonNull J setRowSpan(int rowSpan)
     {
         addAttribute(TableCellAttributes.RowSpan, Integer.toString(rowSpan));
         return (J) this;

@@ -89,7 +89,7 @@ public class Option<J extends Option<J>>
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public J setLabel(String label)
+	public @org.jspecify.annotations.NonNull J setLabel(String label)
 	{
 		addAttribute(OptionAttributes.Label, label);
 		return (J) this;
@@ -114,7 +114,7 @@ public class Option<J extends Option<J>>
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public J setValue(String value)
+	public @org.jspecify.annotations.NonNull J setValue(String value)
 	{
 		addAttribute(OptionAttributes.Value, value);
 		return (J) this;

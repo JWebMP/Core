@@ -52,7 +52,7 @@ public class InputRadioType<J extends InputRadioType<J>>
 	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J setChecked(boolean checked)
+	public @org.jspecify.annotations.NonNull J setChecked(boolean checked)
 	{
 		if (checked)
 		{
@@ -67,7 +67,7 @@ public class InputRadioType<J extends InputRadioType<J>>
 
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J setGroup(String groupName)
+	public @org.jspecify.annotations.NonNull J setGroup(String groupName)
 	{
 		addAttribute("name", groupName);
 		return (J) this;

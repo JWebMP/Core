@@ -114,7 +114,7 @@ public class Body<F extends BodyFeatures, J extends Body<F, J>>
      * @return
      */
     @Override
-    public J setRenderedScripts(boolean renderedScripts) {
+    public @org.jspecify.annotations.NonNull J setRenderedScripts(boolean renderedScripts) {
         this.renderedScripts = renderedScripts;
         return (J) this;
     }
