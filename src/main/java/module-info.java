@@ -1,6 +1,6 @@
-import com.guicedee.guicedinjection.interfaces.IGuiceModule;
-import com.guicedee.guicedinjection.interfaces.IGuicePostStartup;
-import com.guicedee.guicedinjection.interfaces.IGuicePreStartup;
+import com.guicedee.client.services.lifecycle.IGuiceModule;
+import com.guicedee.client.services.config.IGuiceScanModuleInclusions;
+import com.guicedee.client.services.lifecycle.IGuicePreStartup;
 import com.jwebmp.core.events.services.*;
 import com.jwebmp.core.implementations.JWebMPPreStartup;
 import com.jwebmp.core.implementations.JWebMPServicesBindings;
@@ -251,7 +251,7 @@ module com.jwebmp.core {
     provides IGuiceModule with JWebMPServicesBindings;
     provides IGuicePreStartup with JWebMPPreStartup;
 
-    provides com.guicedee.guicedinjection.interfaces.IGuiceScanModuleInclusions with com.jwebmp.core.implementations.JWebMPModuleInclusions;
+    provides IGuiceScanModuleInclusions with com.jwebmp.core.implementations.JWebMPModuleInclusions;
 
     provides com.jwebmp.core.services.IRegularExpressions with com.jwebmp.core.utilities.regex.TextRegExPatterns, com.jwebmp.core.utilities.regex.EmailAddressRegExPatterns, com.jwebmp.core.utilities.regex.DateFormatRegExPatterns;
 

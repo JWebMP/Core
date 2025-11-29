@@ -5,7 +5,7 @@ import com.google.inject.Key;
 import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 import com.guicedee.client.IGuiceContext;
-import com.guicedee.guicedinjection.interfaces.IGuiceModule;
+import com.guicedee.client.services.lifecycle.IGuiceModule;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.services.*;
 

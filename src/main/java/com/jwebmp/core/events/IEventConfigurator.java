@@ -1,7 +1,7 @@
 package com.jwebmp.core.events;
 
 import com.jwebmp.core.Event;
-import com.guicedee.guicedinjection.interfaces.IDefaultService;
+import com.guicedee.client.services.IDefaultService;
 
 import jakarta.validation.constraints.NotNull;
 

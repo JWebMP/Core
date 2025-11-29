@@ -1,7 +1,7 @@
 package com.jwebmp.core.base;
 
 import com.google.common.base.Strings;
-import com.guicedee.guicedservlets.servlets.services.scopes.CallScope;
+import com.guicedee.client.scopes.CallScope;
 import com.jwebmp.core.base.html.DivSimple;
 import com.jwebmp.core.base.interfaces.IContentSecurityPolicy;
 
