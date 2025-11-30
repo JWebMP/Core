@@ -13,8 +13,7 @@
     <packaging>jar</packaging>
     <version>2.0.0-SNAPSHOT</version>
     <name>JWebMP</name>
-    <description>The core of the JWebMP library allowing you to create enterprise grade level applications
-    </description>
+    <description>Open-source core for JWebMP: a strongly-typed, server-rendered HTML/CSS/JS component model for Java with Guice/ServiceLoader extensibility and Vert.x-ready endpoints.</description>
     <url>https://github.com/GedMarc/JWebMP</url>
 
     <properties>
