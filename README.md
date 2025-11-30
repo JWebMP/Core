@@ -27,7 +27,7 @@ public class HomePage extends Page<HomePage> {
   }
 }
 ```
-- Boot GuicedEE (e.g., `IGuiceContext.instance().init();` or your host’s bootstrap). The Vert.x HTTP server starts and routes requests to the configured page URLs.
+- Boot GuicedEE (e.g., `IGuiceContext.instance().inject();` or your host’s bootstrap). The Vert.x HTTP server starts and routes requests to the configured page URLs.
 - For a custom path, set `url` in `@PageConfiguration`; the default is `/`.
 - Rendered output per request uses the same pipeline as `page.toString(true)`, so server-driven events and configurators are applied automatically.
 
