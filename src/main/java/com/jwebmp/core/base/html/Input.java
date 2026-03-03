@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.base.html;
 
-import com.guicedee.services.jsonrepresentation.json.StaticStrings;
+import com.guicedee.modules.services.jsonrepresentation.json.StaticStrings;
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.GlobalAttributes;
 import com.jwebmp.core.base.html.attributes.InputTypes;

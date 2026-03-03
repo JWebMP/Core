@@ -24,7 +24,7 @@ import com.jwebmp.core.htmlbuilder.css.colours.ColourCSSImpl;
 import com.jwebmp.core.htmlbuilder.css.colours.ColourNames;
 import com.jwebmp.core.htmlbuilder.css.enumarations.BorderStyles;
 import com.jwebmp.core.htmlbuilder.css.measurement.MeasurementCSSImpl;
-import com.guicedee.services.jsonrepresentation.json.StaticStrings;
+import com.guicedee.modules.services.jsonrepresentation.json.StaticStrings;
 
 /**
  * CSS Border Properties

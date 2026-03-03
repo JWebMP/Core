@@ -45,7 +45,7 @@ import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.logging.Level;
 
-import static com.guicedee.services.jsonrepresentation.json.StaticStrings.STRING_SEMICOLON;
+import static com.guicedee.modules.services.jsonrepresentation.json.StaticStrings.STRING_SEMICOLON;
 
 /**
  * Top level of any HTML page.

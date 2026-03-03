@@ -1,7 +1,7 @@
 package com.jwebmp.core.implementations;
 
 import com.guicedee.client.services.lifecycle.IGuicePreStartup;
-import com.guicedee.services.jsonrepresentation.IJsonRepresentation;
+import com.guicedee.modules.services.jsonrepresentation.IJsonRepresentation;
 import com.guicedee.vertx.spi.VertXPreStartup;
 import io.vertx.core.Future;
 

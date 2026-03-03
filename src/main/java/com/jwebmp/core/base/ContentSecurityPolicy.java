@@ -8,7 +8,7 @@ import com.jwebmp.core.base.interfaces.IContentSecurityPolicy;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static com.guicedee.services.jsonrepresentation.json.StaticStrings.STRING_SPACE;
+import static com.guicedee.modules.services.jsonrepresentation.json.StaticStrings.STRING_SPACE;
 import static com.jwebmp.core.base.html.attributes.MetaAttributes.Http_Equiv;
 import static com.jwebmp.core.base.servlets.enumarations.ComponentTypes.Metadata;
 

@@ -18,8 +18,8 @@ package com.jwebmp.core;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.guicedee.client.IGuiceContext;
-import com.guicedee.services.jsonrepresentation.IJsonRepresentation;
-import com.guicedee.services.jsonrepresentation.json.StaticStrings;
+import com.guicedee.modules.services.jsonrepresentation.IJsonRepresentation;
+import com.guicedee.modules.services.jsonrepresentation.json.StaticStrings;
 import com.jwebmp.core.base.ComponentEventBase;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.ServiceLoader;
 import java.util.Set;
 
-import static com.guicedee.services.jsonrepresentation.json.StaticStrings.*;
+import static com.guicedee.modules.services.jsonrepresentation.json.StaticStrings.*;
 
 /**
  * Container Class for Events. Splits from the component hierarchy

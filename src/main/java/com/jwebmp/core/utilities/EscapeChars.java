@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.utilities;
 
-import com.guicedee.services.jsonrepresentation.json.StaticStrings;
+import com.guicedee.modules.services.jsonrepresentation.json.StaticStrings;
 import org.apache.commons.text.StringEscapeUtils;
 
 import jakarta.validation.constraints.NotNull;
@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.guicedee.services.jsonrepresentation.json.StaticStrings.CHAR_DOT;
+import static com.guicedee.modules.services.jsonrepresentation.json.StaticStrings.CHAR_DOT;
 
 /**
  * Convenience methods for escaping special characters related to HTML, XML, and regular expressions.

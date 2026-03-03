@@ -17,9 +17,9 @@
 package com.jwebmp.core.base;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.guicedee.services.jsonrepresentation.json.StaticStrings;
-import com.guicedee.services.jsonrepresentation.json.StringToBoolean;
-import com.guicedee.services.jsonrepresentation.json.StringToIntegerRelaxed;
+import com.guicedee.modules.services.jsonrepresentation.json.StaticStrings;
+import com.guicedee.modules.services.jsonrepresentation.json.StringToBoolean;
+import com.guicedee.modules.services.jsonrepresentation.json.StringToIntegerRelaxed;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHTMLOptionsBase;

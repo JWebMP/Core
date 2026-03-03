@@ -1,6 +1,6 @@
 package com.jwebmp.core.htmlbuilder.css.composer;
 
-import com.guicedee.services.jsonrepresentation.json.StaticStrings;
+import com.guicedee.modules.services.jsonrepresentation.json.StaticStrings;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.ComponentStyleBase;
 import com.jwebmp.core.htmlbuilder.css.CSSImpl;

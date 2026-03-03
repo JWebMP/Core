@@ -1,7 +1,7 @@
 package com.jwebmp.core.base.page;
 
 import com.guicedee.client.IGuiceContext;
-import com.guicedee.services.jsonrepresentation.json.StaticStrings;
+import com.guicedee.modules.services.jsonrepresentation.json.StaticStrings;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.Paragraph;

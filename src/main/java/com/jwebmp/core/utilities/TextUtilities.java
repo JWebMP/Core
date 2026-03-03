@@ -25,7 +25,7 @@ import java.io.StringWriter;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 
-import static com.guicedee.services.jsonrepresentation.json.StaticStrings.*;
+import static com.guicedee.modules.services.jsonrepresentation.json.StaticStrings.*;
 
 /**
  * Provides default text functions

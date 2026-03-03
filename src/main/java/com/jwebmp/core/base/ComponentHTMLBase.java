@@ -17,7 +17,7 @@
 package com.jwebmp.core.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.guicedee.services.jsonrepresentation.json.StaticStrings;
+import com.guicedee.modules.services.jsonrepresentation.json.StaticStrings;
 import com.jwebmp.core.base.html.Comment;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.NoClosingTag;

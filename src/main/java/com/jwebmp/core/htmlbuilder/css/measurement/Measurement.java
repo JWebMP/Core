@@ -1,6 +1,6 @@
 package com.jwebmp.core.htmlbuilder.css.measurement;
 
-import com.guicedee.services.jsonrepresentation.json.StaticStrings;
+import com.guicedee.modules.services.jsonrepresentation.json.StaticStrings;
 
 /**
  * Defines any measurement

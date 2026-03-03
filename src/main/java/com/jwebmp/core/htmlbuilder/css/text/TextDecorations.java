@@ -19,7 +19,7 @@ package com.jwebmp.core.htmlbuilder.css.text;
 
 import com.jwebmp.core.base.client.CSSVersions;
 import com.jwebmp.core.htmlbuilder.css.enumarations.CSSEnumeration;
-import com.guicedee.services.jsonrepresentation.json.StaticStrings;
+import com.guicedee.modules.services.jsonrepresentation.json.StaticStrings;
 
 /**
  * Definition and Usage
