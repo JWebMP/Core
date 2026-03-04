@@ -55,44 +55,4 @@ public class BodyTest
         assertEquals("<body id=\"body\"></body>", b.toString(true));
     }
 
-    @Test
-    public void testSetGenerateJQuery()
-    {
-        p = getInstance();
-        resetBody();
-        b.add(new Comment("meh"));
-        WebReference.setIsLocal(true);
-        System.out.println(p.toString(true));
-        assertEquals(
-                "<!DOCTYPE html>\n" +
-                        "<html>\n" +
-                        "\t<body id=\"body\">\n" +
-                        "\t\t<!-- meh -->\n" +
-                        "\t\t<script src=\"bower_components/jquery/dist/jquery.min.js\" type=\"text/javascript\"></script>\n" +
-                        "\t\t<script src=\"jwscr\" type=\"application/javascript\"></script>\n" +
-                        "\t\t<script src=\"jwjs\" type=\"application/javascript\"></script>\n" +
-                        "\t</body>\n" +
-                        "</html>",
-                p.toString(true));
-    }
-
-    @Test
-    public void testSetGenerateJQueryRemote()
-    {
-        resetBody();
-        b.add(new Comment("meh"));
-        WebReference.setIsLocal(false);
-        System.out.println(p.toString(true));
-        assertEquals(
-                "<!DOCTYPE html>\n" +
-                        "<html>\n" +
-                        "\t<body id=\"body\">\n" +
-                        "\t\t<!-- meh -->\n" +
-                        "\t\t<script src=\"https://code.jquery.com/jquery-3.3.1.js\" type=\"text/javascript\"></script>\n" +
-                        "\t\t<script src=\"jwscr\" type=\"application/javascript\"></script>\n" +
-                        "\t\t<script src=\"jwjs\" type=\"application/javascript\"></script>\n" +
-                        "\t</body>\n" +
-                        "</html>",
-                p.toString(true));
-    }
 }

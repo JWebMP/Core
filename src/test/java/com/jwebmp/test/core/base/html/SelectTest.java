@@ -47,7 +47,11 @@ public class SelectTest
         System.out.println(s.toString(true));
 
         Assertions.assertEquals(
-                "<select id=\"id\">\n" + "	<optgroup label=\"Option Group\">\n" + "		<option label=\"Option\" value=\"Option\" id=\"id\">Option</option>\n" + "	</optgroup>\n" + "</select>",
+                "<select id=\"id\" name=\"id\">\n" +
+                        "\t<optgroup label=\"Option Group\">\n" +
+                        "\t\t<option id=\"id\" label=\"Option\" value=\"Option\">Option</option>\n" +
+                        "\t</optgroup>\n" +
+                        "</select>",
                 s.toString(true));
     }
 }

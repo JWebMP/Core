@@ -37,16 +37,16 @@ public class CanvasTest
     public void testSomeMethod()
     {
         System.out.println("neg");
-        Canvas c21 = new Canvas();
+        Canvas<?> c21 = new Canvas<>();
         System.out.println("asdfg");
         c21.addAttribute(CanvasAttributes.Height, "asdf");
         System.out.println(c21.toString(true));
-        Canvas c = new Canvas();
+        Canvas<?> c = new Canvas<>();
         c.setID("Canvas");
         c.addAttribute(CanvasAttributes.Height, "200px");
         c.addAttribute(CanvasAttributes.Width, "200px");
         System.out.println(c.toString(true));
-        Assertions.assertEquals("<canvas height=\"200px\" width=\"200px\" id=\"Canvas\"></canvas>", c.toString(true));
+        Assertions.assertEquals("<canvas height=\"200px\" id=\"Canvas\" width=\"200px\"></canvas>", c.toString(true));
     }
 
 }

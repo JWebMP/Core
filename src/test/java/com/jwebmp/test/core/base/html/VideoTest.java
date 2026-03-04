@@ -38,7 +38,7 @@ public class VideoTest
         v.setID("id");
         v.addAttribute(VideoAttributes.Src, "Source");
         System.out.println(v.toString(true));
-        Assertions.assertEquals("" + "<video src=\"Source\" id=\"id\"></video>", v.toString(true));
+        Assertions.assertEquals("" + "<video id=\"id\" src=\"Source\"></video>", v.toString(true));
     }
 
 }

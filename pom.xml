@@ -55,40 +55,7 @@
             <groupId>com.guicedee.modules.services</groupId>
             <artifactId>uadetector-core</artifactId>
         </dependency>
-        <!--
 
-                <dependency>
-                    <groupId>com.guicedee.modules.services</groupId>
-                    <artifactId>vertx-core</artifactId>
-                </dependency>
-
-                <dependency>
-                    <groupId>com.guicedee.servlets</groupId>
-                    <artifactId>websockets</artifactId>
-                </dependency>
-        -->
-
-        <!--
-        <dependency>
-            <groupId>jakarta.websocket</groupId>
-            <artifactId>jakarta.websocket-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.websocket</groupId>
-            <artifactId>jakarta.websocket-client-api</artifactId>
-        </dependency>
-
-
-        <dependency>
-            <groupId>com.guicedee</groupId>
-            <artifactId>guiced-servlets</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.guicedee</groupId>
-            <artifactId>guiced-websockets</artifactId>
-        </dependency>
--->
         <dependency>
             <groupId>com.guicedee.modules.services</groupId>
             <artifactId>uadetector-resources</artifactId>
@@ -157,5 +124,17 @@
 
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

@@ -54,8 +54,6 @@ public class BaseTestClass
     public Page<?> getInstance()
     {
         IGuiceContext.instance()
-                     .destroy();
-        IGuiceContext.instance()
                      .inject();
 
         return new Page<>().setTiny(false)

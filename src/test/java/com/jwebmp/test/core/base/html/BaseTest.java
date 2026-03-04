@@ -149,7 +149,13 @@ public class BaseTest
         String result;
         page.setTiny(false);
         System.out.println(page.toString(true));
-        expResult = "<!DOCTYPE html>\n" + "<html>\n" + "\t<head>\n" + "\t\t<base href=\"This is a link to something\" target=\"Target Frame\">\n" + "\t</head>\n" + "</html>";
+        expResult = "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "\t<head>\n" +
+                "\t\t<base href=\"This is a link to something\" target=\"Target Frame\">\n" +
+                "\t</head>\n" +
+                "\t<body id=\"body\"></body>\n" +
+                "</html>";
         result = page.toString(true);
         assertEquals(expResult, result);
     }
@@ -169,7 +175,7 @@ public class BaseTest
 
         page.setTiny(true);
         System.out.println(page.toString(true));
-        expResult = "<!DOCTYPE html><html><head><base href=\"This is a link to something\" target=\"Target Frame\"></head></html>";
+        expResult = "<!DOCTYPE html><html><head><base href=\"This is a link to something\" target=\"Target Frame\"></head><body id=\"body\"></body></html>";
         result = page.toString(true);
         assertEquals(expResult, result);
     }

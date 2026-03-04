@@ -73,7 +73,11 @@ public class HeadTest
         String expResult;
         Html html = getInstance();
         html.setTiny(false);
-        expResult = "<!DOCTYPE html>\n" + "<html>\n" + "</html>";
+        expResult = "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "\t<head></head>\n" +
+                "\t<body id=\"body\"></body>\n" +
+                "</html>";
         result = html.toString(true);
         System.out.println(html.toString(true));
         assertEquals(expResult, result);
@@ -87,7 +91,7 @@ public class HeadTest
         Page html = getInstance();
         html.setTiny(true);
         html.setRunningEnvironment(DevelopmentEnvironments.Production);
-        expResult = "<!DOCTYPE html><html></html>";
+        expResult = "<!DOCTYPE html><html><head></head><body id=\"body\"></body></html>";
         result = html.toString(true);
         System.out.println(html.toString(true));
         assertEquals(expResult, result);

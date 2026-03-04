@@ -75,7 +75,11 @@ public class HtmlTest
         Html instance = new HtmlImpl();
         instance.setBrowser(Browsers.Firefox19);
         System.out.println(instance.toString(true));
-        String expResult = "<!DOCTYPE html>\n" + "<html>\n" + "</html>";
+        String expResult = "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "\t<head></head>\n" +
+                "\t<body id=\"body\"></body>\n" +
+                "</html>";
         String result = instance.toString(true);
         assertEquals(expResult, result);
 

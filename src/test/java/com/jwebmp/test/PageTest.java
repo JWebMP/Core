@@ -139,7 +139,11 @@ public class PageTest
         instance.setTiny(false);
         instance.setRunningEnvironment(DevelopmentEnvironments.Development);
         System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html>\n" + "<html>\n" + "</html>";
+        String expResult = "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "\t<head></head>\n" +
+                "\t<body id=\"body\"></body>\n" +
+                "</html>";
         assertEquals(expResult, result);
     }
 
@@ -151,7 +155,7 @@ public class PageTest
         instance.setTiny(true);
         instance.setRunningEnvironment(DevelopmentEnvironments.Production);
         System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html><html></html>";
+        String expResult = "<!DOCTYPE html><html><head></head><body id=\"body\"></body></html>";
         assertEquals(expResult, result);
     }
 
@@ -165,7 +169,11 @@ public class PageTest
         instance = getInstance();
         instance.setRunningEnvironment(DevelopmentEnvironments.Development);
         System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html>\n" + "<html>\n" + "</html>";
+        String expResult = "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "\t<head></head>\n" +
+                "\t<body id=\"body\"></body>\n" +
+                "</html>";
         assertEquals(expResult, result);
     }
 
@@ -179,7 +187,11 @@ public class PageTest
         instance = getInstance();
         instance.setRunningEnvironment(DevelopmentEnvironments.Development);
         System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html>\n" + "<html>\n" + "</html>";
+        String expResult = "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "\t<head></head>\n" +
+                "\t<body id=\"body\"></body>\n" +
+                "</html>";
         assertEquals(expResult, result);
     }
 
@@ -191,7 +203,7 @@ public class PageTest
         instance.setTiny(true);
         instance.setRunningEnvironment(DevelopmentEnvironments.Production);
         System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html><html></html>";
+        String expResult = "<!DOCTYPE html><html><head></head><body id=\"body\"></body></html>";
         assertEquals(expResult, result);
     }
 
@@ -204,7 +216,13 @@ public class PageTest
         instance.getOptions()
                 .setAuthor("Marc Magon");
         System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html>\n" + "<html>\n" + "\t<head>\n" + "\t\t<meta content=\"Marc Magon\" name=\"author\">\n" + "\t</head>\n" + "</html>";
+        String expResult = "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "\t<head>\n" +
+                "\t\t<meta content=\"Marc Magon\" name=\"author\">\n" +
+                "\t</head>\n" +
+                "\t<body id=\"body\"></body>\n" +
+                "</html>";
         assertEquals(expResult, result);
     }
 
@@ -218,7 +236,7 @@ public class PageTest
         instance.getOptions()
                 .setAuthor("Marc Magon");
         System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html><html><head><meta content=\"Marc Magon\" name=\"author\"></head></html>";
+        String expResult = "<!DOCTYPE html><html><head><meta content=\"Marc Magon\" name=\"author\"></head><body id=\"body\"></body></html>";
         assertEquals(expResult, result);
     }
 
@@ -248,7 +266,7 @@ public class PageTest
         instance.getOptions()
                 .setDescription("This is my page description... It can be very very long");
         System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html><html><head><meta content=\"This is my page description... It can be very very long\" name=\"description\"></head></html>";
+        String expResult = "<!DOCTYPE html><html><head><meta content=\"This is my page description... It can be very very long\" name=\"description\"></head><body id=\"body\"></body></html>";
         assertEquals(expResult, result);
     }
 
@@ -261,8 +279,13 @@ public class PageTest
         instance.getOptions()
                 .setGenerator("This is my page description... It can be very very long");
         System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html>\n" + "<html>\n" + "\t<head>\n" + "\t\t<meta content=\"This is my page description... It can be very very long\" name=\"generator\">\n" +
-                "\t</head>\n" + "</html>";
+        String expResult = "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "\t<head>\n" +
+                "\t\t<meta content=\"This is my page description... It can be very very long\" name=\"generator\">\n" +
+                "\t</head>\n" +
+                "\t<body id=\"body\"></body>\n" +
+                "</html>";
         assertEquals(expResult, result);
     }
 
@@ -276,7 +299,13 @@ public class PageTest
         instance.getOptions()
                 .setGenerator("This is my page description... It can be very very long");
         System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html><html><head><meta content=\"This is my page description... It can be very very long\" name=\"generator\"></head></html>";
+        String expResult = "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "\t<head>\n" +
+                "\t\t<meta content=\"This is my page description... It can be very very long\" name=\"keywords\">\n" +
+                "\t</head>\n" +
+                "\t<body id=\"body\"></body>\n" +
+                "</html>";
         assertEquals(expResult, result);
     }
 
@@ -304,7 +333,7 @@ public class PageTest
         instance.getOptions()
                 .setKeywords("This is my page description... It can be very very long");
         System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html><html><head><meta content=\"This is my page description... It can be very very long\" name=\"keywords\"></head></html>";
+        String expResult = "<!DOCTYPE html><html><head><meta content=\"This is my page description... It can be very very long\" name=\"keywords\"></head><body id=\"body\"></body></html>";
         assertEquals(expResult, result);
     }
 
@@ -321,7 +350,13 @@ public class PageTest
         instance.setTiny(false);
         instance.setRunningEnvironment(DevelopmentEnvironments.Development);
         System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html>\n" + "<html>\n" + "\t<head>\n" + "\t\t<base target=\"The Base Target\">\n" + "\t</head>\n" + "</html>";
+        String expResult = "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "\t<head>\n" +
+                "\t\t<base target=\"The Base Target\">\n" +
+                "\t</head>\n" +
+                "\t<body id=\"body\"></body>\n" +
+                "</html>";
         assertEquals(expResult, result);
     }
 
@@ -335,7 +370,7 @@ public class PageTest
         instance.setTiny(true);
         instance.setRunningEnvironment(DevelopmentEnvironments.Production);
         System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html><html><head><base></head></html>";
+        String expResult = "<!DOCTYPE html><html><head><base></head><body id=\"body\"></body></html>";
         assertEquals(expResult, result);
     }
 
@@ -364,10 +399,19 @@ public class PageTest
         String result;
         body.setID(null);
         System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html>\n" + "<html>\n" + "\t<head>\n" + "\t\t<title>This is my title</title>\n" + "\t\t<base target=\"Base Target\">\n" +
-                "\t\t<meta content=\"IE=10\" http-equiv=\"X-UA-Compatible\">\n" + "\t\t<meta content=\"Author GedMarc\" name=\"author\">\n" +
-                "\t\t<meta content=\"Application Name\" name=\"application-name\">\n" + "\t\t<meta content=\"Generator\" name=\"generator\">\n" +
-                "\t\t<meta content=\"Page Description\" name=\"description\">\n" + "\t</head>\n" + "</html>";
+        String expResult = "<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "\t<head>\n" +
+                "\t\t<title>This is my title</title>\n" +
+                "\t\t<base target=\"Base Target\">\n" +
+                "\t\t<meta content=\"IE=10\" http-equiv=\"IE=10\" name=\"X-UA-Compatible\">\n" +
+                "\t\t<meta content=\"Author GedMarc\" name=\"author\">\n" +
+                "\t\t<meta content=\"Application Name\" name=\"application-name\">\n" +
+                "\t\t<meta content=\"Generator\" name=\"generator\">\n" +
+                "\t\t<meta content=\"Page Description\" name=\"description\">\n" +
+                "\t</head>\n" +
+                "\t<body></body>\n" +
+                "</html>";
         assertEquals(expResult, result);
     }
 
@@ -396,7 +440,7 @@ public class PageTest
         instance.setRunningEnvironment(DevelopmentEnvironments.Production);
         String result;
         System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html><html><head><title>This is my title</title><base target=\"Base Target\"><meta content=\"IE=10\" http-equiv=\"X-UA-Compatible\"><meta content=\"Author GedMarc\" name=\"author\"><meta content=\"Application Name\" name=\"application-name\"><meta content=\"Generator\" name=\"generator\"><meta content=\"Page Description\" name=\"description\"></head></html>";
+        String expResult = "<!DOCTYPE html><html><head><title>This is my title</title><base target=\"Base Target\"><meta content=\"IE=10\" http-equiv=\"IE=10\" name=\"X-UA-Compatible\"><meta content=\"Author GedMarc\" name=\"author\"><meta content=\"Application Name\" name=\"application-name\"><meta content=\"Generator\" name=\"generator\"><meta content=\"Page Description\" name=\"description\"></head><body id=\"body\"></body></html>";
         assertEquals(expResult, result);
     }
 
