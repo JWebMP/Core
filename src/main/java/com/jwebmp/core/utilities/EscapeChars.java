@@ -190,7 +190,7 @@ public class EscapeChars
 	}
 
 	/**
-	 * Escape <tt>'$'</tt> and <tt>'\'</tt> characters in replacement strings.
+	 * Escape {@code '$'} and {@code '\'} characters in replacement strings.
 	 *
 	 * @param input
 	 *

@@ -8,19 +8,21 @@ import java.util.function.Function;
  * CRTP helper interface to standardize fluent self-typing across the codebase.
  * <p>
  * Usage:
- * <pre>
+ * {@snippet :
  *   public class Paragraph<J extends Paragraph<J>>
  *       extends ComponentHierarchyBase implements Self<J> {
- *     public @org.jspecify.annotations.NonNull J setText(String text) {
+ *     public J setText(String text) {
  *       this.text = text;
  *       return self();
  *     }
  *   }
- * </pre>
+ * }
  *
- * - Prefer class signatures of the form {@code class X<J extends X<J>> implements Self<J>}.
- * - Use {@link #self()} to return the correctly typed instance from setters and chaining methods.
- * - {@link #with(Consumer)} and {@link #apply(Function)} are optional helpers for fluent configuration.
+ * <ul>
+ *   <li>Prefer class signatures of the form {@code class X<J extends X<J>> implements Self<J>}.</li>
+ *   <li>Use {@link #self()} to return the correctly typed instance from setters and chaining methods.</li>
+ *   <li>{@link #with(Consumer)} and {@link #apply(Function)} are optional helpers for fluent configuration.</li>
+ * </ul>
  */
 public interface Self<J> {
 
