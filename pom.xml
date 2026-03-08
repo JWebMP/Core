@@ -8,7 +8,7 @@
         <version>2.0.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.jwebmp.core</groupId>
+    <groupId>com.jwebmp</groupId>
     <artifactId>jwebmp-core</artifactId>
     <packaging>jar</packaging>
     <version>2.0.0-SNAPSHOT</version>
@@ -25,13 +25,13 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.jwebmp.client</groupId>
+            <groupId>com.jwebmp</groupId>
             <artifactId>jwebmp-client</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.jwebmp.core</groupId>
-            <artifactId>jwebmp-testlib</artifactId>
+            <artifactId>testlib</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -43,7 +43,6 @@
         <dependency>
             <groupId>com.guicedee</groupId>
             <artifactId>inject</artifactId>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
