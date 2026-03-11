@@ -29,6 +29,7 @@ import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
+import org.apache.commons.text.StringEscapeUtils;
 
 /**
  * Implements the PreFormattedText tag<p>
