@@ -22,6 +22,7 @@ jobs:
       baseDir: ''
       name: 'JWebMP Core'
       publishToCentral: ${{inputs.centralRelease}}
+      sonarProjectName: 'jwebmp'
     secrets:
       USERNAME: ${{secrets.USERNAME}}
       USER_TOKEN: ${{secrets.USER_TOKEN}}
