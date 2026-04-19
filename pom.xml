@@ -5,13 +5,13 @@
     <parent>
         <groupId>com.jwebmp</groupId>
         <artifactId>parent</artifactId>
-        <version>2.0.0-RC6</version>
+        <version>2.0.0-RC7</version>
     </parent>
 
     <groupId>com.jwebmp</groupId>
     <artifactId>jwebmp-core</artifactId>
     <packaging>jar</packaging>
-    <version>2.0.0-RC6</version>
+    <version>2.0.0-RC7</version>
     <name>JWebMP</name>
     <description>Open-source core for JWebMP: a strongly-typed, server-rendered HTML/CSS/JS component model for Java with Guice/ServiceLoader extensibility and Vert.x-ready endpoints.</description>
     <url>https://github.com/GedMarc/JWebMP</url>
