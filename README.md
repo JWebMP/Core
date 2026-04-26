@@ -37,7 +37,7 @@ Built on [JWebMP Client](../client) Â· [GuicedEE](https://github.com/GuicedEE) Â
 <summary>Gradle (Kotlin DSL)</summary>
 
 ```kotlin
-implementation("com.jwebmp.core:jwebmp-core:2.0.0-RC9")
+implementation("com.jwebmp.core:jwebmp-core:2.0.0-RC10")
 ```
 </details>
 
