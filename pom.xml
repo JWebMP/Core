@@ -113,13 +113,6 @@
                 <scope>import</scope>
                 <version>${guicedee.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.jwebmp</groupId>
-                <artifactId>jwebmp-bom</artifactId>
-                <type>pom</type>
-                <scope>import</scope>
-                <version>${jwebmp.version}</version>
-            </dependency>
 
         </dependencies>
     </dependencyManagement>
