@@ -1,25 +1,44 @@
-/build/
-/dist/
-Thumbs.db
-/javadoc/
-/.jacocoverage/
-/build
-/target/
-/out/
-/**/.sonar/
-**.jacocoverage/
-**/*.iml
+﻿# ===== Build Outputs =====
+target/
+build/
+dist/
+out/
+dependency-reduced-pom.xml
+*.flattened-pom.xml
+flatter.pom
+# ===== IDE - IntelliJ / JetBrains =====
+.idea/
+*.iws
 *.iml
-**/*.tloh
-**/*.tlog
-**/*.db
-**/*.project
-**/*.factorypath
-**/*.flattened-pom.xml
-**/flatter.pom
-flatter.pom**/*.classpath
-/.idea/
-/dependency-reduced-pom.xml
-/log/
-/logs/
-/.vscode/
+# ===== IDE - Eclipse =====
+.project
+.classpath
+.settings/
+.factorypath
+# ===== IDE - VS Code =====
+.vscode/
+# ===== Java =====
+*.class
+hs_err_pid*
+replay_pid*
+# ===== Maven =====
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+# ===== Logs =====
+*.log
+*.tlog
+logs/
+# ===== OS =====
+Thumbs.db
+.DS_Store
+# ===== Misc =====
+.jacocoverage/
+.sonar/
+javadoc/
+javadoc.zip
