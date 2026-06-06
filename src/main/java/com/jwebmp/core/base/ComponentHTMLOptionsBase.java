@@ -237,7 +237,6 @@ public class ComponentHTMLOptionsBase<
 		ComponentHTMLOptionsBase<?, ?, ?> cloned = super.cloneComponent();
 		cloned.options = new TreeMap<>();
 		cloned.options.putAll(getOption());
-		//noinspection CastCanBeRemovedNarrowingVariableType
-		return (J) cloned;
+        return (J) cloned;
 	}
 }

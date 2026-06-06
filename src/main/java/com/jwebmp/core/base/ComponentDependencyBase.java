@@ -266,9 +266,8 @@ public class ComponentDependencyBase<J extends ComponentDependencyBase<J>>
 		cloned.javascriptReferences = new TreeSet<>();
 		cloned.cssReferences.addAll(getCssReferences());
 		cloned.javascriptReferences.addAll(getJavascriptReferences());
-		
-		//noinspection CastCanBeRemovedNarrowingVariableType
-		return (J) cloned;
+
+        return (J) cloned;
 	}
 
 	/**

@@ -24,7 +24,6 @@ import org.junit.jupiter.api.Test;
 /**
  * @author GedMarc
  */
-@SuppressWarnings("unchecked")
 public class TableColumnGroupTest
 {
 

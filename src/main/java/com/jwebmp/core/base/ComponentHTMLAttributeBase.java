@@ -681,7 +681,6 @@ public class ComponentHTMLAttributeBase<A extends Enum<?> & AttributeDefinitions
         ComponentHTMLAttributeBase<?, ?, ?, ?> cloned = super.cloneComponent();
         cloned.attributes = new TreeMap<>();
         cloned.attributes.putAll(getAttributes());
-        //noinspection CastCanBeRemovedNarrowingVariableType
         return (J) cloned;
     }
 

@@ -165,7 +165,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum<?> 
     public @org.jspecify.annotations.NonNull J setTiny(boolean tiny)
     {
         getChildren().stream()
-                .filter(a -> a != null)
+                .filter(Objects::nonNull)
                 .parallel()
                 .forEach(child -> child.cast()
                         .asBase()
@@ -1099,7 +1099,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum<?> 
     {
         this.page = page;
         getChildren().stream()
-                .filter(a -> a != null)
+                .filter(Objects::nonNull)
                 .forEach(child -> child.cast()
                         .asHierarchyBase()
                         .setPage(page));

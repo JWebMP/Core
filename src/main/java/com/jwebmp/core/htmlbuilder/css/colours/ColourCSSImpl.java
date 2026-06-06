@@ -80,7 +80,6 @@ public class ColourCSSImpl
      * @param value
      * @return
      */
-    @SuppressWarnings("unchecked")
     public ColourCSSImpl setValue(ColourCSSImpl value)
     {
         this.value = value.value();
@@ -103,7 +102,6 @@ public class ColourCSSImpl
      * @param value
      * @return
      */
-    @SuppressWarnings("unchecked")
     public ColourCSSImpl setValue(ColourNames value)
     {
         this.value = value.toString();
@@ -116,7 +114,6 @@ public class ColourCSSImpl
      * @param value
      * @return
      */
-    @SuppressWarnings("unchecked")
     public ColourCSSImpl setValue(ColourHexImpl value)
     {
         this.value = value.toString();
@@ -129,7 +126,6 @@ public class ColourCSSImpl
      * @param value
      * @return
      */
-    @SuppressWarnings("unchecked")
     public ColourCSSImpl setValue(ColourRGBImpl value)
     {
         this.value = new ColourRGBImpl().setBlue(value.Blue())

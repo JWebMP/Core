@@ -89,7 +89,6 @@ public class Meta
     public Meta(MetadataFields field, String value)
     {
         super(ComponentTypes.Metadata);
-        //noinspection EnhancedSwitchMigration
         switch (field)
         {
             case Charset:
