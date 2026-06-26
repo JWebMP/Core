@@ -18,8 +18,8 @@ package com.jwebmp.core.htmlbuilder.css.annotations;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.SerializationFeature;
 import com.guicedee.client.*;
 import com.jwebmp.core.htmlbuilder.css.CSSPropertiesFactory;
 
@@ -30,7 +30,7 @@ import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.logging.Level;
 
-import static com.fasterxml.jackson.databind.SerializationFeature.*;
+import static tools.jackson.databind.SerializationFeature.*;
 
 /**
  * @param <A>
@@ -134,7 +134,7 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 					       .get(ObjectMapper.class)
 					       .writer()
 					       .withoutFeatures(SerializationFeature.INDENT_OUTPUT)
-					       .withoutFeatures(WRITE_ENUMS_USING_TO_STRING)
+					       .withoutFeatures(tools.jackson.databind.cfg.EnumFeature.WRITE_ENUMS_USING_TO_STRING)
 					       .writeValueAsString(this);
 		}
 		catch (Exception e)

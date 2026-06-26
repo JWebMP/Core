@@ -28,8 +28,8 @@ module com.jwebmp.core {
 
     requires com.guicedee.jsonrepresentation;
 
-    requires com.fasterxml.jackson.databind;
-    requires com.fasterxml.jackson.core;
+    requires tools.jackson.databind;
+    requires tools.jackson.core;
 
     //requires com.guicedee.vertx;
     //requires com.guicedee.vertx.sockets;
@@ -258,42 +258,42 @@ module com.jwebmp.core {
     provides com.jwebmp.core.services.IPageConfigurator with com.jwebmp.core.base.page.ScriptsDynamicPageConfigurator, com.jwebmp.core.base.page.CSSLinksInsertPageConfigurator, com.jwebmp.core.base.page.ScriptsInsertPageConfigurator, com.jwebmp.core.base.page.TopShelfScriptsInsertPageConfigurator;
 
     opens com.jwebmp.core.base.page to com.google.guice;
-    //  opens com.jwebmp.core.base.ajax to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.base.html to com.fasterxml.jackson.databind;
-    //  opens com.jwebmp.core.htmlbuilder.javascript to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.base to com.fasterxml.jackson.databind;
+    //  opens com.jwebmp.core.base.ajax to tools.jackson.databind;
+    opens com.jwebmp.core.base.html to tools.jackson.databind;
+    //  opens com.jwebmp.core.htmlbuilder.javascript to tools.jackson.databind;
+    opens com.jwebmp.core.base to tools.jackson.databind;
 
-    opens com.jwebmp.core to com.google.guice, com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.implementations to com.google.guice, com.fasterxml.jackson.databind;
-//	opens com.jwebmp.core.services.scopes to com.google.guice, com.fasterxml.jackson.databind;
+    opens com.jwebmp.core to com.google.guice, tools.jackson.databind;
+    opens com.jwebmp.core.implementations to com.google.guice, tools.jackson.databind;
+//	opens com.jwebmp.core.services.scopes to com.google.guice, tools.jackson.databind;
 
-    opens com.jwebmp.core.htmlbuilder.css to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.annotations to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.interfaces to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.animatable to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.backgrounds to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.borders to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.colours to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.composer to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.displays to com.fasterxml.jackson.databind;
-    // opens com.jwebmp.core.htmlbuilder.css.enumarations to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.fonts to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.heightwidth to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.image to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.lists to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.margins to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.measurement to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.outline to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.padding to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.tables to com.fasterxml.jackson.databind;
-    opens com.jwebmp.core.htmlbuilder.css.text to com.fasterxml.jackson.databind;
-    //  opens com.jwebmp.core.htmlbuilder.css.themes to com.fasterxml.jackson.databind;
+    opens com.jwebmp.core.htmlbuilder.css to tools.jackson.databind;
+    opens com.jwebmp.core.htmlbuilder.css.annotations to tools.jackson.databind;
+    opens com.jwebmp.core.htmlbuilder.css.interfaces to tools.jackson.databind;
+    opens com.jwebmp.core.htmlbuilder.css.animatable to tools.jackson.databind;
+    opens com.jwebmp.core.htmlbuilder.css.backgrounds to tools.jackson.databind;
+    opens com.jwebmp.core.htmlbuilder.css.borders to tools.jackson.databind;
+    opens com.jwebmp.core.htmlbuilder.css.colours to tools.jackson.databind;
+    opens com.jwebmp.core.htmlbuilder.css.composer to tools.jackson.databind;
+    opens com.jwebmp.core.htmlbuilder.css.displays to tools.jackson.databind;
+    // opens com.jwebmp.core.htmlbuilder.css.enumarations to tools.jackson.databind;
+    opens com.jwebmp.core.htmlbuilder.css.fonts to tools.jackson.databind;
+    opens com.jwebmp.core.htmlbuilder.css.heightwidth to tools.jackson.databind;
+    opens com.jwebmp.core.htmlbuilder.css.image to tools.jackson.databind;
+    opens com.jwebmp.core.htmlbuilder.css.lists to tools.jackson.databind;
+    opens com.jwebmp.core.htmlbuilder.css.margins to tools.jackson.databind;
+    opens com.jwebmp.core.htmlbuilder.css.measurement to tools.jackson.databind;
+    opens com.jwebmp.core.htmlbuilder.css.outline to tools.jackson.databind;
+    opens com.jwebmp.core.htmlbuilder.css.padding to tools.jackson.databind;
+    opens com.jwebmp.core.htmlbuilder.css.tables to tools.jackson.databind;
+    opens com.jwebmp.core.htmlbuilder.css.text to tools.jackson.databind;
+    //  opens com.jwebmp.core.htmlbuilder.css.themes to tools.jackson.databind;
 
-    //  opens com.jwebmp.core.base.client to com.fasterxml.jackson.databind;
+    //  opens com.jwebmp.core.base.client to tools.jackson.databind;
 
-    //  opens com.jwebmp.core.base.servlets.interfaces to com.fasterxml.jackson.databind;
+    //  opens com.jwebmp.core.base.servlets.interfaces to tools.jackson.databind;
 
-    opens com.jwebmp.core.utilities.regex to com.fasterxml.jackson.databind;
+    opens com.jwebmp.core.utilities.regex to tools.jackson.databind;
 
     exports com.jwebmp.core.components;
     exports com.jwebmp.core.events;

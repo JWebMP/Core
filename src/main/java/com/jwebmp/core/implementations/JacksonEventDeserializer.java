@@ -1,18 +1,17 @@
 package com.jwebmp.core.implementations;
 
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.ValueDeserializer;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.htmlbuilder.javascript.events.interfaces.IEvent;
 
-import java.io.IOException;
 
-public class JacksonEventDeserializer extends JsonDeserializer<IEvent<?, ?>>
+public class JacksonEventDeserializer extends ValueDeserializer<IEvent<?, ?>>
 {
     @Override
-    public IEvent<?, ?> deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException
+    public IEvent<?, ?> deserialize(JsonParser p, DeserializationContext ctxt) throws JacksonException
     {
         String valueAsString = p.getValueAsString();
         Event o = (Event) new Event("")

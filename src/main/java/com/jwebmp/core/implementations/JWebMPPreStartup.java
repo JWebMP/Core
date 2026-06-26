@@ -15,7 +15,7 @@ public class JWebMPPreStartup implements IGuicePreStartup<JWebMPPreStartup>
 
         return List.of(VertXPreStartup.getVertx().executeBlocking(() -> {
             JWebMPJacksonModule jWebMPJacksonModule = new JWebMPJacksonModule();
-            IJsonRepresentation.getObjectMapper().registerModule(jWebMPJacksonModule);
+            IJsonRepresentation.registerModule(jWebMPJacksonModule);
             return true;
         }));
     }
