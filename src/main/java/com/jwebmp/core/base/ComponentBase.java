@@ -46,7 +46,6 @@ import java.util.logging.Level;
 @Log
 public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase<J>
 {
-
     /**
      * The ID of the component rendering for
      */

@@ -14,8 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.core.base.html;
+package com.jwebmp.test.base.html;
 
+import com.jwebmp.core.base.html.DataDescription;
+import com.jwebmp.core.base.html.DescriptionList;
 import org.junit.jupiter.api.Test;
 
 /**
