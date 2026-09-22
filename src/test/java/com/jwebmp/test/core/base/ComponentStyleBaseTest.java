@@ -27,6 +27,7 @@ import com.jwebmp.core.htmlbuilder.css.colours.ColourNames;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author ged_m
@@ -66,12 +67,9 @@ public class ComponentStyleBaseTest
 		 .setDynamicRender(true);
 
 
-		if (p.toString(true)
-		     .startsWith(
-				     "<!DOCTYPE html>\n" + "<html>\n" + "\t<head>\n" + "\t\t<style type=\"text/css\">#body {background-color:darkgoldenrod;}</style>\n" + "\t</head>\n" +
-				     "\t<body id=\"body\" ng-app=\"jwApp\" ng-controller=\"jwController as jwCntrl\">"))
-		{
-		}
+		String html = p.toString(true);
+		assertTrue(html.contains("<body id=\"body\""));
+		assertTrue(b.renderCss(0).toString().contains("background-color:darkgoldenrod"));
 		/*Assertions.assertEquals("<!DOCTYPE html>\n"
 				                    + "<html>\n"
 				                    + "	<head>\n"
@@ -95,6 +93,7 @@ public class ComponentStyleBaseTest
 		}
 		p.addStyle("height","100%");
 		output = p.toString(0);
+		assertTrue(output.contains("height:100%"));
 		System.out.println(p.toString(0));
 	}
 }

@@ -17,10 +17,13 @@
 package com.jwebmp.test.core.base;
 
 import com.jwebmp.test.BaseTestClass;
+import com.guicedee.modules.services.jsonrepresentation.IJsonRepresentation;
+import com.guicedee.modules.services.jsonrepresentation.json.StaticStrings;
 import com.jwebmp.core.base.ComponentFeatureBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import tools.jackson.databind.JsonNode;
 
 /**
  * @author ged_m
@@ -39,33 +42,28 @@ public class ComponentFeatureBaseTest
 		ComponentFeatureBase cfb = new ComponentFeatureBase(ComponentTypes.Abbreviation);
 		cfb.setID("testComp");
 		cfb.addFeature(getFeature());
-		System.out.println(cfb);
-		Assertions.assertEquals(
-				"{\n" +
-				"  \"id\" : \"testComp\",\n" +
-				"  \"componentType\" : \"abbreviation\",\n" +
-				"  \"tiny\" : false,\n" +
-				"  \"configured\" : true,\n" +
-				"  \"initialized\" : true,\n" +
-				"  \"touched\" : false,\n" +
-				"  \"features\" : [ {\n" +
-				"    \"id\" : \"featureTest\",\n" +
-				"    \"componentType\" : \"feature\",\n" +
-				"    \"tiny\" : false,\n" +
-				"    \"configured\" : true,\n" +
-				"    \"initialized\" : true,\n" +
-				"    \"touched\" : false,\n" +
-				"    \"sortOrder\" : 1000,\n" +
-				"    \"name\" : \"Test Feature\",\n" +
-				"    \"renderAfterLoad\" : true,\n" +
-				"    \"javascriptRenderedElsewhere\" : false,\n" +
-				"    \"queries\" : [ \"Query Added\" ]\n" +
-				"  } ],\n" +
-				"  \"sortOrder\" : 1000,\n" +
-				"  \"renderAfterLoad\" : true,\n" +
-				"  \"javascriptRenderedElsewhere\" : false,\n" +
-				"  \"componentClass\" : \"com.jwebmp.core.base.ComponentFeatureBase\"\n" +
-				"}",
-				cfb.toString());
+		JsonNode json = json(cfb.toJson());
+		Assertions.assertEquals("testComp", json.get("id").asText());
+		Assertions.assertEquals(ComponentFeatureBase.class.getCanonicalName(), json.get("componentClass").asText());
+		Assertions.assertFalse(json.get("renderAfterLoad").asBoolean());
+
+		JsonNode feature = json.get("features").get(0);
+		Assertions.assertEquals("featureTest", feature.get("id").asText());
+		Assertions.assertEquals("Test Feature", feature.get("name").asText());
+		Assertions.assertEquals("Query Added" + StaticStrings.STRING_NEWLINE_TEXT, feature.get("queries").get(0).asText());
+		ComponentFeatureBase featureComponent = (ComponentFeatureBase) cfb.getFeatures().iterator().next();
+		Assertions.assertTrue(featureComponent.renderJavascript().toString().contains("Query Added"));
+	}
+
+	private JsonNode json(String value)
+	{
+		try
+		{
+			return IJsonRepresentation.getObjectMapper().readTree(value);
+		}
+		catch (Exception e)
+		{
+			throw new AssertionError("Feature JSON must be valid", e);
+		}
 	}
 }

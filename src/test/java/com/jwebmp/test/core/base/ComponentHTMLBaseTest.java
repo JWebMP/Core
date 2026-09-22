@@ -97,15 +97,15 @@ public class ComponentHTMLBaseTest
         ComponentHTMLBase tag = new ComponentHTMLAttributeBase(ComponentTypes.Area);
         tag.setID("testTag");
         tag.setTiny(true);
-        System.out.println(tag.toString(true));
-        System.out.println(tag);
+        Assertions.assertEquals("<area id=\"testTag\"></area>", tag.toString(true));
+        Assertions.assertTrue(tag.toJson().contains("\"componentClass\""));
 
     }
 
     @Test
     public void testClone()
     {
-        ComponentEventBase shell = new ComponentEventBase(ComponentTypes.Abbreviation);
+        Div shell = new Div();
 
         shell.setID("shell");
         //shell.addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
@@ -122,9 +122,14 @@ public class ComponentHTMLBaseTest
                               .findFirst()
                               .get())
                    .setID("clickEvent");
+        String eventJson = shell.toJson();
+        Assertions.assertTrue(eventJson.contains("\"events\""));
+        Assertions.assertTrue(eventJson.contains("\"clickEvent\""));
 
         ComponentBase shell2 = shell.cloneComponent();
         shell2.setID("shell2");
+        Assertions.assertInstanceOf(Div.class, shell2);
+        Assertions.assertEquals(1, ((Div) shell2).getEvents().size());
         System.out.println(shell);
         System.out.println(shell2);
         String shellExpected = "{\n" +

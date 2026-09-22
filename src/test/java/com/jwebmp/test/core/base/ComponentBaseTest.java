@@ -18,9 +18,16 @@ package com.jwebmp.test.core.base;
 
 import com.jwebmp.test.BaseTestClass;
 import com.jwebmp.core.base.ComponentBase;
+import com.jwebmp.core.base.html.Div;
+import com.jwebmp.core.base.html.Paragraph;
+import com.jwebmp.core.base.interfaces.IComponentBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
+import com.jwebmp.core.base.servlets.interfaces.IComponent;
+import com.guicedee.modules.services.jsonrepresentation.IJsonRepresentation;
+import com.guicedee.modules.services.jsonrepresentation.JsonRenderException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import tools.jackson.databind.JsonNode;
 
 /**
  * @author ged_m
@@ -39,17 +46,7 @@ public class ComponentBaseTest
 		ComponentBase shell = new ComponentBase(ComponentTypes.Abbreviation);
 		shell.setID("ID");
 		System.out.println(shell);
-		Assertions.assertEquals(
-				"{\n" +
-				"  \"id\" : \"ID\",\n" +
-				"  \"componentType\" : \"abbreviation\",\n" +
-				"  \"tiny\" : false,\n" +
-				"  \"configured\" : true,\n" +
-				"  \"initialized\" : true,\n" +
-				"  \"touched\" : false,\n" +
-				"  \"componentClass\" : \"com.jwebmp.core.base.ComponentBase\"\n" +
-				"}",
-				shell.toJson());
+		assertBaseJson(shell, "ID", false, null);
 	}
 
 	@Test
@@ -59,18 +56,7 @@ public class ComponentBaseTest
 		shell.setID("ID");
 		shell.setText("This is raw text");
 		System.out.println(shell);
-		Assertions.assertEquals(
-				"{\n" +
-				"  \"id\" : \"ID\",\n" +
-				"  \"componentType\" : \"abbreviation\",\n" +
-				"  \"text\" : \"This is raw text\",\n" +
-				"  \"tiny\" : false,\n" +
-				"  \"configured\" : true,\n" +
-				"  \"initialized\" : true,\n" +
-				"  \"touched\" : false,\n" +
-				"  \"componentClass\" : \"com.jwebmp.core.base.ComponentBase\"\n" +
-				"}",
-				shell.toJson());
+		assertBaseJson(shell, "ID", false, "This is raw text");
 	}
 
 	@Test
@@ -80,17 +66,7 @@ public class ComponentBaseTest
 		shell.setTiny(true);
 		shell.setID("ID");
 		System.out.println(shell);
-		Assertions.assertEquals(
-				"{\n" +
-				"  \"id\" : \"ID\",\n" +
-				"  \"componentType\" : \"abbreviation\",\n" +
-				"  \"tiny\" : true,\n" +
-				"  \"configured\" : true,\n" +
-				"  \"initialized\" : true,\n" +
-				"  \"touched\" : false,\n" +
-				"  \"componentClass\" : \"com.jwebmp.core.base.ComponentBase\"\n" +
-				"}",
-				shell.toJson());
+		assertBaseJson(shell, "ID", true, null);
 	}
 
 	@Test
@@ -102,26 +78,8 @@ public class ComponentBaseTest
 		shell2.setID("shell2");
 		System.out.println(shell);
 		System.out.println(shell2);
-		String shellExpected = "{\n" +
-		                       "  \"id\" : \"shell\",\n" +
-		                       "  \"componentType\" : \"abbreviation\",\n" +
-		                       "  \"tiny\" : false,\n" +
-		                       "  \"configured\" : true,\n" +
-		                       "  \"initialized\" : true,\n" +
-		                       "  \"touched\" : false,\n" +
-		                       "  \"componentClass\" : \"com.jwebmp.core.base.ComponentBase\"\n" +
-		                       "}";
-		String shell2Expected = "{\n" +
-		                        "  \"id\" : \"shell2\",\n" +
-		                        "  \"componentType\" : \"abbreviation\",\n" +
-		                        "  \"tiny\" : false,\n" +
-		                        "  \"configured\" : true,\n" +
-		                        "  \"initialized\" : true,\n" +
-		                        "  \"touched\" : false,\n" +
-		                        "  \"componentClass\" : \"com.jwebmp.core.base.ComponentBase\"\n" +
-		                        "}";
-		Assertions.assertEquals(shell.toJson(), shellExpected);
-		Assertions.assertEquals(shell2.toJson(), shell2Expected);
+		assertBaseJson(shell, "shell", false, null);
+		assertBaseJson(shell2, "shell2", false, null);
 	}
 
 	@Test
@@ -133,19 +91,67 @@ public class ComponentBaseTest
 		     .put("Property1", "Value 1");
 		System.out.println(shell);
 
-		String shellExpected = "{\n" +
-		                       "  \"id\" : \"shell\",\n" +
-		                       "  \"componentType\" : \"abbreviation\",\n" +
-		                       "  \"tiny\" : false,\n" +
-		                       "  \"configured\" : true,\n" +
-		                       "  \"initialized\" : true,\n" +
-		                       "  \"touched\" : false,\n" +
-		                       "  \"properties\" : {\n" +
-		                       "    \"Property1\" : \"Value 1\"\n" +
-		                       "  },\n" +
-		                       "  \"componentClass\" : \"com.jwebmp.core.base.ComponentBase\"\n" +
-		                       "}";
+		assertBaseJson(shell, "shell", false, null);
+		Assertions.assertEquals("Value 1", json(shell).get("properties").get("Property1").asText());
+	}
 
-		Assertions.assertEquals(shell.toJson(), shellExpected);
+	@Test
+	public void fromJsonCreatesTheDeclaredComponent()
+	{
+		Div source = new Div();
+		source.setID("component-from-json");
+		source.setText("Round trip component");
+		source.getProperties().put("source", "ComponentBaseTest");
+		source.add(new Paragraph<>("Nested child"));
+
+		IComponent<?> result = IComponentBase.from(source.toJson());
+
+		Assertions.assertInstanceOf(Div.class, result);
+		Div<?, ?, ?, ?, ?> component = (Div<?, ?, ?, ?, ?>) result;
+		Assertions.assertEquals("component-from-json", component.getID());
+		Assertions.assertEquals("Round trip component", component.getText());
+		Assertions.assertEquals("ComponentBaseTest", component.getProperties().get("source"));
+		Assertions.assertEquals(1, component.getChildren().size());
+		Assertions.assertInstanceOf(Paragraph.class, component.getChildren().getFirst());
+	}
+
+	@Test
+	public void fromJsonRejectsClassesThatAreNotComponents()
+	{
+		String json = "{\"componentClass\":\"java.lang.String\"}";
+
+		Assertions.assertThrows(JsonRenderException.class, () -> IComponentBase.from(json));
+	}
+
+	private void assertBaseJson(ComponentBase<?> component, String id, boolean tiny, String text)
+	{
+		JsonNode json = json(component);
+		Assertions.assertEquals(id, json.get("id").asText());
+		Assertions.assertEquals("abbreviation", json.get("componentType").asText());
+		Assertions.assertEquals(tiny, json.get("tiny").asBoolean());
+		Assertions.assertTrue(json.get("configured").asBoolean());
+		Assertions.assertTrue(json.get("initialized").asBoolean());
+		Assertions.assertFalse(json.get("touched").asBoolean());
+		Assertions.assertEquals(ComponentBase.class.getCanonicalName(), json.get("componentClass").asText());
+		if (text == null)
+		{
+			Assertions.assertNull(json.get("text"));
+		}
+		else
+		{
+			Assertions.assertEquals(text, json.get("text").asText());
+		}
+	}
+
+	private JsonNode json(ComponentBase<?> component)
+	{
+		try
+		{
+			return IJsonRepresentation.getObjectMapper().readTree(component.toJson());
+		}
+		catch (Exception e)
+		{
+			throw new AssertionError("Component JSON must be valid", e);
+		}
 	}
 }
