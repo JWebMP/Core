@@ -35,49 +35,21 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.guicedee.modules.representations</groupId>
-            <artifactId>json-representation</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>com.guicedee</groupId>
             <artifactId>inject</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.guicedee</groupId>
-            <artifactId>client</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>com.guicedee.modules.services</groupId>
-            <artifactId>uadetector-core</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>com.guicedee.modules.services</groupId>
-            <artifactId>uadetector-resources</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.guicedee</groupId>
-            <artifactId>vertx</artifactId>
-        </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-web</artifactId>

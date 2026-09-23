@@ -9,7 +9,6 @@ module com.jwebmp.core {
 
     requires static lombok;
 
-    requires transitive com.guicedee.client;
     requires transitive com.jwebmp.client;
 
     requires transitive com.guicedee.vertx;
@@ -19,17 +18,12 @@ module com.jwebmp.core {
     //requires transitive jakarta.servlet;
     //requires transitive com.google.guice.extensions.servlet;
 
-    requires aopalliance;
 
-    requires com.google.guice;
 
     requires static jdk.httpserver;
     requires static java.net.http;
 
-    requires com.guicedee.jsonrepresentation;
 
-    requires tools.jackson.databind;
-    requires tools.jackson.core;
 
     //requires com.guicedee.vertx;
     //requires com.guicedee.vertx.sockets;
@@ -37,10 +31,8 @@ module com.jwebmp.core {
     //requires jakarta.websocket;
     //requires jakarta.websocket.client;
 
-    requires io.vertx.core;
     requires io.vertx.web;
 
-    requires com.google.common;
     requires org.apache.commons.io;
     requires org.apache.commons.lang3;
     requires org.apache.commons.text;
